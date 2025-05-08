@@ -1,0 +1,84 @@
+.otp-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+
+
+  .title {
+     p {
+      font-size: 30px;
+      color: black;
+     }
+  }
+
+  .desc {
+    p {
+      font-size: 20px;
+      color: rgb(166, 166, 166);
+      span {
+        color: black !important;
+      }
+    }
+  }
+
+  .otp {
+    margin-top: 30px;
+  }
+
+  .resend-link {
+    cursor: pointer;
+    font-size: 17px;
+    color: #4989dc;
+  }
+
+  .custom-otp-input {
+    width: 48px !important;
+    height: 48px;
+    font-size: 24px;
+    appearance: none;
+    text-align: center;
+    transition: all 0.2s;
+    border: 1px solid var(--p-inputtext-border-color);
+    background: transparent;
+    outline-offset: -2px;
+    outline-color: transparent;
+    color: var(--p-inputtext-color);
+    border-radius: 0;
+
+    &:focus {
+      outline: 2px solid var(--p-focus-ring-color);
+    }
+
+    /* Rounded corners for the first input */
+    &:first-child {
+      border-top-left-radius: 12px;
+      border-bottom-left-radius: 12px;
+    }
+
+    /* Rounded corners for the last input */
+    &:last-child {
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
+
+    /* Add right border for intermediate inputs */
+    &:not(:last-child) {
+      border-right-width: 1px;
+      border-right-style: solid;
+      border-right-color: var(--p-inputtext-border-color);
+    }
+  }
+
+  /* Style the separator (optional) */
+  .p-inputotp .px-4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--p-inputtext-border-color);
+    /* Match separator color with input borders */
+  }
+
+
+}

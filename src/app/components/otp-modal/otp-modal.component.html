@@ -1,0 +1,31 @@
+<app-modal [dialogProps]="dialogProps">
+  <div class="otp-content">
+    <div class="title">
+      <p>{{'otp.verify_mobile_no'|translate}}</p>
+    </div>
+    <div class="desc">
+      <p>{{'otp.enter_degits'|translate}} <span>{{ mobileNumber }}</span> </p>
+    </div>
+    <div class="otp">
+      <p-inputotp (onChange)="checkOtpValue($event)" [(ngModel)]="otp" [length]="4">
+        <ng-template #input let-token let-events="events" let-index="index">
+          <input
+            type="text"
+            [maxLength]="1"
+            (input)="events.input($event)"
+            (keydown)="events.keydown($event)"
+            [attr.value]="token"
+            class="custom-otp-input"
+          />
+          <div *ngIf="index === 2" class="px-4">
+            <i class="pi pi-minus"></i>
+          </div>
+        </ng-template>
+      </p-inputotp>
+    </div>
+    <div class="timer">
+      {{ getFormattedTimer() }}
+      <span *ngIf="timer === 0" (click)="resend()" class="resend-link">{{'otp.resend'|translate}}</span>
+    </div>
+  </div>
+</app-modal>

@@ -1,0 +1,30 @@
+<div class="footer-container">
+    <div class="container">
+        <div class="content">
+            <div class="logo">
+                <img src="assets/images/icons-svg/logo-white.svg" alt="">
+            </div>
+            <div class="details">
+                <div class="section-one">
+                    <p>{{ 'FOOTER.DESCRIPTION' | translate }}</p>
+                </div>
+                <div class="section-two">
+                    <div class="header">
+                        <p>{{ 'FOOTER.FOLLOW_US' | translate }}</p>
+                    </div>
+                    <div class="social-media">
+                        <ng-container *ngFor="let item of socailMedia">
+                            <div class="social-item">
+                                <i class={{item.icon}}></i>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <div class="copy-right">
+                <p>{{ 'FOOTER.COPYRIGHT' | translate:{ year: year } }}</p>
+            </div>
+        </div>
+    </div>
+</div>

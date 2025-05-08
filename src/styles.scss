@@ -1,0 +1,221 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import "primeicons/primeicons.css";
+@import "./assets/scss/fonts";
+@import 'ngx-toastr/toastr';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+
+:root {
+  --main-text-color: redF2F3E;
+  --p-primary-color: #8174A0 !important;
+}
+
+
+
+body {
+  // tajwal
+  // bahij
+  font-family: 'tajwal', sans-serif;
+  &:lang(ar) {
+    font-family: 'tajwal', sans-serif;
+  }
+   background: #F9F9F9;
+
+  p,
+  span,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin: 0px;
+    font-family: 'tajwal', sans-serif;
+    &:lang(ar) {
+      font-family: 'tajwal', sans-serif;
+    }
+  }
+}
+
+.pi {
+  font-family: "primeicons" !important;
+}
+
+p-breadcrumb {
+  color: white !important;
+
+  .p-breadcrumb {
+    background: none !important;
+    padding: 0 !important;
+
+
+    a {
+      color: white;
+    }
+
+    svg {
+      color: white;
+      transform: rotate(180deg);
+      position: relative;
+      bottom: 3px;
+
+      &:lang(en) {
+        transform: rotate(0deg);
+      }
+    }
+  }
+
+  top: 20px;
+  right: 20px;
+
+  &:lang(en) {
+    right: inset;
+    left: 20px !important;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.dialog-close-btn {
+  border: 1px solid #dddddd;
+  margin: 0px 5px;
+}
+
+.page-form-container {
+  .page-details {
+    display: flex;
+    justify-content: space-between;
+
+    h2 {
+      color: #7d7d7d;
+    }
+  }
+}
+
+small {
+  color: red;
+  font-size: 12px;
+}
+
+.main-btn-one {
+  border-radius: 32px;
+  color: white;
+  background-color: #8174A0;
+  padding: 12px 22px;
+  border: 1px solid rgba(255, 255, 255, 0);
+  &:hover {
+    background-color: #F9F9F9;
+    color: #8174A0;
+    border: 1px solid #8174A0;
+    }
+}
+
+.main-btn-two {
+  border-radius: 32px;
+  color: #8174A0;
+  border: 1px solid #8174A0;
+  padding: 12px 22px;
+  background-color: #F9F9F9;
+  &:hover {
+    background-color: #8174A0;
+    color: #F9F9F9;
+  }
+}
+
+
+.main-btn-three {
+  border-radius: 32px;
+  color: white;
+  border: 1px solid white;
+  padding: 12px 22px;
+  background-color: #f9f9f900;
+}
+
+
+
+.p-floatlabel label {
+
+  &:lang(ar) {
+    left: unset !important;
+    right: 0.75rem !important;
+  }
+
+
+}
+
+.p-inputtext {
+  border-radius: 20px !important;
+}
+
+.p-password-toggle-mask-icon {
+  &:lang(ar) {
+    right: unset !important;
+    left: 0.75rem !important;
+  }
+}
+
+textarea {
+  border-radius: 20px !important;
+  border-color: #cbd5e1;
+  width: 100%;
+}
+
+.p-password:has(.p-password-toggle-mask-icon) .p-password-input 
+ {
+  padding-right: 20px !important ;
+ }
+
+
+ .owl-theme .owl-dots {
+  display: flex !important;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.owl-theme .owl-dots .owl-dot span {
+  display: none !important;
+}
+
+.owl-theme .owl-dots .owl-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #B6AEC8;
+  border-radius: 50%;
+  margin: 0 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.owl-theme .owl-dots .owl-dot.active {
+  width: 30px;
+  background-color: #8174A0 !important;
+  border-radius: 20px;
+}
+
+.owl-stage-outer {
+  padding: 10px;
+}
+
+.p-drawer  {
+  width: 24rem !important;
+}
+
+::ng-deep .p-toast {
+  z-index: 9999;
+}
+
+::ng-deep .p-toast .p-toast-message {
+  border-radius: 8px;
+  font-family: 'Cairo', sans-serif;
+}
+
+::ng-deep .p-toast-message-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+::ng-deep .p-toast-message-error {
+  background-color: #f8d7da;
+  color: #721c24;
+}

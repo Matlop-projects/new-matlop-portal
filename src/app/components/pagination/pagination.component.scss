@@ -1,0 +1,69 @@
+
+:host ::ng-deep {
+    .paginator-section {
+      display: flex;
+      justify-content: center;
+
+      p-paginator {
+        .p-paginator {
+          background-color: transparent !important;
+
+          .p-paginator-pages .p-paginator-page.p-highlight {
+            // background: #253858 !important;
+            // border-color: #EFF6FF !important;
+            // color: white !important;
+          }
+
+          .p-paginator-pages {
+            button {
+              border-radius: 8px;
+              min-width: 2rem !important;
+              height: 30px;
+              background-color: #F7F9FB;
+              color: #8174A0;
+            }
+          }
+
+          .p-paginator-page-selected{
+            background-color: #8174A0!important;
+            color: #fff!important;
+          }
+
+          .p-paginator-first,
+          .p-paginator-prev,
+          .p-paginator-next,
+          .p-paginator-last {
+            min-width: 1.5rem !important;
+          }
+        }
+      }
+
+      &.rtl-paginator {
+        p-paginator {
+          .p-paginator-prev {
+            transform: rotate(180deg); // Reverse the arrow
+          }
+
+          .p-paginator-next {
+            transform: rotate(180deg); // Reverse the arrow
+          }
+          .p-paginator-first{
+            transform: rotate(180deg); // Reverse the arrow
+          }
+          .p-paginator-last{
+            transform: rotate(180deg); // Reverse the arrow
+          }
+        }
+      }
+      &:not(.rtl-paginator) {
+        p-paginator {
+          .p-paginator-prev,
+          .p-paginator-next,
+          .p-paginator-first,
+          .p-paginator-last{
+            transform: none; // Ensure default direction
+          }
+        }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+
+:host ::ng-deep {
+  p-dialog {
+    .p-dialog-mask {
+      .p-dialog {
+        .p-dialog-content {
+          border-radius: 12px !important;
+          // min-height: 300px !important;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  ::ng-deep .p-dialog .p-dialog-header {
+    padding: 0.5rem !important;
+  }
+
+  ::ng-deep .p-dialog {
+    width: 94vw !important;
+  }
+}
+
+

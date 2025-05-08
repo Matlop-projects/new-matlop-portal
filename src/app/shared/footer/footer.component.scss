@@ -1,0 +1,90 @@
+.footer-container {
+    margin-block: 40px;
+    color: white;
+
+    .content {
+        height: 385px;
+        border-radius: 12px;
+        background-image: url('../../../assets/images/background/footer.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+
+        .logo {
+            padding: 29px 29px 10px;
+        }
+
+        .details {
+            margin-top: 30px;
+            display: flex;
+            gap: 40px;
+            border-bottom: 1px solid #FFFFFF;
+            padding: 0 20px 38px;;
+
+            .section-one {
+                width: 38rem;
+
+                p {
+                    font-size: 20px;
+                    color: white;
+                }
+            }
+
+            .section-two {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                .header {
+                    p {
+                        font-size: 20px;
+                        color: white;
+                    }
+                }
+
+                .social-media {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+
+                    .social-item {
+                        cursor: pointer;
+                        width: 70px;
+                        height: 70px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+                        background-color: #FFFFFF;
+
+                        i {
+                            font-size: 20px;
+                            color: #B6AEC8;
+                        }
+
+                        &:hover {
+                            background-color: #B6AEC8;
+
+                            i {
+                                color: #FFFFFF;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .copy-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+             p {
+                margin-top: 40px;
+             }
+        }
+
+    }
+
+
+}

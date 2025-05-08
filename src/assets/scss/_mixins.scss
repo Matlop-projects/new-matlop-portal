@@ -1,0 +1,91 @@
+// Padding
+
+@mixin padding($space) {
+  padding: $space !important;
+}
+
+@mixin paddingTop($space) {
+  padding-top: $space !important;
+}
+
+@mixin paddingBottom($space) {
+  padding-bottom: $space !important;
+}
+
+@mixin paddingRight($space) {
+  padding-right: $space !important;
+}
+
+@mixin paddingLeft($space) {
+  padding-left: $space !important;
+}
+
+@mixin paddingInline($space) {
+  padding-inline: $space !important;
+}
+
+@mixin paddingBlock($space) {
+  padding-block: $space !important;
+}
+
+
+// Margin
+
+@mixin margin($space) {
+  margin: $space !important;
+}
+
+@mixin marginTop($space) {
+  margin-top: $space !important;
+}
+
+@mixin marginBottom($space) {
+  margin-bottom: $space !important;
+}
+
+@mixin marginRight($space) {
+  margin-right: $space !important;
+}
+
+@mixin marginLeft($space) {
+  margin-left: $space !important;
+}
+
+@mixin marginInline($space) {
+  margin-inline: $space !important;
+}
+
+@mixin marginBlock($space) {
+  margin-block: $space !important;
+}
+
+
+//gap
+
+@mixin gap($space) {
+  gap: $space !important;
+}
+
+//border-radius
+
+@mixin radius($space) {
+  border-radius: $space !important;
+}
+
+// Font Actions
+
+@mixin fontSize($space) {
+  font-size: $space !important;
+}
+
+@mixin fontWeight($space) {
+  font-weight: $space !important;
+}
+
+// Responsive
+
+@mixin mobile() {
+  @media (max-width: 576px) {
+    @content;
+  }
+}

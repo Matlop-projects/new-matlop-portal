@@ -1,0 +1,6 @@
+<router-outlet #outlet="outlet" [@routeAnimations]="outlet.activatedRouteData['animation']"></router-outlet>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="square-spin"
+    template="<img class='flip-image' width='350' src='assets/images/icons-svg/logo.svg'>">
+    <p style='color: white ; font-size: 20px;'> Loading... </p>
+</ngx-spinner>
+<p-toast [position]="selectedLang == 'ar' ? 'top-left' : 'top-right'"></p-toast>

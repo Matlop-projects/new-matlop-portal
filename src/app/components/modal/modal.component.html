@@ -1,0 +1,6 @@
+<p-dialog  class="motor-dialog" [(visible)]="dialogProps.props.visible" [modal]="true"
+  [dismissableMask]="false" [closeOnEscape]="true" [maximizable]="false" [baseZIndex]="10000"
+  [draggable]="false" [resizable]="false"  [style]="dialogProps.props.styles ? dialogProps.props.styles : {}" [showHeader]="false" onHide="dialogProps.onHide($event)"
+  onShow="dialogProps.onShow($event)">
+  <ng-content></ng-content>
+</p-dialog>

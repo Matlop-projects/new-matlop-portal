@@ -1,0 +1,7 @@
+<div class="paginator-section" [ngClass]="{'rtl-paginator': isArabic}" *ngIf="totalCount">
+  <p-paginator
+    [totalRecords]="totalCount"
+    [rows]="rows"
+    (onPageChange)="onPage($event)"
+  ></p-paginator>
+</div>

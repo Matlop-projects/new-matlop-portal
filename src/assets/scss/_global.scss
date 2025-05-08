@@ -1,0 +1,19 @@
+
+@import "./_fonts.scss";
+
+
+@if lang('ar') {
+  @import "~bootstrap/dist/css/bootstrap.css";
+}@else {
+  @import "~bootstrap/dist/css/bootstrap.rtl.css";
+}
+
+
+
+body{
+  font-family: 'Lato', sans-serif;
+  background: #F2F3F5;
+  &:lang(ar) {
+    font-family: 'Bahij', sans-serif;
+  }
+}
