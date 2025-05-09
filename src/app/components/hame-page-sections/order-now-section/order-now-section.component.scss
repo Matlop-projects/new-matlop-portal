@@ -1,0 +1,28 @@
+div.order-page{
+    border-radius: 32px;
+    background-color: #FBFBFB;
+    margin-bottom: -90px;
+    position: relative;
+    z-index: 999;
+    div.order{
+        .header ,.info{
+           color: #58BC5A;
+           font-weight: 800;
+           font-size: 45px;
+           line-height: 64px;
+           
+        }
+        .info{
+          color: #14A39A;
+        }
+        button{
+         background-color: #0EC5D2;
+         color:#fff;
+         font-weight: bolder;
+         padding: 20px 50px;
+         border-radius: 32px;
+         margin-top: 30px;
+         width: 100%;
+        }
+     }
+}

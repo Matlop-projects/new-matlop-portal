@@ -1,30 +1,61 @@
 <div class="footer-container">
-    <div class="container">
-        <div class="content">
-            <div class="logo">
-                <img src="assets/images/icons-svg/logo-white.svg" alt="">
-            </div>
-            <div class="details">
-                <div class="section-one">
-                    <p>{{ 'FOOTER.DESCRIPTION' | translate }}</p>
-                </div>
-                <div class="section-two">
-                    <div class="header">
-                        <p>{{ 'FOOTER.FOLLOW_US' | translate }}</p>
-                    </div>
-                    <div class="social-media">
-                        <ng-container *ngFor="let item of socailMedia">
-                            <div class="social-item">
-                                <i class={{item.icon}}></i>
-                            </div>
-                        </ng-container>
-                    </div>
-                </div>
-            </div>
-
-            <div class="copy-right">
-                <p>{{ 'FOOTER.COPYRIGHT' | translate:{ year: year } }}</p>
-            </div>
+  <div class="container">
+    <div class="content">
+      <div class="details">
+        <div class="section-one">
+          <p>{{ "FOOTER.DESCRIPTION" | translate }}</p>
         </div>
+        <div class="section-two">
+          <div class="header">
+            <p>روابط سريعة</p>
+          </div>
+          <div class="services">
+            <span class="block">خدماتنا</span>
+            <span class="block">من نحن</span>
+
+            <span class="block">الطلبات</span>
+
+            <span class="block">إضافة طلب</span>
+
+            <span class="block">تواصل معنا</span>
+          </div>
+        </div>
+        <div class="section-three">
+          <div class="header">
+            <p>خدماتنا</p>
+          </div>
+          <div class="services">
+            <span class="block">سباكة</span>
+            <span class="block">تبريد وتكييف </span>
+
+            <span class="block">دهانات ونجارة</span>
+
+            <span class="block"> كهرباء</span>
+
+            <span class="block">عاملات نظافة </span>
+            <span class="block">عمال نظافة </span>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
+<div class="copyright">
+  <div class="container d-flex justify-content-between  flex-wrap">
+    <div class="d-flex justify-content-between">
+      <p class="m-2 white-text"> تابعنا</p>
+
+      <div class="social-media">
+        <ng-container *ngFor="let item of socailMedia">
+          <div class="social-item">
+            <i class="{{ item.icon }}"></i>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="copy-right">
+      <p class="m-2 white-text">جميع الحقوق محفوظة ل</p>
+    </div>
+  </div>
 </div>

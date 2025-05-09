@@ -25,10 +25,10 @@ export class FooterComponent {
       icon: 'pi pi-instagram',
       routing: ''
     },
-    {
-      icon: 'pi pi-whatsapp',
-      routing: ''
-    },
+    // {
+    //   icon: 'pi pi-whatsapp',
+    //   routing: ''
+    // },
   ]
 
   year = new Date().getFullYear();

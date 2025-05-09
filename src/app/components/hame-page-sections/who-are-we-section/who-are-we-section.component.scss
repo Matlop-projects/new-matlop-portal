@@ -1,0 +1,25 @@
+.how-we-are{
+    margin-bottom: 50px;
+    .w-500{
+        width: 60%;
+    }
+    .header{
+ font-weight: bolder;
+ font-size: 45px;
+    }
+
+    .desc{
+        font-size: 24px;
+        height: 153px;
+    }
+
+    button{
+        background: linear-gradient(to right, #BFFD2B, #05BCE8);
+        color:#fff;
+        font-weight: bolder;
+        padding: 20px 50px;
+        border-radius: 32px;
+        margin: 30px 0px;
+        width: 100%;
+       }
+}
