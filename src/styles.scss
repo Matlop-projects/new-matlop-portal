@@ -39,6 +39,9 @@ body {
 .block{
   display: block;
 }
+.reverse_img{
+   transform: scaleX(-1);
+}
 .w-30{
   width: 30%;
 }
