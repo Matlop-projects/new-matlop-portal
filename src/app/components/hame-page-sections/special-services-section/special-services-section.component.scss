@@ -1,0 +1,44 @@
+.special-section-container {
+    display: flex;
+    min-height: 337px;
+    align-items: center;
+
+    .content {
+        padding: 10px;
+
+        .cards {
+            padding: 10px;
+
+            .card-content {
+                height: 327px;
+                border-radius: 16px;
+                background: white;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 10px;
+
+                .title p {
+                    font-size: 24px;
+                    margin-top: 25px;
+                    color: white;
+                }
+
+                .desc p {
+                    font-size: 20px;
+                    margin-top: 5px;
+                    color: white;
+                }
+            }
+
+            .emergency {
+                background: #9FF030;
+            }
+
+            .order {
+                background: #0EC5D2;
+            }
+        }
+    }
+}

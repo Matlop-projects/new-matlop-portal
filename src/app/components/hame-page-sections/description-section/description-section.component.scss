@@ -1,0 +1,32 @@
+.description-section-container {
+    background: #F0F4F5;
+    display: flex;
+    min-height: 337px;
+    align-items: center;
+
+    .content {
+        padding: 10px;
+
+        .cards {
+            padding: 10px;
+
+            .card-content {
+                height: 227px;
+                border-radius: 16px;
+                background: white;
+                padding: 20px;
+
+                .title p {
+                    font-size: 24px;
+                    margin-top: 25px;
+                }
+
+                .desc p {
+                    font-size: 20px;
+                    margin-top: 5px;
+                    color: #B0B0B0;
+                }
+            }
+        }
+    }
+}

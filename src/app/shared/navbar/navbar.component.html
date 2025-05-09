@@ -1,6 +1,6 @@
 <div class="navbar-container">
   <div class="content">
-    <div class="first-section">
+    <!-- <div class="first-section">
       <div class="content container">
         <div class="loged-users-section" *ngIf="user() ; else noUser">
           <div class="s-one">
@@ -44,7 +44,7 @@
           </button>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="second-section">
       <div class="content container pointer">
         <div class="logo" routerLink="/home">
@@ -67,6 +67,12 @@
             </div>
             <div class="title">{{ 'NAVBAR.FAVORITES' | translate }}</div>
             <div class="value" >(<span style="color: red;">{{user()?.favoriteCount}}</span>)</div>
+          </div>
+          <div class="lang-btn-section">
+            <button class="lang-btn" (click)="toggleLanguage()">
+              <img src="assets/images/icons-svg/global.svg">
+              {{ languageToggleText | translate }}
+            </button>
           </div>
         </div>
       </div>
