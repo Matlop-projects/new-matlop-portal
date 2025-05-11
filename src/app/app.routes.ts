@@ -3,6 +3,7 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { HomeLayoutComponent } from './layouts/home-layout/home-layout.component';
 import { authGuard } from './core/auth.guard';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 
 
 
@@ -28,7 +29,7 @@ export const routes: Routes = [
     // canActivate: [authGuard], // Applying authGuard to the home layout
     children: [
       { path: 'home', component: HomePageComponent },
-      // { path: 'aboutus', component: AboutUsComponent },
+      { path: 'orders', component: OrdersListComponent },
       // { path: 'traders_list', component: TradersListComponent },
       // { path: 'trader_details/:id', component: TraderDetailsComponent },
       // { path: 'trader_all_details/:id/:type', component: TraderAllProductsComponent },
