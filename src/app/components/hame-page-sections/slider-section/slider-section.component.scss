@@ -1,0 +1,87 @@
+.slider-section-container {
+    position: relative;
+    // background-image: url('/assets/images/backgrounds/slider-image.jpg');
+    background-image: url('/assets/images/backgrounds/test.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 615px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    // Default (if needed)
+    background-position: center;
+
+    // Media query for width < 100px
+    // @media (max-width: 100px) {
+    //     background-position: center;
+    // }
+
+    .overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.52);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+        gap: 2rem;
+
+        .text-content {
+            color: white;
+            padding: 1rem;
+            max-width: 900px;
+
+            .mini-title {
+                font-size: 1.5rem;
+                color: #E6E6E6;
+            }
+
+            h1 {
+                font-size: 2.8rem;
+                margin-bottom: 1rem;
+            }
+
+            p {
+                font-size: 1.75rem;
+                color: #E6E6E6;
+            }
+
+
+        }
+
+        .order-btn {
+            background: linear-gradient(to right, #BFFD2B, #05BCE8);
+            color: #fff;
+            font-weight: bolder;
+            padding: 15px 50px;
+            border-radius: 32px;
+            width: 100%;
+            max-width: 300px;
+            border: none;
+            // position: relative;
+            top: 5rem;
+        }
+
+        .app-section {
+            align-self: flex-start;
+            text-align: right;
+            padding: 0 2rem;
+          
+            p {
+              font-size: 1rem;
+              color: white;
+            }
+          
+            .applecations {
+              display: flex;
+              gap: 5px;
+              justify-content: flex-start;
+            }
+          }
+          
+
+
+    }
+}

@@ -6,12 +6,39 @@
     .content {
         padding: 10px;
 
+        .main-title {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+
+            .title {
+                font-size: 40px;
+                color: #2A1102;
+                text-align: center;
+            }
+
+            .main-desc {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                .desc {
+                    font-size: 20px;
+                    color: #B0B0B0;
+                    text-align: center;
+                }
+            }
+        }
+
         .cards {
             padding: 10px;
 
             .card-content {
-                height: 327px;
-                border-radius: 16px;
+                min-height: 327px;
+                border-radius: 32px;
                 background: white;
                 padding: 20px;
                 display: flex;
@@ -29,6 +56,19 @@
                     font-size: 20px;
                     margin-top: 5px;
                     color: white;
+                }
+
+                .action {
+                    display: flex;
+                    gap: 5px;
+                    align-items: center;
+                    justify-content: flex-end;
+
+                    p {
+                        font-size: 22px;
+                        color: white;
+                    }
+
                 }
             }
 
