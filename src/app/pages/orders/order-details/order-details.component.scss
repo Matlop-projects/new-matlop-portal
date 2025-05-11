@@ -1,0 +1,92 @@
+.bread-crump{
+    margin: 20px 0px;
+}
+.card{
+    padding: 20px;
+    border-radius: 32px;
+      border: 1px solid #e6e6e6;
+      background-color: #FCFCFC;
+
+      .numbers-info{
+        span.name{
+            margin: 0px 5px;
+        }
+      }
+      .squar{
+        margin: 0px 5px;
+      }
+}
+.btn-add-order{
+    background-color: #0EC5D2;
+    color: #fff;
+    padding:10px 30px;
+    border-radius: 32px;
+}
+
+.buttons{
+    margin: 20px 0px;
+  .pay{
+    background: linear-gradient(to right, #bffd2b, #40aec2);
+    color:#fff;
+        border-radius: 32px;
+        padding: 10px 30px;
+        margin: 0px 10px;
+        width: 25%;
+
+  }
+  .cancel{
+    background-color: #fff;
+    color:#CD0707;
+    border-radius: 32px;
+    border: 1px solid #CD0707;
+            padding: 10px 30px;
+                    width: 25%;
+
+
+  }
+
+  
+}
+
+.visit{
+    margin: 0px 20px;
+    .bkg-1 ,.bkg-2 ,.bkg-3{
+       padding: 15px;
+       border-radius: 32px;
+       margin-top: 10px;
+    }
+    .bkg-1{
+        background-color: #F4F4F4;
+    }
+     .bkg-2{
+        background-color: #E7F9FB;
+    }
+     .bkg-3{
+      border:3px solid #F4F4F4;
+    }
+}
+
+
+
+
+
+
+.bk-blue-light{
+background-color: #E7F9FB;
+}
+.text-blue-light{
+    color:#0EC5D2
+}
+.bk-green-light{
+    background-color:#E8FFD2
+}
+.text-green-light{
+   color:#46B800
+}
+.border-rd-32{
+    border-radius: 32px;
+    padding:5px 30px;
+}
+.fz-20{
+    font-size: 20px;
+}

@@ -1,6 +1,163 @@
 <div class="container">
-     <div class="bread-crump">
-        <span>{{'الطلبات'}}</span>/
-        <span class="bold">{{'تفاصيل الطلب'}}</span>
-     </div>
+  <div class="bread-crump">
+    <span class="text-gray-light">{{ "الطلبات" }}</span
+    >/
+    <span class="bold">{{ "تفاصيل الطلب" }}</span>
+  </div>
+
+  <div class="order-details d-flex justify-content-between">
+    <div class="details-info flex-grow-1">
+      <div class="card pkg-details">
+        <div class="d-flex justify-content-between">
+          <span class="bold">{{ "تفاصيل الباقة" }}</span>
+          <span class="bk-blue-light border-rd-32">
+            <span class="bold text-blue-light">50</span>
+            <span class="text-blue-light">{{ "ريال" }}</span>
+          </span>
+        </div>
+        <div>
+          <span class="block text-gray-light"> #{{ "اسم الباقة" }}</span>
+          <span class="block bold"> مطلوب</span>
+        </div>
+        <div class="desc text-gray-light">
+          هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا
+          النص من مولد النص
+        </div>
+        <div class="numbers-info mt-3  d-flex justify-content-between">
+          <div>
+            <span class="pi pi-clock"></span>
+            <span class="name text-gray-light">{{ "مدة الزيارة" }}</span>
+            <span class="bold">(1) {{ "ساعات" }}</span>
+          </div>
+          <div>
+                        <span class="pi pi-user"></span>
+            <span class="name text-gray-light">{{ "عدد الفنيين" }}</span>
+            <span  class="bold">(1) {{ "فني" }}</span>
+          </div>
+          <div>
+                        <span class="pi pi-hashtag"></span>
+
+            <span class="name text-gray-light">{{ "عدد الزيارات" }}</span>
+            <span  class="bold">(1) {{ "زيارات" }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="card info mt-3 bold">
+        <div class="d-flex justify-content-between">
+          <span  class="bold fz-20">{{ "معلومات الطلب" }}</span>
+          <span  class="text-gray-light">{{ "# شامل الضريبة" }}</span>
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+          <span  class="bold">{{ "تاريخ الطلب" }}</span>
+          <span>{{ "22 مايو" }}</span>
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+          <span  class="bold">{{ "وقت الطلب" }}</span>
+          <span>{{ "22:30" }}</span>
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+          <span  class="bold">{{ "حالة الطلب" }}</span>
+          <span>{{ "تم اكتمال الطلب" }}</span>
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+          <span  class="bold">{{ "طريقة الدفع" }}</span>
+          <span class="bk-green-light text-green-light border-rd-32">{{ "كاش" }}</span>
+        </div>
+      </div>
+      <div class="card mt-3 added_order">
+        <div class="d-flex justify-content-between">
+          <span class="bold">{{ "الطلبات الاضافية" }}</span>
+          <span class="btn-add-order">{{ "اضافة طلب صيانة اضافي" }}</span>
+        </div>
+        <div>
+          <div class="d-flex justify-content-start">
+            <img class="squar" src="assets/img/squar.svg" alt="" />
+            <span class="bold" >اسم الطلب</span>
+          </div>
+           <div class="d-flex justify-content-start">
+            <img class="squar" src="assets/img/squar.svg" alt="" />
+            <span class="bold" >اسم الطلب</span>
+          </div>
+           <div class="d-flex justify-content-start">
+            <img class="squar" src="assets/img/squar.svg" alt="" />
+            <span class="bold"> اسم الطلب</span>
+          </div>
+          <div class="total text-start">
+            <span>{{ "اجمالي" }}</span>
+            <span class="bold"> 100</span>
+            <span> {{ "ر.س" }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="buttons text-start">
+        <button class="btn pay">{{ "اعادة الدفع" }}</button>
+        <button class="btn cancel">{{ "الغاء الطلب" }}</button>
+      </div>
+    </div>
+    <div class="card w-30 visit flex-grow-1">
+      <div class="d-flex justify-content-between mb-3">
+        <span class="bold">{{ "مواعيد الزيارة" }}</span>
+        <img src="assets/img/edit.svg" alt="" />
+      </div>
+      <div class="d-flex justify-content-between bkg-1">
+        <span>{{ "20 نوفمبر 2025" }}</span>
+        <span>{{ "08:00" }} {{ "م" }}</span>
+      </div>
+      <div class="d-flex justify-content-between bkg-2">
+        <span>{{ "20 نوفمبر 2025" }}</span>
+        <span>{{ "08:00" }} {{ "م" }}</span>
+      </div>
+      <div class="d-flex justify-content-between bkg-3">
+        <span>{{ "20 نوفمبر 2025" }}</span>
+        <span>{{ "08:00" }} {{ "م" }}</span>
+      </div>
+      <div class="bold mt-3">{{ "ألمعدات" }}</div>
+      <div class="d-flex justify-content-between mt-2">
+        <span class="bold">{{ "مفك" }}</span>
+        <span class="bold">{{ "سلم" }}</span>
+        <span class="bold">{{ "ماكينه لحام بلاستيك" }}</span>
+      </div>
+      <div class="mt-5 bold">
+        {{'صور الطلب'}}
+      </div>
+      <div class="images d-flex justify-content-between mt-3">
+        <img src="assets/img/img1.svg" alt="" />
+        <img src="assets/img/img1.svg" alt="" />
+        <img src="assets/img/img1.svg" alt="" />
+      </div>
+      <div>
+        <div class="bold mt-5">{{ "ألتعليمات الرئيسية" }}</div>
+        <div class="d-flex justify-content-between mt-3">
+          <img src="assets/img/bubble.svg" alt="" />
+          <span class="text-gray-light mb-3">
+            هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا
+            النص من مولد النص
+          </span>
+        </div>
+        <div class="d-flex justify-content-between">
+          <img src="assets/img/bubble.svg" alt="" />
+          <span class="text-gray-light mb-3">
+            هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا
+            النص من مولد النص
+          </span>
+        </div>
+        <div class="d-flex justify-content-between">
+          <img src="assets/img/bubble.svg" alt="" />
+          <span class="text-gray-light mb-3">
+            هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا
+            النص من مولد النص
+          </span>
+        </div>
+      </div>
+      <div class="notes text-blue-light mt-3">
+        <span class="block">
+          <span class="pi pi-book"></span>
+          <span class="bold"> {{ "ملاحظة" }}</span>
+        </span>
+        <span>
+          {{ "يمكنك الغاء االطلب قبل 24 ساعة " }}
+        </span>
+      </div>
+    </div>
+  </div>
 </div>
