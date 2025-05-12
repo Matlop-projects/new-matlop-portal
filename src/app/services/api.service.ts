@@ -31,20 +31,6 @@ export class ApiService {
     );
   }
 
-  test() {
-    return this.http.post(`https://onlinetest.medgulf.com.sa/motorrenwal/api/Tasks/SendOtpBySer?SerNo=ilOnmgbl34`, {}).pipe(
-      take(1),
-      tap((res: any) => {
-        if (res?.message) {
-          //this.toaster.successToaster(res.message);
-        }
-      }),
-      catchError((error) => {
-        // this.toaster.errorToaster(error?.error?.message);
-        return throwError(() => error);
-      })
-    );
-  }
 
   post(APIName: string, body: any): Observable<any> {
     return this.http.post(`${baseUrl}${APIName}`, body).pipe(

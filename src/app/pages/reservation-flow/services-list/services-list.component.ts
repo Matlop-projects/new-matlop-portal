@@ -1,22 +1,22 @@
 import { Component, inject } from '@angular/core';
 import { ApiService } from '../../../services/api.service';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
 import { environment } from '../../../../environments/environment';
-import { NgIf, NgStyle } from '@angular/common';
+import { NgFor, NgIf, NgStyle } from '@angular/common';
 
 @Component({
-  selector: 'app-main-services-section',
+  selector: 'app-services-list',
   standalone: true,
-  imports: [NgIf , NgStyle , RouterModule],
-  templateUrl: './main-services-section.component.html',
-  styleUrl: './main-services-section.component.scss'
+  imports: [NgIf , NgStyle , NgFor],
+  templateUrl: './services-list.component.html',
+  styleUrl: './services-list.component.scss'
 })
-export class MainServicesSectionComponent {
+export class ServicesListComponent {
   api = inject(ApiService);
   services: any;
   private imageUrl = environment.baseImageUrl;
-  selectedLang: any; 
+  selectedLang: any;
   languageService = inject(LanguageService);
   private router = inject(Router)
 
@@ -43,7 +43,7 @@ export class MainServicesSectionComponent {
         }));
   
         // Keep only the first 4
-        this.services = fullList.slice(0, 4);
+        this.services = fullList;
       }
     });
   }
@@ -60,3 +60,4 @@ export class MainServicesSectionComponent {
     this.router.navigate(['reservation' , id])
   }
 }
+

@@ -53,7 +53,6 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.test();
     console.log('User Signal:', this.user()); // ✅ Access computed() as a function
     this.initAppTranslation();
     this.languageService.translationService.onLangChange.subscribe((lang: any) => {
@@ -116,15 +115,4 @@ export class NavbarComponent implements OnInit {
     this.authService.logout();
   }
 
-  test() {
-    let myNum = [1,2,3,4,5,6];
-
-    for (let index = 0; index < myNum.length; index++) {
-      const element = myNum[index];
-      console.log(element);
-      
-    }
-
-
-  }
 }
