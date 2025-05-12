@@ -14,6 +14,8 @@ export class OrdersListComponent implements OnInit {
   private router =inject(Router)
   orders: any = [1,2,3,4];
   activeStatus='current'
+
+
   searchObject = {
     pageNumber: 1,
     pageSize: 8,
@@ -56,7 +58,7 @@ if (storedData !== null) {
 
   }
   getAllOrders() {
-    this.apiService.post("Order/GetAllWitPagination",this.searchObject).subscribe((res) => {});
+    this.apiService.post("Order/GetByClientIdWithPagination",this.searchObject).subscribe((res) => {});
   }
 
   onOrderDetails(){
