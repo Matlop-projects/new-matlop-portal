@@ -246,3 +246,27 @@ textarea {
   background-color: #f8d7da;
   color: #721c24;
 }
+.Pending,.pending{
+  background-color: #FFEBAE;
+  color:#E1A900
+}
+.Complete,.complete{
+  background-color: #EAFDEE;
+  color:#28C700
+}
+.Cancel,.cancel ,.Canceled{
+  background-color: #FFDFD7;
+  color:#E24700
+}
+ .all-status {
+      border-radius: 32px;
+      padding: 5px 10px;
+      span.pi-circle-on {
+        font-size: 8px;
+      }
+    }
+
+    .p-checkbox-checked .p-checkbox-box{
+ background-color: #20D4AD !important;
+  border-color: #20D4AD !important;
+    }
