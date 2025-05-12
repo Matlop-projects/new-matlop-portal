@@ -5,6 +5,7 @@ import { authGuard } from './core/auth.guard';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 import { OrderDetailsComponent } from './pages/orders/order-details/order-details.component';
+import { ServicesListComponent } from './pages/reservation-flow/services-list/services-list.component';
 
 
 
@@ -31,8 +32,8 @@ export const routes: Routes = [
     children: [
       { path: 'home', component: HomePageComponent },
       { path: 'orders', component: OrdersListComponent },
-       { path: 'order-details/:id', component: OrderDetailsComponent },
-      // { path: 'traders_list', component: TradersListComponent },
+      { path: 'order-details/:id', component: OrderDetailsComponent },
+      { path: 'services-list', component: ServicesListComponent },
       // { path: 'trader_details/:id', component: TraderDetailsComponent },
       // { path: 'trader_all_details/:id/:type', component: TraderAllProductsComponent },
       // { path: 'product_details/:productId', component: ProductDetailsComponent },
