@@ -5,63 +5,72 @@
     <span class="bold">{{ "تفاصيل الطلب" }}</span>
   </div>
 
-  <div class="order-details d-flex justify-content-between flex-wrap">
+  <div *ngIf="orderDetails" class="order-details d-flex justify-content-between flex-wrap">
     <div class="details-info flex-grow-1">
       <div class="card pkg-details">
         <div class="d-flex justify-content-between">
           <span class="bold">{{ "تفاصيل الباقة" }}</span>
           <span class="bk-blue-light border-rd-32">
-            <span class="bold text-blue-light">50</span>
+            <span class="bold text-blue-light">{{
+              orderDetails.totalWithAdditional
+            }}</span>
             <span class="text-blue-light">{{ "ريال" }}</span>
           </span>
         </div>
         <div>
           <span class="block text-gray-light"> #{{ "اسم الباقة" }}</span>
-          <span class="block bold"> مطلوب</span>
+          <span class="block bold"> {{orderDetails?.package?.nameAr}}</span>
         </div>
         <div class="desc text-gray-light">
-          هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا
-          النص من مولد النص
+          {{ orderDetails?.package?.descriptionAr }}
         </div>
-        <div class="numbers-info mt-3  d-flex justify-content-between">
+        <div class="numbers-info mt-3 d-flex justify-content-between flex-wrap">
           <div>
             <span class="pi pi-clock"></span>
             <span class="name text-gray-light">{{ "مدة الزيارة" }}</span>
-            <span class="bold">(1) {{ "ساعات" }}</span>
+            <span class="bold"
+              >({{ orderDetails?.package?.visitHours }}) {{ "ساعات" }}</span
+            >
           </div>
           <div>
-                        <span class="pi pi-user"></span>
+            <span class="pi pi-user"></span>
             <span class="name text-gray-light">{{ "عدد الفنيين" }}</span>
-            <span  class="bold">(1) {{ "فني" }}</span>
+            <span class="bold"
+              >({{ orderDetails?.package?.providerNumber }}) {{ "فني" }}</span
+            >
           </div>
           <div>
-                        <span class="pi pi-hashtag"></span>
+            <span class="pi pi-hashtag"></span>
 
             <span class="name text-gray-light">{{ "عدد الزيارات" }}</span>
-            <span  class="bold">(1) {{ "زيارات" }}</span>
+            <span class="bold"
+              >({{ orderDetails?.package?.visitNumber }}) {{ "زيارات" }}</span
+            >
           </div>
         </div>
       </div>
       <div class="card info mt-3 bold">
         <div class="d-flex justify-content-between">
-          <span  class="bold fz-20">{{ "معلومات الطلب" }}</span>
-          <span  class="text-gray-light">{{ "# شامل الضريبة" }}</span>
+          <span class="bold fz-20">{{ "معلومات الطلب" }}</span>
+          <span class="text-gray-light">{{ "# شامل الضريبة" }}</span>
         </div>
         <div class="d-flex justify-content-between mt-3">
-          <span  class="bold">{{ "تاريخ الطلب" }}</span>
-          <span>{{ "22 مايو" }}</span>
+          <span class="bold">{{ "تاريخ الطلب" }}</span>
+          <span>{{orderDetails.creationTime|date: 'dd MMM yyyy'  }}</span>
         </div>
         <div class="d-flex justify-content-between mt-3">
-          <span  class="bold">{{ "وقت الطلب" }}</span>
-          <span>{{ "22:30" }}</span>
+          <span class="bold">{{ "وقت الطلب" }}</span>
+          <span>{{orderDetails.creationTime|date: 'HH:mm'  }}</span>
         </div>
         <div class="d-flex justify-content-between mt-3">
-          <span  class="bold">{{ "حالة الطلب" }}</span>
-          <span>{{ "تم اكتمال الطلب" }}</span>
+          <span class="bold">{{ "حالة الطلب" }}</span>
+          <span [class]="orderDetails.orderStatusName" class="border-rd-32">{{ orderDetails.orderStatusName }}</span>
         </div>
         <div class="d-flex justify-content-between mt-3">
-          <span  class="bold">{{ "طريقة الدفع" }}</span>
-          <span class="bk-green-light text-green-light border-rd-32">{{ "كاش" }}</span>
+          <span class="bold">{{ "طريقة الدفع" }}</span>
+          <span class="bk-green-light text-green-light border-rd-32">{{
+            "كاش"
+          }}</span>
         </div>
       </div>
       <div class="card mt-3 added_order">
@@ -69,29 +78,29 @@
           <span class="bold">{{ "الطلبات الاضافية" }}</span>
           <span class="btn-add-order">{{ "اضافة طلب صيانة اضافي" }}</span>
         </div>
-        <div>
+        <ng-container *ngIf="orderDetails.orderAddtionalItem.length;else empty">
+  <div *ngFor="let item of orderDetails.orderAddtionalItem">
           <div class="d-flex justify-content-start">
             <img class="squar" src="assets/img/squar.svg" alt="" />
-            <span class="bold" >اسم الطلب</span>
+            <span class="bold">اسم الطلب</span>
           </div>
-           <div class="d-flex justify-content-start">
-            <img class="squar" src="assets/img/squar.svg" alt="" />
-            <span class="bold" >اسم الطلب</span>
-          </div>
-           <div class="d-flex justify-content-start">
-            <img class="squar" src="assets/img/squar.svg" alt="" />
-            <span class="bold"> اسم الطلب</span>
-          </div>
-          <div class="total text-start">
+        </div>
+        </ng-container>
+        <ng-template #empty>
+             <div class="">
+                {{'لا توجد طلبات اضافية'}}
+             </div>
+        </ng-template>
+      
+         <div *ngIf="orderDetails.orderAddtionalItem.length>0" class="total text-start mt-4">
             <span>{{ "اجمالي" }}</span>
             <span class="bold"> 100</span>
             <span> {{ "ر.س" }}</span>
           </div>
-        </div>
       </div>
       <div class="buttons text-start">
         <button class="btn pay">{{ "اعادة الدفع" }}</button>
-        <button class="btn cancel">{{ "الغاء الطلب" }}</button>
+        <button class="btn cancel"(click)="onCancelOrder()">{{ "الغاء الطلب" }}</button>
       </div>
     </div>
     <div class="card w-30 visit flex-grow-1">
@@ -100,8 +109,8 @@
         <img src="assets/img/edit.svg" alt="" />
       </div>
       <div class="d-flex justify-content-between bkg-1">
-        <span>{{ "20 نوفمبر 2025" }}</span>
-        <span>{{ "08:00" }} {{ "م" }}</span>
+        <span>{{orderDetails.nextVistDate |date: 'dd MMM yyyy'  }}</span>
+        <span>{{ orderDetails.nextVistDate|date: 'HH:mm a'    }}</span>
       </div>
       <div class="d-flex justify-content-between bkg-2">
         <span>{{ "20 نوفمبر 2025" }}</span>
@@ -112,19 +121,28 @@
         <span>{{ "08:00" }} {{ "م" }}</span>
       </div>
       <div class="bold mt-3">{{ "ألمعدات" }}</div>
-      <div class="d-flex justify-content-between mt-2">
+      <ng-container *ngFor="let item of orderDetails.orderEquipmentResponse">
+        <div class="d-flex justify-content-between mt-2">
         <span class="bold">{{ "مفك" }}</span>
         <span class="bold">{{ "سلم" }}</span>
         <span class="bold">{{ "ماكينه لحام بلاستيك" }}</span>
       </div>
+      </ng-container>
+      <div *ngIf="orderDetails.orderEquipmentResponse.length==0">
+        {{'لا توجد معدات'}}
+      </div>
       <div class="mt-5 bold">
-        {{'صور الطلب'}}
+        {{ "صور الطلب" }}
       </div>
-      <div class="images d-flex justify-content-between flex-wrap mt-3">
-        <img class="mt-2" src="assets/img/img1.svg" alt="" />
-        <img  class="mt-2" src="assets/img/img1.svg" alt="" />
-        <img class="mt-2" src="assets/img/img1.svg" alt="" />
+      <ng-container *ngFor="let item of orderDetails.media">
+         <div class="images d-flex justify-content-between flex-wrap mt-3">
+        <img class="mt-2" [src]="baseUrl+item.src" width="100" height="100" alt="">
       </div>
+      </ng-container>
+      <div *ngIf="orderDetails.media.length==0">
+        {{'لا توجد صور'}}
+      </div>
+     
       <div>
         <div class="bold mt-5">{{ "ألتعليمات الرئيسية" }}</div>
         <div class="d-flex justify-content-between mt-3">
@@ -161,3 +179,8 @@
     </div>
   </div>
 </div>
+
+<p-dialog  [modal]="true" [(visible)]="visible"  [style]="{ width: '25rem' }">
+   <app-order-cancel></app-order-cancel>
+</p-dialog>
+
