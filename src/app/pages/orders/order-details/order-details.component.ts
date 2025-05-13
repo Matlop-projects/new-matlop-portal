@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../../services/api.service';
 import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { environment } from '../../../../environments/environment';
@@ -17,6 +17,8 @@ export class OrderDetailsComponent implements OnInit {
   visible:boolean=false
   baseUrl=environment.baseImageUrl
   private route =inject(ActivatedRoute)
+    private router =inject(Router)
+
   private apiService =inject(ApiService)
 
   get orderId(){
@@ -34,7 +36,14 @@ export class OrderDetailsComponent implements OnInit {
      })
   }
 
+goToOrders(){
+this.router.navigateByUrl('orders')
+}
+
   onCancelOrder(){
     this.visible=true
+  }
+  onCloseDialogWhenConfirm(value:string){
+    this.visible=false
   }
 }

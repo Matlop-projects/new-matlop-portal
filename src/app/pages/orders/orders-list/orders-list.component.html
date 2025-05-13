@@ -6,7 +6,7 @@
       (click)="onSelectStatus('pending')"
     >
       <span class="name"> الطلبات الحالية</span>
-      <span class="count">0</span>
+      <span class="count">{{ordersCount?ordersCount.pendingOrdersCount:0}}</span>
     </span>
     <span
       [class.active-status]="activeStatus == 'complete'"
@@ -14,7 +14,7 @@
       (click)="onSelectStatus('complete')"
     >
       <span class="name"> الطلبات المكتملة</span>
-      <span class="count">0</span>
+      <span class="count">{{ordersCount?ordersCount.completedOrdersCount:0}}</span>
     </span>
     <span
       [class.active-status]="activeStatus == 'cancel'"
@@ -22,7 +22,7 @@
       (click)="onSelectStatus('cancel')"
     >
       <span class="name"> الطلبات الملغية </span>
-      <span class="count">0</span>
+      <span class="count">{{ordersCount?ordersCount.canceledOrdersCount:0}}</span>
     </span>
   </div>
 

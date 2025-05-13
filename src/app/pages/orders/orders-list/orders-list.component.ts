@@ -14,6 +14,7 @@ export class OrdersListComponent implements OnInit {
   private router = inject(Router);
   orders: any = [];
   activeStatus = "pending";
+  ordersCount:any
 
   searchObject = {
     pageNumber: 0,
@@ -38,6 +39,7 @@ export class OrdersListComponent implements OnInit {
       const parsed = JSON.parse(storedData);
       const id: number = Number(parsed.id);
       this.searchObject.clientId = id;
+      this.getOrdersCount(id)
     }
     this.getAllOrders();
   }
@@ -61,7 +63,13 @@ export class OrdersListComponent implements OnInit {
         }
       });
   }
-
+  getOrdersCount(clientId:number){
+    this.apiService.get(`order/GetOrderCountsByClientId`,{clientId:clientId}).subscribe((res:any)=>{
+      if(res.data){
+        this.ordersCount=res.data
+      }
+    })
+  }
   onOrderDetails(orderId:number) {
     this.router.navigateByUrl(`order-details/${orderId}`);
   }

@@ -1,4 +1,5 @@
-<div>
+<div class="page">
+    <div>
   <p class="bold">{{ "من فضلك اختر سبب الالغاء" }}</p>
   <p class="text-gray">{{ "اختر سبب الالغاء لتحسين الخدمة" }}</p>
 </div>
@@ -39,5 +40,7 @@
   ></textarea>
 </div>
 <div>
-  <button class="btn mt-3" (click)="onConfirm()">{{ "تأكيد" }}</button>
+  <button class="btn mt-3" [disabled]="orderCancelationNotes=='' || checked==0"  (click)="onConfirm()">{{ "تأكيد" }}</button>
+</div>
+
 </div>

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ApiService } from '../../../services/api.service';
@@ -13,6 +13,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
   styleUrl: './order-cancel.component.scss'
 })
 export class OrderCancelComponent {
+  @Output()confirmOrder:any =new EventEmitter()
 checked=0
 orderCancelationNotes=''
 private apiServices=inject(ApiService)
@@ -30,8 +31,8 @@ onConfirm(){
   "cancelReasonId": this.checked,
   "orderCancelationNotes": this.orderCancelationNotes
   }).subscribe(res=>{
-    
-    this.dialogRef.close();  
+    if(res)
+      this.confirmOrder.emit('success')
   })
  
 }
