@@ -6,6 +6,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 import { OrderDetailsComponent } from './pages/orders/order-details/order-details.component';
 import { ServicesListComponent } from './pages/reservation-flow/services-list/services-list.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 
 
@@ -32,6 +33,7 @@ export const routes: Routes = [
     children: [
       { path: 'home', component: HomePageComponent },
       { path: 'orders', component: OrdersListComponent },
+      { path: 'about-us', component: AboutUsComponent },
       { path: 'order-details/:id', component: OrderDetailsComponent },
       { path: 'services-list', component: ServicesListComponent },
       // { path: 'trader_details/:id', component: TraderDetailsComponent },
