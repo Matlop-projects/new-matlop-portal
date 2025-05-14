@@ -1,0 +1,72 @@
+<div class="package-container container my-5">
+    <div class="row">
+        <div class="col-lg-12 title-select">
+            <h2>الباقات</h2>
+            <p-select [options]="cities" (onChange)="onPackagesDropdownSearch($event)" optionLabel="fullName"
+                placeholder="ابحث عن طريق المدينه" />
+        </div>
+    </div>
+
+    <div class="row g-4 mt-4" *ngIf="packageList?.length; else emptyState">
+        <div class="col-lg-6 col-md-6 col-sm-12" *ngFor="let package of packageList">
+            <div class="card-content">
+                <div class="content" (click)="goPackages(package.contractTypeId)">
+                    <div class="section-one">
+                        <div class="details">
+                            <div class="vat-section">
+                                <p>شامل الضريبة </p>
+                            </div>
+                            <div class="package-name">
+                                <p class="name">{{selectedLang == 'ar' ? package.nameAr : package.nameEn}}</p>
+                                <p class="type">({{selectedLang == 'ar' ? package.typeOfPackageNameAr : package.typeOfPackageName}})</p>
+                            </div>
+                        </div>
+                        <div class="amount">
+                            <p>{{package.price}} ريال</p>
+                        </div>
+                    </div>
+                    <div class="section-two mt-4">
+                        <div class="contents">
+                            <img src="assets/images/icons-svg/profile.svg" alt="">
+                            <div class="title">
+                                <p>عدد الفنين </p>
+                            </div>
+                            <div class="value">
+                                <p>(#### )</p>
+                            </div>
+                        </div>
+                        <div class="contents">
+                            <img src="assets/images/icons-svg/hash.svg" alt="">
+                            <div class="title">
+                                <p>عدد الزيارات </p>
+                            </div>
+                            <div class="value">
+                                <p>({{package.visitNumber}} زيارة)</p>
+                            </div>
+                        </div>
+                        <div class="contents">
+                            <img src="assets/images/icons-svg/clock.svg" alt="">
+                            <div class="title">
+                                <p>مدة الزيارة </p>
+                            </div>
+                            <div class="value">
+                                <p>({{package.visitHours}} ساعات )</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-three">
+                        <p>عرض الباقات </p>
+                        <img width="35" src="assets/images/icons-svg/arrow-black.svg" alt="arrow" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #emptyState>
+        <div class="empty-state d-flex flex-column align-items-center justify-content-center mt-5 text-center">
+            <img [width]="150" src="assets/images/global/folder.png" alt="No Contracts" />
+            <p class="mt-3 mb-0 text-muted">لا توجد باقات متاحة </p>
+        </div>
+    </ng-template>
+</div>

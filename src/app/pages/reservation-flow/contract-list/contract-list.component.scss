@@ -1,0 +1,47 @@
+.contract-container {
+    .card-content {
+        transition: transform 0.3s ease, box-shadow 0.3s ease; // Smooth animation
+        border-radius: 32px;
+        cursor: pointer;
+        &:hover {
+            transform: translateY(-10px); // Move card up
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); // Optional: add shadow
+        }
+
+        .content {
+            padding: 20px;
+            border-radius: 32px;
+            height: 220px;
+            background: linear-gradient(108.89deg,
+                    rgba(191, 253, 43, 0.2) 2.71%,
+                    rgba(19, 202, 197, 0.2) 97.54%);
+
+            .title {
+                position: relative;
+                top: 8px;
+
+                p {
+                    font-size: 20px;
+                    font-weight: 500;
+                }
+            }
+
+            .routing-packages {
+                display: flex;
+                color: black;
+                position: relative;
+                bottom: -40px;
+                justify-content: flex-end;
+                align-items: center;
+            }
+        }
+    }
+
+    .empty-state {
+        height: 400px;
+
+        p {
+            font-size: 40px;
+        }
+    }
+}

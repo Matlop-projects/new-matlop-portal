@@ -8,7 +8,7 @@ import { NgFor, NgIf, NgStyle } from '@angular/common';
 @Component({
   selector: 'app-services-list',
   standalone: true,
-  imports: [NgIf , NgStyle , NgFor],
+  imports: [NgIf, NgStyle, NgFor],
   templateUrl: './services-list.component.html',
   styleUrl: './services-list.component.scss'
 })
@@ -30,18 +30,18 @@ export class ServicesListComponent {
     })
   }
 
-  isServiceList(){
+  isServiceList() {
     return this.router.url.includes('/services/list')
-   }
+  }
 
-   getAllServices() {
+  getAllServices() {
     this.api.get('Service/GetAll').subscribe((res: any) => {
       if (res?.data) {
         const fullList = res.data.map((service: any) => ({
           ...service,
           image: this.imageUrl + service.image,
         }));
-  
+
         // Keep only the first 4
         this.services = fullList;
       }
@@ -57,7 +57,11 @@ export class ServicesListComponent {
   }
 
   goReservation(id: string) {
-    this.router.navigate(['reservation' , id])
+    this.router.navigate(['reservation', id])
+  }
+
+  goContractList(id: any) {
+    this.router.navigate(['/contract-list', id])
   }
 }
 

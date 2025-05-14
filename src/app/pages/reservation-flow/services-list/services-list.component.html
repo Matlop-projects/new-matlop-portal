@@ -12,7 +12,7 @@
                     <div class="desc"
                         [innerHTML]="selectedLang === 'ar' ? service.descriptionAr : service.descriptionEn"></div>
 
-                    <button class="action-btn">
+                    <button class="action-btn" (click)="goContractList(service.serviceId)">
                         أطلب خدمة الان
                     </button>
                 </div>

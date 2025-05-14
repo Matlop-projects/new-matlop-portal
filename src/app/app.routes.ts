@@ -6,6 +6,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 import { OrderDetailsComponent } from './pages/orders/order-details/order-details.component';
 import { ServicesListComponent } from './pages/reservation-flow/services-list/services-list.component';
+import { ContractListComponent } from './pages/reservation-flow/contract-list/contract-list.component';
+import { PackagesListComponent } from './pages/reservation-flow/packages-list/packages-list.component';
 
 
 
@@ -34,6 +36,8 @@ export const routes: Routes = [
       { path: 'orders', component: OrdersListComponent },
       { path: 'order-details/:id', component: OrderDetailsComponent },
       { path: 'services-list', component: ServicesListComponent },
+      { path: 'contract-list/:id', component: ContractListComponent },
+      { path: 'package-list/:contractId/:serviceId', component: PackagesListComponent },
       // { path: 'trader_details/:id', component: TraderDetailsComponent },
       // { path: 'trader_all_details/:id/:type', component: TraderAllProductsComponent },
       // { path: 'product_details/:productId', component: ProductDetailsComponent },

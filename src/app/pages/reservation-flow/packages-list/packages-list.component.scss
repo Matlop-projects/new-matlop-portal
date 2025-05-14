@@ -1,0 +1,134 @@
+::ng-deep {
+    .package-container {
+        min-height: 400px;
+
+        .title-select {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+            p-select {
+                width: 50%;
+                background: #F9F9F9;
+                border-radius: 24px;
+            }
+        }
+
+        .card-content {
+            transition: transform 0.3s ease, box-shadow 0.3s ease; // Smooth animation
+            border-radius: 32px;
+            cursor: pointer;
+
+            &:hover {
+                transform: translateY(-10px); // Move card up
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); // Optional: add shadow
+            }
+
+            .content {
+                padding: 20px;
+                border-radius: 32px;
+                min-height: 299px;
+                border: 1px solid #E6E6E6;
+                background-color: #f6f6f6;
+
+                .section-one {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .details {
+                        .vat-section {
+                            p {
+                                font-size: 20px;
+                                font-weight: 500;
+                            }
+                        }
+
+                        .package-name {
+                            display: flex;
+                            gap: 15px;
+                            align-items: center;
+
+                            .name {
+                                font-size: 24px;
+                                font-weight: 700;
+                            }
+
+                            .type {
+                                font-size: 16px;
+                                font-weight: 300;
+                                color: #B0B0B0;
+                            }
+                        }
+
+                    }
+
+                    .amount {
+                        background-color: #E7F9FB;
+                        border-radius: 32px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 6px 20px;
+
+                        p {
+                            color: #0eafba;
+                            font-size: 24px;
+                            font-weight: 700;
+                        }
+                    }
+                }
+
+                .section-two {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    flex-wrap: wrap;
+
+                    .contents {
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                        padding: 6px 20px;
+                        background-color: #FBFBFB;
+                        height: 49px;
+                        border-radius: 32px;
+
+                        .title { 
+                            p {
+                                font-size: 16px;
+                                font-weight: 400;
+                                color: #B0B0B0;
+                            }
+                        }
+
+                        .value { 
+                            p {
+                                font-size: 16px;
+                                font-weight: 500;
+                            }
+                        }
+                    }
+                }
+
+                .section-three {
+                    display: flex;
+                    color: black;
+                    position: relative;
+                    bottom: -20px;
+                    justify-content: flex-end;
+                    align-items: center;
+                }
+            }
+        }
+
+        .empty-state {
+            height: 400px;
+
+            p {
+                font-size: 40px;
+            }
+        }
+    }
+}
