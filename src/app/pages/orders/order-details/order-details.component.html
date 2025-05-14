@@ -81,7 +81,7 @@
       <div class="card mt-3 added_order">
         <div class="d-flex justify-content-between">
           <span class="bold">{{ "الطلبات الاضافية" }}</span>
-          <span class="btn-add-order">{{ "اضافة طلب صيانة اضافي" }}</span>
+          <span class="btn-add-order pointer"(click)="onAdditionalOrder()">{{ "اضافة طلب صيانة اضافي" }}</span>
         </div>
         <ng-container
           *ngIf="orderDetails.orderAddtionalItem.length; else empty"
@@ -89,7 +89,7 @@
           <div *ngFor="let item of orderDetails.orderAddtionalItem">
             <div class="d-flex justify-content-start">
               <img class="squar" src="assets/img/squar.svg" alt="" />
-              <span class="bold">اسم الطلب</span>
+              <span class="bold">{{item.note}} </span>
             </div>
           </div>
         </ng-container>
@@ -104,7 +104,7 @@
           class="total text-start mt-4"
         >
           <span>{{ "اجمالي" }}</span>
-          <span class="bold"> 100</span>
+          <span class="bold"> {{orderDetails.totalWithAdditional - orderDetails.orderTotal}}</span>
           <span> {{ "ر.س" }}</span>
         </div>
       </div>
@@ -205,10 +205,31 @@
 <p-dialog
   [header]="'الغاء طلب'"
   [modal]="true"
-  [(visible)]="visible"
+  [(visible)]="visibleCancelOrder"
   [style]="{ width: '25rem' }"
 >
   <app-order-cancel
     (confirmOrder)="onCloseDialogWhenConfirm($event)"
   ></app-order-cancel>
+</p-dialog>
+
+<p-dialog
+  [header]="'اضافة طلب اضافي'"
+  [modal]="true"
+  [(visible)]="visibleAdditionalItem"
+  [style]="{ width: '25rem' }"
+>
+ <div>
+  <textarea
+  class="p-3 mt-3"
+    rows="5"
+    cols="30"
+    pTextarea
+    placeholder="ملاحظات"
+    [(ngModel)]="orderAdditionalNotes"
+  ></textarea>
+</div>
+<div>
+  <button class="btn mt-3 w-100 btn-additional-item" [disabled]="orderAdditionalNotes==''"  (click)="confirmAdditionalItem()">{{ "اضافة طلب" }}</button>
+</div>
 </p-dialog>
