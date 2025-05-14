@@ -1,4 +1,4 @@
-import { NgFor } from "@angular/common";
+import { NgFor, NgIf, TitleCasePipe } from '@angular/common';
 import { Component, inject, OnInit } from "@angular/core";
 import { ApiService } from "../../../services/api.service";
 import { Router } from "@angular/router";
@@ -6,16 +6,18 @@ import { Router } from "@angular/router";
 @Component({
   selector: "app-orders-list",
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor,NgIf,TitleCasePipe],
   templateUrl: "./orders-list.component.html",
   styleUrl: "./orders-list.component.scss",
 })
 export class OrdersListComponent implements OnInit {
-  private router =inject(Router)
-  orders: any = [1,2,3,4];
-  activeStatus='current'
+  private router = inject(Router);
+  orders: any = [];
+  activeStatus = "pending";
+  ordersCount:any
+
   searchObject = {
-    pageNumber: 1,
+    pageNumber: 0,
     pageSize: 8,
     sortingExpression: "",
     sortingDirection: 0,
@@ -23,7 +25,7 @@ export class OrdersListComponent implements OnInit {
     paymentWayId: 0,
     orderStatus: 0,
     packageId: 0,
-    nextVistTime: "",
+    nextVistTime: null,
     coponeId: 0,
     orderSubTotal: 0,
     orderTotal: 0,
@@ -31,35 +33,68 @@ export class OrdersListComponent implements OnInit {
   };
   private apiService = inject(ApiService);
   ngOnInit(): void {
-    const storedData = localStorage.getItem('userData');
+    const storedData = localStorage.getItem("userData");
 
-if (storedData !== null) {
-  const parsed = JSON.parse(storedData);
-  const id: number = Number(parsed.id);
-  this.searchObject.clientId=id
-}
-   this.getAllOrders()
-
-   
+    if (storedData !== null) {
+      const parsed = JSON.parse(storedData);
+      const id: number = Number(parsed.id);
+      this.searchObject.clientId = id;
+      this.getOrdersCount(id)
+    }
+    this.getAllOrders();
   }
-  onSelectStatus(value:string){
-    this.activeStatus=value
-    if(value=='current'){
-
+  onSelectStatus(value: string) {
+    this.activeStatus = value;
+    if (value == "pending") {
+      this.searchObject.orderStatus = 0;
+    } else if (value == "complete") {
+      this.searchObject.orderStatus = 7;
+    } else {
+      this.searchObject.orderStatus = 8;
     }
-    else if(value=='complete'){
-
-    }
-    else{
-
-    }
-
+    this.getAllOrders();
   }
   getAllOrders() {
-    this.apiService.post("Order/GetAllWitPagination",this.searchObject).subscribe((res) => {});
+    this.apiService
+      .post("Order/GetByClientIdWithPagination", this.searchObject)
+      .subscribe((res) => {
+        if (res.data.dataList) {
+          this.orders = res.data.dataList;
+        }
+      });
+  }
+  getOrdersCount(clientId:number){
+    this.apiService.get(`order/GetOrderCountsByClientId`,{clientId:clientId}).subscribe((res:any)=>{
+      if(res.data){
+        this.ordersCount=res.data
+      }
+    })
+  }
+  onOrderDetails(orderId:number) {
+    this.router.navigateByUrl(`order-details/${orderId}`);
   }
 
-  onOrderDetails(){
-    this.router.navigateByUrl('order-details/1')
+  formatDateTime(dateTime: any ,type:string) {
+    const cleanedIso = dateTime.split(".")[0]; // "2025-05-10T00:52:55"
+
+    // Convert to Date object
+    const date = new Date(cleanedIso);
+    const formattedDate = date.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    }); // "10 May 2025"
+
+    // Format time in 24-hour format
+    const formattedTime = date.toLocaleTimeString("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    }); //
+
+    if(type=='date')
+      return  formattedDate
+    else
+    return formattedTime
   }
 }

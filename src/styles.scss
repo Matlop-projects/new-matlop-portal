@@ -1,26 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'bootstrap/dist/css/bootstrap.min.css';
+@import "bootstrap/dist/css/bootstrap.min.css";
 @import "primeicons/primeicons.css";
 @import "./assets/scss/fonts";
-@import 'ngx-toastr/toastr';
-@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
-@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+@import "ngx-toastr/toastr";
+@import "ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
 
 :root {
   --main-text-color: redF2F3E;
-  --p-primary-color: #8174A0 !important;
+  --p-primary-color: #8174a0 !important;
 }
-
-
 
 body {
   // tajwal
   // bahij
-  font-family: 'tajwal', sans-serif;
+  font-family: "tajwal", sans-serif;
   &:lang(ar) {
-    font-family: 'tajwal', sans-serif;
+    font-family: "tajwal", sans-serif;
   }
-   background: #F9F9F9;
+  background: #f9f9f9;
 
   p,
   span,
@@ -30,22 +28,22 @@ body {
   h4,
   h5 {
     margin: 0px;
-    font-family: 'tajwal', sans-serif;
+    font-family: "tajwal", sans-serif;
     &:lang(ar) {
-      font-family: 'tajwal', sans-serif;
+      font-family: "tajwal", sans-serif;
     }
   }
 }
-.block{
+.block {
   display: block;
 }
-.reverse_img{
-   transform: scaleX(-1);
+.reverse_img {
+  transform: scaleX(-1);
 }
-.w-30{
+.w-30 {
   width: 30%;
 }
-.white-text{
+.white-text {
   color: #fff;
 }
 .pi {
@@ -58,7 +56,6 @@ p-breadcrumb {
   .p-breadcrumb {
     background: none !important;
     padding: 0 !important;
-
 
     a {
       color: white;
@@ -104,7 +101,19 @@ p-breadcrumb {
 .fz-12 {
   font-size: 12px;
 }
+.fz-20{
+  font-size: 20px;
+}
 
+.w-90{
+  width: 90%;
+}
+.w-95{
+  width: 95%;
+}
+.min-width-300{
+  min-width: 300px;
+}
 .dialog-close-btn {
   border: 1px solid #dddddd;
   margin: 0px 5px;
@@ -129,28 +138,27 @@ small {
 .main-btn-one {
   border-radius: 32px;
   color: white;
-  background-color: #8174A0;
+  background-color: #8174a0;
   padding: 12px 22px;
   border: 1px solid rgba(255, 255, 255, 0);
   &:hover {
-    background-color: #F9F9F9;
-    color: #8174A0;
-    border: 1px solid #8174A0;
-    }
+    background-color: #f9f9f9;
+    color: #8174a0;
+    border: 1px solid #8174a0;
+  }
 }
 
 .main-btn-two {
   border-radius: 32px;
-  color: #8174A0;
-  border: 1px solid #8174A0;
+  color: #8174a0;
+  border: 1px solid #8174a0;
   padding: 12px 22px;
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
   &:hover {
-    background-color: #8174A0;
-    color: #F9F9F9;
+    background-color: #8174a0;
+    color: #f9f9f9;
   }
 }
-
 
 .main-btn-three {
   border-radius: 32px;
@@ -160,16 +168,11 @@ small {
   background-color: #f9f9f900;
 }
 
-
-
 .p-floatlabel label {
-
   &:lang(ar) {
     left: unset !important;
     right: 0.75rem !important;
   }
-
-
 }
 
 .p-inputtext {
@@ -189,13 +192,11 @@ textarea {
   width: 100%;
 }
 
-.p-password:has(.p-password-toggle-mask-icon) .p-password-input 
- {
+.p-password:has(.p-password-toggle-mask-icon) .p-password-input {
   padding-right: 20px !important ;
- }
+}
 
-
- .owl-theme .owl-dots {
+.owl-theme .owl-dots {
   display: flex !important;
   justify-content: center;
   margin-top: 20px;
@@ -208,7 +209,7 @@ textarea {
 .owl-theme .owl-dots .owl-dot {
   width: 10px;
   height: 10px;
-  background-color: #B6AEC8;
+  background-color: #b6aec8;
   border-radius: 50%;
   margin: 0 5px;
   transition: all 0.3s ease-in-out;
@@ -216,7 +217,7 @@ textarea {
 
 .owl-theme .owl-dots .owl-dot.active {
   width: 30px;
-  background-color: #8174A0 !important;
+  background-color: #8174a0 !important;
   border-radius: 20px;
 }
 
@@ -224,7 +225,7 @@ textarea {
   padding: 10px;
 }
 
-.p-drawer  {
+.p-drawer {
   width: 24rem !important;
 }
 
@@ -234,7 +235,7 @@ textarea {
 
 ::ng-deep .p-toast .p-toast-message {
   border-radius: 8px;
-  font-family: 'Cairo', sans-serif;
+  font-family: "Cairo", sans-serif;
 }
 
 ::ng-deep .p-toast-message-success {
@@ -245,4 +246,32 @@ textarea {
 ::ng-deep .p-toast-message-error {
   background-color: #f8d7da;
   color: #721c24;
+}
+.Pending,
+.pending {
+  background-color: #ffebae;
+  color: #e1a900;
+}
+.Complete,
+.complete {
+  background-color: #eafdee;
+  color: #28c700;
+}
+.Cancel,
+.cancel,
+.Canceled {
+  background-color: #ffdfd7;
+  color: #e24700;
+}
+.all-status {
+  border-radius: 32px;
+  padding: 5px 10px;
+  span.pi-circle-on {
+    font-size: 8px;
+  }
+}
+
+.p-checkbox-checked .p-checkbox-box {
+  background-color: #20d4ad !important;
+  border-color: #20d4ad !important;
 }

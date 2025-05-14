@@ -48,6 +48,13 @@
   
 }
 
+.btn-additional-item{
+    background: linear-gradient(to right, #33C0A8,#20D4AD);
+    color: #fff;
+    border-radius:32px ;
+    width: 100%;
+    padding: 10px;
+}
 .visit{
     margin: 0px 20px;
     .bkg-1 ,.bkg-2 ,.bkg-3{
@@ -69,7 +76,11 @@
 
 
 
-
+.bk-white{
+    background-color: #fff;
+    border-radius: 32px;
+    padding:5px 15px;
+}
 
 .bk-blue-light{
 background-color: #E7F9FB;

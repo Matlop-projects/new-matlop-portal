@@ -8,6 +8,7 @@ import { OrderDetailsComponent } from './pages/orders/order-details/order-detail
 import { ServicesListComponent } from './pages/reservation-flow/services-list/services-list.component';
 import { ContractListComponent } from './pages/reservation-flow/contract-list/contract-list.component';
 import { PackagesListComponent } from './pages/reservation-flow/packages-list/packages-list.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 
 
@@ -34,6 +35,7 @@ export const routes: Routes = [
     children: [
       { path: 'home', component: HomePageComponent },
       { path: 'orders', component: OrdersListComponent },
+      { path: 'about-us', component: AboutUsComponent },
       { path: 'order-details/:id', component: OrderDetailsComponent },
       { path: 'services-list', component: ServicesListComponent },
       { path: 'contract-list/:id', component: ContractListComponent },
