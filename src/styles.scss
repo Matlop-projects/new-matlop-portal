@@ -146,7 +146,17 @@ p-breadcrumb {
   border: 1px solid #dddddd;
   margin: 0px 5px;
 }
-
+.p-password  {
+  border-radius: 16px !important;
+  width: 100%!important;
+  .p-password-input{
+    width: 100%!important;
+  }
+}
+.cursor-not-allowed{
+  cursor: not-allowed!important;
+  
+}
 .page-form-container {
   .page-details {
     display: flex;

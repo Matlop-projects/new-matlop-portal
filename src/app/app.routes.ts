@@ -9,20 +9,26 @@ import { ServicesListComponent } from './pages/reservation-flow/services-list/se
 import { ContractListComponent } from './pages/reservation-flow/contract-list/contract-list.component';
 import { PackagesListComponent } from './pages/reservation-flow/packages-list/packages-list.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { LoginComponent } from './pages/login/login.component';
 
 
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'auth',
     pathMatch: 'full'
   },
   {
     path: 'auth',
     component: AuthLayoutComponent,
     children: [
-      // { path: 'login', component: LoginComponent },
+      {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+      { path: 'login', component: LoginComponent },
       // { path: 'forget_password', component: ForgetPasswordComponent },
       // { path: 'reset_password', component: ResetPasswordComponent },
       // { path: 'signup', component: SignupComponent }
