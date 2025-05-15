@@ -9,6 +9,8 @@ import { ServicesListComponent } from './pages/reservation-flow/services-list/se
 import { ContractListComponent } from './pages/reservation-flow/contract-list/contract-list.component';
 import { PackagesListComponent } from './pages/reservation-flow/packages-list/packages-list.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { SpecialOrderPageComponent } from './pages/special-order-page/special-order-page.component';
+import { EmergencyOrderPageComponent } from './pages/emergency-order-page/emergency-order-page.component';
 
 
 
@@ -40,6 +42,8 @@ export const routes: Routes = [
       { path: 'services-list', component: ServicesListComponent },
       { path: 'contract-list/:id', component: ContractListComponent },
       { path: 'package-list/:contractId/:serviceId', component: PackagesListComponent },
+      { path: 'special-order', component: SpecialOrderPageComponent },
+      { path: 'emergency-order', component: EmergencyOrderPageComponent },
       // { path: 'trader_details/:id', component: TraderDetailsComponent },
       // { path: 'trader_all_details/:id/:type', component: TraderAllProductsComponent },
       // { path: 'product_details/:productId', component: ProductDetailsComponent },
