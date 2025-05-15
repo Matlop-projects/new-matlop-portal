@@ -1,0 +1,38 @@
+<span class="welcome block">
+    {{'مرحبًا بك مجددًا في مطلوب '}}
+</span>
+<span class="desc mt-2">
+    {{'نسعد بعودتك معنا، حيث نحرص على توفير تجربة سهلة وسريعة تتيح لك الوصول إلى كل ما تحتاجه بخطوات بسيطة وأمان كامل'}}
+</span>
+
+ <form [formGroup]="form" class="form mt-5">
+      <div class="d-flex justify-contnet-start flex-wrap">
+        <div class="w-50 flex-grow-1">
+          <input
+            class="block w-100 mb-2 "
+            type="text"
+            placeholder="الاسم"
+            pInputText
+            [formControlName]="'name'"
+          />
+          <p-password 
+            class="block  mb-2"
+            [toggleMask]="true"
+            [feedback]="false"
+            placeholder="كلمة المرور"
+            [formControlName]="'password'"
+          />
+        </div>
+       
+      </div>
+      <div class="button text-start p-2 mt-3">
+        <button
+          class="btn btn-login"
+          (click)="login()"
+          [class.cursor-not-allowed]="!form.valid"
+          [disabled]="!form.valid"
+        >
+          {{ "تسجيل الدخول" }}
+        </button>
+      </div>
+    </form>
