@@ -101,10 +101,37 @@ p-breadcrumb {
 .fz-12 {
   font-size: 12px;
 }
+
+.fz-14 {
+  font-size: 14px;
+}
 .fz-20{
   font-size: 20px;
 }
-
+.fz-28{
+  font-size: 28px;
+}
+.fz-40{
+  font-size: 40px;
+} 
+.fz-24{
+  font-size: 24px;
+}
+.border-32{
+  border-radius: 32px;
+}
+.text-black {
+  color:#525252
+}
+.text-main-black {
+  color: #232A42;
+}
+.w-48{
+  width: 48%;
+}
+.w-45{
+  width: 45%;
+}
 .w-90{
   width: 90%;
 }
@@ -176,7 +203,7 @@ small {
 }
 
 .p-inputtext {
-  border-radius: 20px !important;
+  border-radius: 16px !important;
 }
 
 .p-password-toggle-mask-icon {
@@ -187,7 +214,7 @@ small {
 }
 
 textarea {
-  border-radius: 20px !important;
+  border-radius: 16px !important;
   border-color: #cbd5e1;
   width: 100%;
 }

@@ -1,7 +1,6 @@
 import { Component, inject } from "@angular/core";
 import {
   FormControl,
-  FormControlName,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -11,14 +10,42 @@ import { InputTextModule } from "primeng/inputtext";
 import { TextareaModule } from "primeng/textarea";
 import { ApiService } from "../../services/api.service";
 import { Validations } from "../../validations";
+import { GalleriaModule } from 'primeng/galleria';
+import { BackgroundImageWithTextComponent, IBackGroundImageWithText } from "../../components/background-image-with-text/background-image-with-text.component";
 @Component({
   selector: "app-about-us",
   standalone: true,
-  imports: [ReactiveFormsModule, InputTextModule, TextareaModule],
+  imports: [ReactiveFormsModule, InputTextModule, TextareaModule,GalleriaModule,FormsModule,BackgroundImageWithTextComponent],
   templateUrl: "./about-us.component.html",
   styleUrl: "./about-us.component.scss",
 })
 export class AboutUsComponent {
+  someWorksImages: any[] = [
+    {
+    itemImageSrc: 'assets/img/some-work-4.svg',
+    thumbnailImageSrc: 'assets/img/some-work-4.svg',
+    alt: 'Description for Image 1',
+    title: 'Title 1'
+},
+{
+    itemImageSrc: 'assets/img/some-work-3.svg',
+    thumbnailImageSrc: 'assets/img/some-work-3.svg',
+    alt: 'Description for Image 1',
+    title: 'Title 1'
+},
+{
+    itemImageSrc: 'assets/img/some-work-2.svg',
+    thumbnailImageSrc: 'assets/img/some-work-2.svg',
+    alt: 'Description for Image 1',
+    title: 'Title 1'
+},
+{
+    itemImageSrc: 'assets/img/some-work-1.svg',
+    thumbnailImageSrc: 'assets/img/some-work-1.svg',
+    alt: 'Description for Image 1',
+    title: 'Title 1'
+},
+  ]
   private apiService = inject(ApiService);
 
   form = new FormGroup({

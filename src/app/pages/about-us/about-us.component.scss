@@ -19,11 +19,36 @@
 .btn-contact-us{
      background-color: #0EC5D2;
     color: #fff;
-    border-radius:32px ;
+    border-radius:16px ;
     padding: 10px 20px;
 }
 .text-area{
     min-width: 300px;
     max-width: 95%;
 }
+}
+
+.bk-img{
+   background: url("/assets/img/clean-window.svg") no-repeat center center;
+   background-size: cover;
+}
+.our-vision{
+.card{
+       width: 98%;
+
+}   
+}
+.galleria-container{
+    display: none!important;   
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 1400px) {
+   .some-work-images{
+    display: none;
+   }
+   .galleria-container  {
+    display: block!important;
+   }
+    
 }
