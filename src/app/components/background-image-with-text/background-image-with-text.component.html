@@ -1,0 +1,22 @@
+<div
+  class="page-content"
+  [ngStyle]="{
+    'background-image':'url(' + options.imageUrl + ')' ,
+    'background-repeat': 'no-repeat',
+    'background-size': 'cover',
+    'background-position': 'center',
+    'padding': options.style?.padding,
+    'margin': options.style?.margin,
+    'width': options.style?.width,
+    'height': options.style?.height,
+  }"
+>
+  <div class="info">
+    <span class="block header">
+      {{options.header|translate}}
+    </span>
+    <span class="block desc">
+      {{options.description|translate}}
+    </span>
+  </div>
+</div>
