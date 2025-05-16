@@ -11,6 +11,7 @@ import { PackagesListComponent } from './pages/reservation-flow/packages-list/pa
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { SpecialOrderPageComponent } from './pages/special-order-page/special-order-page.component';
 import { EmergencyOrderPageComponent } from './pages/emergency-order-page/emergency-order-page.component';
+import { LoginComponent } from './pages/login/login.component';
 
 
 
@@ -24,7 +25,12 @@ export const routes: Routes = [
     path: 'auth',
     component: AuthLayoutComponent,
     children: [
-      // { path: 'login', component: LoginComponent },
+      {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+      { path: 'login', component: LoginComponent },
       // { path: 'forget_password', component: ForgetPasswordComponent },
       // { path: 'reset_password', component: ResetPasswordComponent },
       // { path: 'signup', component: SignupComponent }
