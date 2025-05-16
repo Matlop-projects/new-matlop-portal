@@ -1,52 +1,80 @@
-
 <div class="login-container">
   <div class="content">
     <div class="form-section">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="details d-flex justify-content-between">
-
-
           <div class="d-flex flex-col">
             <h2 class="bold">
-               {{'مرحبًا بك مجددًا في مطلوب '}}
+              {{ "مرحبًا بك مجددًا في مطلوب " }}
             </h2>
-          <p class="text-gray-light">
-                {{'نسعد بعودتك معنا، حيث نحرص على توفير تجربة سهلة وسريعة تتيح لك الوصول إلى كل ما تحتاجه بخطوات بسيطة وأمان كامل'}}
-
-          </p>
+            <p class="text-gray-light">
+              {{
+                "نسعد بعودتك معنا، حيث نحرص على توفير تجربة سهلة وسريعة تتيح لك الوصول إلى كل ما تحتاجه بخطوات بسيطة وأمان كامل"
+              }}
+            </p>
           </div>
 
           <div class="user-section">
             <button type="button" class="lang-btn" (click)="toggleLanguage()">
-              {{ selectedLang.toUpperCase() == 'AR' ? 'EN' : 'AR' }}
+              {{ selectedLang.toUpperCase() == "AR" ? "EN" : "AR" }}
             </button>
           </div>
-
-
         </div>
         <div class="d-flex flex-col gap-2 mt-3">
-          <label  for="email">{{'login.userName'|translate}}</label>
-          <input class="w-100" pInputText id="userName" formControlName="userName" />
-          <small *ngIf="loginForm.get('userName')?.hasError('required') && loginForm.get('userName')?.touched">
-            {{'login.userName_required'|translate}}
+          <label for="email">{{ "login.userName" | translate }}</label>
+          <input
+            class="w-100"
+            pInputText
+            id="userName"
+            formControlName="userName"
+          />
+          <small
+            *ngIf="
+              loginForm.get('userName')?.hasError('required') &&
+              loginForm.get('userName')?.touched
+            "
+          >
+            {{ "login.userName_required" | translate }}
           </small>
         </div>
-        <div class="d-flex flex-col gap-2 ">
-          <label for="password"> {{'login.password'|translate}}  </label>
-          <p-password formControlName="password" [toggleMask]="true" [feedback]="false"></p-password>
-          <small *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
-            {{'login.password_required'|translate}}
+        <div class="d-flex flex-col gap-2">
+          <label for="password"> {{ "login.password" | translate }} </label>
+          <p-password
+            formControlName="password"
+            [toggleMask]="true"
+            [feedback]="false"
+          ></p-password>
+          <small
+            *ngIf="
+              loginForm.get('password')?.hasError('required') &&
+              loginForm.get('password')?.touched
+            "
+          >
+            {{ "login.password_required" | translate }}
           </small>
         </div>
-         <div class="button text-start p-2 mt-3">
-        <button
-          class="btn btn-login w-100"
-         type="submit"
-          [disabled]="!loginForm.valid"
-        >
-          {{ "تسجيل الدخول" }}
-        </button>
-         </div>
+        <div class="d-flex justify-content-between">
+          <div class="d-flex justify-contnet-start remember-me">
+    <p-checkbox class="remember-checkbox" [value]="'checked'"  />
+            <label class="fz-16" for="password">
+              {{ "login.remember_me" | translate }}
+            </label>
+          </div>
+          <div class="d-flex flex-col gap-2">
+            <a class="forget_password" routerLink="/auth/forget_password">{{
+              "login.forget_password" | translate
+            }}</a>
+          </div>
+        </div>
+        <div class="button text-start mt-4">
+          <button
+            class="btn btn-login w-100"
+            type="submit"
+            [disabled]="!loginForm.valid"
+          >
+            {{ "تسجيل الدخول" }}
+          </button>
+        </div>
         <!-- <div class="actions">
           <button type="submit" class="send-btn"> {{'login.btn_login'|translate}}
             <span class="pi pi-arrow-right"></span>
@@ -61,22 +89,12 @@
   </div>
 </div>
 
-<app-otp-modal *ngIf="openOtpModal" [mobileNumber]="mobileNumber" (resendOtp)="resendOtp($event)" (otpValue)="getOtpValue($event)"></app-otp-modal>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<app-otp-modal
+  *ngIf="openOtpModal"
+  [mobileNumber]="mobileNumber"
+  (resendOtp)="resendOtp($event)"
+  (otpValue)="getOtpValue($event)"
+></app-otp-modal>
 
 <!-- 
 <div *ngIf="false">
@@ -120,4 +138,3 @@
       </div>
     </form>
 </div> -->
-

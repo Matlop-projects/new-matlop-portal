@@ -10,10 +10,11 @@ import { LanguageService } from '../../services/language.service';
 import { Router } from '@angular/router';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { OtpModalComponent } from '../../components/otp-modal/otp-modal.component';
+import { CheckboxModule } from 'primeng/checkbox';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [NgIf,TranslatePipe,ReactiveFormsModule, PasswordModule,InputTextModule,OtpModalComponent],
+  imports: [NgIf,TranslatePipe,ReactiveFormsModule,CheckboxModule, PasswordModule,InputTextModule,OtpModalComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

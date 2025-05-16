@@ -112,7 +112,8 @@
     "btn_login": "تسجيل الدخول",
     "forget_password": "نسيت كلمة المرور؟",
     "mobile": "رقم الجوال",
-    "signup": "انشاء حساب"
+    "signup": "انشاء حساب",
+    "remember_me": "تذكرني"
   },
   "FORGET_PASSWORD": {
     "WELCOME": "إعادة تعيين كلمة المرور",
