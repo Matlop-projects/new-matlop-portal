@@ -1,12 +1,114 @@
-.welcome{
-    font-size: 48px;
-    font-weight: bolder;
-    color:#000
+::ng-deep {
+  .login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h2,
+    p {
+      margin: 0;
+    }
+
+    .content {
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      height: 600px;
+      flex-basis: 70%;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 8px;
+        background-color: #fff;
+        padding: 30px;
+      .form-section {
+        flex-basis: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+
+        form {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+
+          .details {
+            gap: 10px;
+          }
+
+          .d-flex {
+            display: flex;
+          }
+
+          .flex-col {
+            flex-direction: column;
+          }
+        }
+      }
+
+      .details-section {
+        flex-basis: 40%;
+        background: url('/assets/img/login_bkg.svg') no-repeat;
+        background-size: cover;
+        border-radius: 24px;
+      }
+    }
+  }
+
+    // Small devices (portrait phones)
+@media only screen and (max-width:249.98px) {
+  .hide-part {
+    display: none !important;
+  }
+
+  .form-section {
+    flex-basis: 100% !important;
+    form {
+    input {
+      width: 100% !important;
+    }
+  }
+  }
 }
-.desc{
-    font-size: 24px;
-    font-weight: 400;
-    color:#999999
+
+  // Small devices (portrait phones)
+@media only screen and (min-width:250.98px) and (max-width: 575.98px) {
+  .hide-part {
+    display: none !important;
+  }
+
+  .form-section {
+    flex-basis: 100% !important;
+  }
+}
+
+// Medium devices (landscape phones, tablets)
+@media only screen and (min-width: 576px) and (max-width: 767.98px) {
+  .hide-part {
+    display: none !important;
+  }
+  .form-section {
+    flex-basis: 100% !important;
+  }
+}
+
+// Large devices (tablets, small desktops)
+@media only screen and (min-width: 768px) and (max-width: 991.98px) {
+  .hide-part {
+    display: none !important;
+  }
+  .form-section {
+    flex-basis: 100% !important;
+  }
+}
+
+// Extra large devices (desktops)
+@media only screen and (min-width: 992px) and (max-width: 1199.98px) {
+  // Styles for extra-large devices
+}
+
+// Extra extra large devices (large desktops, TVs)
+@media only screen and (min-width: 1200px) {
+  // Styles for extra-extra-large devices
 }
 .btn-login{
                  background: linear-gradient(to right, #BFFD2B, #05BCE8);
@@ -14,4 +116,52 @@
     color: #fff;
     border-radius:32px ;
     padding: 10px 20px;
+    &:hover {
+      color: #fff;
+    }
+    &:disabled{
+        background: #ddd;
+        color: #7a7a7a;
+        cursor: not-allowed!important;
+        pointer-events: none;
+    }
 }
+
+.lang-btn {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

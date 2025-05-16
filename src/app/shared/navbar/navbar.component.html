@@ -27,7 +27,7 @@
         <li class="nav-item">
           <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/services-list']">{{ "خدماتنا" }}</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="hasPermission">
           <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/orders']">{{ "الطلبات" }}</a>
         </li>
       </ul>

@@ -16,7 +16,7 @@ import { LoginComponent } from './pages/login/login.component';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'home',//auth if you want to start your app with auth
     pathMatch: 'full'
   },
   {
