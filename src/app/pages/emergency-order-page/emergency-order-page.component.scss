@@ -2,10 +2,117 @@
     .content {
         .main-card {
             border-radius: 32px;
-            border: 1px solid #E6E6E6;
-            padding: 20px;
+            border: 1px solid #e6e6e6;
+            padding: 25px;
             min-height: 600px;
             margin-block: 30px;
+            background-color: white;
+
+            .title {
+                p {
+                    font-size: 20px;
+                    font-weight: 700;
+                }
+            }
+
+            textarea {
+                height: 300px;
+                padding: 20px;
+            }
+
+            p-select {
+                border-radius: 16px;
+                padding-block: 7px;
+            }
+
+            .location-btn {
+                border-radius: 16px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 19px;
+                cursor: pointer;
+                border: 1px solid #cbd5e1;
+
+                &:hover {
+                    border-color: green;
+
+                    i {
+                        color: green;
+                    }
+                }
+
+
+            }
+
+            .location-section {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .upload-dropzone {
+                border: 2px dashed #E6E6E6;
+                padding: 2rem;
+                text-align: center;
+                border-radius: 12px;
+                display: flex;
+                flex-direction: column;
+                transition: background-color 0.3s ease;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+
+                &.dragging {
+                    background-color: #e9f7fc;
+                }
+
+                .image-details {
+                    font-size: 14px;
+                    font-weight: 400;
+                    color: #B0B0B0;
+                }
+
+                .action {
+                    display: flex;
+                    align-items: center;
+                    gap: 3px;
+
+                    p {
+                        font-weight: 500;
+                    }
+
+                    .btn-upload {
+                        background-color: white;
+                        border: none;
+                        color: #0EC5D2;
+                        padding: 0;
+                        margin: 0;
+                    }
+                }
+
+
+            }
+
+            .submit-btn {
+                display: flex;
+                justify-content: flex-end;
+
+                button {
+                    font-size: 20px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    border: none;
+                    padding: 11px 20px;
+                    border-radius: 24px;
+                    background: linear-gradient(to right, #BFFD2B, #05BCE8);
+                    color: white;
+
+                    &:disabled {
+                        cursor: not-allowed;
+                    }
+                }
+            }
         }
     }
 }
