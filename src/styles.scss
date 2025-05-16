@@ -340,7 +340,7 @@ textarea {
   }
 }
 
-.p-checkbox-checked .p-checkbox-box {
+.custom-checkbox .p-checkbox-checked .p-checkbox-box {
   background-color: #20d4ad !important;
   border-color: #20d4ad !important;
 }
@@ -376,4 +376,11 @@ p-datepicker {
       transform: rotate(180deg) !important;
     }
   }
+}
+.remember-checkbox .p-checkbox-checked .p-checkbox-box {
+  background-color: #fff !important;
+  border-color: #000 !important;
+}
+.remember-checkbox .p-checkbox-checked .p-checkbox-box .p-checkbox-icon {
+  color: #000 !important;
 }

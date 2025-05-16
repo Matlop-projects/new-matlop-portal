@@ -112,7 +112,8 @@
     "btn_login": "Login",
     "forget_password": "Forgot Password?",
     "mobile": "Mobile Number",
-    "signup": "New Account"
+    "signup": "New Account",
+    "remember_me": "Remember Me"
   },
   "FORGET_PASSWORD": {
     "WELCOME": "Reset Your Password",
