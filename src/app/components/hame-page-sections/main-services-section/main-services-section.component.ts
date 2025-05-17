@@ -59,4 +59,8 @@ export class MainServicesSectionComponent {
   goReservation(id: string) {
     this.router.navigate(['reservation' , id])
   }
+
+  goContractList(id: any) {
+    this.router.navigate(['/contract-list', id])
+  }
 }

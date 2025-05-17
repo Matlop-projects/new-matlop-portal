@@ -61,7 +61,7 @@ export class SpecialOrderPageComponent {
     return date;
   })();
   form = new FormGroup({
-    clientId: new FormControl('12'),
+    clientId: new FormControl(localStorage.getItem('userId')),
     specialOrderId: new FormControl(0),
     amount: new FormControl(0),
     locationId: new FormControl('', Validators.required),
@@ -169,7 +169,7 @@ export class SpecialOrderPageComponent {
 
   getLocation() {
     const userId = localStorage.getItem('userId');
-    this.api.get('Location/GetByUserId/' + '12').subscribe((res: any) => {
+    this.api.get('Location/GetByUserId/' + userId).subscribe((res: any) => {
       if (res.data) {
         this.locations = res.data.map((item: any) => ({
           name: item.countryName,
@@ -186,6 +186,7 @@ export class SpecialOrderPageComponent {
   addLocation() {
     this.showAddLocationDialog = true
   }
+  
   API_addLocation(payload: any) {
     this.api
       .post('Location/Create', payload)

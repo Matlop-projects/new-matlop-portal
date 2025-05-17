@@ -74,9 +74,8 @@ export class PackagesListComponent {
     });
   }
 
-  goPackages(contractId: string) {
-    console.log(contractId);
-    this.router.navigate(['/package-list' ,contractId ,this.serviceId ])
+  goPackageDetails(packageId: string) {
+    this.router.navigate(['/package-details' , packageId])
   }
 
   onPackagesDropdownSearch(data: any) {

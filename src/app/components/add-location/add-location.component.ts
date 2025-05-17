@@ -144,7 +144,7 @@ export class AddLocationComponent {
       locationId: 0,
       longitude: '123',
       name: 'asd',
-      userId: 12,
+      userId: localStorage.getItem('userId'),
     };
     this.value.emit(payload)
   //  this.addLocation();

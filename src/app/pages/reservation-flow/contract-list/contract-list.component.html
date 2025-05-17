@@ -7,7 +7,7 @@
 
     <!-- ✅ Contracts List -->
     <div class="row g-4 mt-4" *ngIf="contractList?.length; else emptyState">
-        <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let contract of contractList">
+        <div class="col-lg-4 col-md-6 col-sm-12 card-row" *ngFor="let contract of contractList">
             <div class="card-content">
                 <div class="content" (click)="goPackages(contract.contractTypeId)">
                     <img src="assets/images/icons-svg/contract-frame.svg" width="80" alt="frame" />

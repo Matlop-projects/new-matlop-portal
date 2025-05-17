@@ -33,9 +33,9 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder,@Inject(DOCUMENT) private document: Document, private api: ApiService, private translate: TranslateService, private router: Router) {
     this.loginForm = this.fb.group({
-      userName: ['superadmin@admin.com', [Validators.required]],
+      userName: ['0555555556', [Validators.required]],
       password: ['Admin@VL', [Validators.required]],
-      loginMethod: [2]
+      loginMethod: [1]
     });
 
     this.translate.setDefaultLang('en');
@@ -98,7 +98,8 @@ export class LoginComponent {
           id: data.data.userId,
           gender: data.data.gender
         }
-        localStorage.setItem('userData', JSON.stringify(dataUser))
+        localStorage.setItem('userData', JSON.stringify(dataUser));
+        localStorage.setItem('userId', JSON.stringify(dataUser.id))
         localStorage.setItem('token', data.data.accessToken);
         this.router.navigate(['/home']);
       }
