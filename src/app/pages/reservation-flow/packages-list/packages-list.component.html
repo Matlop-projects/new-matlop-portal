@@ -10,7 +10,7 @@
     <div class="row g-4 mt-4" *ngIf="packageList?.length; else emptyState">
         <div class="col-lg-6 col-md-6 col-sm-12" *ngFor="let package of packageList">
             <div class="card-content">
-                <div class="content" (click)="goPackageDetails(package.contractTypeId)">
+                <div class="content" (click)="goPackageDetails(package.packageId)">
                     <div class="section-one">
                         <div class="details">
                             <div class="vat-section">
