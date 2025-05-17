@@ -9,7 +9,10 @@ import { ServicesListComponent } from './pages/reservation-flow/services-list/se
 import { ContractListComponent } from './pages/reservation-flow/contract-list/contract-list.component';
 import { PackagesListComponent } from './pages/reservation-flow/packages-list/packages-list.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { SpecialOrderPageComponent } from './pages/special-order-page/special-order-page.component';
+import { EmergencyOrderPageComponent } from './pages/emergency-order-page/emergency-order-page.component';
 import { LoginComponent } from './pages/login/login.component';
+import { PackageDetailsComponent } from './pages/reservation-flow/package-details/package-details.component';
 
 
 
@@ -42,11 +45,13 @@ export const routes: Routes = [
       { path: 'home', component: HomePageComponent },
       { path: 'orders', component: OrdersListComponent },
       { path: 'about-us', component: AboutUsComponent },
-      { path: 'order-details/:id', component: OrderDetailsComponent },
+      { path: 'order-details/:id', component: OrderDetailsComponent  , canActivate: [authGuard]},
       { path: 'services-list', component: ServicesListComponent },
-      { path: 'contract-list/:id', component: ContractListComponent },
-      { path: 'package-list/:contractId/:serviceId', component: PackagesListComponent },
-      // { path: 'trader_details/:id', component: TraderDetailsComponent },
+      { path: 'contract-list/:id', component: ContractListComponent , canActivate: [authGuard]},
+      { path: 'package-list/:contractId/:serviceId', component: PackagesListComponent , canActivate: [authGuard]},
+      { path: 'special-order', component: SpecialOrderPageComponent , canActivate: [authGuard]},
+      { path: 'emergency-order', component: EmergencyOrderPageComponent , canActivate: [authGuard]},
+      { path: 'package-details/:packageId', component: PackageDetailsComponent , canActivate: [authGuard] },
       // { path: 'trader_all_details/:id/:type', component: TraderAllProductsComponent },
       // { path: 'product_details/:productId', component: ProductDetailsComponent },
       // { path: 'product_details/:productId/:traderId', component: ProductDetailsComponent },

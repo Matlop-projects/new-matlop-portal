@@ -1,0 +1,41 @@
+
+<div class="container mt-3 mb-3">
+    <form  [formGroup]="form" class="mt-5 mb-5"  (ngSubmit)="onSubmit()">
+            <div class=" d-flex justify-content-between flex-wrap w-100">
+                <div class="w-49">
+                    <p-floatlabel variant="on">
+                        <p-select class="w-100"  (onChange)="onCountrySelect($event.value)" 
+                       
+                          [options]="countryList" formControlName="countryId"  optionValue="code" optionLabel="name" />
+                        <label for="on_label">اسم البلد</label>
+                    </p-floatlabel>
+                </div>
+                <div class="w-49">
+                    <p-floatlabel variant="on">
+                        <p-select class="w-100"(onChange)="onCitySelect($event.value)"  [options]="cityList" formControlName="cityId"  optionValue="code" optionLabel="name" />
+                        <label for="on_label">اسم المدينة</label>
+                    </p-floatlabel>
+                </div>
+                <div class="w-49">
+                    <p-floatlabel variant="on">
+                        <p-select class="w-100"  [options]="districtList" formControlName="districtId" optionValue="code" optionLabel="name" />
+                        <label for="on_label">اسم القطاع</label>
+                    </p-floatlabel>
+                </div>
+                <div class="w-49">
+                    <p-floatlabel variant="on">
+                        <input  class="w-100" pInputText id="on_label"  formControlName="blockNo" autocomplete="off" />
+                        <label for="on_label">اسم البلوك</label>
+                    </p-floatlabel>
+                </div>
+               
+             
+            </div>
+            <div class="buttons mt-4 mb-4">
+                <button class="btn submit" type="submit"[class.not-allowed]="!form.valid" [disabled]="!form.valid">
+                    <span >اضف موقع</span>
+                </button>
+            </div>
+    </form>
+
+</div>

@@ -1,0 +1,187 @@
+<div class="package-details-container container">
+    <div class="content">
+        <div class="row">
+            <div class="packaeg-details-section col-lg-12" *ngIf="packageDetails">
+                <div class="card-content">
+                    <div class="content">
+                        <div class="section-one">
+                            <div class="details">
+                                <div class="vat-section">
+                                    <p>شامل الضريبة </p>
+                                </div>
+                                <div class="package-name">
+                                    <p class="name">{{selectedLang == 'ar' ? packageDetails.nameAr :
+                                        packageDetails.nameEn}}</p>
+                                    <p class="type">({{selectedLang == 'ar' ? packageDetails.typeOfPackageNameAr :
+                                        packageDetails.typeOfPackageName}})</p>
+                                </div>
+                            </div>
+                            <div class="amount">
+                                <p>{{packageDetails.price}} ريال</p>
+                            </div>
+                        </div>
+                        <div class="section-three">
+                            <p
+                                [innerHTML]="selectedLang == 'ar' ? packageDetails.descriptionAr : packageDetails.descriptionEn">
+                            </p>
+                        </div>
+                        <div class="section-two mt-4">
+                            <div class="contents">
+                                <img src="assets/images/icons-svg/profile.svg" alt="">
+                                <div class="title">
+                                    <p>عدد الفنين </p>
+                                </div>
+                                <div class="value">
+                                    <p>(#### )</p>
+                                </div>
+                            </div>
+                            <div class="contents">
+                                <img src="assets/images/icons-svg/hash.svg" alt="">
+                                <div class="title">
+                                    <p>عدد الزيارات </p>
+                                </div>
+                                <div class="value">
+                                    <p>({{packageDetails.visitNumber}} زيارة)</p>
+                                </div>
+                            </div>
+                            <div class="contents">
+                                <img src="assets/images/icons-svg/clock.svg" alt="">
+                                <div class="title">
+                                    <p>مدة الزيارة </p>
+                                </div>
+                                <div class="value">
+                                    <p>({{packageDetails.visitHours}} ساعات )</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-section">
+
+                    <div class="row">
+                        <div class="title col-lg-12">
+                            <p>بيانات الطلب</p>
+                        </div>
+
+                        <div class="location-section mt-4 col-lg-12">
+                            <label for="">الموقع </label><span class="red-mark">*</span>
+                            <div class="actions-section">
+                                <p-select (onChange)="selectLocation($event)" [(ngModel)]="locationSelect"
+                                    [options]="locations" optionLabel="name" placeholder="اختر المدينه" class="w-100"
+                                    optionValue="code"></p-select>
+                                <div (click)="addLocation()" class="location-btn" pTooltip="اضف موقع جديد"
+                                    tooltipPosition="top">
+                                    <i class="pi pi-plus"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="date-picker-section col-lg-6">
+                            <label for="">التاريخ</label><span class="red-mark">*</span>
+
+                            <p-datepicker [ngClass]="{ 'input-error': isDateInvalid }" [(ngModel)]="dates"
+                                placeholder="من فضلك قم بتحديد التاريخ المناسب لك " (onSelect)="validateMinDates()"
+                                selectionMode="multiple" [disabledDays]="[5, 6]" [minDate]="minDate" [maxDate]="maxDate"
+                                [readonlyInput]="true" />
+                            <small *ngIf="errorMessage" class="error-message">
+                                {{ errorMessage }}
+                            </small>
+                        </div>
+
+                        <div class="time-picker-section col-lg-6">
+                            <label for="">وقت العمل</label><span class="red-mark">*</span>
+
+                            <p-select [options]="workingHoursList" [(ngModel)]="workingHoursSelect"
+                                (onChange)="onWorkingHoursChange($event)" optionLabel="finalWorking"
+                                placeholder="من فضلك قم بتحديد المواعيد المناسبة لك " />
+                        </div>
+
+                        <div class="payment-way-section col-lg-12">
+                            <label for="">طريقة الدفع</label><span class="red-mark">*</span>
+
+                            <p-select [options]="paymentList" [(ngModel)]="paymentSelect"
+                                (onChange)="onPaymentChange($event)" optionLabel="finalPayment"
+                                placeholder="اختر طريقة الدفع" />
+                        </div>
+
+                        <div class="equepment-section col-lg-12">
+                            <label for="">المعدات</label>
+                            <p class="clarify">اختر من المعدات</p>
+                            <div class="equipments-container">
+                                <div *ngFor="let equipment of equipments" class="equipment-card"
+                                    [ngClass]="{ 'selected': equipment.status }" (click)="toggleStatus(equipment)">
+                                    <p> {{ selectedLang === 'ar' ? equipment.arName : equipment.enName }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="media-section col-lg-12">
+
+                            <label for="">الصور</label>
+                            <div class="desc">
+                                <p>يرجى رفع صور توضّح موقع الخدمة أو نوع العطل، عشان نضمن لك تنفيذ أدق وأسرع للخدمة
+                                    المطلوبة</p>
+                            </div>
+                            <div class="upload-dropzone mb-3 mt-4" (dragover)="onDragOver($event)"
+                                (dragleave)="onDragLeave($event)" (drop)="onDrop($event)" [class.dragging]="isDragging">
+
+                                <img width="120" src="assets/images/icons-svg/vector.svg" alt="upload-files" />
+
+                                <div class="action">
+                                    <button class="btn-upload" type="button" (click)="fileInput.click()">
+                                        أضغط للتحميل
+                                    </button>
+                                    <p> أو اسحب وأفلِت </p>
+                                </div>
+
+                                <p class="image-details">JPG، JPEG، PNG أقل من 1 ميجابايت</p>
+
+                                <input type="file" multiple accept="image/*,video/*" hidden #fileInput
+                                    (change)="onFileSelected($event)" />
+
+                                <div *ngIf="orderObject.media?.length" class="mt-3">
+                                    <div *ngFor="let file of orderObject.media; let i = index"
+                                        class="d-flex align-items-center justify-content-between mb-2">
+
+                                        <span class="text-success">
+                                            {{ file.mediaTypeEnum === 1 ? '📷' : '🎥' }} {{ file.src | slice: 0:30 }}...
+                                        </span>
+
+                                        <button type="button" class="btn btn-sm btn-danger" (click)="removeMedia(i)">
+                                            حذف
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="note-section col-lg-12">
+                            <label for="">ملاحظة علي الطلب </label>
+                            <textarea class="form-control mb-3 mt-3" placeholder="من فضلك قم بكتابة ملاحظاتك هنا "
+                                name="notes" [(ngModel)]="orderObject.notes">
+                            </textarea>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="instructions-section">
+                    <label for="">التعليمات الرئيسية </label>
+                    <p [innerHTML]="selectedLang == 'ar' ? packageDetails.arInstraction : packageDetails.enInstraction">
+                    </p>
+                </div>
+
+                <div class="submit-btn-section">
+                    <button class="submit-btn-form" (click)="createOrder()">تأكيد الطلب </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p-dialog header="اضف موقع جديد" [modal]="true" [(visible)]="showAddLocationDialog" [style]="{ width: '25rem' }">
+    <app-add-location (value)="onAddLocation($event)"></app-add-location>
+</p-dialog>

@@ -15,9 +15,11 @@ body {
   // tajwal
   // bahij
   font-family: "tajwal", sans-serif;
+
   &:lang(ar) {
     font-family: "tajwal", sans-serif;
   }
+
   background: #f9f9f9;
 
   p,
@@ -29,23 +31,29 @@ body {
   h5 {
     margin: 0px;
     font-family: "tajwal", sans-serif;
+
     &:lang(ar) {
       font-family: "tajwal", sans-serif;
     }
   }
 }
+
 .block {
   display: block;
 }
+
 .reverse_img {
   transform: scaleX(-1);
 }
+
 .w-30 {
   width: 30%;
 }
+
 .white-text {
   color: #fff;
 }
+
 .pi {
   font-family: "primeicons" !important;
 }
@@ -89,15 +97,19 @@ p-breadcrumb {
 .text-gray-light {
   color: #b0b0b0;
 }
+
 .bold {
   font-weight: bolder;
 }
+
 .margin-2 {
   margin: 0px 10px;
+
   span.name {
     margin: 0px 3px;
   }
 }
+
 .fz-12 {
   font-size: 12px;
 }
@@ -105,43 +117,55 @@ p-breadcrumb {
 .fz-14 {
   font-size: 14px;
 }
-.fz-20{
+
+.fz-20 {
   font-size: 20px;
 }
-.fz-28{
+
+.fz-28 {
   font-size: 28px;
 }
-.fz-40{
+
+.fz-40 {
   font-size: 40px;
-} 
-.fz-24{
+}
+
+.fz-24 {
   font-size: 24px;
 }
-.border-32{
+
+.border-32 {
   border-radius: 32px;
 }
 
 .text-black {
-  color:#525252
+  color: #525252
 }
+
 .text-main-black {
   color: #232A42;
 }
-.w-48{
+
+.w-48 {
   width: 48%;
 }
-.w-45{
+
+.w-45 {
   width: 45%;
 }
-.w-90{
+
+.w-90 {
   width: 90%;
 }
-.w-95{
+
+.w-95 {
   width: 95%;
 }
-.min-width-300{
+
+.min-width-300 {
   min-width: 300px;
 }
+
 .dialog-close-btn {
   border: 1px solid #dddddd;
   margin: 0px 5px;
@@ -179,6 +203,7 @@ small {
   background-color: #8174a0;
   padding: 12px 22px;
   border: 1px solid rgba(255, 255, 255, 0);
+
   &:hover {
     background-color: #f9f9f9;
     color: #8174a0;
@@ -192,6 +217,7 @@ small {
   border: 1px solid #8174a0;
   padding: 12px 22px;
   background-color: #f9f9f9;
+
   &:hover {
     background-color: #8174a0;
     color: #f9f9f9;
@@ -231,7 +257,7 @@ textarea {
 }
 
 .p-password:has(.p-password-toggle-mask-icon) .p-password-input {
-  padding-right: 20px !important ;
+  padding-right: 20px !important;
 }
 
 .owl-theme .owl-dots {
@@ -285,25 +311,30 @@ textarea {
   background-color: #f8d7da;
   color: #721c24;
 }
+
 .Pending,
 .pending {
   background-color: #ffebae;
   color: #e1a900;
 }
+
 .Complete,
 .complete {
   background-color: #eafdee;
   color: #28c700;
 }
+
 .Cancel,
 .cancel,
 .Canceled {
   background-color: #ffdfd7;
   color: #e24700;
 }
+
 .all-status {
   border-radius: 32px;
   padding: 5px 10px;
+
   span.pi-circle-on {
     font-size: 8px;
   }
@@ -312,6 +343,39 @@ textarea {
 .custom-checkbox .p-checkbox-checked .p-checkbox-box {
   background-color: #20d4ad !important;
   border-color: #20d4ad !important;
+}
+
+
+p-datepicker.w-full-profile span {
+  width: 100% !important;
+}
+
+p-datepicker.w-full-profile .p-datepicker .p-datepicker-panel {
+  min-width: 50% !important;
+}
+
+
+
+p-datepicker {
+  table {
+    .p-datepicker-weekday-cell {
+      text-align: center !important;
+    }
+  }
+
+  .p-datepicker-day {
+    width: 0px !important;
+    padding: 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  &:lang(ar) {
+    .p-button-icon-only {
+      transform: rotate(180deg) !important;
+    }
+  }
 }
 .remember-checkbox .p-checkbox-checked .p-checkbox-box {
   background-color: #fff !important;

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-special-services-section',
@@ -9,4 +10,13 @@ import { Component } from '@angular/core';
 })
 export class SpecialServicesSectionComponent {
 
+  router = inject(Router);
+
+  goOrder(route: any) {
+    if(route == 's') {
+      this.router.navigate(['/special-order']);
+    } else {
+      this.router.navigate(['/emergency-order']);
+    }
+  }
 }
