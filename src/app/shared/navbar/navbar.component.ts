@@ -58,7 +58,7 @@ export class NavbarComponent implements OnInit {
     
     console.log('User Signal:', this.user()); // ✅ Access computed() as a function
     this.initAppTranslation();
-    // this.checkPermission();
+    this.checkPermission();
     this.languageService.translationService.onLangChange.subscribe((lang: any) => {
       this.updateMenuItems();
       this.selectedLang = lang.lang
@@ -70,11 +70,11 @@ export class NavbarComponent implements OnInit {
     return this.selectedLang.toUpperCase() === 'AR' ? 'NAVBAR.ENGLISH' : 'NAVBAR.ARABIC';
   }
 
-  // checkPermission() {
-  //  this.api.post('Authentication/validateUserToken', {tokenToValidate:localStorage.getItem('token')}).subscribe((res: any) => {
-  //   this.hasPermission = res?.data;
-  //  })
-  // }
+  checkPermission() {
+   this.api.post('Authentication/validateUserToken', {tokenToValidate:localStorage.getItem('token')}).subscribe((res: any) => {
+    this.hasPermission = res?.data;
+   })
+  }
 
   updateMenuItems() {
     this.items = [

@@ -5,12 +5,10 @@
         <div class="details d-flex justify-content-between">
           <div class="d-flex flex-col">
             <h2 class="bold">
-              {{ "مرحبًا بك مجددًا في مطلوب " }}
+              {{ "login.welcome" | translate }}
             </h2>
             <p class="text-gray-light">
-              {{
-                "نسعد بعودتك معنا، حيث نحرص على توفير تجربة سهلة وسريعة تتيح لك الوصول إلى كل ما تحتاجه بخطوات بسيطة وأمان كامل"
-              }}
+              {{ "login.welcome_message" | translate }}
             </p>
           </div>
 
@@ -20,121 +18,51 @@
             </button>
           </div>
         </div>
+
         <div class="d-flex flex-col gap-2 mt-3">
           <label for="email">{{ "login.userName" | translate }}</label>
-          <input
-            class="w-100"
-            pInputText
-            id="userName"
-            formControlName="userName"
-          />
-          <small
-            *ngIf="
-              loginForm.get('userName')?.hasError('required') &&
-              loginForm.get('userName')?.touched
-            "
-          >
+          <input class="w-100" pInputText id="userName" formControlName="userName" />
+          <small *ngIf="loginForm.get('userName')?.hasError('required') && loginForm.get('userName')?.touched">
             {{ "login.userName_required" | translate }}
           </small>
         </div>
+
         <div class="d-flex flex-col gap-2">
-          <label for="password"> {{ "login.password" | translate }} </label>
-          <p-password
-            formControlName="password"
-            [toggleMask]="true"
-            [feedback]="false"
-          ></p-password>
-          <small
-            *ngIf="
-              loginForm.get('password')?.hasError('required') &&
-              loginForm.get('password')?.touched
-            "
-          >
+          <label for="password">{{ "login.password" | translate }}</label>
+          <p-password formControlName="password" [toggleMask]="true" [feedback]="false"></p-password>
+          <small *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
             {{ "login.password_required" | translate }}
           </small>
         </div>
+
         <div class="d-flex justify-content-between">
-          <div class="d-flex justify-contnet-start remember-me">
-    <p-checkbox class="remember-checkbox" [value]="'checked'"  />
+          <div class="d-flex justify-contnet-start remember-me ckeck-box">
+            <p-checkbox class="remember-checkbox" [value]="'checked'" />
             <label class="fz-16" for="password">
               {{ "login.remember_me" | translate }}
             </label>
           </div>
           <div class="d-flex flex-col gap-2">
-            <a class="forget_password" routerLink="/auth/forget_password">{{
-              "login.forget_password" | translate
-            }}</a>
+            <a class="forget_password" routerLink="/auth/forget_password">
+              {{ "login.forget_password" | translate }}
+            </a>
           </div>
         </div>
-        <div class="button text-start mt-4">
-          <button
-            class="btn btn-login w-100"
-            type="submit"
-            [disabled]="!loginForm.valid"
-          >
-            {{ "تسجيل الدخول" }}
+
+        <div class="button text-center mt-4">
+          <button class="btn btn-login w-100" type="submit" [disabled]="!loginForm.valid">
+            {{ "login.submit" | translate }}
           </button>
+          <a class="forget_password signup" routerLink="/auth/signup">{{'login.signup' | translate}}</a>
         </div>
-        <!-- <div class="actions">
-          <button type="submit" class="send-btn"> {{'login.btn_login'|translate}}
-            <span class="pi pi-arrow-right"></span>
-          </button>
-          <a routerLink='/auth/forget_password'>{{'login.forget_password'|translate}}</a>
-        </div> -->
       </form>
     </div>
     <div class="details-section hide-part">
-      <!-- <img width="164" height="51" src="assets/img/login_logo.svg" alt=""> -->
+      <!-- صورة أو تفاصيل إضافية -->
     </div>
   </div>
 </div>
 
-<app-otp-modal
-  *ngIf="openOtpModal"
-  [mobileNumber]="mobileNumber"
-  (resendOtp)="resendOtp($event)"
-  (otpValue)="getOtpValue($event)"
-></app-otp-modal>
-
-<!-- 
-<div *ngIf="false">
-
-<span class="welcome block">
-    {{'مرحبًا بك مجددًا في مطلوب '}}
-</span>
-<span class="desc mt-2">
-    {{'نسعد بعودتك معنا، حيث نحرص على توفير تجربة سهلة وسريعة تتيح لك الوصول إلى كل ما تحتاجه بخطوات بسيطة وأمان كامل'}}
-</span>
-
- <form [formGroup]="form" class="form mt-5">
-      <div class="d-flex justify-contnet-start flex-wrap">
-        <div class="w-50 flex-grow-1">
-          <input
-            class="block w-100 mb-2 "
-            type="text"
-            placeholder="الاسم"
-            pInputText
-            [formControlName]="'name'"
-          />
-          <p-password 
-            class="block  mb-2"
-            [toggleMask]="true"
-            [feedback]="false"
-            placeholder="كلمة المرور"
-            [formControlName]="'password'"
-          />
-        </div>
-       
-      </div>
-      <div class="button text-start p-2 mt-3">
-        <button
-          class="btn btn-login"
-          (click)="login()"
-          [class.cursor-not-allowed]="!form.valid"
-          [disabled]="!form.valid"
-        >
-          {{ "تسجيل الدخول" }}
-        </button>
-      </div>
-    </form>
-</div> -->
+<app-otp-modal *ngIf="openOtpModal" [mobileNumber]="mobileNumber" (resendOtp)="resendOtp($event)"
+  (otpValue)="getOtpValue($event)">
+</app-otp-modal>

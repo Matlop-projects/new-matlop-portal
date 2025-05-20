@@ -11,16 +11,18 @@ import { Router, RouterModule } from '@angular/router';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { OtpModalComponent } from '../../components/otp-modal/otp-modal.component';
 import { CheckboxModule } from 'primeng/checkbox';
-@Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [NgIf,TranslatePipe,ReactiveFormsModule,CheckboxModule,RouterModule , PasswordModule,InputTextModule,OtpModalComponent],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
-})
-export class LoginComponent {
+import { CarouselModule } from 'primeng/carousel';
 
-  loginForm: FormGroup;
+@Component({
+  selector: 'app-signup',
+  standalone: true,
+  imports: [NgIf,TranslatePipe,CarouselModule,ReactiveFormsModule,CheckboxModule,RouterModule , PasswordModule,InputTextModule,OtpModalComponent],
+  templateUrl: './signup.component.html',
+  styleUrl: './signup.component.scss'
+})
+export class SignupComponent {
+
+  signupForm: FormGroup;
   toaster = inject(ToasterService);
   otpValue: string = '';
   mobileNumber: string = '';
@@ -29,13 +31,22 @@ export class LoginComponent {
   currentLang = 'en';
   selectedLang: string = localStorage.getItem('lang') || 'en';
 
-
+  carouselImages: string[] = [
+    'assets/images/backgrounds/slider-1.png',
+    'assets/images/backgrounds/slider-2.png',
+    'assets/images/backgrounds/slider-3.png'
+  ];
 
   constructor(private fb: FormBuilder,@Inject(DOCUMENT) private document: Document, private api: ApiService, private translate: TranslateService, private router: Router) {
-    this.loginForm = this.fb.group({
-      userName: ['0555555556', [Validators.required]],
-      password: ['Admin@VL', [Validators.required]],
-      loginMethod: [1]
+    this.signupForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      userName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      mobileNumber: ['', [Validators.required, Validators.pattern(/^05\d{8}$/)]], // رقم سعودي
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+      genderId: [1, Validators.required], // 1: ذكر, 2: أنثى
     });
 
     this.translate.setDefaultLang('en');
@@ -45,14 +56,26 @@ export class LoginComponent {
   ngOnInit(): void {
     this.initAppTranslation();
   }
-
   onSubmit() {
-    if (this.loginForm.valid) {
-      this.onLogin(this.loginForm.value);
+    if (this.signupForm.valid) {
+      const formValue = this.signupForm.value;
+  
+      const signupPayload = {
+        userId: 0,
+        roleId: 1,
+        isActive: true,
+        ...formValue
+      };
+  
+      this.api.post('Authentication/Register', signupPayload).subscribe((res: any) => {
+        this.toaster.successToaster('تم إنشاء الحساب بنجاح');
+        this.router.navigate(['/auth/login']);
+      });
     } else {
-      this.toaster.errorToaster('Please Complete All Feilds');
+      this.toaster.errorToaster('يرجى إكمال جميع الحقول');
     }
   }
+  
 
   toggleLanguage() {
     this.selectedLang = this.selectedLang === 'en' ? 'ar' : 'en';
@@ -111,55 +134,3 @@ export class LoginComponent {
   }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// private apiService = inject(ApiService);
-
-//   form = new FormGroup({
-//     name: new FormControl("",{
-//       validators:[
-//         Validators.required
-//       ]
-//     }),
-//     password:  new FormControl("",{
-//       validators:[
-//         Validators.required,
-//       ]
-//     })
-//   });
-
-//   login() {
-   
-//     this.apiService.post("ContactUs/Create", this.form.value).subscribe((res) => {
-//       if (res) {
-//       }
-//     });
-//   }
-

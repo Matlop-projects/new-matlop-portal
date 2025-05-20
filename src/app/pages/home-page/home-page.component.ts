@@ -6,11 +6,12 @@ import { OrderNowSectionComponent } from '../../components/hame-page-sections/or
 import { SliderSectionComponent } from '../../components/hame-page-sections/slider-section/slider-section.component';
 import { SpecialServicesSectionComponent } from '../../components/hame-page-sections/special-services-section/special-services-section.component';
 import { WhoAreWeSectionComponent } from '../../components/hame-page-sections/who-are-we-section/who-are-we-section.component';
+import { FaqsSectionComponent } from "../../components/hame-page-sections/faqs-section/faqs-section.component";
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [DescriptionSectionComponent ,HowWeWorkSectionComponent ,MainServicesSectionComponent,OrderNowSectionComponent,SliderSectionComponent,SpecialServicesSectionComponent,WhoAreWeSectionComponent],
+  imports: [DescriptionSectionComponent, HowWeWorkSectionComponent, MainServicesSectionComponent, OrderNowSectionComponent, SliderSectionComponent, SpecialServicesSectionComponent, WhoAreWeSectionComponent, FaqsSectionComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })

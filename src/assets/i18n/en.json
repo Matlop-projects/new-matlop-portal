@@ -6,5 +6,32 @@
       "LOCATION": "Please select a location.",
       "VISTI_TIME": "Please select a visit time."
     }
+  },
+  "login": {
+    "welcome": "Welcome back to Matloob",
+    "welcome_message": "We’re glad to have you back! Enjoy a simple and secure experience to access everything you need quickly.",
+    "userName": "Username or Email",
+    "userName_required": "Username is required",
+    "password": "Password",
+    "password_required": "Password is required",
+    "remember_me": "Remember me",
+    "forget_password": "Forgot your password?",
+    "submit": "Login",
+    "signup": "Sign Up"
+  },
+  "signup": {
+    "welcome": "Create Your Account",
+    "sub_welcome": "Create your account now and start requesting services easily and quickly.",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "username": "Username",
+    "email": "Email",
+    "mobile": "Mobile Number",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "submit": "Sign Up"
   }
 }

@@ -1,0 +1,23 @@
+.faqs-section-container {
+    .content {
+        padding: 20px;
+
+        .title {
+            text-align: center;
+            p {
+                font-size: 48px;
+                font-weight: 500;
+                color: #0D0D0D;
+            }
+        }
+
+        .desc {
+            text-align: center;
+            p {
+                font-size: 20px;
+                font-weight: 400;
+                color: #737373;
+            }
+        }
+    }
+}

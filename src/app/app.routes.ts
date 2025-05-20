@@ -13,6 +13,8 @@ import { SpecialOrderPageComponent } from './pages/special-order-page/special-or
 import { EmergencyOrderPageComponent } from './pages/emergency-order-page/emergency-order-page.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PackageDetailsComponent } from './pages/reservation-flow/package-details/package-details.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 
 
 
@@ -32,9 +34,9 @@ export const routes: Routes = [
     pathMatch: 'full'
   },
       { path: 'login', component: LoginComponent },
+      { path: 'signup', component: SignupComponent }
       // { path: 'forget_password', component: ForgetPasswordComponent },
       // { path: 'reset_password', component: ResetPasswordComponent },
-      // { path: 'signup', component: SignupComponent }
     ]
   },
   {
@@ -52,7 +54,7 @@ export const routes: Routes = [
       { path: 'special-order', component: SpecialOrderPageComponent , canActivate: [authGuard]},
       { path: 'emergency-order', component: EmergencyOrderPageComponent , canActivate: [authGuard]},
       { path: 'package-details/:packageId', component: PackageDetailsComponent , canActivate: [authGuard] },
-      // { path: 'trader_all_details/:id/:type', component: TraderAllProductsComponent },
+      { path: 'privacy-policy', component: PrivacyPolicyComponent },
       // { path: 'product_details/:productId', component: ProductDetailsComponent },
       // { path: 'product_details/:productId/:traderId', component: ProductDetailsComponent },
       // { path: 'wishlist', component: FavItemsComponent ,canActivate: [authGuard] },

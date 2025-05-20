@@ -1,0 +1,22 @@
+<div class="faqs-section-container container" *ngIf="faqsList">
+    <div class="content">
+        <div class="title">
+            <p>الأسئلة الشائعة</p>
+        </div>
+        <div class="desc mt-2 mb-3">
+            <p>جمعنا لكم أبرز الأسئلة اللي ممكن تخطر على بالك مع إجابات واضحة تساعدك تتخذ القرار المناسب بكل ثقة. لو ما
+                لقيت سؤالك هنا، تقدر تتواصل معنا مباشرة.</p>
+        </div>
+        <ng-container *ngFor="let faq of faqsList; let i = index">
+            <div class="mt-4">
+              <p-panel 
+                [header]="selectedLang == 'ar' ? faq.arTitle : faq.enTitle" 
+                [toggleable]="true"
+                [collapsed]="i !== 0">
+                <p class="m-0" [innerHTML]="selectedLang == 'ar' ? faq.arDescription : faq.enDescription"></p>
+              </p-panel>
+            </div>
+          </ng-container>
+          
+    </div>
+</div>

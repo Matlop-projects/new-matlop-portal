@@ -1,0 +1,38 @@
+import { NgFor, NgIf } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { ApiService } from '../../../services/api.service';
+import { ToasterService } from '../../../services/toaster.service';
+import { PanelModule } from 'primeng/panel';
+import { LanguageService } from '../../../services/language.service';
+
+@Component({
+  selector: 'app-faqs-section',
+  standalone: true,
+  imports: [NgIf, NgFor, PanelModule],
+  templateUrl: './faqs-section.component.html',
+  styleUrl: './faqs-section.component.scss'
+})
+export class FaqsSectionComponent {
+
+  faqsList: any[] = [];
+  api = inject(ApiService);
+  toaster = inject(ToasterService);
+  languageService = inject(LanguageService);
+  selectedLang = this.languageService.translationService.currentLang;
+
+
+  ngOnInit(): void {
+    this.getFaqsList();
+    this.languageService.translationService.onLangChange.subscribe((lang: any) => {
+      this.selectedLang = lang.lang
+    });
+  }
+
+  getFaqsList() {
+    this.api.get('FAQs/GetAll').subscribe((res: any) => {
+      console.log(res);
+      this.faqsList = res.data;
+    })
+  }
+
+}

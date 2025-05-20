@@ -12,7 +12,8 @@
 
     .content {
       box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-      height: 600px;
+      min-height: 600px;
+      height: 90vh;
       flex-basis: 70%;
       display: flex;
       justify-content: space-between;
@@ -20,7 +21,7 @@
         background-color: #fff;
         padding: 30px;
       .form-section {
-        flex-basis: 60%;
+        flex-basis: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -46,8 +47,8 @@
       }
 
       .details-section {
-        flex-basis: 40%;
-        background: url('/assets/img/login_bkg.svg') no-repeat;
+        flex-basis: 50%;
+        background: url('/assets/images/backgrounds/Frame\ 2147224800.png') no-repeat;
         background-size: cover;
         border-radius: 24px;
       }
@@ -149,7 +150,20 @@
 }
 
 
+.ckeck-box {
+  label {
+    position: relative;
+    top: 5px;
+  }
+}
 
+
+.signup {
+  text-align: center;
+ position: relative;
+ top: 10px;
+cursor: pointer;
+}
 
 
 
