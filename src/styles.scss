@@ -344,7 +344,13 @@ textarea {
   background-color: #20d4ad !important;
   border-color: #20d4ad !important;
 }
+.p-radiobutton-checked .p-radiobutton-box .p-radiobutton-icon {
+  background: #38efc7 !important;
+}
+.p-radiobutton-checked .p-radiobutton-box{
+  background: #20d4ad!important;
 
+}
 
 p-datepicker.w-full-profile span {
   width: 100% !important;

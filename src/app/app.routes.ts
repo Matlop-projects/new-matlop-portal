@@ -21,7 +21,7 @@ import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.co
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',//auth if you want to start your app with auth
+    redirectTo: 'auth',//auth if you want to start your app with auth
     pathMatch: 'full'
   },
   {
