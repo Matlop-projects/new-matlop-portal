@@ -1,0 +1,33 @@
+.title{
+    font-size: 36px;
+    color:#41667E;
+    font-weight: bolder;
+    margin: 20px 10px;
+    display: block;
+}
+.width-card{
+    min-width: 350px;
+  p{
+    width: 85%;
+  }
+}
+.sheet{
+    min-width: 350px;
+    width:65%;
+    margin:auto;
+    margin-bottom: 100px;
+}
+p{
+    font-size: 22px;
+    margin: 0px 10px;
+    color: #41667E;
+}
+ul{
+    font-size: 22px;
+    color: #41667E;
+}
+div{
+    img[width="30"] {
+        margin-top: 5px;
+    }
+}
