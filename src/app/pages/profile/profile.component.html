@@ -1,0 +1,124 @@
+<div class="container">
+  <span class="fz-36 bold block">{{ "الملف الشخصي" | translate }}</span>
+  <div class="card mt-3 mb-5">
+    <div class="d-flex justify-content-start flex-wrap">
+      <div class="profile-image-container">
+        <img
+          class="img-profile"
+          [src]="defaultImg"
+          width="86"
+          height="86"
+          alt=""
+        />
+        <img
+          *ngIf="showBtn"
+          class="edit-icon"
+          (click)="fileInput.click()"
+          src="assets/img/edit-profile-image.svg"
+          alt=""
+        />
+        <input
+          #fileInput
+          type="file"
+          accept="image/*"
+          style="display: none"
+          (change)="onFileSelected($event)"
+        />
+      </div>
+
+      <div class="fz-24 m-2">
+        <span class="bold block">{{ user?.firstName }}</span>
+        <span class="fz-20 block">{{ user?.email }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-5 mb-5">
+    <div class="d-flex justify-content-between">
+      <span class="fz-36 bold block">{{ "البيانات الشخصية" | translate }}</span>
+      <img
+        *ngIf="!showBtn"
+        class="pointer"
+        (click)="onEditMode()"
+        src="assets/img/edit-profile.svg"
+        alt=""
+      />
+    </div>
+    <form [formGroup]="form" class="form mt-3">
+      <div class="d-flex justify-contnet-start flex-wrap">
+        <div class="w-48 mb-2 flex-grow-1">
+          <p-floatlabel>
+            <input
+              class="w-100"
+              type="text"
+              pInputText
+              [readOnly]="!showBtn"
+              [disabled]="!showBtn"
+              [class.disabled-input]="!showBtn"
+              [formControlName]="'firstName'"
+            />
+            <label for="in_label">{{ "الاسم" }}</label>
+          </p-floatlabel>
+        </div>
+        <div class="w-48 mb-2 flex-grow-1">
+          <p-floatlabel>
+            <input
+              class="w-100"
+              [class.disabled-input]="!showBtn"
+              type="text"
+              pInputText
+              [readOnly]="!showBtn"
+              [disabled]="!showBtn"
+              [formControlName]="'email'"
+            />
+            <label for="in_label">{{ "البريد الالكتروني" }}</label>
+          </p-floatlabel>
+        </div>
+        <div class="w-48 flex-grow-1">
+          <p-floatlabel>
+            <p-select
+              [options]="genderList"
+              [class.disabled-input]="!showBtn"
+              [formControlName]="'gender'"
+              [readonly]="!showBtn"
+              [disabled]="!showBtn"
+              optionLabel="name"
+              optionValue="code"
+              class="w-full"
+            />
+            <label for="in_label">{{ "النوع" }}</label>
+          </p-floatlabel>
+        </div>
+        <div class="w-48 mb-2 flex-grow-1">
+          <p-floatlabel>
+            <p-datepicker
+              class="w-100 text-start"
+              [class.disabled-date]="!showBtn"
+              [dateFormat]="'yy-mm-dd'"
+              [formControlName]="'dateOfBirth'"
+              [iconDisplay]="'input'" [showIcon]="true"
+              [readonlyInput]="!showBtn"
+              [disabled]="!showBtn"
+            />
+     
+          
+            <label for="in_label">{{ "ناريخ الميلاد" }}</label>
+          </p-floatlabel>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="showBtn" class="button w-100 p-2 mb-5 d-flex justify-content-end">
+    <div class="d-flex justify-content-end w-100 flex-wrap">
+      <button
+        class="btn btn-edit flex-grow-1"
+        (click)="onUpdate()"
+        [disabled]="!form.valid"
+      >
+        {{ "تعديل" }}
+      </button>
+      <button class="btn btn-cancel flex-grow-1" (click)="onCancel()">
+        {{ "إلغاء" }}
+      </button>
+    </div>
+  </div>
+</div>

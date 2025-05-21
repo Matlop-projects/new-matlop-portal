@@ -129,6 +129,9 @@ p-breadcrumb {
 .fz-40 {
   font-size: 40px;
 }
+.fz-36 {
+  font-size: 36px;
+}
 
 .fz-24 {
   font-size: 24px;
@@ -389,4 +392,11 @@ p-datepicker {
 }
 .remember-checkbox .p-checkbox-checked .p-checkbox-box .p-checkbox-icon {
   color: #000 !important;
+}
+.p-datepicker{
+  width: 100% !important;
+}
+.p-select {
+  width: 100% !important;
+  border-radius: 16px !important;
 }

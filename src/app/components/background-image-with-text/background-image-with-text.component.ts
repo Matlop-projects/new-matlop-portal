@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 
 export interface IBackGroundImageWithText {
-  imageUrl: string;
+  imageUrl?: string;
   header: string;
   description: string;
   style?: IStyle;

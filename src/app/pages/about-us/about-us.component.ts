@@ -15,11 +15,19 @@ import { BackgroundImageWithTextComponent, IBackGroundImageWithText } from "../.
 @Component({
   selector: "app-about-us",
   standalone: true,
-  imports: [ReactiveFormsModule, InputTextModule, TextareaModule,GalleriaModule,FormsModule,BackgroundImageWithTextComponent],
+  imports: [ReactiveFormsModule,BackgroundImageWithTextComponent, InputTextModule, TextareaModule,GalleriaModule,FormsModule,BackgroundImageWithTextComponent],
   templateUrl: "./about-us.component.html",
   styleUrl: "./about-us.component.scss",
 })
 export class AboutUsComponent {
+  bkg_text_options:IBackGroundImageWithText={
+  imageUrl:'assets/img/slider.svg',
+header:' خبرة تثق بها، جودة تعتمد عليها ',
+description:'نقدم خدمات صيانة موثوقة باحترافية عالية وسهولة في الطلب. نهدف لتوفير تجربة مريحة وسريعة ترضي تطلعاتك، من خلال فريق خبير وخدمة تهتم بالتفاصيل.',
+style:{
+padding:"70px 0 0 0"
+}
+}
   someWorksImages: any[] = [
     {
     itemImageSrc: 'assets/img/some-work-4.svg',

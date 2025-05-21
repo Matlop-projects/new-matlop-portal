@@ -2,15 +2,24 @@ import { NgFor, NgIf, TitleCasePipe } from '@angular/common';
 import { Component, inject, OnInit } from "@angular/core";
 import { ApiService } from "../../../services/api.service";
 import { Router } from "@angular/router";
+import { BackgroundImageWithTextComponent, IBackGroundImageWithText } from '../../../components/background-image-with-text/background-image-with-text.component';
 
 @Component({
   selector: "app-orders-list",
   standalone: true,
-  imports: [NgFor,NgIf,TitleCasePipe],
+  imports: [NgFor,NgIf,TitleCasePipe,BackgroundImageWithTextComponent],
   templateUrl: "./orders-list.component.html",
   styleUrl: "./orders-list.component.scss",
 })
 export class OrdersListComponent implements OnInit {
+  bkg_text_options:IBackGroundImageWithText={
+    imageUrl:'assets/img/order-slider.png',
+  header:'تابع تقدم طلباتك في لحظات',
+  description:'تابع حالة طلباتك الجارية وابقَ على اطلاع بأحدث المستجدات',
+  style:{
+  padding:"70px 0 0 0"
+  }
+  }
   private router = inject(Router);
   orders: any = [];
   activeStatus = "pending";
