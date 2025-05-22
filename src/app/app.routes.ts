@@ -23,7 +23,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'auth',//auth if you want to start your app with auth
+    redirectTo: 'home',//auth if you want to start your app with auth
     pathMatch: 'full'
   },
   {
