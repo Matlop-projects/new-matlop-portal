@@ -15,17 +15,17 @@
                     </div>
                 </div>
 
-                <!-- First Name -->
-                <div class="d-flex flex-col gap-2">
-                    <label for="firstName">{{ "signup.first_name" | translate }}</label>
-                    <input class="w-100" pInputText id="firstName" formControlName="firstName" />
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">{{ "signup.first_name" | translate }}</label>
+                        <input class="form-control" pInputText id="firstName" formControlName="firstName" />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName">{{ "signup.last_name" | translate }}</label>
+                        <input class="form-control" pInputText id="lastName" formControlName="lastName" />
+                    </div>
                 </div>
 
-                <!-- Last Name -->
-                <div class="d-flex flex-col gap-2">
-                    <label for="lastName">{{ "signup.last_name" | translate }}</label>
-                    <input class="w-100" pInputText id="lastName" formControlName="lastName" />
-                </div>
 
                 <!-- User Name -->
                 <div class="d-flex flex-col gap-2">
@@ -74,23 +74,27 @@
                     <button class="btn btn-login w-100" type="submit" [disabled]="!signupForm.valid">
                         {{ "signup.submit" | translate }}
                     </button>
-                    <a class="forget_password signup" routerLink="/auth/signup">
-                        {{ "login.signup" | translate }}
+                    <a class="forget_password signup" routerLink="/auth/login">
+                        {{ "لديك حساب بالفعل" | translate }}
                     </a>
                 </div>
             </form>
         </div>
 
-        <div class="details-section hide-part">
+        <!-- <div class="details-section hide-part">
             <p-carousel [value]="carouselImages" [numVisible]="1" [numScroll]="1" [circular]="true"
                 [autoplayInterval]="4000">
                 <ng-template pTemplate="item" let-image>
                     <div class="carousel-item">
+                        {{image}}
                         <img [src]="image" alt="carousel-image" style="width: 100%; border-radius: 8px;" />
                     </div>
                 </ng-template>
             </p-carousel>
-        </div>
+        </div> -->
+        <div class="details-section hide-part">
+            <!-- صورة أو تفاصيل إضافية -->
+          </div>
     </div>
 </div>
 

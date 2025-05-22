@@ -42,7 +42,7 @@ export class NavbarComponent implements OnInit {
   items: MenuItem[] | undefined = [];
   activeRoute: string = '';
   authService = inject(LoginSignalUserDataService);
- api=inject(ApiService);
+  api = inject(ApiService);
   // ✅ Move computed() outside ngOnInit()
   user = computed(() => this.authService.user());
 
@@ -55,7 +55,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
     console.log('User Signal:', this.user()); // ✅ Access computed() as a function
     this.initAppTranslation();
     this.checkPermission();
@@ -71,9 +71,9 @@ export class NavbarComponent implements OnInit {
   }
 
   checkPermission() {
-   this.api.post('Authentication/validateUserToken', {tokenToValidate:localStorage.getItem('token')}).subscribe((res: any) => {
-    this.hasPermission = res?.data;
-   })
+    this.api.post('Authentication/validateUserToken', { tokenToValidate: localStorage.getItem('token') }).subscribe((res: any) => {
+      this.hasPermission = res?.data;
+    })
   }
 
   updateMenuItems() {

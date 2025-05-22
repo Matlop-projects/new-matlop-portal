@@ -48,7 +48,7 @@
   
         .details-section {
           flex-basis: 50%;
-          height: 500px;
+          // height: 500px;
         //   background: url('/assets/images/backgrounds/Frame\ 2147224800.png') no-repeat;
         //   background-size: cover;
           border-radius: 24px;
@@ -179,29 +179,11 @@
    top: 10px;
   cursor: pointer;
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+  .details-section {
+    flex-basis: 50%;
+    background: url('/assets/images/backgrounds/Frame\ 2147224800.png') no-repeat;
+    background-size: cover;
+    border-radius: 24px;
+  }

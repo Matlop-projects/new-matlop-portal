@@ -11,6 +11,7 @@ import { Router, RouterModule } from '@angular/router';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { OtpModalComponent } from '../../components/otp-modal/otp-modal.component';
 import { CheckboxModule } from 'primeng/checkbox';
+import { LoginSignalUserDataService } from '../../services/login-signal-user-data.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -31,7 +32,7 @@ export class LoginComponent {
 
 
 
-  constructor(private fb: FormBuilder,@Inject(DOCUMENT) private document: Document, private api: ApiService, private translate: TranslateService, private router: Router) {
+  constructor(private fb: FormBuilder,@Inject(DOCUMENT) private document: Document, private api: ApiService, private translate: TranslateService, private router: Router ,private userDataSignals: LoginSignalUserDataService) {
     this.loginForm = this.fb.group({
       userName: ['0555555556', [Validators.required]],
       password: ['Admin@VL', [Validators.required]],
@@ -96,8 +97,11 @@ export class LoginComponent {
         let dataUser: any = {
           img: data.data.imgSrc,
           id: data.data.userId,
-          gender: data.data.gender
+          gender: data.data.gender,
+          token: data.data.token
         }
+        this.userDataSignals.setUser(dataUser);
+
         localStorage.setItem('userData', JSON.stringify(dataUser));
         localStorage.setItem('userId', JSON.stringify(dataUser.id))
         localStorage.setItem('token', data.data.accessToken);

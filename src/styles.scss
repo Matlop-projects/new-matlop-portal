@@ -203,9 +203,9 @@ small {
 .main-btn-one {
   border-radius: 32px;
   color: white;
-  background-color: #8174a0;
-  padding: 12px 22px;
-  border: 1px solid rgba(255, 255, 255, 0);
+  background: linear-gradient(to right, #BFFD2B, #05BCE8);;
+  padding: 8px 15px;
+  border: none;
 
   &:hover {
     background-color: #f9f9f9;

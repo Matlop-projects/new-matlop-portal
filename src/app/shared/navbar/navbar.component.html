@@ -1,17 +1,8 @@
 <nav class="navbar navbar-expand-md bg-white navbar-light fixed-top">
   <a class="navbar-brand" [routerLink]="['/home']">
-    <img
-      src="assets/img/matlop_logo.svg"
-      alt="matloop-logo"
-      class="logo-image"
-    />
+    <img src="assets/img/matlop_logo.svg" alt="matloop-logo" class="logo-image" />
   </a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#collapsibleNavbar"
-  >
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -31,42 +22,44 @@
           <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/orders']">{{ "الطلبات" }}</a>
         </li>
       </ul>
-      <ul class="navbar-nav padding-20 pointer">
-          <li class="margin-20">
-        <span class="margin-10  notification">
+      <ul class="navbar-nav padding-20 pointer" *ngIf="user() ; else noUser">
+        <div class="action-section-login margin-20">
+          <span class="margin-10  notification">
             <img src="assets/img/notification.svg">
-          <span class="number">{{1}}</span>
-        </span>
+            <span class="number">{{1}}</span>
+          </span>
 
           <img src="assets/img/profile-circle.svg" [routerLink]="['/profile']" alt="">
-        </li>
-       
+
+          <span class="pi pi-sign-out" (click)="logout()" style="color: red;"></span>
+        </div>
+
         <li (click)="toggleLanguage()">
-           <span class="">
-          <span *ngIf="selectedLang == 'ar'">
-            {{ "english" | translate }}
+          <span class="">
+            <span *ngIf="selectedLang == 'ar'">
+              {{ "english" | translate }}
+            </span>
+            <span *ngIf="selectedLang == 'en'">
+              {{ "arabic" | translate }}
+            </span>
           </span>
-          <span *ngIf="selectedLang == 'en'">
-            {{ "arabic" | translate }}
-          </span>
-        </span>
-        <img
-          *ngIf="selectedLang == 'en'"
-          src="assets/img/arab_lang.png"
-          alt=""
-          height="20"
-        />
-        <img
-          *ngIf="selectedLang == 'ar'"
-          src="assets/img/english_lang.png"
-          alt=""
-          height="20"
-        />
+          <img *ngIf="selectedLang == 'en'" src="assets/img/arab_lang.png" alt="" height="20" />
+          <img *ngIf="selectedLang == 'ar'" src="assets/img/english_lang.png" alt="" height="20" />
         </li>
-      
+
       </ul>
+
+      <ng-template #noUser>
+        <div class="auth-section">
+          <div class="signup-btn">
+            <button class="main-btn-one" routerLink="auth/signup">{{ 'انشاء حساب جديد' | translate }}</button>
+          </div>
+          <div class="login-btn">
+            <button class="main-btn-one" routerLink="auth/login">{{ 'تسجيل الدخول' | translate }}</button>
+          </div>
+        </div>
+      </ng-template>
     </ul>
-   
+
   </div>
 </nav>
-
