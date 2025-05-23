@@ -71,7 +71,7 @@ export class NavbarComponent implements OnInit {
   }
 
   checkPermission() {
-    this.api.post('Authentication/validateUserToken', { tokenToValidate: localStorage.getItem('token') }).subscribe((res: any) => {
+    this.api.post('Authentication/validateUserToken', { tokenToValidate: localStorage.getItem('token')??null }).subscribe((res: any) => {
       this.hasPermission = res?.data;
     })
   }
