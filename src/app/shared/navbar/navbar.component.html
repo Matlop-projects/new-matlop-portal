@@ -1,65 +1,124 @@
-<nav class="navbar navbar-expand-md bg-white navbar-light fixed-top">
+<nav class="navbar navbar-expand-lg bg-white navbar-light fixed-top">
   <a class="navbar-brand" [routerLink]="['/home']">
-    <img src="assets/img/matlop_logo.svg" alt="matloop-logo" class="logo-image" />
+    <img
+      src="assets/img/matlop_logo.svg"
+      alt="matloop-logo"
+      class="logo-image"
+    />
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#collapsibleNavbar"
+    aria-controls="collapsibleNavbar"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav w-100 d-flex justify-content-between  fz-16">
+    <ul class="navbar-nav w-100 d-flex justify-content-between fz-16">
       <ul></ul>
-      <ul class="navbar-nav">
+      <ul class="main-list navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/home']">{{ "الرئيسية" }}</a>
+          <a
+            class="nav-link"
+            [routerLinkActive]="'active'"
+            [routerLink]="['/home']"
+            >{{ "الرئيسية" }}</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/about-us']">{{ "من نحن" }}</a>
+          <a
+            class="nav-link"
+            [routerLinkActive]="'active'"
+            [routerLink]="['/about-us']"
+            >{{ "من نحن" }}</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/services-list']">{{ "خدماتنا" }}</a>
+          <a
+            class="nav-link"
+            [routerLinkActive]="'active'"
+            [routerLink]="['/services-list']"
+            >{{ "خدماتنا" }}</a
+          >
         </li>
         <li class="nav-item" *ngIf="hasPermission">
-          <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/orders']">{{ "الطلبات" }}</a>
+          <a
+            class="nav-link"
+            [routerLinkActive]="'active'"
+            [routerLink]="['/orders']"
+            >{{ "الطلبات" }}</a
+          >
         </li>
       </ul>
-      <ul class="navbar-nav padding-20 pointer" *ngIf="user() ; else noUser">
-        <div class="action-section-login margin-20">
-          <span class="margin-10  notification">
-            <img src="assets/img/notification.svg">
-            <span class="number">{{1}}</span>
-          </span>
-
-          <img src="assets/img/profile-circle.svg" [routerLink]="['/profile']" alt="">
-
-          <span class="pi pi-sign-out" (click)="logout()" style="color: red;"></span>
-        </div>
-
-        <li (click)="toggleLanguage()">
-          <span class="">
-            <span *ngIf="selectedLang == 'ar'">
-              {{ "english" | translate }}
+      <ul
+        class="list-lang-profile navbar-nav padding-20 pointer"
+        *ngIf="user(); else noUser"
+      >
+        <li class="d-flex">
+          <div class="action-section-login margin-20">
+            <span class="margin-10 notification">
+              <img src="assets/img/notification.svg" />
+              <span class="number">{{ 1 }}</span>
             </span>
-            <span *ngIf="selectedLang == 'en'">
-              {{ "arabic" | translate }}
+
+            <img
+              src="assets/img/profile-circle.svg"
+              [routerLink]="['/profile']"
+              alt=""
+            />
+
+        
+          </div>
+          <div class="padding-sm-20 d-flex flex-colum gap-2">
+                <span
+              class="sign-out pi pi-sign-out block"
+              (click)="logout()"
+              style="color: red"
+            ></span>
+           <div (click)="toggleLanguage()">
+             <span class="" >
+              <span *ngIf="selectedLang == 'ar'">
+                {{ "english" | translate }}
+              </span>
+              <span *ngIf="selectedLang == 'en'">
+                {{ "arabic" | translate }}
+              </span>
             </span>
-          </span>
-          <img *ngIf="selectedLang == 'en'" src="assets/img/arab_lang.png" alt="" height="20" />
-          <img *ngIf="selectedLang == 'ar'" src="assets/img/english_lang.png" alt="" height="20" />
+            <img 
+              *ngIf="selectedLang == 'en'"
+              src="assets/img/arab_lang.png"
+              alt=""
+              height="20"
+            />
+            <img 
+              *ngIf="selectedLang == 'ar'"
+              src="assets/img/english_lang.png"
+              alt=""
+              height="20"
+            />
+           </div>
+          </div>
         </li>
-
       </ul>
 
       <ng-template #noUser>
         <div class="auth-section">
           <div class="signup-btn">
-            <button class="main-btn-one" routerLink="auth/signup">{{ 'انشاء حساب جديد' | translate }}</button>
+            <button class="main-btn-one" routerLink="auth/signup">
+              {{ "انشاء حساب جديد" | translate }}
+            </button>
           </div>
           <div class="login-btn">
-            <button class="main-btn-one" routerLink="auth/login">{{ 'تسجيل الدخول' | translate }}</button>
+            <button class="main-btn-one" routerLink="auth/login">
+              {{ "تسجيل الدخول" | translate }}
+            </button>
           </div>
         </div>
       </ng-template>
     </ul>
-
   </div>
 </nav>

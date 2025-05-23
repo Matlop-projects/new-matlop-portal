@@ -13,7 +13,7 @@ import { BackgroundImageWithTextComponent, IBackGroundImageWithText } from '../.
 })
 export class OrdersListComponent implements OnInit {
   bkg_text_options:IBackGroundImageWithText={
-    imageUrl:'assets/img/order-slider.png',
+    imageUrl:'assets/img/order-slider.svg',
   header:'تابع تقدم طلباتك في لحظات',
   description:'تابع حالة طلباتك الجارية وابقَ على اطلاع بأحدث المستجدات',
   style:{
