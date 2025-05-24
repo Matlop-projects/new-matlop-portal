@@ -1,9 +1,11 @@
-<div class="package-container container my-5">
+<app-background-image-with-text [options]="bkg_text_options"></app-background-image-with-text>
+
+<div class="package-container container">
     <div class="row">
         <div class="col-lg-12 title-select">
-            <h2>الباقات</h2>
+            <h2>{{ 'PACKAGES.TITLE' | translate }}</h2>
             <p-select [options]="cities" (onChange)="onPackagesDropdownSearch($event)" optionLabel="fullName"
-                placeholder="ابحث عن طريق المدينه" />
+                [placeholder]="'PACKAGES.SEARCH_BY_CITY' | translate"></p-select>
         </div>
     </div>
 
@@ -14,48 +16,58 @@
                     <div class="section-one">
                         <div class="details">
                             <div class="vat-section">
-                                <p>شامل الضريبة </p>
+                                <p>{{ 'PACKAGES.INCLUDING_TAX' | translate }}</p>
                             </div>
                             <div class="package-name">
-                                <p class="name">{{selectedLang == 'ar' ? package.nameAr : package.nameEn}}</p>
-                                <p class="type">({{selectedLang == 'ar' ? package.typeOfPackageNameAr : package.typeOfPackageName}})</p>
+                                <p class="name">
+                                    {{ selectedLang == 'ar' ? package.nameAr : package.nameEn }}
+                                </p>
+                                <p class="type">
+                                    (
+                                    {{
+                                    selectedLang == 'ar'
+                                    ? package.typeOfPackageNameAr
+                                    : package.typeOfPackageName
+                                    }}
+                                    )
+                                </p>
                             </div>
                         </div>
                         <div class="amount">
-                            <p>{{package.price}} ريال</p>
+                            <p>{{ package.price }} {{ 'PACKAGES.CURRENCY' | translate }}</p>
                         </div>
                     </div>
                     <div class="section-two mt-4">
                         <div class="contents">
-                            <img src="assets/images/icons-svg/profile.svg" alt="">
+                            <img src="assets/images/icons-svg/profile.svg" alt="" />
                             <div class="title">
-                                <p>عدد الفنين </p>
+                                <p>{{ 'PACKAGES.TECHNICIANS_COUNT' | translate }}</p>
                             </div>
                             <div class="value">
-                                <p>(#### )</p>
+                                <p>(####)</p>
                             </div>
                         </div>
                         <div class="contents">
-                            <img src="assets/images/icons-svg/hash.svg" alt="">
+                            <img src="assets/images/icons-svg/hash.svg" alt="" />
                             <div class="title">
-                                <p>عدد الزيارات </p>
+                                <p>{{ 'PACKAGES.VISIT_COUNT' | translate }}</p>
                             </div>
                             <div class="value">
-                                <p>({{package.visitNumber}} زيارة)</p>
+                                <p>({{ package.visitNumber }} {{ 'PACKAGES.VISIT' | translate }})</p>
                             </div>
                         </div>
                         <div class="contents">
-                            <img src="assets/images/icons-svg/clock.svg" alt="">
+                            <img src="assets/images/icons-svg/clock.svg" alt="" />
                             <div class="title">
-                                <p>مدة الزيارة </p>
+                                <p>{{ 'PACKAGES.VISIT_DURATION' | translate }}</p>
                             </div>
                             <div class="value">
-                                <p>({{package.visitHours}} ساعات )</p>
+                                <p>({{ package.visitHours }} {{ 'PACKAGES.HOUR' | translate }})</p>
                             </div>
                         </div>
                     </div>
                     <div class="section-three">
-                        <p>تفاصيل الباقة</p>
+                        <p>{{ 'PACKAGES.DETAILS' | translate }}</p>
                         <img width="35" src="assets/images/icons-svg/arrow-black.svg" alt="arrow" />
                     </div>
                 </div>
@@ -66,7 +78,9 @@
     <ng-template #emptyState>
         <div class="empty-state d-flex flex-column align-items-center justify-content-center mt-5 text-center">
             <img [width]="150" src="assets/images/global/folder.png" alt="No Contracts" />
-            <p class="mt-3 mb-0 text-muted">لا توجد باقات متاحة </p>
+            <p class="mt-3 mb-0 text-muted">
+                {{ 'PACKAGES.NO_PACKAGES' | translate }}
+            </p>
         </div>
     </ng-template>
 </div>

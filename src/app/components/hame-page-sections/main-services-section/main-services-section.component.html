@@ -1,18 +1,16 @@
 <div class="main-services-container container">
     <div class="content">
-
         <div class="row">
             <div class="col-lg-12">
                 <div class="main-title">
-                    <p>خدماتنا</p>
+                    <p>{{ 'SERVICES.TITLE' | translate }}</p>
                 </div>
                 <div class="main-desc">
                     <div class="title">
-                        <p>خدمات موثوقة بجودة تليق بك</p>
+                        <p>{{ 'SERVICES.SUBTITLE' | translate }}</p>
                     </div>
                     <div class="desc">
-                        مهما كانت احتياجاتك في الصيانة أو الخدمات، فريقنا جاهز يخدمك بأعلى مستوى من الاحترافية. كل اللي
-                        عليك تطلب، وإحنا هنعتني بالباقي!
+                        {{ 'SERVICES.DESCRIPTION' | translate }}
                     </div>
                 </div>
             </div>
@@ -22,80 +20,76 @@
             <div class="col-lg-12">
                 <div class="routing">
                     <a routerLink="/services-list">
-                        <p>عرض الكل </p>
-                        <img width="35" src="assets/images/icons-svg/arrow-black.svg" alt="">
+                        <p>{{ 'SERVICES.VIEW_ALL' | translate }}</p>
+                        <img width="35" src="assets/images/icons-svg/arrow-black.svg" alt="" />
                     </a>
                 </div>
             </div>
         </div>
 
-        <div class="grid-section mt-4">
-            <ng-container *ngIf="services?.length >= 4">
+        <div class="grid-section mt-4" *ngIf="services?.length >= 4">
+            <!-- Card 1 -->
+            <div class="card left" [ngStyle]="{ 'background-image': 'url(' + services[0].image + ')' }"
+                (click)="goContractList(services[0].serviceId)">
+                <div class="overlay"></div>
+                <div class="top-left-label">
+                    <p>{{ 'SERVICES.ADD_REQUEST' | translate }}</p>
+                    <img width="35" src="assets/images/icons-svg/arrow.svg" alt="" />
+                </div>
+                <div class="content">
+                    {{ selectedLang === 'ar' ? services[0].nameAr : services[0].nameEn }}
+                </div>
+                <div class="description"
+                    [innerHTML]="selectedLang === 'ar' ? services[0].descriptionAr : services[0].descriptionEn"></div>
+            </div>
 
-                <!-- Card 1 -->
-                <div class="card left" [ngStyle]="{ 'background-image': 'url(' + services[0].image + ')' }" (click)="goContractList(services[0].serviceId)">
+            <!-- Center Cards -->
+            <div class="center-wrapper">
+                <div class="card center top" [ngStyle]="{ 'background-image': 'url(' + services[1].image + ')' }"
+                    (click)="goContractList(services[1].serviceId)">
                     <div class="overlay"></div>
                     <div class="top-left-label">
-                        <p>إضافة طلب</p>
-                        <img width="35" src="assets/images/icons-svg/arrow.svg" alt="">
+                        <p>{{ 'SERVICES.ADD_REQUEST' | translate }}</p>
+                        <img width="35" src="assets/images/icons-svg/arrow.svg" alt="" />
                     </div>
                     <div class="content">
-                        {{ selectedLang === 'ar' ? services[0].nameAr : services[0].nameEn }}
+                        {{ selectedLang === 'ar' ? services[1].nameAr : services[1].nameEn }}
                     </div>
                     <div class="description"
-                        [innerHTML]="selectedLang === 'ar' ? services[0].descriptionAr : services[0].descriptionEn">
+                        [innerHTML]="selectedLang === 'ar' ? services[1].descriptionAr : services[1].descriptionEn">
                     </div>
                 </div>
 
-                <!-- Center Cards -->
-                <div class="center-wrapper">
-                    <div class="card center top" [ngStyle]="{ 'background-image': 'url(' + services[1].image + ')' }" (click)="goContractList(services[1].serviceId)">
-                        <div class="overlay"></div>
-                        <div class="top-left-label">
-                            <p>إضافة طلب</p>
-                            <img width="35" src="assets/images/icons-svg/arrow.svg" alt="">
-                        </div>
-                        <div class="content">
-                            {{ selectedLang === 'ar' ? services[1].nameAr : services[1].nameEn }}
-                        </div>
-                        <div class="description"
-                            [innerHTML]="selectedLang === 'ar' ? services[1].descriptionAr : services[1].descriptionEn">
-                        </div>
-                    </div>
-
-                    <div class="card center bottom" (click)="goContractList(services[2].serviceId)"
-                        [ngStyle]="{ 'background-image': 'url(' + services[2].image + ')' }">
-                        <div class="overlay"></div>
-                        <div class="top-left-label">
-                            <p>إضافة طلب</p>
-                            <img width="35" src="assets/images/icons-svg/arrow.svg" alt="">
-                        </div>
-                        <div class="content">
-                            {{ selectedLang === 'ar' ? services[2].nameAr : services[2].nameEn }}
-                        </div>
-                        <div class="description"
-                            [innerHTML]="selectedLang === 'ar' ? services[2].descriptionAr : services[2].descriptionEn">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="card right" [ngStyle]="{ 'background-image': 'url(' + services[3].image + ')' }" (click)="goContractList(services[3].serviceId)">
+                <div class="card center bottom" [ngStyle]="{ 'background-image': 'url(' + services[2].image + ')' }"
+                    (click)="goContractList(services[2].serviceId)">
                     <div class="overlay"></div>
                     <div class="top-left-label">
-                        <p>إضافة طلب</p>
-                        <img width="35" src="assets/images/icons-svg/arrow.svg" alt="">
+                        <p>{{ 'SERVICES.ADD_REQUEST' | translate }}</p>
+                        <img width="35" src="assets/images/icons-svg/arrow.svg" alt="" />
                     </div>
                     <div class="content">
-                        {{ selectedLang === 'ar' ? services[3].nameAr : services[3].nameEn }}
+                        {{ selectedLang === 'ar' ? services[2].nameAr : services[2].nameEn }}
                     </div>
                     <div class="description"
-                        [innerHTML]="selectedLang === 'ar' ? services[3].descriptionAr : services[3].descriptionEn">
+                        [innerHTML]="selectedLang === 'ar' ? services[2].descriptionAr : services[2].descriptionEn">
                     </div>
                 </div>
+            </div>
 
-            </ng-container>
+            <!-- Card 4 -->
+            <div class="card right" [ngStyle]="{ 'background-image': 'url(' + services[3].image + ')' }"
+                (click)="goContractList(services[3].serviceId)">
+                <div class="overlay"></div>
+                <div class="top-left-label">
+                    <p>{{ 'SERVICES.ADD_REQUEST' | translate }}</p>
+                    <img width="35" src="assets/images/icons-svg/arrow.svg" alt="" />
+                </div>
+                <div class="content">
+                    {{ selectedLang === 'ar' ? services[3].nameAr : services[3].nameEn }}
+                </div>
+                <div class="description"
+                    [innerHTML]="selectedLang === 'ar' ? services[3].descriptionAr : services[3].descriptionEn"></div>
+            </div>
         </div>
-
     </div>
 </div>

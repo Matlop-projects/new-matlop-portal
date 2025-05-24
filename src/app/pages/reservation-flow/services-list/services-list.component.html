@@ -1,3 +1,5 @@
+<app-background-image-with-text [options]="bkg_text_options"></app-background-image-with-text>
+
 <div class="all-services-container container my-5">
     <div class="row g-4" *ngIf="services?.length">
         <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let service of services">
@@ -13,7 +15,7 @@
                         [innerHTML]="selectedLang === 'ar' ? service.descriptionAr : service.descriptionEn"></div>
 
                     <button class="action-btn" (click)="goContractList(service.serviceId)">
-                        أطلب خدمة الان
+                        {{'SERVICE_LIST.ORDER_NOW' | translate}}
                     </button>
                 </div>
             </div>

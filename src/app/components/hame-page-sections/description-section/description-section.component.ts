@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-description-section',
   standalone: true,
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: './description-section.component.html',
   styleUrl: './description-section.component.scss'
 })

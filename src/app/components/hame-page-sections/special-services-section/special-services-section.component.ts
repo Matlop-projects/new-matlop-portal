@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-special-services-section',
   standalone: true,
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: './special-services-section.component.html',
   styleUrl: './special-services-section.component.scss'
 })

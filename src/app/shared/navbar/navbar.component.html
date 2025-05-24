@@ -22,37 +22,26 @@
       <ul></ul>
       <ul class="main-list navbar-nav">
         <li class="nav-item">
-          <a
-            class="nav-link"
-            [routerLinkActive]="'active'"
-            [routerLink]="['/home']"
-            >{{ "الرئيسية" }}</a
-          >
+          <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/home']">
+            {{ 'NAVBAR.HOME' | translate }}
+          </a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            [routerLinkActive]="'active'"
-            [routerLink]="['/about-us']"
-            >{{ "من نحن" }}</a
-          >
+          <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/about-us']">
+            {{ 'NAVBAR.ABOUT_US' | translate }}
+          </a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            [routerLinkActive]="'active'"
-            [routerLink]="['/services-list']"
-            >{{ "خدماتنا" }}</a
-          >
+          <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/services-list']">
+            {{ 'NAVBAR.SERVICES' | translate }}
+          </a>
         </li>
         <li class="nav-item" *ngIf="hasPermission">
-          <a
-            class="nav-link"
-            [routerLinkActive]="'active'"
-            [routerLink]="['/orders']"
-            >{{ "الطلبات" }}</a
-          >
+          <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/orders']">
+            {{ 'NAVBAR.ORDERS' | translate }}
+          </a>
         </li>
+        
       </ul>
       <ul
         class="list-lang-profile navbar-nav padding-20 pointer"
@@ -109,12 +98,14 @@
         <div class="auth-section">
           <div class="signup-btn">
             <button class="main-btn-one" routerLink="auth/signup">
-              {{ "انشاء حساب جديد" | translate }}
+              {{ "NAVBAR.SIGNUP" | translate }}
             </button>
+            
+            
           </div>
           <div class="login-btn">
             <button class="main-btn-one" routerLink="auth/login">
-              {{ "تسجيل الدخول" | translate }}
+              {{ "NAVBAR.LOGIN" | translate }}
             </button>
           </div>
         </div>

@@ -1,7 +1,7 @@
 <div class="contract-container container my-5">
     <div class="row">
         <div class="col-lg-12">
-            <h2>العقود</h2>
+            <h2>{{ 'CONTRACTS.HEADER' | translate }}</h2>
         </div>
     </div>
 
@@ -12,12 +12,10 @@
                 <div class="content" (click)="goPackages(contract.contractTypeId)">
                     <img src="assets/images/icons-svg/contract-frame.svg" width="80" alt="frame" />
                     <div class="title">
-                        <p>
-                            {{ selectedLang === 'ar' ? contract.arName : contract.enName }}
-                        </p>
+                        <p>{{ selectedLang === 'ar' ? contract.arName : contract.enName }}</p>
                     </div>
                     <div class="routing-packages">
-                        <p>عرض الباقات </p>
+                        <p>{{ 'CONTRACTS.VIEW_PACKAGES' | translate }}</p>
                         <img width="35" src="assets/images/icons-svg/arrow-black.svg" alt="" />
                     </div>
                 </div>
@@ -29,7 +27,7 @@
     <ng-template #emptyState>
         <div class="empty-state d-flex flex-column align-items-center justify-content-center mt-5 text-center">
             <img [width]="150" src="assets/images/global/folder.png" alt="No Contracts" />
-            <p class="mt-3 mb-0 text-muted">لا توجد عقود متاحة حالياً</p>
+            <p class="mt-3 mb-0 text-muted">{{ 'CONTRACTS.EMPTY_MESSAGE' | translate }}</p>
         </div>
     </ng-template>
 </div>

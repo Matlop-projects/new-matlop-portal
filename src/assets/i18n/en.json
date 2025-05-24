@@ -1,12 +1,4 @@
 {
-  "PACKAGE_DETAILS": {
-    "VALIDATION": {
-      "SHCEDULE": "Please select schedule dates.",
-      "PAYMENT": "Please select a payment method.",
-      "LOCATION": "Please select a location.",
-      "VISTI_TIME": "Please select a visit time."
-    }
-  },
   "login": {
     "welcome": "Welcome back to Matloob",
     "welcome_message": "We’re glad to have you back! Enjoy a simple and secure experience to access everything you need quickly.",
@@ -32,6 +24,229 @@
     "gender": "Gender",
     "male": "Male",
     "female": "Female",
-    "submit": "Sign Up"
+    "submit": "Sign Up",
+    "ERRORS": {
+    "PASSWORD_MISMATCH": "Passwords do not match"
+  }
+  },
+  "NAVBAR": {
+    "HOME": "Home",
+    "ABOUT_US": "About Us",
+    "SERVICES": "Our Services",
+    "ORDERS": "Orders",
+    "SIGNUP": "Create Account",
+    "LOGIN": "Login",
+    "ENGLISH": "English",
+    "ARABIC": "Arabic",
+    "LOGOUT": "Logout",
+    "NOTIFICATIONS": "Notifications"
+  },
+  "SLIDER": {
+    "TITLE": "Matloob",
+    "HEADING": "All Maintenance Services at Your Fingertips",
+    "DESCRIPTION": "From plumbing and electricity to air conditioning and carpentry, we provide comprehensive solutions with high professionalism and prompt execution tailored to your needs.",
+    "ORDER_NOW": "Request Service Now",
+    "DOWNLOAD_APP": "Download the app now"
+  },
+  "DESCRIPTION": {
+    "CARD_1": {
+      "TITLE": "Fast and Safe Service",
+      "DESCRIPTION": "We ensure service is delivered quickly and with the highest safety standards, using advanced technologies and precise procedures for your safety and comfort."
+    },
+    "CARD_2": {
+      "TITLE": "Certified Professional Technicians",
+      "DESCRIPTION": "Our team consists of highly experienced and certified technicians, offering professional services that meet the highest performance standards."
+    },
+    "CARD_3": {
+      "TITLE": "Transparent and Competitive Prices",
+      "DESCRIPTION": "We offer fair and competitive prices with no surprises, ensuring full transparency in all invoice details for a trustworthy experience."
+    }
+  },
+  "SERVICES": {
+    "TITLE": "Our Services",
+    "SUBTITLE": "Trusted services with the quality you deserve",
+    "DESCRIPTION": "Whatever your maintenance or service needs, our team is ready to serve you with top-level professionalism. Just make a request and we’ll take care of the rest!",
+    "VIEW_ALL": "View All",
+    "ADD_REQUEST": "Add Request"
+  },
+  "SPECIAL_SECTION": {
+    "TITLE": "Exceptional Services for Exceptional Cases",
+    "DESCRIPTION_LINE1": "When time matters or the request is unique, our premium services offer you an instant solution.",
+    "DESCRIPTION_LINE2": "From urgent malfunctions that need immediate action to special requests with exceptional details — we serve you efficiently and quickly.",
+    "ACTION": "Request Service Now",
+    "SPECIAL_REQUESTS": {
+      "TITLE": "Special Requests",
+      "DESCRIPTION": "We ensure service delivery with speed and the highest safety standards, using the latest technology and precise procedures to ensure your comfort and safety."
+    },
+    "EMERGENCY": {
+      "TITLE": "Emergency Issues",
+      "DESCRIPTION": "Our team is composed of highly experienced and certified technicians who provide professional services with top performance quality."
+    }
+  },
+  "ABOUT_US": {
+    "HINT": "About Us",
+    "HEADER": "Expertise That Prioritizes Your Comfort",
+    "DESCRIPTION": "Our goal is to simplify the customer experience by connecting them with trusted technicians across various specialties such as plumbing, air conditioning, painting, cleaning, and more — all through easy and quick steps. With every request, we aim to deliver a comfortable, safe, and transparent experience from the first click to the completion of the service. We believe your comfort begins with professional service.",
+    "BUTTON": "Learn More"
+  },
+  "HOW_WORK": {
+    "QUALITY_HINT": "Uncompromised Quality",
+    "TITLE": "How Do Our Services Work?",
+    "DESCRIPTION": "Start by choosing the service and location, then set the time that suits you. At the scheduled time, our expert technician will arrive to perform the service efficiently and professionally, ensuring you a smooth, hassle-free experience.",
+    "STEP_1": "Choose the service and location",
+    "STEP_2": "Select the time that suits you",
+    "STEP_3": "Welcome the technician and enjoy the service",
+    "BUTTON": "Request a Service Now"
+  },
+  "FAQ": {
+    "TITLE": "Frequently Asked Questions",
+    "DESCRIPTION": "We’ve gathered the most common questions that might come to your mind, along with clear answers to help you make the right decision with full confidence. If you don’t find your question here, feel free to contact us directly."
+  },
+  "ORDER_NOW": {
+    "HEADER": "Request Your Service Now...",
+    "SUBTEXT": "Let your comfort begin in less than a minute",
+    "BUTTON": "Request a Service Now"
+  },
+  "FOOTER": {
+    "DESCRIPTION": "No matter what your maintenance or service needs are, our team is ready to serve you with the highest level of professionalism. Just place your request and we’ll take care of the rest!",
+    "QUICK_LINKS": "Quick Links",
+    "LINKS": {
+      "SERVICES": "Our Services",
+      "ABOUT": "About Us",
+      "ORDERS": "Orders",
+      "PRIVACY_POLICY": "Privacy and Policy",
+      "CONTACT": "Contact Us"
+    },
+    "SERVICES_TITLE": "Our Services",
+    "SERVICES": {
+      "PLUMBING": "Plumbing",
+      "AC": "Cooling & Air Conditioning",
+      "PAINTING": "Painting & Carpentry",
+      "ELECTRICITY": "Electricity",
+      "CLEANING_FEMALE": "Female Cleaners",
+      "CLEANING_MALE": "Male Cleaners"
+    },
+    "FOLLOW_US": "Follow Us",
+    "TERMS": "Terms & Conditions",
+    "COPYRIGHT": "All rights reserved for"
+  },
+  "SERVICE_LIST": {
+    "ORDER_NOW": "Order Now"
+  },
+  "CONTRACTS": {
+    "HEADER": "Contracts",
+    "VIEW_PACKAGES": "View Packages",
+    "EMPTY_MESSAGE": "No contracts are currently available"
+  },
+  "PACKAGES": {
+    "TITLE": "Packages",
+    "SEARCH_BY_CITY": "Search by City",
+    "INCLUDING_TAX": "Including VAT",
+    "CURRENCY": "SAR",
+    "TECHNICIANS_COUNT": "Technicians Count",
+    "VISIT_COUNT": "Number of Visits",
+    "VISIT": "visit",
+    "VISIT_DURATION": "Visit Duration",
+    "HOUR": "hours",
+    "DETAILS": "Package Details",
+    "NO_PACKAGES": "No packages available"
+  },
+  "PACKAGE_DETAILS": {
+    "VAT_INCLUDED": "VAT Included",
+    "TECHNICIANS_COUNT": "Technicians Count",
+    "VISITS_COUNT": "Number of Visits",
+    "VISIT_DURATION": "Visit Duration",
+    "PACKAGE_DETAILS": "Package Details",
+    "REQUEST_DATA": "Request Information",
+    "LOCATION": "Location",
+    "SELECT_LOCATION": "Select City",
+    "ADD_LOCATION": "Add New Location",
+    "DATE": "Date",
+    "SELECT_DATE": "Please select a suitable date",
+    "WORK_TIME": "Work Time",
+    "SELECT_WORK_TIME": "Please select a suitable time",
+    "PAYMENT_METHOD": "Payment Method",
+    "SELECT_PAYMENT_METHOD": "Select Payment Method",
+    "EQUIPMENT": "Equipment",
+    "SELECT_EQUIPMENT": "Select Equipment",
+    "MEDIA": "Media",
+    "MEDIA_HINT": "Please upload photos showing the service location or the issue type...",
+    "UPLOAD": "Click to Upload",
+    "OR_DROP": "or drag and drop",
+    "MEDIA_NOTE": "JPG, JPEG, PNG under 1MB",
+    "ORDER_NOTE": "Order Note",
+    "NOTE_PLACEHOLDER": "Please enter your note here",
+    "MAIN_INSTRUCTIONS": "Main Instructions",
+    "SUBMIT": "Confirm Order",
+    "INSTRUCTIONS": "Instructions",
+    "CONFIRM_ORDER": "Confirm Order",
+    "IMAGES": "Images",
+    "IMAGE_DESCRIPTION": "Please upload images to explain the service location or issue type to ensure accurate and faster service.",
+    "UPLOAD_CLICK": "Click to upload",
+    "OR_DRAG_DROP": "or drag and drop",
+    "IMAGE_HINT": "JPG, JPEG, PNG under 1MB",
+    "DELETE": "Delete",
+    "NOTES": "Order Note",
+    "NOTES_PLACEHOLDER": "Please enter your notes here",
+    "ORDER_DETAILS": "Order Details",
+    "CITY_PLACEHOLDER": "Choose a city",
+    "TIME_PLACEHOLDER": "Choose suitable time",
+    "DATE_PLACEHOLDER": "Select preferred date",
+    "ADD_LOCATION_MODAL_TITLE": "Add New Location",
+    "VALIDATION": {
+      "LOCATION": "Please select location",
+      "PAYMENT": "Please select payment method",
+      "VISTI_TIME": "Please select visit time",
+      "SHCEDULE": "Please select visit dates",
+      "MIN_DATES": "You must select at least {{count}} dates"
+    },
+    "SUCCESS": "Order placed successfully",
+    "LOCATION_ADDED": "Location added successfully"
+  },
+  "ABOUT_US_CONTACT": {
+    "START_JOURNEY": "Your journey starts here",
+    "INTRO": "A platform specialized in providing professional and high-quality maintenance and home assistance services. Our goal is to simplify our customers' lives by connecting them with qualified and trusted technicians across various fields, through one simple and fast application.",
+    "VISION_TITLE": "Our Vision",
+    "VISION_DESC": "To be the first choice in the region for anyone seeking reliable and fast home services, redefining the maintenance experience through technology, professionalism, and customer trust.",
+    "MISSION_TITLE": "Our Mission",
+    "MISSION_DESC": "We are here to provide smart and fast solutions for all your daily needs through integrated services, clear pricing, and a trained team that prioritizes your satisfaction.",
+    "CORE_VALUES_TITLE": "Our Core Values",
+    "CORE_VALUES_DESC": "We believe that quality doesn't happen by chance; it's built on clear and solid principles. In every service we offer, we adhere to our core values that form the foundation of our work.",
+    "QUALITY": "Quality",
+    "COMMITMENT": "Commitment",
+    "TRANSPARENCY": "Transparency",
+    "TRUST": "Trust",
+    "WORKS_TITLE": "Our Work",
+    "WORKS_HEADER": "Showcase of Our Proud Projects",
+    "WORKS_DESC": "Here we present a selection of our projects that reflect our commitment to quality and precision in delivering maintenance and implementation services. Whether in air conditioning, plumbing, painting, or cleaning, we always strive to meet our customers' satisfaction and deliver results worthy of their trust.",
+    "CONTACT_US": "Contact Us",
+    "CONTACT_HEADER": "Get in Touch Easily",
+    "CONTACT_DESC_1": "If you have any questions or need assistance, feel free to contact us. We are here to serve you and provide the support you need.",
+    "CONTACT_DESC_2": "We're always ready to answer your inquiries and help you request the right service. Reach out via the form or through available communication methods, and rest assured, we’ll respond promptly.",
+    "FORM": {
+      "NAME": "Name",
+      "EMAIL": "Email",
+      "MOBILE": "Mobile Number",
+      "MESSAGE": "Message"
+    },
+    "BANNER_HEADER": "Trusted Experience, Reliable Quality",
+    "BANNER_DESC": "We provide reliable maintenance services with high professionalism and easy ordering. Our goal is to deliver a smooth and fast experience that meets your expectations through an expert team and attentive service."
+  },
+  "ORDERS": {
+    "PENDING": "Current Orders",
+    "COMPLETE": "Completed Orders",
+    "CANCEL": "Cancelled Orders",
+    "SAR": "SAR",
+    "VAT_INCLUDED": "VAT Included",
+    "VISITS": "Visit Count",
+    "VISITS_UNIT": "Visits",
+    "HOURS": "Hour Count",
+    "HOURS_UNIT": "Hours",
+    "SHOW_DETAILS": "Show Details",
+    "NO_ORDERS": "No orders at the moment"
+  },
+  "ORDER_TRACKING": {
+    "BANNER_HEADER": "Track your orders instantly",
+    "BANNER_DESC": "Stay updated with the status of your current orders and latest updates"
   }
 }

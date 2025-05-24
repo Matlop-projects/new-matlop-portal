@@ -55,6 +55,10 @@
                 <div class="d-flex flex-col gap-2">
                     <label for="confirmPassword">{{ "signup.confirm_password" | translate }}</label>
                     <p-password formControlName="confirmPassword" [toggleMask]="true" [feedback]="false"></p-password>
+                    <div *ngIf="signupForm.errors?.['passwordMismatch'] && signupForm.get('confirmPassword')?.touched"
+                        class="text-danger">
+                        {{ 'signup.ERRORS.PASSWORD_MISMATCH' | translate }}
+                    </div>
                 </div>
 
                 <!-- Gender -->
@@ -94,7 +98,7 @@
         </div> -->
         <div class="details-section hide-part">
             <!-- صورة أو تفاصيل إضافية -->
-          </div>
+        </div>
     </div>
 </div>
 

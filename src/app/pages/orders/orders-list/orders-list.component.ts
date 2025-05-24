@@ -3,27 +3,32 @@ import { Component, inject, OnInit } from "@angular/core";
 import { ApiService } from "../../../services/api.service";
 import { Router } from "@angular/router";
 import { BackgroundImageWithTextComponent, IBackGroundImageWithText } from '../../../components/background-image-with-text/background-image-with-text.component';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LanguageService } from '../../../services/language.service';
 
 @Component({
   selector: "app-orders-list",
   standalone: true,
-  imports: [NgFor,NgIf,TitleCasePipe,BackgroundImageWithTextComponent],
+  imports: [NgFor, NgIf, TitleCasePipe, BackgroundImageWithTextComponent , TranslatePipe],
   templateUrl: "./orders-list.component.html",
   styleUrl: "./orders-list.component.scss",
 })
 export class OrdersListComponent implements OnInit {
-  bkg_text_options:IBackGroundImageWithText={
-    imageUrl:'assets/img/order-slider.svg',
-  header:'تابع تقدم طلباتك في لحظات',
-  description:'تابع حالة طلباتك الجارية وابقَ على اطلاع بأحدث المستجدات',
-  style:{
-  padding:"70px 0 0 0"
-  }
-  }
+
+    languageService = inject(LanguageService)
+  
+    bkg_text_options: IBackGroundImageWithText = {
+      imageUrl: 'assets/img/order-slider.svg',
+      header: this.languageService.translate('ORDER_TRACKING.BANNER_HEADER'),
+      description: this.languageService.translate('ORDER_TRACKING.BANNER_DESC'),
+      style: {
+        padding: "70px 0 0 0"
+      }
+    };
   private router = inject(Router);
   orders: any = [];
   activeStatus = "pending";
-  ordersCount:any
+  ordersCount: any
 
   searchObject = {
     pageNumber: 0,
@@ -51,6 +56,11 @@ export class OrdersListComponent implements OnInit {
       this.getOrdersCount(id)
     }
     this.getAllOrders();
+
+    this.languageService.translationService.onLangChange.subscribe(() => {
+      this.bkg_text_options.header = this.languageService.translate('ORDER_TRACKING.BANNER_HEADER');
+    this.bkg_text_options.description = this.languageService.translate('ORDER_TRACKING.BANNER_DESC');
+    });
   }
   onSelectStatus(value: string) {
     this.activeStatus = value;
@@ -72,18 +82,18 @@ export class OrdersListComponent implements OnInit {
         }
       });
   }
-  getOrdersCount(clientId:number){
-    this.apiService.get(`order/GetOrderCountsByClientId`,{clientId:clientId}).subscribe((res:any)=>{
-      if(res.data){
-        this.ordersCount=res.data
+  getOrdersCount(clientId: number) {
+    this.apiService.get(`order/GetOrderCountsByClientId`, { clientId: clientId }).subscribe((res: any) => {
+      if (res.data) {
+        this.ordersCount = res.data
       }
     })
   }
-  onOrderDetails(orderId:number) {
+  onOrderDetails(orderId: number) {
     this.router.navigateByUrl(`order-details/${orderId}`);
   }
 
-  formatDateTime(dateTime: any ,type:string) {
+  formatDateTime(dateTime: any, type: string) {
     const cleanedIso = dateTime.split(".")[0]; // "2025-05-10T00:52:55"
 
     // Convert to Date object
@@ -101,9 +111,9 @@ export class OrdersListComponent implements OnInit {
       hour12: false,
     }); //
 
-    if(type=='date')
-      return  formattedDate
+    if (type == 'date')
+      return formattedDate
     else
-    return formattedTime
+      return formattedTime
   }
 }

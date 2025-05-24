@@ -9,11 +9,14 @@ import { ToasterService } from '../../../services/toaster.service';
 import { Dialog } from 'primeng/dialog';
 import { AddLocationComponent } from '../../../components/add-location/add-location.component';
 import { DatePicker } from 'primeng/datepicker';
+import { TranslatePipe } from '@ngx-translate/core';
+import { TooltipModule } from 'primeng/tooltip';
+import { BackgroundImageWithTextComponent, IBackGroundImageWithText } from '../../../components/background-image-with-text/background-image-with-text.component';
 
 @Component({
   selector: 'app-package-details',
   standalone: true,
-  imports: [NgIf, NgFor,CommonModule, NgClass, SelectModule, DatePicker, Dialog, FormsModule, AddLocationComponent],
+  imports: [NgIf, NgFor,CommonModule, NgClass,TranslatePipe , TooltipModule, SelectModule, DatePicker, Dialog, FormsModule, AddLocationComponent , BackgroundImageWithTextComponent],
   templateUrl: './package-details.component.html',
   styleUrl: './package-details.component.scss'
 })
@@ -29,7 +32,14 @@ export class PackageDetailsComponent {
   toaster = inject(ToasterService);
   selectedEquipments: { equipmentId: number }[] = []; // declare at top of your TS file
 
-
+  bkg_text_options: IBackGroundImageWithText = {
+      imageUrl: 'assets/img/slider.svg',
+      header: this.languageService.translate('ABOUT_US_CONTACT.BANNER_HEADER'),
+      description: this.languageService.translate('ABOUT_US_CONTACT.BANNER_DESC'),
+      style: {
+        padding: "70px 0 0 0"
+      }
+    };
 
   paymentList = [
     // {
@@ -139,6 +149,8 @@ export class PackageDetailsComponent {
     this.selectedLang = this.languageService.translationService.currentLang;
     this.languageService.translationService.onLangChange.subscribe(() => {
       this.selectedLang = this.languageService.translationService.currentLang;
+      this.bkg_text_options.header = this.languageService.translate('ABOUT_US_CONTACT.BANNER_HEADER');
+      this.bkg_text_options.description = this.languageService.translate('ABOUT_US_CONTACT.BANNER_DESC');
     });
   }
 

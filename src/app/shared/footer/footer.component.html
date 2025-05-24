@@ -3,50 +3,42 @@
     <div class="content">
       <div class="details">
         <div class="section-one">
-          <p>
-            مهما كانت احتياجاتك في الصيانة أو الخدمات، فريقنا جاهز يخدمك بأعلى مستوى من الاحترافية. كل اللي عليك تطلب، وإحنا هنعتني بالباقي!
-          </p>
+          <p>{{ 'FOOTER.DESCRIPTION' | translate }}</p>
         </div>
         <div class="section-two">
           <div class="header">
-            <p>روابط سريعة</p>
+            <p>{{ 'FOOTER.QUICK_LINKS' | translate }}</p>
           </div>
           <div class="services">
-            <span class="block">خدماتنا</span>
-            <span class="block">من نحن</span>
-
-            <span class="block">الطلبات</span>
-
-            <a class="block" routerLink="/privacy-policy">إضافة طلب</a>
-
-            <span class="block">تواصل معنا</span>
+            <a class="block" routerLink="/services-list">{{ 'FOOTER.LINKS.SERVICES' | translate }}</a>
+            <a class="block" routerLink="/orders">{{ 'FOOTER.LINKS.ORDERS' | translate }}</a>
+            <a class="block" routerLink="/about-us">{{ 'FOOTER.LINKS.ABOUT' | translate }}</a>
+            <a class="block" routerLink="/privacy-policy">{{ 'FOOTER.LINKS.PRIVACY_POLICY' | translate }}</a>
+            <a class="block" routerLink="/terms-conditions">{{ 'FOOTER.TERMS' | translate }}</a>
           </div>
         </div>
         <div class="section-three">
           <div class="header">
-            <p>خدماتنا</p>
+            <p>{{ 'FOOTER.SERVICES_TITLE' | translate }}</p>
           </div>
           <div class="services">
-            <span class="block">سباكة</span>
-            <span class="block">تبريد وتكييف </span>
-
-            <span class="block">دهانات ونجارة</span>
-
-            <span class="block"> كهرباء</span>
-
-            <span class="block">عاملات نظافة </span>
-            <span class="block">عمال نظافة </span>
+            <span class="block">{{ 'FOOTER.SERVICES.PLUMBING' | translate }}</span>
+            <span class="block">{{ 'FOOTER.SERVICES.AC' | translate }}</span>
+            <span class="block">{{ 'FOOTER.SERVICES.PAINTING' | translate }}</span>
+            <span class="block">{{ 'FOOTER.SERVICES.ELECTRICITY' | translate }}</span>
+            <span class="block">{{ 'FOOTER.SERVICES.CLEANING_FEMALE' | translate }}</span>
+            <span class="block">{{ 'FOOTER.SERVICES.CLEANING_MALE' | translate }}</span>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="copyright">
-  <div class="container d-flex justify-content-between  flex-wrap">
-    <div class="d-flex justify-content-between">
-      <p class="m-2 white-text"> تابعنا</p>
 
+<div class="copyright">
+  <div class="container d-flex justify-content-between flex-wrap">
+    <div class="d-flex justify-content-between">
+      <p class="m-2 white-text">{{ 'FOOTER.FOLLOW_US' | translate }}</p>
       <div class="social-media">
         <ng-container *ngFor="let item of socailMedia">
           <div class="social-item">
@@ -55,10 +47,8 @@
         </ng-container>
       </div>
     </div>
-
     <div class="copy-right">
-            <a class="block" routerLink="/terms-conditions">hh</a>
-      <p class="m-2 white-text">جميع الحقوق محفوظة ل</p>
+      <p class="m-2 white-text">{{ 'FOOTER.COPYRIGHT' | translate }}</p>
     </div>
   </div>
 </div>

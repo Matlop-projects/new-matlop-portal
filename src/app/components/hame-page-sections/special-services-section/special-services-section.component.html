@@ -4,54 +4,53 @@
             <div class="col-lg-12">
                 <div class="main-title">
                     <p class="title">
-                        خدمات استثنائية لحالات استثنائية
+                        {{ 'SPECIAL_SECTION.TITLE' | translate }}
                     </p>
-                   <div class="main-desc">
-                    <p class="desc">
-                        لما يكون الوقت مهم أو الطلب غير تقليدي، خدماتنا المميزة بتقدملك الحل فورًا. 
-                    </p>
-                    <p class="desc">
-                        من الأعطال الطارئة
-                        اللي محتاجة تدخل فوري، لطلبات خاصة بتفاصيل استثنائية — نخدمك بكفاءة وسرعة.
-                    </p>
-                   </div>
+                    <div class="main-desc">
+                        <p class="desc">
+                            {{ 'SPECIAL_SECTION.DESCRIPTION_LINE1' | translate }}
+                        </p>
+                        <p class="desc">
+                            {{ 'SPECIAL_SECTION.DESCRIPTION_LINE2' | translate }}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
+
         <div class="row mt-3">
             <div class="cards col-lg-6 col-md-6 col-sm-12" (click)="goOrder('s')">
                 <div class="card-content order">
                     <div class="image-section">
-                        <img src="assets/images/icons-svg/four.svg" alt="">
+                        <img src="assets/images/icons-svg/four.svg" alt="" />
                     </div>
                     <div class="title">
-                        <p>طلبات خاصة</p>
+                        <p>{{ 'SPECIAL_SECTION.SPECIAL_REQUESTS.TITLE' | translate }}</p>
                     </div>
                     <div class="desc">
-                        <p>نضمن لك تنفيذ الخدمة بسرعة وبأعلى معايير الأمان، باستخدام أحدث التقنيات وإجراءات دقيقة لضمان
-                            سلامتك وراحتك</p>
+                        <p>{{ 'SPECIAL_SECTION.SPECIAL_REQUESTS.DESCRIPTION' | translate }}</p>
                     </div>
                     <div class="action">
-                        <p>أطلب خدمة الان</p>
-                        <img src="assets/images/icons-svg/arrow.svg" alt="">
+                        <p>{{ 'SPECIAL_SECTION.ACTION' | translate }}</p>
+                        <img src="assets/images/icons-svg/arrow.svg" alt="" />
                     </div>
                 </div>
             </div>
-            <div class="cards col-lg-6 col-md-6 col-sm-12">
-                <div class="card-content emergency" (click)="goOrder('e')">
+
+            <div class="cards col-lg-6 col-md-6 col-sm-12" (click)="goOrder('e')">
+                <div class="card-content emergency">
                     <div class="image-section">
-                        <img src="assets/images/icons-svg/five.svg" alt="">
+                        <img src="assets/images/icons-svg/five.svg" alt="" />
                     </div>
                     <div class="title">
-                        <p>أعطال طارئة </p>
+                        <p>{{ 'SPECIAL_SECTION.EMERGENCY.TITLE' | translate }}</p>
                     </div>
                     <div class="desc">
-                        <p>فريقنا يتكون من فنيين ذوي خبرة عالية ومعتمدين، يقدمون لك خدمات احترافية وفقًا لأعلى المعايير
-                            لضمان جودة الأداء </p>
+                        <p>{{ 'SPECIAL_SECTION.EMERGENCY.DESCRIPTION' | translate }}</p>
                     </div>
                     <div class="action">
-                        <p>أطلب خدمة الان</p>
-                        <img src="assets/images/icons-svg/arrow.svg" alt="">
+                        <p>{{ 'SPECIAL_SECTION.ACTION' | translate }}</p>
+                        <img src="assets/images/icons-svg/arrow.svg" alt="" />
                     </div>
                 </div>
             </div>

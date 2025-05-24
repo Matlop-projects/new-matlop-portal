@@ -4,11 +4,13 @@ import { Router } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
 import { environment } from '../../../../environments/environment';
 import { NgFor, NgIf, NgStyle } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
+import { BackgroundImageWithTextComponent, IBackGroundImageWithText } from '../../../components/background-image-with-text/background-image-with-text.component';
 
 @Component({
   selector: 'app-services-list',
   standalone: true,
-  imports: [NgIf, NgStyle, NgFor],
+  imports: [NgIf, NgStyle, NgFor , TranslatePipe , BackgroundImageWithTextComponent],
   templateUrl: './services-list.component.html',
   styleUrl: './services-list.component.scss'
 })
@@ -20,13 +22,22 @@ export class ServicesListComponent {
   languageService = inject(LanguageService);
   private router = inject(Router)
 
-
+ bkg_text_options: IBackGroundImageWithText = {
+    imageUrl: 'assets/img/slider.svg',
+    header: this.languageService.translate('ABOUT_US_CONTACT.BANNER_HEADER'),
+    description: this.languageService.translate('ABOUT_US_CONTACT.BANNER_DESC'),
+    style: {
+      padding: "70px 0 0 0"
+    }
+  };
+  
   ngOnInit(): void {
     this.getAllServices();
     localStorage.removeItem('contractDetails');
     this.languageService.translationService.onLangChange.subscribe(() => {
       this.selectedLang = this.languageService.translationService.currentLang;
-      // this.setImageLanguage();
+      this.bkg_text_options.header = this.languageService.translate('ABOUT_US_CONTACT.BANNER_HEADER');
+      this.bkg_text_options.description = this.languageService.translate('ABOUT_US_CONTACT.BANNER_DESC');
     })
   }
 

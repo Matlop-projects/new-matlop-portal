@@ -3,11 +3,12 @@ import { ApiService } from '../../../services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
 import { NgIf, NgFor } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-contract-list',
   standalone: true,
-  imports: [NgIf, NgFor],
+  imports: [NgIf, NgFor , TranslatePipe],
   templateUrl: './contract-list.component.html',
   styleUrl: './contract-list.component.scss'
 })

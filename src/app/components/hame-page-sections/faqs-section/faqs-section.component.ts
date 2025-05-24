@@ -4,11 +4,12 @@ import { ApiService } from '../../../services/api.service';
 import { ToasterService } from '../../../services/toaster.service';
 import { PanelModule } from 'primeng/panel';
 import { LanguageService } from '../../../services/language.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-faqs-section',
   standalone: true,
-  imports: [NgIf, NgFor, PanelModule],
+  imports: [NgIf, NgFor, PanelModule , TranslatePipe],
   templateUrl: './faqs-section.component.html',
   styleUrl: './faqs-section.component.scss'
 })

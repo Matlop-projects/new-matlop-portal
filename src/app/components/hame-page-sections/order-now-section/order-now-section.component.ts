@@ -1,10 +1,11 @@
 import { Component,inject, OnInit } from '@angular/core';
 import { LanguageService } from '../../../services/language.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-order-now-section',
   standalone: true,
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: './order-now-section.component.html',
   styleUrl: './order-now-section.component.scss'
 })

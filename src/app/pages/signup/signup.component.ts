@@ -43,11 +43,12 @@ export class SignupComponent {
       lastName: ['', Validators.required],
       userName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      mobileNumber: ['', [Validators.required, Validators.pattern(/^05\d{8}$/)]], // رقم سعودي
+      mobileNumber: ['', [Validators.required, Validators.pattern(/^05\d{8}$/)]],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-      genderId: [1, Validators.required], // 1: ذكر, 2: أنثى
-    });
+      genderId: [1, Validators.required],
+    }, { validators: passwordMatchValidator }); // ⬅️ Add validator here
+    
 
     this.translate.setDefaultLang('en');
     this.translate.use('en');  // You can change this dynamically
@@ -133,4 +134,10 @@ export class SignupComponent {
     this.onSubmit();
   }
 
+}
+
+function passwordMatchValidator(form: FormGroup) {
+  const password = form.get('password')?.value;
+  const confirmPassword = form.get('confirmPassword')?.value;
+  return password === confirmPassword ? null : { passwordMismatch: true };
 }
