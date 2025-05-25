@@ -42,7 +42,7 @@
   margin: 0px 20px;
 }
 .padding-20 {
-  padding: 10px 30px;
+  padding: 5px 30px;
 }
 .active {
   font-weight: bolder;
@@ -61,7 +61,7 @@
 }
 
 /* Mobile view */
-@media (max-width: 991px) {
+@media (max-width: 991.5px) {
   .navbar {
     border-radius: unset;
     margin: unset;

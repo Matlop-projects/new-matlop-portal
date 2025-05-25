@@ -1,0 +1,169 @@
+.notification-container {
+//   max-width: 600px;
+//   margin: 20px auto;
+//   padding: 16px;
+//   background-color: #fff; /* Added background color for the container */
+//   border-radius: 8px; /* Rounded corners for a cleaner look */
+//   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+div.hr-title{
+    border-bottom: 1px solid #F2F1F6;
+    h2{
+        margin-bottom: 10px;
+    }
+    margin: 10px 0;
+  
+}
+.notification-item {
+  padding: 16px;
+  margin-block-end: 12px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+//   border-inline-start: 4px solid #e4ca20;
+  transition: transform 0.2s, box-shadow 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+}
+
+.notification-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Increased shadow on hover for more emphasis */
+}
+
+.notification-item.unseen {
+  background-color: #F2FBFE;
+//   border-inline-start-color: #2ecc71; /* Highlight for unseen notifications */
+}
+
+.notification-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  font-weight: bold;
+  color: #2c3e50;
+  flex-shrink: 0;
+}
+
+.notification-content {
+  flex: 1;
+}
+
+.notification-title {
+  font-weight: bold;
+  color: #2c3e50;
+  font-size: 16px; /* Slightly larger title font for better readability */
+}
+
+.notification-body {
+  color: #6B6B6B;
+  font-size: 14px; /* Smaller body text */
+}
+
+.notification-time {
+  font-size: 0.8em;
+  color: #7f8c8d;
+}
+
+.dialog-content {
+  padding: 20px;
+  background-color: #fff; /* Ensure the dialog content is white */
+  border-radius: 8px; /* Rounded corners for the dialog */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Shadow for a polished look */
+}
+
+:host-context([dir="rtl"]) .notification-item:hover {
+  transform: translateX(-5px); /* Reverse the hover effect for RTL layout */
+}
+
+::ng-deep {
+    .p-popover{
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+z-index: 99999999999!important;
+top:50px!important;
+width: 500px;
+    }
+  .p-popover:before {
+    display: none !important;
+  }
+
+  .p-popover:after {
+    display: none !important;
+    
+  }
+}
+
+.notification-content-section {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.notification-content-section::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar */
+}
+
+.desc {
+  display: flex;
+  gap: 17px;
+}
+
+.item {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.item span {
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  background-color: #2ecc71; /* Added a background color for a better visual effect */
+}
+
+
+.count-noti {
+  position: relative;
+
+  div {
+    position: absolute;
+    display: flex;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    bottom: 14px;
+    left: 8px;
+    width: 15px;
+    height: 15px;
+    &:lang(ar) {
+      left: unset !important;
+      right: 8px;
+    }
+  }
+}
+
+  /* Mobile view */
+      @media (max-width: 510px) {
+      ::ng-deep{
+         .p-popover{
+            width: 90%!important;
+        }
+       }
+      }
+            @media (max-width: 991.5px) {
+      ::ng-deep{
+         .p-popover{
+            top: 260px!important;
+        }
+       }
+      }

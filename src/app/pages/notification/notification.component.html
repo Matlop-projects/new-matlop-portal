@@ -1,0 +1,86 @@
+<ng-container>
+  <div class="count-noti mt-2">
+    <div class="count-number" (click)="op.toggle($event)">
+      {{ totalUnSeen }}
+    </div>
+    <span class="pi pi-bell" (click)="op.toggle($event)"></span>
+  </div>
+  <p-popover #op>
+    <div class="notification-container">
+        <div class="hr-title">
+                  <h2>{{ "notifications" | translate }}</h2>
+
+        </div>
+      <ng-container *ngIf="notificationsList">
+        <div *ngIf="notificationsList.length === 0" class="p-3">
+          {{ "no_notifications" | translate }}
+        </div>
+        <!-- <div class="desc mt-2 mb-2">
+          <div class="green item">
+            <span style="background-color: #2ecc71;"></span>
+            <p>{{'notifications.new'|translate}} ({{totalUnSeen}})</p>
+          </div>
+          <div class="yellow item">
+            <span style="background-color: #e4ca20;"></span>
+            <p>{{'notifications.seen'|translate}}</p>
+          </div>
+        </div> -->
+        <div class="notification-content-section">
+          <div
+            *ngFor="let notification of notificationsList"
+            [class.unseen]="!notification.isSeen"
+            class="notification-item mt-3"
+            (click)="handleNotificationClick(notification)"
+          >
+            <div class="">
+              <img src="assets/img/notification-bing.svg" alt="" />
+              <!-- {{ getModuleIcon(notification.module) }} -->
+            </div>
+            <div class="notification-content">
+              <div class="notification-title">
+                {{
+                  selectedLang == "en"
+                    ? notification.titleEn
+                    : notification.titleAr
+                }}
+              </div>
+              <div class="notification-body">
+                {{
+                  selectedLang == "en"
+                    ? notification.bodyEn
+                    : notification.bodyAr
+                }}
+              </div>
+            </div>
+            <div class="notification-time">
+              {{ getTimeAgo(notification.creationTime,selectedLang) }}
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </p-popover>
+</ng-container>
+
+<p-dialog
+  [(visible)]="showDialog"
+  [header]="'Text Notification Details'"
+  [modal]="true"
+  [style]="{ width: '30vw' }"
+>
+  <div class="dialog-content" *ngIf="selectedNotification">
+    <h3>{{ selectedNotification?.title }}</h3>
+    <p>
+      <strong>{{ "notifications.id" | translate }}:</strong>
+      {{ selectedNotification.notificationId }}
+    </p>
+    <p>
+      <strong>{{ "notifications.message" | translate }}:</strong>
+      {{ selectedNotification.body }}
+    </p>
+    <p>
+      <strong>{{ "notifications.created" | translate }}:</strong>
+      {{ selectedNotification.creationTime | date : "medium" }}
+    </p>
+  </div>
+</p-dialog>
