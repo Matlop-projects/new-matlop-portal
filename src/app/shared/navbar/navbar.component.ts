@@ -14,6 +14,7 @@ import { MenuItem } from 'primeng/api';
 import { filter } from 'rxjs/operators';
 import { LoginSignalUserDataService } from '../../services/login-signal-user-data.service';
 import { ApiService } from '../../services/api.service';
+import { NotificationComponent } from '../../pages/notification/notification.component';
 
 interface User {
   username: string;
@@ -24,7 +25,7 @@ interface User {
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [TranslateModule, NgIf, TranslatePipe, RouterModule, MenubarModule, IconFieldModule, InputIconModule, FormsModule, InputGroup, InputTextModule, NgFor],
+  imports: [TranslateModule, NgIf,NotificationComponent, TranslatePipe, RouterModule, MenubarModule, IconFieldModule, InputIconModule, FormsModule, InputGroup, InputTextModule, NgFor],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
