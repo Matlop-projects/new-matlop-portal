@@ -1,11 +1,3 @@
-.notification-container {
-//   max-width: 600px;
-//   margin: 20px auto;
-//   padding: 16px;
-//   background-color: #fff; /* Added background color for the container */
-//   border-radius: 8px; /* Rounded corners for a cleaner look */
-//   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
-}
 
 div.hr-title{
     border-bottom: 1px solid #F2F1F6;
@@ -90,14 +82,11 @@ z-index: 99999999999!important;
 top:50px!important;
 width: 500px;
     }
-  .p-popover:before {
+  .p-popover:before,
+  .p-popover:after {
     display: none !important;
   }
 
-  .p-popover:after {
-    display: none !important;
-    
-  }
 }
 
 .notification-content-section {

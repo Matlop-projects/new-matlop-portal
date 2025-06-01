@@ -36,7 +36,7 @@
             {{ 'NAVBAR.SERVICES' | translate }}
           </a>
         </li>
-        <li class="nav-item" *ngIf="hasPermission">
+        <li class="nav-item" *ngIf="localStorage">
           <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/orders']">
             {{ 'NAVBAR.ORDERS' | translate }}
           </a>

@@ -1,4 +1,6 @@
-<app-background-image-with-text [options]="bkg_text_options"></app-background-image-with-text>
+<app-background-image-with-text
+  [options]="bkg_text_options"
+></app-background-image-with-text>
 
 <div class="container mt-5">
   <div class="status">
@@ -7,7 +9,7 @@
       class="btn"
       (click)="onSelectStatus('pending')"
     >
-      <span class="name">{{ 'ORDERS.PENDING' | translate }}</span>
+      <span class="name">{{ "ORDERS.PENDING" | translate }}</span>
       <span class="count">{{ ordersCount?.pendingOrdersCount || 0 }}</span>
     </span>
     <span
@@ -15,7 +17,7 @@
       class="btn"
       (click)="onSelectStatus('complete')"
     >
-      <span class="name">{{ 'ORDERS.COMPLETE' | translate }}</span>
+      <span class="name">{{ "ORDERS.COMPLETE" | translate }}</span>
       <span class="count">{{ ordersCount?.completedOrdersCount || 0 }}</span>
     </span>
     <span
@@ -23,63 +25,65 @@
       class="btn"
       (click)="onSelectStatus('cancel')"
     >
-      <span class="name">{{ 'ORDERS.CANCEL' | translate }}</span>
+      <span class="name">{{ "ORDERS.CANCEL" | translate }}</span>
       <span class="count">{{ ordersCount?.canceledOrdersCount || 0 }}</span>
     </span>
   </div>
-
-  <ng-container *ngIf="orders.length > 0; else empty">
-    <div class="card mt-3 mb-3" *ngFor="let item of orders">
-      <div class="p-4">
-        <div class="header d-flex justify-content-between">
-          <span class="bold">{{ item.serviceNameAr }}</span>
-          <span [class]="activeStatus" class="all-status">
-            {{ activeStatus | titlecase }}
-            <span class="pi pi-circle-on"></span>
-          </span>
-        </div>
-        <div class="d-flex justify-content-start">
-          <div>
-            <span class="bold">{{ item.orderTotal }}</span>
-            <span class="text-gray-light">{{ 'ORDERS.SAR' | translate }}</span>
+  <div class="orders">
+    <ng-container *ngIf="orders.length > 0; else empty">
+      <div class="card mt-3 mb-3" *ngFor="let item of orders">
+        <div class="p-4">
+          <div class="header d-flex justify-content-between">
+            <span class="bold">{{ item.serviceNameAr }}</span>
+            <span [class]="activeStatus" class="all-status">
+              {{ activeStatus | titlecase }}
+              <span class="pi pi-circle-on"></span>
+            </span>
           </div>
-          <div class="tax">{{ 'ORDERS.VAT_INCLUDED' | translate }}</div>
-        </div>
-        <div class="d-flex justify-content-start mt-3">
-          <div class="margin-2">
-            <span class="name">{{ 'ORDERS.VISITS' | translate }}</span>
-            <span class="bold">{{ item.package.visitNumber }}</span>
-            <span class="bold">{{ 'ORDERS.VISITS_UNIT' | translate }}</span>
+          <div class="d-flex justify-content-start">
+            <div>
+              <span class="bold">{{ item.orderTotal }}</span>
+              <span class="text-gray-light">{{
+                "ORDERS.SAR" | translate
+              }}</span>
+            </div>
+            <div class="tax">{{ "ORDERS.VAT_INCLUDED" | translate }}</div>
           </div>
-          <div class="margin-2">
-            <span class="name">{{ 'ORDERS.HOURS' | translate }}</span>
-            <span class="bold">{{ item.package.visitHours }}</span>
-            <span class="bold">{{ 'ORDERS.HOURS_UNIT' | translate }}</span>
+          <div class="d-flex justify-content-start mt-3">
+            <div class="margin-2">
+              <span class="name">{{ "ORDERS.VISITS" | translate }}</span>
+              <span class="bold">{{ item.package.visitNumber }}</span>
+              <span class="bold">{{ "ORDERS.VISITS_UNIT" | translate }}</span>
+            </div>
+            <div class="margin-2">
+              <span class="name">{{ "ORDERS.HOURS" | translate }}</span>
+              <span class="bold">{{ item.package.visitHours }}</span>
+              <span class="bold">{{ "ORDERS.HOURS_UNIT" | translate }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="details d-flex justify-content-between">
+          <div class="text-gray-light">
+            <span class="time">
+              {{ formatDateTime(item.creationTime, "time") }}
+              <span class="pi pi-clock"></span>
+            </span>
+            <span>
+              {{ formatDateTime(item.creationTime, "date") }}
+              <span class="pi pi-calendar"></span>
+            </span>
+          </div>
+          <div class="pointer" (click)="onOrderDetails(item.orderId)">
+            {{ "ORDERS.SHOW_DETAILS" | translate }}
+            <span class="fz-12 pi pi-arrow-circle-left"></span>
           </div>
         </div>
       </div>
-      <div class="details d-flex justify-content-between">
-        <div class="text-gray-light">
-          <span class="time">
-            {{ formatDateTime(item.creationTime, 'time') }}
-            <span class="pi pi-clock"></span>
-          </span>
-          <span>
-            {{ formatDateTime(item.creationTime, 'date') }}
-            <span class="pi pi-calendar"></span>
-          </span>
-        </div>
-        <div class="pointer" (click)="onOrderDetails(item.orderId)">
-          {{ 'ORDERS.SHOW_DETAILS' | translate }}
-          <span class="fz-12 pi pi-arrow-circle-left"></span>
-        </div>
-      </div>
-    </div>
-  </ng-container>
-
+    </ng-container>
+  </div>
   <ng-template #empty>
     <div class="text-center m-5">
-      <span class="bold">{{ 'ORDERS.NO_ORDERS' | translate }}</span>
+      <span class="bold">{{ "ORDERS.NO_ORDERS" | translate }}</span>
     </div>
   </ng-template>
 </div>
