@@ -1,10 +1,8 @@
 ::ng-deep {
   .signup-container {
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-
     h2,
     p {
       margin: 0;
@@ -22,12 +20,7 @@
       padding: 30px;
 
       .form-section {
-        flex-basis: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         padding: 20px;
-
         form {
           display: flex;
           flex-direction: column;
@@ -48,32 +41,26 @@
       }
 
       .details-section {
-        flex-basis: 50%;
-        // height: 500px;
-        //   background: url('/assets/images/backgrounds/Frame\ 2147224800.png') no-repeat;
-        //   background-size: cover;
+        width: 50%;
+        overflow: hidden;
         border-radius: 24px;
-
+         padding-top: 20px;
         .carousel-item {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100%;
-          height: 500px;
+          height: 100vh;
+          // height: 500px;
         }
 
         img {
           max-width: 100%;
-          height: auto;
-          object-fit: cover;
-          height: 500px;
+          height: 100vh;
+          
         }
       }
     }
   }
 
   // Small devices (portrait phones)
-  @media only screen and (max-width:249.98px) {
+  @media only screen and (max-width: 249.98px) {
     .hide-part {
       display: none !important;
     }
@@ -90,9 +77,12 @@
   }
 
   // Small devices (portrait phones)
-  @media only screen and (min-width:250.98px) and (max-width: 575.98px) {
+  @media only screen and (min-width: 250.98px) and (max-width: 575.98px) {
     .hide-part {
       display: none !important;
+    }
+    .content{
+      flex-basis: unset!important;
     }
 
     .form-section {
@@ -124,17 +114,26 @@
 
   // Extra large devices (desktops)
   @media only screen and (min-width: 992px) and (max-width: 1199.98px) {
-    // Styles for extra-large devices
+    .content{
+      flex-basis: 100%!important;
+    }
   }
 
   // Extra extra large devices (large desktops, TVs)
   @media only screen and (min-width: 1200px) {
-    // Styles for extra-extra-large devices
+    // // Styles for extra-extra-large devices
+    // .hide-part {
+    //   display: none !important;
+    // }
+
+    // .form-section {
+    //   flex-basis: 100% !important;
+    // }
   }
 
   .forget_password {
     text-decoration: none;
-    color: #0EC5D2;
+    color: #0ec5d2;
   }
 
   .remember-me {
@@ -146,7 +145,7 @@
   }
 
   .btn-login {
-    background: linear-gradient(to right, #BFFD2B, #05BCE8);
+    background: linear-gradient(to right, #bffd2b, #05bce8);
 
     color: #fff;
     border-radius: 32px;
@@ -172,9 +171,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
   }
-
 }
-
 
 .ckeck-box {
   label {
@@ -183,7 +180,6 @@
   }
 }
 
-
 .signup {
   text-align: center;
   position: relative;
@@ -191,10 +187,6 @@
   cursor: pointer;
 }
 
-
-.details-section {
-  flex-basis: 50%;
-  background: url('/assets/images/backgrounds/Frame\ 2147224800.png') no-repeat;
-  background-size: cover;
-  border-radius: 24px;
+.black-color {
+  color: #000;
 }
