@@ -44,16 +44,21 @@
         width: 50%;
         overflow: hidden;
         border-radius: 24px;
-         padding-top: 20px;
+        padding-top: 20px;
         .carousel-item {
           height: 100vh;
           // height: 500px;
+        }
+        .carousel-indicators button {
+          height: 5px;
+          width: 30%;
+          border: 1px solid #fff;
+          border-radius: 8px;
         }
 
         img {
           max-width: 100%;
           height: 100vh;
-          
         }
       }
     }
@@ -81,8 +86,8 @@
     .hide-part {
       display: none !important;
     }
-    .content{
-      flex-basis: unset!important;
+    .content {
+      flex-basis: unset !important;
     }
 
     .form-section {
@@ -114,8 +119,8 @@
 
   // Extra large devices (desktops)
   @media only screen and (min-width: 992px) and (max-width: 1199.98px) {
-    .content{
-      flex-basis: 100%!important;
+    .content {
+      flex-basis: 100% !important;
     }
   }
 
