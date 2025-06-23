@@ -1,0 +1,23 @@
+<div class="thank-you-container" [ngClass]="{'success': isSuccess, 'failure': !isSuccess}">
+  <div class="content">
+    <div class="icon">
+      <i [class]="isSuccess ? 'success-icon' : 'failure-icon'">
+        {{ isSuccess ? '✓' : '✕' }}
+      </i>
+    </div>
+    <h1>Thank You!</h1>
+    <p>Thank you for choosing Matlop.</p>
+    <p>{{this.queryParams.message}}</p>
+    <div class="status-message">
+      <p *ngIf="isSuccess">
+        Your payment was successful! We'll process your order right away.
+      </p>
+      <p *ngIf="!isSuccess">
+        Unfortunately, your payment was not successful. Please try again or contact our support.
+      </p>
+    </div>
+    <button class="action-button" (click)="goHome()">
+      {{ 'Home' |  translate}}
+    </button>
+  </div>
+</div>

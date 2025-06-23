@@ -8,11 +8,11 @@
 
         .red-mark {
             color: red;
-          }
+        }
 
-          label {
+        label {
             margin-bottom: 10px;
-          }
+        }
 
         p {
             margin: 0;
@@ -324,6 +324,71 @@
                         height: 300px;
                         padding: 20px;
                     }
+                }
+
+                .coupon-section {
+                    margin-top: 30px;
+
+                    .title {
+                        margin-bottom: 10px;
+
+                        p {
+                            font-size: 18px;
+                            font-weight: 500;
+                        }
+                    }
+
+                    .desc {
+                        margin-top: 10px;
+
+                        p {
+                            font-size: 15px;
+                            font-weight: 500;
+                            color: #B4B4B4;
+                        }
+                    }
+
+                    .input-container {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        border: 1px solid #ccc;
+                        border-radius: 24px;
+                        height: 71px;
+                        padding: 0;
+                        margin-top: 15px;
+                        width: 50%;
+
+                        input {
+                            border: none;
+                            padding: 10px 45px 10px 10px;
+                            flex: 1;
+                            outline: none;
+                            font-size: 16px;
+                            border-radius: 8px;
+                        }
+
+                        button {
+                            position: absolute;
+                            left: 10px;
+                            background: linear-gradient(90deg, #BFFD2B 0.01%, #B9FC30 7.01%, #AAF83D 16%, #90F253 26%, #6BEA72 37%, #62E77A 43%, #5EE57E 43.01%, #4ADE91 53%, #24D0B5 65%, #13CAC5 70%, #05BCE8 100%);
+                            border: none;
+                            cursor: pointer;
+                            font-size: 18px;
+                            color: white;
+                            top: 7px;
+                            border-radius: 16px;
+                            padding: 2px 23px;
+
+
+
+                            &:lang(en) {
+                                right: 10px;
+                                left: unset;
+                            }
+                        }
+                    }
+
                 }
             }
 

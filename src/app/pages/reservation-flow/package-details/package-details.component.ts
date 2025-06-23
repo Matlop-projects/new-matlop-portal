@@ -42,13 +42,13 @@ export class PackageDetailsComponent {
     };
 
   paymentList = [
-    // {
-    //     "paymentId": 1,
-    //     "enName": "cash",
-    //     "arName": "كاش",
-    //     "enDescription": "<p>Payment in cash to the worker supervisor upon completion of the order on site</p>",
-    //     "arDescription": "<p>الدفع كاش لمشرف العمال عند الانتهاء من الطلب في الموقع </p>"
-    // },
+    {
+        "paymentId": 1,
+        "enName": "cash",
+        "arName": "كاش",
+        "enDescription": "<p>Payment in cash to the worker supervisor upon completion of the order on site</p>",
+        "arDescription": "<p>الدفع كاش لمشرف العمال عند الانتهاء من الطلب في الموقع </p>"
+    },
     // {
     //     "paymentId": 2,
     //     "enName": "stc pay",
@@ -57,7 +57,7 @@ export class PackageDetailsComponent {
     //     "arDescription": "<p>الدفع بواسطة اس تي سي باي في البرنامج عند القيام بطلب الباقة </p>"
     // },
     {
-      "paymentId": 3,
+      "paymentId": 2,
       "enName": "credit card",
       "arName": "بطاقة بنكية ",
       "enDescription": "<p>Payment by bank card while ordering the package in the program</p>",
@@ -78,13 +78,13 @@ export class PackageDetailsComponent {
     //     "enDescription": "<p>Payment is by bank transfer to the company&#39;s account</p>",
     //     "arDescription": "<p>الدفع بواسطة تحويل بنكي على حساب الشركة</p>"
     // },
-    // {
-    //     "paymentId": 7,
-    //     "enName": "wallet",
-    //     "arName": "محفظة ",
-    //     "enDescription": "<p>Payment using the wallet balance in the application</p>",
-    //     "arDescription": "<p>الدفع بواسطة رصيد المحفظة في التطبيق </p>"
-    // }
+    {
+        "paymentId": 3,
+        "enName": "wallet",
+        "arName": "محفظة ",
+        "enDescription": "<p>Payment using the wallet balance in the application</p>",
+        "arDescription": "<p>الدفع بواسطة رصيد المحفظة في التطبيق </p>"
+    }
   ]
 
   packageDetails: any
