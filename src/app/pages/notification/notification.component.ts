@@ -44,7 +44,7 @@ export class NotificationComponent {
   private isUserInteracted = false;
   selectedLang: any;
   languageService = inject(LanguageService);
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     window.addEventListener("click", () => (this.isUserInteracted = true), {
@@ -61,28 +61,49 @@ export class NotificationComponent {
   }
 
   getNotifications() {
-    if (localStorage.getItem("token"))
-      this.ApiService.get("Notification/GetNotifications").subscribe(
-        (noti: any) => {
-          this.notificationsList = noti.data.data;
-          this.totlaCount = noti.data.totalCount;
-          this.totalUnSeen = noti.data.totalUnSeenCount;
+  const expirationTimeStr = localStorage.getItem("token");
 
-          const newCount = noti.data.totalUnSeenCount;
-          const oldCount = this.totalUnSeenCount$.value;
-
-          if (
-            oldCount !== null &&
-            newCount > oldCount &&
-            this.isUserInteracted
-          ) {
-            this.playSound();
-          }
-
-          this.totalUnSeenCount$.next(newCount);
-        }
-      );
+  if (!expirationTimeStr) {
+    console.log('⛔ No token found');
+    return;
   }
+
+  const expirationTime = Number(expirationTimeStr);
+
+  if (isNaN(expirationTime)) {
+    return;
+  }
+
+  if (this.isTokenExpired(expirationTime)) {
+    return;
+  }
+
+  this.ApiService.get("Notification/GetNotifications").subscribe((noti: any) => {
+    this.notificationsList = noti.data.data;
+    this.totlaCount = noti.data.totalCount;
+    this.totalUnSeen = noti.data.totalUnSeenCount;
+
+    const newCount = noti.data.totalUnSeenCount;
+    const oldCount = this.totalUnSeenCount$.value;
+
+    if (
+      oldCount !== null &&
+      newCount > oldCount &&
+      this.isUserInteracted
+    ) {
+      this.playSound();
+    }
+
+    this.totalUnSeenCount$.next(newCount);
+  });
+}
+
+
+  isTokenExpired(expirationTimestamp: number): boolean {
+    const now = Date.now(); // current time in milliseconds
+    return now > expirationTimestamp;
+  }
+
   onClickNotification(): void {
     if (this.popoverRef.overlayVisible) {
       this.is_fixed = true;

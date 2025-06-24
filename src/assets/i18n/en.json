@@ -154,8 +154,8 @@
     "NO_PACKAGES": "No packages available"
   },
   "PACKAGE_DETAILS": {
-    "wallet": "Wallet Ballance",
-    "add_wallet": "ِAdd Ballance",
+    "wallet": " Current Wallet Ballance",
+    "add_wallet": "Add Ballance",
     "wallet_amount": "Wallet Amount",
     "VAT_INCLUDED": "VAT Included",
     "TECHNICIANS_COUNT": "Technicians Count",

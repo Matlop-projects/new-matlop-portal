@@ -154,7 +154,7 @@
     "NO_PACKAGES": "لا توجد باقات متاحة"
   },
   "PACKAGE_DETAILS": {
-    "wallet": "رصيد المحفظة",
+    "wallet": "رصيد المحفظة الحالي",
     "add_wallet": "إضافة رصيد",
     "wallet_amount": "مبلغ المحفظة",
     "VAT_INCLUDED": "شامل الضريبة",
