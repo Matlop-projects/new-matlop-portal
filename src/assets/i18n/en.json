@@ -1,6 +1,14 @@
 {
   "rsa": "RSA",
-  "cancel":"Cancel",
+  "cancel": "Cancel",
+  "errors": {
+    "required": "This field is required",
+    "minLength": "Characters  must be at least",
+    "maxLength": " Characters must be at most",
+    "email": "Please enter a valid email address",
+    "mobileNumber": "Mobile Number must start with 05 and be 10 digits long",
+    "passwordMismatch": "Passwords do not match"
+  },
   "login": {
     "welcome": "Welcome back to Matloob",
     "welcome_message": "We’re glad to have you back! Enjoy a simple and secure experience to access everything you need quickly.",

@@ -1,94 +1,282 @@
 <div class="signup-container">
-    <div class="content">
-        <div class="form-section">
-            <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-                <div class="details d-flex justify-content-between">
-                    <div class="d-flex flex-col">
-                        <h2 class="bold">{{ "signup.welcome" | translate }}</h2>
-                        <p class="text-gray-light">{{ "signup.sub_welcome" | translate }}</p>
-                    </div>
+  <div class="content">
+    <div class="form-section">
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div class="details d-flex justify-content-between">
+          <div class="d-flex flex-col">
+            <h2 class="bold">{{ "signup.welcome" | translate }}</h2>
+            <p class="text-gray-light">
+              {{ "signup.sub_welcome" | translate }}
+            </p>
+          </div>
 
-                    <div class="user-section">
-                        <button type="button" class="lang-btn" (click)="toggleLanguage()">
-                            {{ selectedLang.toUpperCase() == "AR" ? "EN" : "AR" }}
-                        </button>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6 mb-0">
-                        <label for="firstName">{{ "signup.first_name" | translate }}</label>
-                        <input class="form-control" pInputText id="firstName" formControlName="firstName" />
-                    </div>
-                    <div class="col-md-6 mb-0">
-                        <label for="lastName">{{ "signup.last_name" | translate }}</label>
-                        <input class="form-control" pInputText id="lastName" formControlName="lastName" />
-                    </div>
-                </div>
-
-
-                <!-- User Name -->
-                <div class="d-flex flex-col gap-2">
-                    <label for="userName">{{ "signup.username" | translate }}</label>
-                    <input class="w-100" pInputText id="userName" formControlName="userName" />
-                </div>
-
-                <!-- Email -->
-                <div class="d-flex flex-col gap-2">
-                    <label for="email">{{ "signup.email" | translate }}</label>
-                    <input class="w-100" pInputText id="email" formControlName="email" type="email" />
-                </div>
-
-                <!-- Mobile Number -->
-                <div class="d-flex flex-col gap-2">
-                    <label for="mobileNumber">{{ "signup.mobile" | translate }}</label>
-                    <input class="w-100" pInputText id="mobileNumber" formControlName="mobileNumber" />
-                </div>
-
-                <!-- Password -->
-                <div class="d-flex flex-col gap-2">
-                    <label for="password">{{ "signup.password" | translate }}</label>
-                    <p-password formControlName="password" [toggleMask]="true" [feedback]="false"></p-password>
-                </div>
-
-                <!-- Confirm Password -->
-                <div class="d-flex flex-col gap-2">
-                    <label for="confirmPassword">{{ "signup.confirm_password" | translate }}</label>
-                    <p-password formControlName="confirmPassword" [toggleMask]="true" [feedback]="false"></p-password>
-                    <div *ngIf="signupForm.errors?.['passwordMismatch'] && signupForm.get('confirmPassword')?.touched"
-                        class="text-danger">
-                        {{ 'signup.ERRORS.PASSWORD_MISMATCH' | translate }}
-                    </div>
-                </div>
-
-                <!-- Gender -->
-                <div class="d-flex flex-row gap-3">
-                    <label>{{ "signup.gender" | translate }}</label>
-                    <div>
-                        <input type="radio" id="male" name="gender" [value]="1" formControlName="genderId" />
-                        <label class="margin-5" for="male">{{ "signup.male" | translate }}</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="female" name="gender" [value]="2" formControlName="genderId" />
-                        <label class="margin-5"  for="female"> {{ "signup.female" | translate }}</label>
-                    </div>
-                </div>
-
-                <div class="button text-center mt-2">
-                    <button class="btn btn-login w-100" type="submit" [disabled]="!signupForm.valid">
-                        {{ "signup.submit" | translate }}
-                    </button>
-                    <a class="forget_password signup" routerLink="/auth/login">
-                        <span class="black-color bold">                        {{ "لديك حساب بالفعل ؟" | translate }}</span>
-                        <span class="">
-                            {{'تسجيل دخول' | translate}}
-                        </span>
-                    </a>
-                </div>
-            </form>
+          <div class="user-section">
+            <button type="button" class="lang-btn" (click)="toggleLanguage()">
+              {{ selectedLang.toUpperCase() == "AR" ? "EN" : "AR" }}
+            </button>
+          </div>
         </div>
 
-        <!-- <div class="details-section hide-part">
+        <div class="row">
+          <div class="col-md-6 mb-0">
+            <label for="firstName">{{ "signup.first_name" | translate }}</label>
+            <input
+              class="form-control"
+              pInputText
+              id="firstName"
+              formControlName="firstName"
+            />
+            <div
+              *ngIf="
+                signupForm.get('firstName')?.invalid &&
+                (signupForm.get('firstName')?.touched ||
+                  signupForm.get('firstName')?.dirty)
+              "
+            >
+              <div
+                *ngIf="signupForm.get('firstName')?.errors?.['required']"
+                class="text-danger"
+              >
+                {{ "errors.required" | translate }}
+              </div>
+              <div
+                *ngIf="signupForm.get('firstName')?.errors?.['minlength']"
+                class="text-danger"
+              >
+                {{ "errors.minLength" | translate }}(3)
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-0">
+            <label for="lastName">{{ "signup.last_name" | translate }}</label>
+            <input
+              class="form-control"
+              pInputText
+              id="lastName"
+              formControlName="lastName"
+            />
+            <div
+              *ngIf="
+                signupForm.get('lastName')?.invalid &&
+                (signupForm.get('lastName')?.touched ||
+                  signupForm.get('lastName')?.dirty)
+              "
+            >
+              <div
+                *ngIf="signupForm.get('lastName')?.errors?.['required']"
+                class="text-danger"
+              >
+                {{ "errors.required" | translate }}
+              </div>
+              <div
+                *ngIf="signupForm.get('lastName')?.errors?.['minlength']"
+                class="text-danger"
+              >
+                {{ "errors.minLength" | translate }}(3)
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- User Name -->
+        <div class="d-flex flex-col gap-2">
+          <label for="userName">{{ "signup.username" | translate }}</label>
+          <input
+            class="w-100"
+            pInputText
+            id="userName"
+            formControlName="userName"
+          />
+          <div
+            *ngIf="
+              signupForm.get('userName')?.invalid &&
+              (signupForm.get('userName')?.touched ||
+                signupForm.get('userName')?.dirty)
+            "
+          >
+            <div
+              *ngIf="signupForm.get('userName')?.errors?.['required']"
+              class="text-danger"
+            >
+              {{ "errors.required" | translate }}
+            </div>
+            <div
+              *ngIf="signupForm.get('userName')?.errors?.['minlength']"
+              class="text-danger"
+            >
+              {{ "errors.minLength" | translate }}(3)
+            </div>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="d-flex flex-col gap-2">
+          <label for="email">{{ "signup.email" | translate }}</label>
+          <input
+            class="w-100"
+            pInputText
+            id="email"
+            formControlName="email"
+            type="email"
+          />
+          <div
+            *ngIf="
+              signupForm.get('email')?.invalid &&
+              (signupForm.get('email')?.touched ||
+                signupForm.get('email')?.dirty)
+            "
+          >
+            <div
+              *ngIf="signupForm.get('email')?.errors?.['required']"
+              class="text-danger"
+            >
+              {{ "errors.required" | translate }}
+            </div>
+            <div
+              *ngIf="signupForm.get('email')?.errors?.['email']"
+              class="text-danger"
+            >
+              {{ "errors.email" | translate }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Number -->
+        <div class="d-flex flex-col gap-2">
+          <label for="mobileNumber">{{ "signup.mobile" | translate }}</label>
+          <input
+            class="w-100"
+            pInputText
+            id="mobileNumber"
+            formControlName="mobileNumber"
+          />
+          <div
+            *ngIf="
+              signupForm.get('mobileNumber')?.touched ||
+              signupForm.get('mobileNumber')?.dirty
+            "
+          >
+            <div
+              *ngIf="signupForm.get('mobileNumber')?.errors?.['required']"
+              class="text-danger"
+            >
+              {{ "errors.required" | translate }}
+            </div>
+            <div
+              *ngIf="signupForm.get('mobileNumber')?.errors?.['pattern']||signupForm.get('mobileNumber')?.errors?.['maxLength']"
+              class="text-danger"
+            >
+              {{ "errors.mobileNumber" | translate }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="d-flex flex-col gap-2">
+          <label for="password">{{ "signup.password" | translate }}</label>
+          <p-password
+            formControlName="password"
+            [toggleMask]="true"
+            [feedback]="false"
+          ></p-password>
+          <div
+            *ngIf="
+              signupForm.get('password')?.invalid &&
+              (signupForm.get('password')?.touched ||
+                signupForm.get('password')?.dirty)
+            "
+          >
+            <div
+              *ngIf="signupForm.get('password')?.errors?.['required']"
+              class="text-danger"
+            >
+              {{ "errors.required" | translate }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="d-flex flex-col gap-2">
+          <label for="confirmPassword">{{
+            "signup.confirm_password" | translate
+          }}</label>
+          <p-password
+            formControlName="confirmPassword"
+            [toggleMask]="true"
+            [feedback]="false"
+          ></p-password>
+          <div
+            *ngIf="
+              signupForm.get('confirmPassword')?.invalid &&
+              (signupForm.get('confirmPassword')?.touched ||
+                signupForm.get('confirmPassword')?.dirty)
+            "
+          >
+            <div
+              *ngIf="signupForm.get('confirmPassword')?.errors?.['required']"
+              class="text-danger"
+            >
+              {{ "errors.required" | translate }}
+            </div>
+            <div
+              *ngIf="signupForm.errors?.['passwordMismatch'] && signupForm.get('confirmPassword')?.touched"
+              class="text-danger"
+            >
+              {{ "errors.passwordMismatch" | translate }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Gender -->
+        <div class="d-flex flex-row gap-3">
+          <label>{{ "signup.gender" | translate }}</label>
+          <div>
+            <input
+              type="radio"
+              id="male"
+              name="gender"
+              [value]="1"
+              formControlName="genderId"
+            />
+            <label class="margin-5" for="male">{{
+              "signup.male" | translate
+            }}</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="female"
+              name="gender"
+              [value]="2"
+              formControlName="genderId"
+            />
+            <label class="margin-5" for="female">
+              {{ "signup.female" | translate }}</label
+            >
+          </div>
+        </div>
+
+        <div class="button text-center mt-2">
+          <button
+            class="btn btn-login w-100"
+            type="submit"
+            [disabled]="!signupForm.valid"
+          >
+            {{ "signup.submit" | translate }}
+          </button>
+          <a class="forget_password signup" routerLink="/auth/login">
+            <span class="black-color bold">
+              {{ "لديك حساب بالفعل ؟" | translate }}</span
+            >
+            <span class="">
+              {{ "تسجيل دخول" | translate }}
+            </span>
+          </a>
+        </div>
+      </form>
+    </div>
+
+    <!-- <div class="details-section hide-part">
             <p-carousel [value]="carouselImages" [numVisible]="1" [numScroll]="1" [circular]="true"
                 [autoplayInterval]="4000">
                 <ng-template pTemplate="item" let-image>
@@ -99,41 +287,67 @@
                 </ng-template>
             </p-carousel>
         </div> -->
-        <div class="details-section hide-part">
-<div id="demo" class="carousel slide" data-bs-ride="carousel">
+    <div class="details-section hide-part">
+      <div id="demo" class="carousel slide" data-bs-ride="carousel">
+        <!-- Indicators/dots -->
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#demo"
+            data-bs-slide-to="0"
+            class="active"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#demo"
+            data-bs-slide-to="1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#demo"
+            data-bs-slide-to="2"
+          ></button>
+        </div>
 
-  <!-- Indicators/dots -->
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+        <!-- The slideshow/carousel -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img [src]="carouselImages[0]" alt="img1" />
+          </div>
+          <div class="carousel-item">
+            <img [src]="carouselImages[1]" alt="img2" />
+          </div>
+          <div class="carousel-item">
+            <img [src]="carouselImages[2]" alt="img3 " />
+          </div>
+        </div>
+
+        <!-- Left and right controls/icons -->
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#demo"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#demo"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </div>
   </div>
-  
-  <!-- The slideshow/carousel -->
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img [src]="carouselImages[0]" alt="img1">
-    </div>
-    <div class="carousel-item">
-      <img [src]="carouselImages[1]" alt="img2">
-    </div>
-    <div class="carousel-item">
-      <img [src]="carouselImages[2]" alt="img3 ">
-    </div>
-  </div>
-  
-  <!-- Left and right controls/icons -->
-  <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </button>
-</div>        </div>
-    </div>
 </div>
 
-
-<app-otp-modal *ngIf="openOtpModal" [mobileNumber]="mobileNumber" (resendOtp)="resendOtp($event)"
-    (otpValue)="getOtpValue($event)">
+<app-otp-modal
+  *ngIf="openOtpModal"
+  [mobileNumber]="mobileNumber"
+  (resendOtp)="resendOtp($event)"
+  (otpValue)="getOtpValue($event)"
+>
 </app-otp-modal>
