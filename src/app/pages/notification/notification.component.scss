@@ -1,19 +1,9 @@
-.notification-container {
-//   max-width: 600px;
-//   margin: 20px auto;
-//   padding: 16px;
-//   background-color: #fff; /* Added background color for the container */
-//   border-radius: 8px; /* Rounded corners for a cleaner look */
-//   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
-}
-
-div.hr-title{
-    border-bottom: 1px solid #F2F1F6;
-    h2{
-        margin-bottom: 10px;
-    }
-    margin: 10px 0;
-  
+div.hr-title {
+  border-bottom: 1px solid #f2f1f6;
+  h2 {
+    margin-bottom: 10px;
+  }
+  margin: 10px 0;
 }
 .notification-item {
   padding: 16px;
@@ -21,7 +11,7 @@ div.hr-title{
   border-radius: 8px;
   background-color: #f8f9fa;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-//   border-inline-start: 4px solid #e4ca20;
+  //   border-inline-start: 4px solid #e4ca20;
   transition: transform 0.2s, box-shadow 0.3s;
   display: flex;
   align-items: center;
@@ -35,8 +25,8 @@ div.hr-title{
 }
 
 .notification-item.unseen {
-  background-color: #F2FBFE;
-//   border-inline-start-color: #2ecc71; /* Highlight for unseen notifications */
+  background-color: #f2fbfe;
+  //   border-inline-start-color: #2ecc71; /* Highlight for unseen notifications */
 }
 
 .notification-image {
@@ -63,7 +53,7 @@ div.hr-title{
 }
 
 .notification-body {
-  color: #6B6B6B;
+  color: #6b6b6b;
   font-size: 14px; /* Smaller body text */
 }
 
@@ -84,19 +74,15 @@ div.hr-title{
 }
 
 ::ng-deep {
-    .p-popover{
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
-z-index: 99999999999!important;
-top:50px!important;
-width: 500px;
-    }
-  .p-popover:before {
-    display: none !important;
+  .p-popover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    z-index: 99999999999 !important;
+    top: 50px !important;
+    width: 500px;
   }
-
+  .p-popover:before,
   .p-popover:after {
     display: none !important;
-    
   }
 }
 
@@ -127,7 +113,6 @@ width: 500px;
   background-color: #2ecc71; /* Added a background color for a better visual effect */
 }
 
-
 .count-noti {
   position: relative;
 
@@ -152,18 +137,18 @@ width: 500px;
   }
 }
 
-  /* Mobile view */
-      @media (max-width: 510px) {
-      ::ng-deep{
-         .p-popover{
-            width: 90%!important;
-        }
-       }
-      }
-            @media (max-width: 991.5px) {
-      ::ng-deep{
-         .p-popover{
-            top: 260px!important;
-        }
-       }
-      }
+/* Mobile view */
+@media (max-width: 510px) {
+  ::ng-deep {
+    .p-popover {
+      width: 90% !important;
+    }
+  }
+}
+@media (max-width: 991.5px) {
+  ::ng-deep {
+    .p-popover {
+      top: 260px !important;
+    }
+  }
+}

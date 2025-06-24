@@ -1,16 +1,21 @@
 <ng-container>
   <div class="count-noti mt-2">
-    <div class="count-number" (click)="op.toggle($event)">
+    <div
+      class="count-number"
+      (click)="op.toggle($event); onClickNotification()"
+    >
       {{ totalUnSeen }}
     </div>
-    <span class="pi pi-bell" (click)="op.toggle($event)"></span>
+    <span
+      class="pi pi-bell"
+      (click)="op.toggle($event); onClickNotification()"
+    ></span>
   </div>
   <p-popover #op>
     <div class="notification-container">
-        <div class="hr-title">
-                  <h2>{{ "notifications" | translate }}</h2>
-
-        </div>
+      <div class="hr-title">
+        <h2>{{ "notifications" | translate }}</h2>
+      </div>
       <ng-container *ngIf="notificationsList">
         <div *ngIf="notificationsList.length === 0" class="p-3">
           {{ "no_notifications" | translate }}
@@ -53,7 +58,7 @@
               </div>
             </div>
             <div class="notification-time">
-              {{ getTimeAgo(notification.creationTime,selectedLang) }}
+              {{ getTimeAgo(notification.creationTime, selectedLang) }}
             </div>
           </div>
         </div>

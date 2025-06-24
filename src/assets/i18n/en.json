@@ -1,4 +1,6 @@
 {
+  "rsa": "RSA",
+  "cancel":"Cancel",
   "login": {
     "welcome": "Welcome back to Matloob",
     "welcome_message": "We’re glad to have you back! Enjoy a simple and secure experience to access everything you need quickly.",
@@ -152,6 +154,9 @@
     "NO_PACKAGES": "No packages available"
   },
   "PACKAGE_DETAILS": {
+    "wallet": "Wallet Ballance",
+    "add_wallet": "ِAdd Ballance",
+    "wallet_amount": "Wallet Amount",
     "VAT_INCLUDED": "VAT Included",
     "TECHNICIANS_COUNT": "Technicians Count",
     "VISITS_COUNT": "Number of Visits",

@@ -1,15 +1,15 @@
 import { NgClass, NgIf } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ApiService } from '../../services/api.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-thank-you',
-  templateUrl: './thank-you.component.html',
-  styleUrls: ['./thank-you.component.scss'],
   standalone: true,
   imports: [NgClass, NgIf, TranslatePipe],
+  templateUrl: './thank-you.component.html',
+  styleUrl: './thank-you.component.scss'
 })
 export class ThankYouComponent implements OnInit {
   isSuccess: boolean = true;

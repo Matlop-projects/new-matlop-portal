@@ -32,9 +32,9 @@ export class SignupComponent {
   selectedLang: string = localStorage.getItem('lang') || 'en';
 
   carouselImages: string[] = [
-    'assets/images/backgrounds/slider-1.png',
-    'assets/images/backgrounds/slider-2.png',
-    'assets/images/backgrounds/slider-3.png'
+    'assets/images/backgrounds/register-slider1.svg',
+    'assets/images/backgrounds/register-slider2.svg',
+    'assets/images/backgrounds/register-slider3.svg'
   ];
 
   constructor(private fb: FormBuilder,@Inject(DOCUMENT) private document: Document, private api: ApiService, private translate: TranslateService, private router: Router) {

@@ -30,7 +30,8 @@ interface User {
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
-  hasPermission: boolean = false;
+  // hasPermission: boolean = false;
+  localStorage=localStorage.getItem('token')
   langOptions = [
     { name: 'English', code: 'en', icon: 'assets/images/icons/en-lang.png' },
     { name: 'العربية', code: 'ar', icon: 'assets/images/icons/ar-lang.png' },
@@ -59,7 +60,7 @@ export class NavbarComponent implements OnInit {
 
     console.log('User Signal:', this.user()); // ✅ Access computed() as a function
     this.initAppTranslation();
-    this.checkPermission();
+    // this.checkPermission();
     this.languageService.translationService.onLangChange.subscribe((lang: any) => {
       this.updateMenuItems();
       this.selectedLang = lang.lang
@@ -71,11 +72,11 @@ export class NavbarComponent implements OnInit {
     return this.selectedLang.toUpperCase() === 'AR' ? 'NAVBAR.ENGLISH' : 'NAVBAR.ARABIC';
   }
 
-  checkPermission() {
-    this.api.post('Authentication/validateUserToken', { tokenToValidate: localStorage.getItem('token')??null }).subscribe((res: any) => {
-      this.hasPermission = res?.data;
-    })
-  }
+  // checkPermission() {
+  //   this.api.post('Authentication/validateUserToken', { tokenToValidate: localStorage.getItem('token')??null }).subscribe((res: any) => {
+  //     this.hasPermission = res?.data;
+  //   })
+  // }
 
   updateMenuItems() {
     this.items = [
@@ -124,8 +125,11 @@ export class NavbarComponent implements OnInit {
   logout() {
     localStorage.clear();
     this.authService.logout();
-    this.hasPermission=false;
-    this.router.navigateByUrl('/')
+    // this.hasPermission=false;
+    this.router.navigate(['/']).then(()=>{
+      this.router.navigateByUrl('/home');
+      window.location.reload()
+    })
   }
 
 }
