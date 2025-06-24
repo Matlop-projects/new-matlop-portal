@@ -20,6 +20,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease; // Smooth animation
             border-radius: 32px;
             cursor: pointer;
+            margin-bottom: 30px;
 
             &:hover {
                 transform: translateY(-10px); // Move card up

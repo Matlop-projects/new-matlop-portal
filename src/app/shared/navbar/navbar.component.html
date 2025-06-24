@@ -1,20 +1,9 @@
 <nav class="navbar navbar-expand-lg bg-white navbar-light fixed-top">
   <a class="navbar-brand" [routerLink]="['/home']">
-    <img
-      src="assets/img/matlop_logo.svg"
-      alt="matloop-logo"
-      class="logo-image"
-    />
+    <img src="assets/img/matlop_logo.svg" alt="matloop-logo" class="logo-image" />
   </a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#collapsibleNavbar"
-    aria-controls="collapsibleNavbar"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar"
+    aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -41,12 +30,9 @@
             {{ 'NAVBAR.ORDERS' | translate }}
           </a>
         </li>
-        
+
       </ul>
-      <ul
-        class="list-lang-profile navbar-nav padding-20 pointer"
-        *ngIf="user(); else noUser"
-      >
+      <ul class="list-lang-profile navbar-nav padding-20 pointer" *ngIf="user(); else noUser">
         <li class="d-flex">
           <div class="action-section-login margin-20">
            
@@ -54,42 +40,24 @@
               <app-notification></app-notification>
             </span>
 
-            <img
-              src="assets/img/profile-circle.svg"
-              [routerLink]="['/profile']"
-              alt=""
-            />
+            <img src="assets/img/profile-circle.svg" [routerLink]="['/profile']" alt="" />
 
-        
+
           </div>
           <div class="padding-sm-20 d-flex flex-colum gap-2">
-                <span
-              class="sign-out pi pi-sign-out block"
-              (click)="logout()"
-              style="color: red"
-            ></span>
-           <div (click)="toggleLanguage()">
-             <span class="" >
-              <span *ngIf="selectedLang == 'ar'">
-                {{ "english" | translate }}
+            <span class="sign-out pi pi-sign-out block" (click)="logout()" style="color: red"></span>
+            <div (click)="toggleLanguage()">
+              <span class="">
+                <span *ngIf="selectedLang == 'ar'">
+                  {{ "english" | translate }}
+                </span>
+                <span *ngIf="selectedLang == 'en'">
+                  {{ "arabic" | translate }}
+                </span>
               </span>
-              <span *ngIf="selectedLang == 'en'">
-                {{ "arabic" | translate }}
-              </span>
-            </span>
-            <img 
-              *ngIf="selectedLang == 'en'"
-              src="assets/img/arab_lang.png"
-              alt=""
-              height="20"
-            />
-            <img 
-              *ngIf="selectedLang == 'ar'"
-              src="assets/img/english_lang.png"
-              alt=""
-              height="20"
-            />
-           </div>
+              <img *ngIf="selectedLang == 'en'" src="assets/img/arab_lang.png" alt="" height="20" />
+              <img *ngIf="selectedLang == 'ar'" src="assets/img/english_lang.png" alt="" height="20" />
+            </div>
           </div>
         </li>
       </ul>
@@ -100,8 +68,8 @@
             <button class="main-btn-one" routerLink="auth/signup">
               {{ "NAVBAR.SIGNUP" | translate }}
             </button>
-            
-            
+
+
           </div>
           <div class="login-btn">
             <button class="main-btn-one" routerLink="auth/login">

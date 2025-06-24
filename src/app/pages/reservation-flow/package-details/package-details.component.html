@@ -1,18 +1,16 @@
-<app-background-image-with-text
-  [options]="bkg_text_options"
-></app-background-image-with-text>
+<app-background-image-with-text [options]="bkg_text_options"></app-background-image-with-text>
 
 <div class="package-details-container container">
   <div class="content">
     <div class="wallet-container mt-3">
       <div class="d-flex justify-content-between flex-wrap">
-        <span class="bold mt-2 w-250">{{ "PACKAGE_DETAILS.wallet" | translate }}</span>
-        <span>
+        <div class="collection">
+          <span class="bold ">{{ "PACKAGE_DETAILS.wallet" | translate }}</span>
           <span class="bold">{{ walletBalance }} {{ "rsa" | translate }}</span>
-          <button
-            class="open-wallet btn btn-primary"
-            (click)="showWalletDialog = true"
-          >
+        </div>
+
+        <span>
+          <button class="open-wallet btn" (click)="showWalletDialog = true">
             {{ "PACKAGE_DETAILS.add_wallet" | translate }}
           </button>
         </span>
@@ -30,16 +28,16 @@
                 <div class="package-name">
                   <p class="name">
                     {{
-                      selectedLang == "ar"
-                        ? packageDetails.nameAr
-                        : packageDetails.nameEn
+                    selectedLang == "ar"
+                    ? packageDetails.nameAr
+                    : packageDetails.nameEn
                     }}
                   </p>
                   <p class="type">
                     ({{
-                      selectedLang == "ar"
-                        ? packageDetails.typeOfPackageNameAr
-                        : packageDetails.typeOfPackageName
+                    selectedLang == "ar"
+                    ? packageDetails.typeOfPackageNameAr
+                    : packageDetails.typeOfPackageName
                     }})
                   </p>
                 </div>
@@ -49,13 +47,11 @@
               </div>
             </div>
             <div class="section-three">
-              <p
-                [innerHTML]="
+              <p [innerHTML]="
                   selectedLang == 'ar'
                     ? packageDetails.descriptionAr
                     : packageDetails.descriptionEn
-                "
-              ></p>
+                "></p>
             </div>
             <div class="section-two mt-4">
               <div class="contents">
@@ -102,76 +98,42 @@
             </div>
 
             <div class="location-section mt-4 col-lg-12">
-              <label>{{ "PACKAGE_DETAILS.LOCATION" | translate }}</label
-              ><span class="red-mark">*</span>
+              <label>{{ "PACKAGE_DETAILS.LOCATION" | translate }}</label><span class="red-mark">*</span>
               <div class="actions-section">
-                <p-select
-                  (onChange)="selectLocation($event)"
-                  [(ngModel)]="locationSelect"
-                  [options]="locations"
-                  optionLabel="name"
-                  [placeholder]="'PACKAGE_DETAILS.SELECT_LOCATION' | translate"
-                  class="w-100"
-                  optionValue="code"
-                ></p-select>
-                <div
-                  (click)="addLocation()"
-                  class="location-btn"
-                  pTooltip="{{ 'PACKAGE_DETAILS.ADD_LOCATION' | translate }}"
-                  tooltipPosition="top"
-                >
+                <p-select (onChange)="selectLocation($event)" [(ngModel)]="locationSelect" [options]="locations"
+                  optionLabel="name" [placeholder]="'PACKAGE_DETAILS.SELECT_LOCATION' | translate" class="w-100"
+                  optionValue="code"></p-select>
+                <div (click)="addLocation()" class="location-btn"
+                  pTooltip="{{ 'PACKAGE_DETAILS.ADD_LOCATION' | translate }}" tooltipPosition="top">
                   <i class="pi pi-plus"></i>
                 </div>
               </div>
             </div>
 
             <div class="date-picker-section col-lg-6">
-              <label>{{ "PACKAGE_DETAILS.DATE" | translate }}</label
-              ><span class="red-mark">*</span>
-              <p-datepicker
-                [ngClass]="{ 'input-error': isDateInvalid }"
-                [(ngModel)]="dates"
-                [placeholder]="'PACKAGE_DETAILS.SELECT_DATE' | translate"
-                (onSelect)="validateMinDates()"
-                selectionMode="multiple"
-                [disabledDays]="[5, 6]"
-                [minDate]="minDate"
-                [maxDate]="maxDate"
-                [readonlyInput]="true"
-              />
+              <label>{{ "PACKAGE_DETAILS.DATE" | translate }}</label><span class="red-mark">*</span>
+              <p-datepicker [ngClass]="{ 'input-error': isDateInvalid }" [(ngModel)]="dates"
+                [placeholder]="'PACKAGE_DETAILS.SELECT_DATE' | translate" (onSelect)="validateMinDates()"
+                selectionMode="multiple" [disabledDays]="[5, 6]" [minDate]="minDate" [maxDate]="maxDate"
+                [readonlyInput]="true" />
               <small *ngIf="errorMessage" class="error-message">
                 {{ errorMessage }}
               </small>
             </div>
 
             <div class="time-picker-section col-lg-6">
-              <label>{{ "PACKAGE_DETAILS.WORK_TIME" | translate }}</label
-              ><span class="red-mark">*</span>
-              <p-select
-                [options]="workingHoursList"
-                [(ngModel)]="workingHoursSelect"
-                (onChange)="onWorkingHoursChange($event)"
-                optionLabel="finalWorking"
-                [placeholder]="'PACKAGE_DETAILS.SELECT_WORK_TIME' | translate"
-              />
+              <label>{{ "PACKAGE_DETAILS.WORK_TIME" | translate }}</label><span class="red-mark">*</span>
+              <p-select [options]="workingHoursList" [(ngModel)]="workingHoursSelect"
+                (onChange)="onWorkingHoursChange($event)" optionLabel="finalWorking"
+                [placeholder]="'PACKAGE_DETAILS.SELECT_WORK_TIME' | translate" />
             </div>
 
-            <div
-              class="payment-way-section col-lg-12"
-              *ngIf="paymentList.length > 0"
-            >
-              <label>{{ "PACKAGE_DETAILS.PAYMENT_METHOD" | translate }}</label
-              ><span class="red-mark">*</span>
-              <p-select
-                [options]="paymentList"
-                [(ngModel)]="paymentSelect"
-                [optionDisabled]="'disabled'"
-                (onChange)="onPaymentChange($event)"
-                optionLabel="finalPayment"
-                [placeholder]="
+            <div class="payment-way-section col-lg-12" *ngIf="paymentList.length > 0">
+              <label>{{ "PACKAGE_DETAILS.PAYMENT_METHOD" | translate }}</label><span class="red-mark">*</span>
+              <p-select [options]="paymentList" [(ngModel)]="paymentSelect" [optionDisabled]="'disabled'"
+                (onChange)="onPaymentChange($event)" optionLabel="finalPayment" [placeholder]="
                   'PACKAGE_DETAILS.SELECT_PAYMENT_METHOD' | translate
-                "
-              />
+                " />
             </div>
 
             <div class="equepment-section col-lg-12">
@@ -180,17 +142,13 @@
                 {{ "PACKAGE_DETAILS.SELECT_EQUIPMENT" | translate }}
               </p>
               <div class="equipments-container">
-                <div
-                  *ngFor="let equipment of equipments"
-                  class="equipment-card"
-                  [ngClass]="{ selected: equipment.status }"
-                  (click)="toggleStatus(equipment)"
-                >
+                <div *ngFor="let equipment of equipments" class="equipment-card"
+                  [ngClass]="{ selected: equipment.status }" (click)="toggleStatus(equipment)">
                   <p>
                     {{
-                      selectedLang === "ar"
-                        ? equipment.arName
-                        : equipment.enName
+                    selectedLang === "ar"
+                    ? equipment.arName
+                    : equipment.enName
                     }}
                   </p>
                 </div>
@@ -202,24 +160,11 @@
               <div class="desc">
                 <p>{{ "PACKAGE_DETAILS.MEDIA_HINT" | translate }}</p>
               </div>
-              <div
-                class="upload-dropzone mb-3 mt-4"
-                (dragover)="onDragOver($event)"
-                (dragleave)="onDragLeave($event)"
-                (drop)="onDrop($event)"
-                [class.dragging]="isDragging"
-              >
-                <img
-                  width="120"
-                  src="assets/images/icons-svg/vector.svg"
-                  alt="upload-files"
-                />
+              <div class="upload-dropzone mb-3 mt-4" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
+                (drop)="onDrop($event)" [class.dragging]="isDragging">
+                <img width="120" src="assets/images/icons-svg/vector.svg" alt="upload-files" />
                 <div class="action">
-                  <button
-                    class="btn-upload"
-                    type="button"
-                    (click)="fileInput.click()"
-                  >
+                  <button class="btn-upload" type="button" (click)="fileInput.click()">
                     {{ "PACKAGE_DETAILS.UPLOAD" | translate }}
                   </button>
                   <p>{{ "PACKAGE_DETAILS.OR_DROP" | translate }}</p>
@@ -227,28 +172,16 @@
                 <p class="image-details">
                   {{ "PACKAGE_DETAILS.MEDIA_NOTE" | translate }}
                 </p>
-                <input
-                  type="file"
-                  multiple
-                  accept="image/*,video/*"
-                  hidden
-                  #fileInput
-                  (change)="onFileSelected($event)"
-                />
+                <input type="file" multiple accept="image/*,video/*" hidden #fileInput
+                  (change)="onFileSelected($event)" />
                 <div *ngIf="orderObject.media?.length" class="mt-3">
-                  <div
-                    *ngFor="let file of orderObject.media; let i = index"
-                    class="d-flex align-items-center justify-content-between mb-2"
-                  >
+                  <div *ngFor="let file of orderObject.media; let i = index"
+                    class="d-flex align-items-center justify-content-between mb-2">
                     <span class="text-success">
                       {{ file.mediaTypeEnum === 1 ? "📷" : "🎥" }}
                       {{ file.src | slice : 0 : 30 }}...
                     </span>
-                    <button
-                      type="button"
-                      class="btn btn-sm btn-danger"
-                      (click)="removeMedia(i)"
-                    >
+                    <button type="button" class="btn btn-sm btn-danger" (click)="removeMedia(i)">
                       {{ "PACKAGE_DETAILS.DELETE" | translate }}
                     </button>
                   </div>
@@ -258,25 +191,37 @@
 
             <div class="note-section col-lg-12">
               <label>{{ "PACKAGE_DETAILS.ORDER_NOTE" | translate }}</label>
-              <textarea
-                class="form-control mb-3 mt-3"
-                [placeholder]="'PACKAGE_DETAILS.NOTE_PLACEHOLDER' | translate"
-                name="notes"
-                [(ngModel)]="orderObject.notes"
-              ></textarea>
+              <textarea class="form-control mb-3 mt-3" [placeholder]="'PACKAGE_DETAILS.NOTE_PLACEHOLDER' | translate"
+                name="notes" [(ngModel)]="orderObject.notes"></textarea>
             </div>
+
+            <div class="promo-code-section">
+
+              <div class="promo-title">
+                <p>رمز الخصم (إن وُجد)</p>
+              </div>
+              <div class="promo-desc">
+                <p>عندك كود خصم؟ دخّله هنا قبل تأكيد الطلب للاستفادة من العرض.</p>
+              </div>
+              <div class="form-group">
+                <div class="input-wrapper">
+                  <input id="saudiNumber" [(ngModel)]="promoCodeValue" type="text" placeholder="رمز الخصم " />
+                  <button class="input-btn" (click)="onPromoCodeCheck()">تأكيد</button>
+                </div>
+              </div>
+            </div>
+
+
           </div>
         </div>
 
         <div class="instructions-section">
           <label>{{ "PACKAGE_DETAILS.MAIN_INSTRUCTIONS" | translate }}</label>
-          <p
-            [innerHTML]="
+          <p [innerHTML]="
               selectedLang == 'ar'
                 ? packageDetails.arInstraction
                 : packageDetails.enInstraction
-            "
-          ></p>
+            "></p>
         </div>
 
         <div class="submit-btn-section">
@@ -288,40 +233,23 @@
     </div>
   </div>
 </div>
-<p-dialog
-  header="{{ 'PACKAGE_DETAILS.ADD_LOCATION_MODAL_TITLE' | translate }}"
-  [modal]="true"
-  [(visible)]="showAddLocationDialog"
-  [style]="{ width: '25rem' }"
->
+<p-dialog header="{{ 'PACKAGE_DETAILS.ADD_LOCATION_MODAL_TITLE' | translate }}" [modal]="true"
+  [(visible)]="showAddLocationDialog" [style]="{ width: '25rem' }">
   <app-add-location (value)="onAddLocation($event)"></app-add-location>
 </p-dialog>
-<p-dialog
-  header="{{ 'PACKAGE_DETAILS.add_wallet' | translate }}"
-  [modal]="true"
-  [(visible)]="showWalletDialog"
-  [style]="{ width: '27rem' }"
->
+<p-dialog header="{{ 'PACKAGE_DETAILS.add_wallet' | translate }}" [modal]="true" [(visible)]="showWalletDialog"
+  [style]="{ width: '27rem' }">
   <div>
     <div class="time-picker-section">
-      <label>{{ "PACKAGE_DETAILS.wallet_amount" | translate }}</label
-      ><span class="red-mark">*</span>
-      <input
-        class="w-100 mt-1"
-        type="number"
-        pInputText
-        [(ngModel)]="walletAmount"
-      />
+      <label>{{ "PACKAGE_DETAILS.wallet_amount" | translate }}</label><span class="red-mark">*</span>
+      <input class="w-100 mt-1" type="number" pInputText [(ngModel)]="walletAmount" />
     </div>
     <div class="d-flex justify-content-between mt-3">
       <button class="btn btn-wallet btn-danger w-49" (click)="showWalletDialog = false">
         {{'cancel' | translate}}
       </button>
-      <button
-        class="btn btn-primary w-49 btn-wallet"
-        [disabled]="walletAmount <= 0||!walletAmount"
-        (click)="addWalletSubmit()"
-      >
+      <button class="btn btn-primary w-49 btn-wallet" [disabled]="walletAmount <= 0||!walletAmount"
+        (click)="addWalletSubmit()">
         {{ "PACKAGE_DETAILS.add_wallet" | translate }}
       </button>
     </div>

@@ -107,6 +107,7 @@ export class PackageDetailsComponent {
   isoDates: any;
   equipments: any[] = [];
   locations: any;
+  promoCodeValue: any;
 
   ngOnInit(): void {
     this.packageId = this.route.snapshot.params["packageId"];
@@ -222,13 +223,13 @@ export class PackageDetailsComponent {
         disabled: this.walletBalance < this.packageDetails.price, // Disable if wallet balance is 0 or less
       }
     );
-    console.log(
-      this.walletBalance,
-      "--------",
-      this.packageDetails.price,
-      "===",
-      this.walletBalance < this.packageDetails.price
-    );
+    // console.log(
+    //   this.walletBalance,
+    //   "--------",
+    //   this.packageDetails.price,
+    //   "===",
+    //   this.walletBalance < this.packageDetails.price
+    // );
   }
   setCalendarLimits() {
     if (this.packageDetails) {
@@ -439,4 +440,44 @@ export class PackageDetailsComponent {
     );
   }
   }
+
+  onPromoCodeCheck() {
+    console.log(this.promoCodeValue);
+      if (this.promoCodeValue) {
+      this.ApiService.get(`Copone/Verfiy/${this.promoCodeValue}/${+this.orderObject.clientId}`).subscribe((loc: any) => {
+        this.invalidCoupn = false;
+        this.validCoupon = true;
+        this.toaster.successToaster('Coupon Addedd Successfully');
+        this.discountType = loc.data.coponeType;
+        this.packageDetails.couponPrice = 0;
+        this.packageDetails.couponDiscount = 0;
+        if (loc.data.coponeType == 1) {
+          this.packageDetails.couponDiscount = loc.data.amount;
+          let priceAfterDiscountPrecentage = this.packageDetails.price - this.calculateSalePrice(this.packageDetails.price, loc.data.amount);
+          if(loc.data.hasMaxAmount && priceAfterDiscountPrecentage >= loc.data.maxAmount) {
+            this.packageDetails.couponPrice =  this.packageDetails.price - loc.data.maxAmount;
+          } else {
+            this.packageDetails.couponPrice = this.calculateSalePrice(this.packageDetails.price, loc.data.amount);
+          }
+          console.log(this.packageDetails);
+        } else {
+          this.packageDetails.couponDiscount = loc.data.amount;
+          this.packageDetails.couponPrice = this.packageDetails.price - this.packageDetails.couponDiscount;
+          console.log(this.packageDetails);
+        }
+      }, err => {
+        this.invalidCoupn = true;
+        this.validCoupon = false;
+        this.invalidCoupnMessage = err.error.message;
+        this.toaster.errorToaster('Invalid Coupon');
+      })
+    } else {
+      this.toaster.errorToaster('Please Add Coupon');
+    }
+  }
+
+   calculateSalePrice(originalPrice: number, discountPercentage: number): number {
+    return originalPrice - (originalPrice * discountPercentage) / 100;
+  }
+
 }

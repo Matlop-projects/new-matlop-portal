@@ -17,6 +17,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 import { TermsConditionsComponent } from './pages/terms-conditions/terms-conditions.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { ThankYouComponent } from './pages/thank-you/thank-you.component';
 
 
 
@@ -58,9 +59,8 @@ export const routes: Routes = [
       { path: 'package-details/:packageId', component: PackageDetailsComponent , canActivate: [authGuard] },
       { path: 'privacy-policy', component: PrivacyPolicyComponent },
       { path: 'terms-conditions', component: TermsConditionsComponent },
-      { path: 'profile', component: ProfileComponent }
-
-      // { path: 'product_details/:productId', component: ProductDetailsComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'thank-you', component: ThankYouComponent },
       // { path: 'product_details/:productId/:traderId', component: ProductDetailsComponent },
       // { path: 'wishlist', component: FavItemsComponent ,canActivate: [authGuard] },
       // { path: 'cart', component: ShoppingCartComponent , canActivate: [authGuard] },

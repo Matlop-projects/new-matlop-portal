@@ -1,159 +1,97 @@
-<app-background-image-with-text [options]="bkg_text_options"></app-background-image-with-text>
 
+
+
+
+
+<app-background-image-with-text [options]="bkg_text_options"></app-background-image-with-text>
 <div class="container">
-  <div class="text-center mb-5">
-    <span class="title">{{ "في مطلوب  الحفاظ علي خصوصيتك مسؤوليتنا " }}</span>
-  </div>
-  <div class="d-flex justify-content-start flex-wrap">
-    <div class="w-50 width-card flex-grow-1">
-      <div class="d-flex justify-content-start">
-        <img src="assets/img/info.svg" width="50" alt="" />
-        <span class="title">{{ "جمع معلومات تعريف الشخصية " }}</span>
-      </div>
-      <div>
-        <p>
-          {{
-            'قد يختار بعض زوار موقع "مطلوب" التفاعل مع المنصة بطرق تتطلب جمع معلومات تعريف شخصية. ويعتمد مقدار ونوع المعلومات التي نجمعها على طبيعة التفاعل ذاته. على سبيل المثال، قد نطلب من المستخدمين الذين يقومون بطلب خدماتنا تقديم معلومات مثل الاسم، ورقم الهاتف، وعنوان البريد الإلكتروني، و الموقع الجغرافي أو عنوان السكن لتحديد تفاصيل الخدمة بدقة.'
-          }}
-        </p>
-      </div>
-    </div>
-    <div class="w-50 width-card flex-grow-1">
-      <div class="d-flex justify-content-start">
-        <img src="assets/img/security.svg" width="50" alt="" />
-        <span class="title">{{ "الأمان" }}</span>
-      </div>
-      <div>
-        <p>
-          {{
-            'نحن في "مطلوب" نحرص بشدة على حماية معلوماتك الشخصية والحفاظ عليها بسرية تامة. مع ذلك، نود أن نلفت انتباهك إلى أنه لا توجد طريقة نقل أو تخزين إلكتروني يمكن أن تضمن الأمان بنسبة 100٪ على الإنترنت.
-رغم ذلك، نستخدم أفضل الوسائل المتاحة والمقبولة تجاريًا لضمان حماية بياناتك أثناء تقديم خدمات الصيانة والنظافة وغيرها. هدفنا هو توفير تجربة آمنة وموثوقة لك في كل تعامل مع "مطلوب"'
-          }}
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="d-flex justify-content-start flex-wrap">
-    <div class="w-50 width-card flex-grow-1">
-      <div class="d-flex justify-content-start">
-        <img src="assets/img/visitor.svg" width="50" alt="" />
-        <span class="title">{{ "زوار الموقع " }}</span>
-      </div>
-      <div>
-        <p>
-          {{
-            'مثل معظم مزودي الخدمات عبر الإنترنت، يقوم موقع "مطلوب" بجمع معلومات غير شخصية تُرسل تلقائيًا من متصفحات الويب والخوادم عند زيارتك للموقع. هذه المعلومات قد تشمل نوع المتصفح الذي تستخدمه، تفضيلات اللغة، عنوان الـ IP التقريبي، وتاريخ ووقت كل طلب تقوم به على الموقع.
-يهدف "مطلوب" من خلال جمع هذه البيانات إلى تحسين تجربة المستخدم، فهم كيفية استخدام الموقع، وتطوير خدماتنا بشكل مستمر لتلبية احتياجاتك بشكل أفضل.'
-          }}
-        </p>
-      </div>
-    </div>
-    <div class="w-50 width-card flex-grow-1">
-      <div class="d-flex justify-content-start">
-        <img src="assets/img/ad.svg" width="50" alt="" />
-        <span class="title">{{ "الإعلانات" }}</span>
-      </div>
-      <div>
-        <p>
-          {{
-            "قد تظهر الإعلانات على موقعنا من خلال شركائنا المعلنين، الذين قد يقومون بوضع ملفات تعريف الارتباط (Cookies) على جهازك. تتيح هذه الملفات لخوادم الإعلانات التعرف على جهاز الكمبيوتر أو الجهاز الذي تستخدمه في كل مرة يتم فيها عرض إعلان لك عبر الإنترنت، مما يساعد في تقديم إعلانات ملائمة أكثر لاهتماماتك."
-          }}
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="mt-5 mb-5">
-    <div class="d-flex justify-content-center">
-      <img src="assets/img/sheet.svg" width="50" alt="" />
-      <span class="title">{{ "تغييرات سياسة الخصوصية" }}</span>
-    </div>
-    <div class="sheet text-center">
-           <p class="mb-5">
-        {{
-          'على الرغم من أن التغييرات في سياسة الخصوصية لموقع "مطلوب" غالبًا ما تكون بسيطة، إلا أن الموقع قد يقوم بتحديث هذه السياسة من وقت لآخر وفقًا لتقدير إدارة "مطلوب".
-لذلك، ننصح جميع زوار موقعنا الكرام بمراجعة صفحة سياسة الخصوصية بانتظام للاطلاع على أي تحديثات أو تغييرات قد تطرأ.'
-        }}
-      </p>
-    </div>
-  </div>
-  <div class="mt-5 mb-5">
+  <span class="title">{{ "TERMS.TITLE" | translate }}</span>
+
+  <p>{{ "TERMS.INTRO_1" | translate }}</p>
+  <p>{{ "TERMS.INTRO_2" | translate }}</p>
+  <p>{{ "TERMS.INTRO_3" | translate }}</p>
+
+  <div class="mt-3">
     <div class="d-flex justify-content-start">
-      <img src="assets/img/lock-green.svg" width="50" alt="" />
-      <span class="title">{{ "حماية بعض معلومات تعريف الشخصية" }}</span>
+      <img src="assets/img/folder-green.svg" width="50" alt="" />
+      <span class="title">{{ "TERMS.PURCHASES" | translate }}</span>
     </div>
     <div class="d-flex justify-content-start">
-      <div>
-        <img src="assets/img/lock-gray.svg" width="30" alt="" />
-      </div>
-      <p>
-        {{
-          'لا يقوم موقع "مطلوب" بالكشف عن أي معلومات شخصية أو بيانات قد تُصنف على أنها شخصية إلا للموظفين والمتعاقدين معه والجهات التابعة التي تحتاج هذه المعلومات فقط لأداء مهامها أو لتوفير الخدمات التي نقدمها عبر الموقع.'
-        }}
-      </p>
+      <div><img src="assets/img/folder-gray.svg" width="30" alt="" /></div>
+      <p>{{ "TERMS.PURCHASES_DETAILS" | translate }}</p>
     </div>
     <ul class="bold mt-2">
-      <li>
-        {{
-          "بالنسبة للأشخاص الذين وافقت مسبقًا على عدم الكشف عن معلوماتهم للآخرين، نؤكد التزامنا بحفظ سرية بياناتهم."
-        }}
-      </li>
-      <li>
-        {{
-          'ومع ذلك، قد يكون بعض الموظفين أو المتعاقدين أو الجهات التابعة خارج البلاد. لذلك، باستخدامك لموقع "مطلوب"، فإنك توافق على نقل معلوماتك الشخصية إليهم عند الحاجة لتقديم الخدمات.'
-        }}
-      </li>
+      <li>{{ "TERMS.PURCHASES_LI_1" | translate }}</li>
+      <li>{{ "TERMS.PURCHASES_LI_2" | translate }}</li>
+      <li>{{ "TERMS.PURCHASES_LI_3" | translate }}</li>
     </ul>
 
     <div class="d-flex justify-content-start mb-2">
-      <div>
-        <img src="assets/img/lock-gray.svg" width="30" alt="" />
-      </div>
-      <p>
-        {{
-          'لن يقوم موقع "مطلوب" بتأجير أو بيع أي معلومات شخصية يمكن أن تكشف هويتك لأي طرف ثالث.
-وبخلاف موظفي الموقع والمتعاقدين والجهات التابعة له، كما أوضحنا سابقًا، قد يكشف "مطلوب" عن معلومات شخصية فقط استجابة لطلبات قانونية مثل استدعاءات المحكمة أو الأوامر الحكومية، أو عندما يعتقد الموقع بحسن نية أن الكشف ضروري بشكل معقول لحماية ممتلكات أو حقوق "مطلوب"، أو حقوق الأطراف الثالثة، أو لحماية الجمهور.'
-        }}
-      </p>
+      <div><img src="assets/img/folder-gray.svg" width="30" alt="" /></div>
+      <p>{{ "TERMS.ORDER_CANCELLATION" | translate }}</p>
     </div>
     <div class="d-flex justify-content-start mb-2">
-      <div>
-        <img src="assets/img/lock-gray.svg" width="30" alt="" />
-      </div>
-      <p>
-        {{
-          'إذا كنت مستخدمًا مسجلاً على موقع "مطلوب" وقدمت عنوان بريدك الإلكتروني، فقد نرسل لك أحيانًا رسائل إلكترونية لإطلاعك على الميزات الجديدة، طلب ملاحظاتك، أو إعلامك بآخر المستجدات وأحدث خدماتنا.'
-        }}
-      </p>
+      <div><img src="assets/img/folder-gray.svg" width="30" alt="" /></div>
+      <p>{{ "TERMS.PAYMENT_ACCEPTED" | translate }}</p>
     </div>
     <div class="d-flex justify-content-start mt-1">
-      <div>
-        <img src="assets/img/lock-gray.svg" width="30" alt="" />
-      </div>
-      <p>
-        {{
-          "نستخدم مدونتنا بشكل رئيسي لمشاركة هذا النوع من المعلومات، لذا نسعى للحفاظ على عدد الرسائل الإلكترونية التي نرسلها إليك في أدنى حد ممكن."
-        }}
-      </p>
+      <div><img src="assets/img/folder-gray.svg" width="30" alt="" /></div>
+      <p>{{ "TERMS.REFUND" | translate }}</p>
     </div>
-    <div class="d-flex justify-content-start mt-1">
-      <div>
-        <img src="assets/img/lock-gray.svg" width="30" alt="" />
-      </div>
-      <p>
-        {{
-          "إذا أرسلت لنا طلبًا أو استفسارًا (مثلًا عبر البريد الإلكتروني للدعم أو عبر وسائل التواصل المتاحة)، نحتفظ بحق نشر جزء من هذا الطلب لمساعدتنا في توضيح استفسارك أو الرد عليه، وكذلك لدعم مستخدمين آخرين."
-        }}
-      </p>
+  </div>
+
+  <div class="mt-3">
+    <div class="d-flex justify-content-start">
+      <img src="assets/img/x-green.svg" width="50" alt="" />
+      <span class="title">{{ "TERMS.AVAILABILITY" | translate }}</span>
     </div>
-    <div class="d-flex justify-content-start mt-1">
-      <div>
-        <img src="assets/img/lock-gray.svg" width="30" alt="" />
-      </div>
-      <p>
-        {{
-          'يتخذ موقع "مطلوب" كافة التدابير الضرورية وضمن الحدود القانونية لحماية معلوماتك الشخصية أو أي بيانات قد تُصنف على أنها شخصية، من الوصول غير المصرح به أو الاستخدام أو التعديل أو الإتلاف.'
-        }}
-      </p>
+    <div class="d-flex justify-content-start">
+      <div><img src="assets/img/x-gray.svg" width="30" alt="" /></div>
+      <p>{{ "TERMS.AVAILABILITY_DESC" | translate }}</p>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <div class="d-flex justify-content-start">
+      <img src="assets/img/arrow-green.svg" width="50" alt="" />
+      <span class="title">{{ "TERMS.PROMOTIONS" | translate }}</span>
+    </div>
+    <div class="d-flex justify-content-start">
+      <div><img src="assets/img/arrow-gray.svg" width="30" alt="" /></div>
+      <p>{{ "TERMS.PROMOTIONS_DESC" | translate }}</p>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <div class="d-flex justify-content-start">
+      <img src="assets/img/user-green.svg" width="50" alt="" />
+      <span class="title">{{ "TERMS.ACCOUNTS" | translate }}</span>
+    </div>
+    <div class="d-flex justify-content-start">
+      <div><img src="assets/img/user-gray.svg" width="30" alt="" /></div>
+      <p>{{ "TERMS.ACCOUNTS_DESC" | translate }}</p>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <div class="d-flex justify-content-start">
+      <img src="assets/img/lamo-green.svg" width="50" alt="" />
+      <span class="title">{{ "TERMS.INTELLECTUAL_PROPERTY" | translate }}</span>
+    </div>
+    <div class="d-flex justify-content-start">
+      <div><img src="assets/img/lamo-gray.svg" width="30" alt="" /></div>
+      <p>{{ "TERMS.INTELLECTUAL_PROPERTY_DESC" | translate }}</p>
+    </div>
+  </div>
+
+  <div class="mt-3 mb-5">
+    <div class="d-flex justify-content-start">
+      <img src="assets/img/attach-green.svg" width="50" alt="" />
+      <span class="title">{{ "TERMS.EXTERNAL_LINKS" | translate }}</span>
+    </div>
+    <div class="d-flex justify-content-start">
+      <div><img src="assets/img/attach-gray.svg" width="30" alt="" /></div>
+      <p>{{ "TERMS.EXTERNAL_LINKS_DESC" | translate }}</p>
     </div>
   </div>
 </div>

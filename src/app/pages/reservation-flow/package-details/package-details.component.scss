@@ -310,6 +310,65 @@
             padding: 20px;
           }
         }
+
+        .promo-code-section {
+          margin-top: 30px;
+
+          .promo-title {
+            font-weight: 500;
+            font-size: 18px;
+          }
+
+          .promo-desc {
+            font-weight: 500;
+            font-size: 15px;
+            color: #B4B4B4;
+          }
+
+          .form-group {
+            display: flex;
+            flex-direction: column;
+
+            .input-wrapper {
+              position: relative;
+
+              input {
+                width: 100%;
+                padding: 16px 8px 16px 8px; // Extra right padding for the button
+                border: 1px solid #E6E6E6;
+                border-radius: 34px;
+                font-size: 14px;
+                min-height: 70px;
+              }
+
+              .input-btn {
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                transform: translateY(-50%);
+                padding: 6px 12px;
+                font-size: 13px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                background: linear-gradient(to right, #bffd2b, #05bce8);
+                color: #fff;
+                font-weight: bolder;
+                padding: 11px 80px;
+                border-radius: 32px;
+                border: none;
+
+                &:lang(ar) {
+                  left: 10px;
+                  right: unset;
+                }
+              }
+            }
+          }
+        }
+
       }
 
       .instructions-section {
@@ -343,19 +402,41 @@
     }
   }
 }
+
 .wallet-container {
-    background: #ececec;
-    padding: 10px 20px;
-    border-radius: 32px;
-    margin-bottom: 10px;
+  background: #ececec;
+  padding: 10px 20px;
+  border-radius: 32px;
+  margin-bottom: 10px;
+  align-items: center;
+
+  .collection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
   .open-wallet {
     margin: 0px 10px;
+    font-size: 13px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background: linear-gradient(to right, #bffd2b, #05bce8);
+    color: #fff;
+    font-weight: bolder;
+    padding: 11px 80px;
+    border-radius: 32px;
+    border: none;
   }
 }
+
 .w-49 {
-    width: 49%;
-  }
-  .w-250{
-    min-width: 250px;
-  }
-  
+  width: 49%;
+}
+
+.w-250 {
+  min-width: 250px;
+}
