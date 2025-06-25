@@ -7,7 +7,8 @@
     "maxLength": " Characters must be at most",
     "email": "Please enter a valid email address",
     "mobileNumber": "Mobile Number must start with 05 and be 10 digits long",
-    "passwordMismatch": "Passwords do not match"
+    "passwordMismatch": "Passwords do not match",
+    "passwordPattern": "Password must be at least 6 characters, with letters and numbers"
   },
   "login": {
     "welcome": "Welcome back to Matloob",

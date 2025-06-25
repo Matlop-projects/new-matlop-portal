@@ -192,6 +192,12 @@
             >
               {{ "errors.required" | translate }}
             </div>
+            <div
+              *ngIf="signupForm.get('password')?.errors?.['pattern']"
+              class="text-danger"
+            >
+              {{ "errors.passwordPattern" | translate }}
+            </div>
           </div>
         </div>
 

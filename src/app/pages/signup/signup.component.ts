@@ -88,7 +88,7 @@ export class SignupComponent {
             Validators.pattern(/^05\d{8}$/),
           ],
         ],
-        password: ["", Validators.required],
+        password: ["", [Validators.required,Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/)]],
         confirmPassword: ["", Validators.required],
         genderId: [1, Validators.required],
       },
