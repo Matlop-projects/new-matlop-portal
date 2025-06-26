@@ -15,15 +15,15 @@ export class FooterComponent {
 
   socailMedia =[
     {
-      icon: 'pi pi-facebook',
+      icon: 'face.svg',
       routing: ''
     },
     {
-      icon: 'pi pi-twitter',
+      icon: 'twitter.svg',
       routing: ''
     },
     {
-      icon: 'pi pi-instagram',
+      icon: 'instgram.svg',
       routing: ''
     },
     // {

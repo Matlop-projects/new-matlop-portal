@@ -64,6 +64,13 @@
     }
   }
 
+  @media only screen and (min-width:250.98px) and (max-width: 605px) {
+  .signup-container{
+    .content{
+      flex-basis: 95%;
+    }
+  }
+}
   // Small devices (portrait phones)
   @media only screen and (max-width: 249.98px) {
     .hide-part {

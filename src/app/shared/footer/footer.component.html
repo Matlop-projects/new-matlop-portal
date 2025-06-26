@@ -42,7 +42,7 @@
       <div class="social-media">
         <ng-container *ngFor="let item of socailMedia">
           <div class="social-item">
-            <i class="{{ item.icon }}"></i>
+            <img [src]="'assets/images/icons-svg/'+item.icon" alt="">
           </div>
         </ng-container>
       </div>

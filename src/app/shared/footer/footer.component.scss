@@ -61,19 +61,8 @@
             border-radius: 50%;
             background-color: #FFFFFF;
 
-            i {
-                font-size: 20px;
-                color: #B6AEC8;
-                background: linear-gradient(to right, #BFFD2B, #05BCE8);
-                -webkit-text-fill-color: transparent;
-            }
-
             &:hover {
-                background-color: #B6AEC8;
-
-                i {
-                    color: #FFFFFF;
-                }
+                background-color: #e9e8e9;
             }
         }
     }

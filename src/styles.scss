@@ -45,7 +45,9 @@ body {
 .reverse_img {
   transform: scaleX(-1);
 }
-
+.w-250{
+  min-width: 250px;
+}
 .w-30 {
   width: 30%;
 }

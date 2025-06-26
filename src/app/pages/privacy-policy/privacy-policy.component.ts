@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { BackgroundImageWithTextComponent, IBackGroundImageWithText } from "../../components/background-image-with-text/background-image-with-text.component";
 import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageService } from '../../services/language.service';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-privacy-policy',
   standalone: true,
-  imports: [BackgroundImageWithTextComponent, TranslatePipe],
+  imports: [BackgroundImageWithTextComponent, TranslatePipe,NgFor],
   templateUrl: './privacy-policy.component.html',
   styleUrl: './privacy-policy.component.scss'
 })
