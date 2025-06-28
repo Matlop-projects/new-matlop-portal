@@ -111,13 +111,13 @@ export class PackageDetailsComponent {
 
   ngOnInit(): void {
     this.packageId = this.route.snapshot.params["packageId"];
+    this.orderObject.clientId = localStorage.getItem("userId");
+    this.orderObject.packageId = this.packageId;
     this.getLocation();
     this.getPackageDetailsById(this.packageId);
     this.setCalendarLimits();
     this.getWorkingHours();
     this.getEquipmentsList(this.packageId);
-    this.orderObject.clientId = localStorage.getItem("userId");
-    this.orderObject.packageId = this.packageId;
     this.selectedLang = this.languageService.translationService.currentLang;
     this.languageService.translationService.onLangChange.subscribe(() => {
       this.selectedLang = this.languageService.translationService.currentLang;
@@ -231,22 +231,36 @@ export class PackageDetailsComponent {
     //   this.walletBalance < this.packageDetails.price
     // );
   }
+  // setCalendarLimits() {
+  //   if (this.packageDetails) {
+  //     if (this.packageDetails.packageType == 2) {
+  //       this.minDate = new Date();
+  //       this.minDate.setDate(this.minDate.getDate() + 1);
+
+  //       this.maxDate = new Date();
+  //       this.maxDate.setMonth(this.maxDate.getMonth() + 1);
+  //     } else {
+  //       this.minDate = new Date();
+  //       this.minDate.setDate(this.minDate.getDate() + 1);
+
+  //       this.maxDate = null;
+  //     }
+  //   }
+  // }
   setCalendarLimits() {
-    if (this.packageDetails) {
-      if (this.packageDetails.packageType == 2) {
-        this.minDate = new Date();
-        this.minDate.setDate(this.minDate.getDate() + 1);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  this.minDate = today;
 
-        this.maxDate = new Date();
-        this.maxDate.setMonth(this.maxDate.getMonth() + 1);
-      } else {
-        this.minDate = new Date();
-        this.minDate.setDate(this.minDate.getDate() + 1);
-
-        this.maxDate = null;
-      }
-    }
+  if (this.packageDetails?.packageType == 2) {
+    const max = new Date();
+    max.setMonth(max.getMonth() + 1);
+    this.maxDate = max;
+  } else {
+    this.maxDate = null;
   }
+}
+
 
   validateMinDates() {
     let validationValue = 0;
