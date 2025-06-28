@@ -1,6 +1,7 @@
-<div class="faqs-section-container container" *ngIf="faqsList">
+<div class="faqs-section-container container">
   <div class="content">
-    <div class="title">
+    <ng-container *ngIf="faqsList">
+      <div class="title">
       <p>{{ 'FAQ.TITLE' | translate }}</p>
     </div>
     <div class="desc mt-2 mb-3">
@@ -17,5 +18,11 @@
         </p-panel>
       </div>
     </ng-container>
+    </ng-container>
+    <div *ngIf="!faqsList">
+        <div class="no-data text-center">
+          <h1>{{'no_data_found'|translate}}</h1>
+        </div>
+    </div>
   </div>
 </div>

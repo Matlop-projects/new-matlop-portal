@@ -1,6 +1,7 @@
 {
   "rsa": "RSA",
   "cancel": "Cancel",
+  "no_data_found":"No data found",
   "errors": {
     "required": "This field is required",
     "minLength": "Characters  must be at least",

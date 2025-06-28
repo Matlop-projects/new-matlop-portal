@@ -25,7 +25,7 @@ export class ApiService {
     return this.http.post(baseUrl + `Authentication/login`, object).pipe(
       take(1),
       catchError((error) => {
-        this.toaster.errorToaster(error?.error?.message || 'shared.errors.login');
+        // this.toaster.errorToaster(error?.error?.message || 'shared.errors.login');
         return throwError(() => error);
       })
     );
