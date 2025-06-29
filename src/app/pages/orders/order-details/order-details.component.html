@@ -1,6 +1,8 @@
 <div class="container">
   <div class="bread-crump">
-    <span class="text-gray-light pointer"(click)="goToOrders()">{{ "الطلبات" }}</span
+    <span class="text-gray-light pointer" (click)="goToOrders()">{{
+      "الطلبات"
+    }}</span
     >/
     <span class="bold">{{ "تفاصيل الطلب" }}</span>
   </div>
@@ -24,9 +26,10 @@
           <span class="block text-gray-light"> #{{ "اسم الباقة" }}</span>
           <span class="block bold"> {{ orderDetails?.package?.nameAr }}</span>
         </div>
-        <div class="desc text-gray-light" [innerHTML]="orderDetails?.package?.descriptionAr ">
-         
-        </div>
+        <div
+          class="desc text-gray-light"
+          [innerHTML]="orderDetails?.package?.descriptionAr"
+        ></div>
         <div class="numbers-info mt-3 d-flex justify-content-between flex-wrap">
           <div class="bk-white">
             <span class="pi pi-clock"></span>
@@ -81,7 +84,9 @@
       <div class="card mt-3 added_order">
         <div class="d-flex justify-content-between">
           <span class="bold">{{ "الطلبات الاضافية" }}</span>
-          <span class="btn-add-order pointer"(click)="onAdditionalOrder()">{{ "اضافة طلب صيانة اضافي" }}</span>
+          <span class="btn-add-order pointer" (click)="onAdditionalOrder()">{{
+            "اضافة طلب صيانة اضافي"
+          }}</span>
         </div>
         <ng-container
           *ngIf="orderDetails.orderAddtionalItem.length; else empty"
@@ -89,7 +94,7 @@
           <div *ngFor="let item of orderDetails.orderAddtionalItem">
             <div class="d-flex justify-content-start">
               <img class="squar" src="assets/img/squar.svg" alt="" />
-              <span class="bold">{{item.note}} </span>
+              <span class="bold">{{ item.note }} </span>
             </div>
           </div>
         </ng-container>
@@ -104,7 +109,11 @@
           class="total text-start mt-4"
         >
           <span>{{ "اجمالي" }}</span>
-          <span class="bold"> {{orderDetails.totalWithAdditional - orderDetails.orderTotal}}</span>
+          <span class="bold">
+            {{
+              orderDetails.totalWithAdditional - orderDetails.orderTotal
+            }}</span
+          >
           <span> {{ "ر.س" }}</span>
         </div>
       </div>
@@ -112,7 +121,9 @@
         *ngIf="orderDetails.orderStatusName == 'Pending'"
         class="buttons text-start"
       >
-        <button class="btn pay"(click)="visiblePaymentWay=true">{{ "اعادة الدفع" }}</button>
+        <button class="btn pay" (click)="visiblePaymentWay = true">
+          {{ "اعادة الدفع" }}
+        </button>
         <button class="btn cancel" (click)="onCancelOrder()">
           {{ "الغاء الطلب" }}
         </button>
@@ -150,8 +161,13 @@
       </div>
       <div class="d-flex justify-content-start flex-wrap mt-3">
         <ng-container *ngFor="let item of orderDetails.media">
-          <div class="images d-flex justify-content-between flex-wrap m-3">
+          <div class="rounded d-flex justify-content-between flex-wrap m-3">
+            <video *ngIf="item.mediaTypeEnum==2" width="200" height="150" controls>
+              <source [src]="baseUrl + item.src" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
             <img
+            *ngIf="item.mediaTypeEnum==1"
               class="mt-2 rounded"
               [src]="baseUrl + item.src"
               width="100"
@@ -170,8 +186,10 @@
         <div class="bold mt-5">{{ "التعليمات الرئيسية" }}</div>
         <div class="d-flex justify-content-start mt-3">
           <img class="m-1" src="assets/img/bubble.svg" alt="" />
-          <span class="text-gray-light m-1" [innerHTML]="orderDetails.package?.arInstraction">
-           
+          <span
+            class="text-gray-light m-1"
+            [innerHTML]="orderDetails.package?.arInstraction"
+          >
           </span>
         </div>
         <!-- <div class="d-flex justify-content-between">
@@ -194,6 +212,9 @@
           <span class="pi pi-book"></span>
           <span class="bold"> {{ "ملاحظة" }}</span>
         </span>
+         <div class="mt-2 mb-2">
+            {{orderDetails.notes}}
+         </div>
         <span>
           {{ "يمكنك الغاء االطلب قبل 24 ساعة " }}
         </span>
@@ -219,19 +240,25 @@
   [(visible)]="visibleAdditionalItem"
   [style]="{ width: '25rem' }"
 >
- <div>
-  <textarea
-  class="p-3 mt-3"
-    rows="5"
-    cols="30"
-    pTextarea
-    placeholder="ملاحظات"
-    [(ngModel)]="orderAdditionalNotes"
-  ></textarea>
-</div>
-<div>
-  <button class="btn mt-3 w-100 btn-additional-item" [disabled]="orderAdditionalNotes==''"  (click)="confirmAdditionalItem()">{{ "اضافة طلب" }}</button>
-</div>
+  <div>
+    <textarea
+      class="p-3 mt-3"
+      rows="5"
+      cols="30"
+      pTextarea
+      placeholder="ملاحظات"
+      [(ngModel)]="orderAdditionalNotes"
+    ></textarea>
+  </div>
+  <div>
+    <button
+      class="btn mt-3 w-100 btn-additional-item"
+      [disabled]="orderAdditionalNotes == ''"
+      (click)="confirmAdditionalItem()"
+    >
+      {{ "اضافة طلب" }}
+    </button>
+  </div>
 </p-dialog>
 <p-dialog
   [header]="'select_payment'"
@@ -239,16 +266,34 @@
   [(visible)]="visiblePaymentWay"
   [style]="{ width: '25rem' }"
 >
- <div class="pt-3">
+  <div class="pt-3">
     <div class="w-100">
-    <p-floatlabel variant="on">
-        <p-select appendTo="body" class="w-100"(onChange)="onPaymentWaySelect($event.value)"  [options]="PaymentWayList"   optionValue="code" optionLabel="name" />
-        <label for="on_label">{{'select_payment'|translate}}</label>
-    </p-floatlabel>
-</div>
-</div>
-<div class="mt-3">
-  <button class="btn mt-3 w-100 btn-additional-item" [disabled]="selectedPaymentValue.length==0"  (click)="confirmPaymentWay()">{{ "update"|translate}}</button>
-  <button class="btn mt-3 w-100 btn-additional-item-cancel"  (click)="visiblePaymentWay=false">{{ "cancel"|translate}}</button>
-</div>
+      <p-floatlabel variant="on">
+        <p-select
+          appendTo="body"
+          class="w-100"
+          (onChange)="onPaymentWaySelect($event.value)"
+          [options]="PaymentWayList"
+          optionValue="code"
+          optionLabel="name"
+        />
+        <label for="on_label">{{ "select_payment" | translate }}</label>
+      </p-floatlabel>
+    </div>
+  </div>
+  <div class="mt-3">
+    <button
+      class="btn mt-3 w-100 btn-additional-item"
+      [disabled]="selectedPaymentValue.length == 0"
+      (click)="confirmPaymentWay()"
+    >
+      {{ "update" | translate }}
+    </button>
+    <button
+      class="btn mt-3 w-100 btn-additional-item-cancel"
+      (click)="visiblePaymentWay = false"
+    >
+      {{ "cancel" | translate }}
+    </button>
+  </div>
 </p-dialog>
