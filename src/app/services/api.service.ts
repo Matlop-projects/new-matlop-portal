@@ -72,7 +72,7 @@ export class ApiService {
         return res;
       }),
       catchError((error) => {
-        this.toaster.errorToaster(error?.error?.message);
+        // this.toaster.errorToaster(error?.error?.message);
         return throwError(() => error);
       })
     );
@@ -84,11 +84,11 @@ export class ApiService {
       take(1),
       map((res: any) => {
         if (res.message)
-          // this.ngxToaster.success(res.message)
+          this.toaster.successToaster(res.message)
         return res;
       }),
       catchError((error) => {
-        this.toaster.errorToaster(error?.error?.message)
+        // this.toaster.errorToaster(error?.error?.message)
         return throwError(() => error);
       })
     );

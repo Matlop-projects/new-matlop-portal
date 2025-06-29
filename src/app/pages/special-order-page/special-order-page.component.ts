@@ -57,7 +57,7 @@ export class SpecialOrderPageComponent {
   showAddLocationDialog: boolean = false
   minDate: Date = (() => {
     const date = new Date();
-    date.setDate(date.getDate() + 1); // +1 يوم
+    date.setDate(date.getDate());
     return date;
   })();
   form = new FormGroup({

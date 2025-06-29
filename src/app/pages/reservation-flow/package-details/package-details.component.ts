@@ -483,7 +483,7 @@ export class PackageDetailsComponent {
         this.invalidCoupn = true;
         this.validCoupon = false;
         this.invalidCoupnMessage = err.error.message;
-        this.toaster.errorToaster('Invalid Coupon');
+        // this.toaster.errorToaster('Invalid Coupon');
       })
     } else {
       this.toaster.errorToaster('Please Add Coupon');
