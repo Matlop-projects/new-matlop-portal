@@ -1,7 +1,19 @@
 {
   "rsa": "SAR",
   "cancel": "Cancel",
-  "no_data_found":"No data found",
+  "no_data_found": "No data found",
+  "actions": {
+    "send": "Send",
+    "send_sms": "Send a  message",
+    "login": "Login",
+    "change": "Change",
+    "back": "Back",
+    "addNew": "Add New",
+    "update": "Update",
+    "add": "Add",
+    "close": "Close",
+    "select": "Select"
+  },
   "errors": {
     "required": "This field is required",
     "minLength": "Characters  must be at least",
@@ -59,6 +71,17 @@
     "DESCRIPTION": "From plumbing and electricity to air conditioning and carpentry, we provide comprehensive solutions with high professionalism and prompt execution tailored to your needs.",
     "ORDER_NOW": "Request Service Now",
     "DOWNLOAD_APP": "Download the app now"
+  },
+  "forget_pass": {
+    "title": "Forget Password",
+    "mobile": " Mobile Number",
+    "mobile_required": "Mobile number is required",
+    "add_new_pass": "Add New Password",
+    "enter_new_pass": "Enter new password",
+    "new_pass_required": " New password is required",
+    "confirm_pass": "Confirm password",
+    "confirm_required": "Confirm password is required",
+    "not_matched": "Passwords do not match"
   },
   "DESCRIPTION": {
     "CARD_1": {
