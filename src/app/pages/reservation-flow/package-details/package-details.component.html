@@ -112,7 +112,7 @@
 
             <div class="date-picker-section col-lg-6">
               <label>{{ "PACKAGE_DETAILS.DATE" | translate }}</label><span class="red-mark">*</span>
-              <p-datepicker appendTo="body" [ngClass]="{ 'input-error': isDateInvalid }" [(ngModel)]="dates"
+              <p-datepicker [ngClass]="{ 'input-error': isDateInvalid }" [(ngModel)]="dates"
                 [placeholder]="'PACKAGE_DETAILS.SELECT_DATE' | translate" (onSelect)="validateMinDates()"
                 selectionMode="multiple" [disabledDays]="[5, 6]" [minDate]="minDate" [maxDate]="maxDate"
                 [readonlyInput]="true" />
@@ -205,8 +205,8 @@
               </div>
               <div class="form-group">
                 <div class="input-wrapper">
-                  <input id="saudiNumber" [(ngModel)]="promoCodeValue" type="text" placeholder="رمز الخصم " />
-                  <button class="input-btn" (click)="onPromoCodeCheck()">تأكيد</button>
+                  <input id="saudiNumber"[disabled]="usedNumber?usedNumber==0:false" [readOnly]="usedNumber?usedNumber==0:false" [(ngModel)]="promoCodeValue" type="text" placeholder="رمز الخصم " />
+                  <button class="input-btn" [class.disabled]="usedNumber?usedNumber==0:false" [disabled]="usedNumber==0" (click)="onPromoCodeCheck()">تأكيد</button>
                 </div>
               </div>
             </div>

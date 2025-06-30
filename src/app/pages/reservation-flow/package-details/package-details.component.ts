@@ -49,7 +49,7 @@ export class PackageDetailsComponent {
   cities: any;
   toaster = inject(ToasterService);
   selectedEquipments: { equipmentId: number }[] = []; // declare at top of your TS file
-
+  usedNumber:any;
   bkg_text_options: IBackGroundImageWithText = {
     imageUrl: "assets/img/slider.svg",
     header: this.languageService.translate("ABOUT_US_CONTACT.BANNER_HEADER"),
@@ -158,7 +158,7 @@ export class PackageDetailsComponent {
     this.ApiService.get("Location/GetByUserId/" + userId).subscribe(
       (res: any) => {
         if (res.data) {
-          this.locations = res.data.map((item: any) => ({
+          this.locations = res.data?.map((item: any) => ({
             name: item.countryName,
             code: item.locationId,
           }));
@@ -290,7 +290,7 @@ export class PackageDetailsComponent {
 
   getWorkingHours() {
     this.ApiService.get(`WorkingTime/GetAll`).subscribe((hours: any) => {
-      this.workingHoursList = hours.data.map((item: any) => ({
+      this.workingHoursList = hours.data?.map((item: any) => ({
         ...item,
         finalWorking: `${new Date(item.startDate).toLocaleTimeString("en-GB", {
           hour: "2-digit",
@@ -316,7 +316,7 @@ export class PackageDetailsComponent {
       (res: any) => {
         console.log(res);
 
-        this.equipments = res.data.map((item: any) => ({
+        this.equipments = res.data?.map((item: any) => ({
           ...item,
           status: false, // ✅ Add status property
         }));
@@ -465,6 +465,7 @@ export class PackageDetailsComponent {
         this.discountType = loc.data.coponeType;
         this.packageDetails.couponPrice = 0;
         this.packageDetails.couponDiscount = 0;
+        this.usedNumber=loc.data.usedNumber
         if (loc.data.coponeType == 1) {
           this.packageDetails.couponDiscount = loc.data.amount;
           let priceAfterDiscountPrecentage = this.packageDetails.price - this.calculateSalePrice(this.packageDetails.price, loc.data.amount);

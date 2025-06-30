@@ -366,7 +366,9 @@ p-datepicker.w-full-profile .p-datepicker .p-datepicker-panel {
 }
 
 
-
+.p-datepicker .p-datepicker-panel{
+  z-index: 99999!important;
+}
 p-datepicker {
   table {
     .p-datepicker-weekday-cell {
