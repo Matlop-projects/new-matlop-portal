@@ -32,6 +32,7 @@ export class ServicesListComponent {
   };
   
   ngOnInit(): void {
+this.selectedLang = this.languageService.translationService.currentLang;
     this.getAllServices();
     localStorage.removeItem('contractDetails');
     this.languageService.translationService.onLangChange.subscribe(() => {

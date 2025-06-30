@@ -34,9 +34,11 @@
       <div class="card mt-3 mb-3" *ngFor="let item of orders">
         <div class="p-4">
           <div class="header d-flex justify-content-between">
-            <span class="bold">{{ item.serviceNameAr }}</span>
+            <span class="bold">{{
+              currentlang == "en" ?  item.serviceNameEn:item.serviceNameAr
+            }}</span>
             <span [class]="activeStatus" class="all-status">
-              {{ activeStatus | titlecase }}
+              {{ activeStatus |titlecase|translate }}
               <span class="pi pi-circle-on"></span>
             </span>
           </div>

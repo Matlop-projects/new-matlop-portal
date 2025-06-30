@@ -1,7 +1,10 @@
 {
   "rsa": "SAR",
+  "ryal": "SAR",
+  "rs": "SAR",
   "cancel": "Cancel",
   "no_data_found": "No data found",
+  "Pending":"Pending",
   "actions": {
     "send": "Send",
     "send_sms": "Send a  message",
@@ -12,7 +15,8 @@
     "update": "Update",
     "add": "Add",
     "close": "Close",
-    "select": "Select"
+    "select": "Select",
+    "cancel":"Cancel"
   },
   "errors": {
     "required": "This field is required",
@@ -282,6 +286,40 @@
     "HOURS_UNIT": "Hours",
     "SHOW_DETAILS": "Show Details",
     "NO_ORDERS": "No orders at the moment"
+  },
+  "order_details": {
+    "orders": "Orders",
+    "details": "Order Details",
+    "pkg_details": "Package Details",
+    "pkg_name": "Package Name",
+    "visit_duration": "Visit Duration",
+    "hours": "Hours",
+    "visitor_count": "Number of Technicians",
+    "tech": "Technician",
+    "info": "Order Information",
+    "date": "Order Date",
+    "time": "Order Time",
+    "status": "Order Status",
+    "paymentWay": "Payment Method",
+    "orderAdded": "Additional Orders",
+    "mintanance": "Add Extra Maintenance Request",
+    "no_added_ordered": "No Additional Orders",
+    "total": "Total",
+    "retry_payment": "Retry Payment",
+    "canceld_order": "Cancel Order",
+    "visit_mo3ed": "Visit Schedule",
+    "equipments": "Equipment",
+    "no_equipments": "No Equipment",
+    "img_order": "Order Images",
+    "no_video_support": "This browser does not support video",
+    "no_img": "No Images Available",
+    "main_instractions": "Main Instructions",
+    "add_added_order": "Add Additional Request",
+    "note": "Note",
+    "notes": "Notes",
+    "can_canceled": "You can cancel the order up to 24 hours in advance",
+    "select_payment": "Select Payment Method",
+    "add_order": "Add Order"
   },
   "ORDER_TRACKING": {
     "BANNER_HEADER": "Track your orders instantly",

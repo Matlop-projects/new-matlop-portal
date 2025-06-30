@@ -1,7 +1,10 @@
 {
+  "ryal": "ريال",
   "rsa": "ريال سعودي",
+  "rs": "ر.س",
   "cancel": "إلغاء",
   "no_data_found": "لا توجد بيانات حاليا",
+  "Pending":"تحت الطلب",
   "actions": {
     "send": "إرسال",
     "send_sms": "إرسال رسالة",
@@ -12,7 +15,8 @@
     "update": "تحديث",
     "add": "اضافة",
     "close": "اغلاق",
-    "select": "اختر"
+    "select": "اختر",
+    "cancel":"إلغاء"
   },
   "errors": {
     "required": "هذا الحقل مطلوب",
@@ -282,6 +286,40 @@
     "HOURS_UNIT": "ساعات",
     "SHOW_DETAILS": "عرض التفاصيل",
     "NO_ORDERS": "لا توجد طلبات حاليا"
+  },
+  "order_details": {
+    "orders": "الطلبات",
+    "details": "تفاصيل الطلب",
+    "pkg_details": "تفاصيل الباقة",
+    "pkg_name": "اسم الباقة",
+    "visit_duration": "مدة الزيارة",
+    "hours": "ساعات",
+    "visitor_count": "عدد الفنيين",
+    "tech": "فني",
+    "info": "معلومات الطلب",
+    "date": "تاريخ الطلب",
+    "time": "وقت الطلب",
+    "status": "حالة الطلب",
+    "paymentWay": "طريقة الدفع",
+    "orderAdded": "الطلبات الاضافية",
+    "mintanance": "اضافة طلب صيانة اضافي",
+    "no_added_ordered": "لا توجد طلبات اضافية",
+    "total": "اجمالي",
+    "retry_payment": "اعادة الدفع",
+    "canceld_order": "الغاء الطلب",
+    "visit_mo3ed": "مواعيد الزيارة",
+    "equipments": "المعدات",
+    "no_equipments": "لا توجد معدات",
+    "img_order": "صور الطلب",
+    "no_video_support": "هذا المتصفح لا يدعم الفيديو",
+    "no_img": "لا توجد صور",
+    "main_instractions": "التعليمات الرئيسية",
+    "add_added_order": "اضافة طلب اضافي",
+    "note": "ملاحظة",
+    "notes": "ملاحظات",
+    "can_canceled": "يمكنك الغاء االطلب قبل 24 ساعة ",
+    "select_payment": "اختر طريقة الدفع",
+    "add_order": "اضافة طلب"
   },
   "ORDER_TRACKING": {
     "BANNER_HEADER": "تابع تقدم طلباتك في لحظات",
