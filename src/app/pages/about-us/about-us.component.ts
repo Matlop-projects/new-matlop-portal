@@ -99,8 +99,6 @@ export class AboutUsComponent {
 
   onContactUs() {
     this.apiService.post("ContactUs/Create", this.form.value).subscribe((res) => {
-      if (res) {
-      }
     });
   }
 }
