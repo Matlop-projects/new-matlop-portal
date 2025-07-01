@@ -157,14 +157,10 @@ export class SpecialOrderPageComponent {
 
   createEmergencyOrder(payload: any) {
     this.api.post('SpecialOrder/Create', payload).subscribe(res => {
-      this.toaster.successToaster('تم انشاء الطلب بنجاح');
       setTimeout(() => {
         this.router.navigate(['/home'])
       }, 1000);
-    },
-      err => {
-        this.toaster.errorToaster('حدث خطاء')
-      });
+    });
   }
 
   getLocation() {
