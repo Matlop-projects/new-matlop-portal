@@ -49,7 +49,7 @@ export class PackageDetailsComponent {
   cities: any;
   toaster = inject(ToasterService);
   selectedEquipments: { equipmentId: number }[] = []; // declare at top of your TS file
-  usedNumber:any;
+  usedNumber: any;
   bkg_text_options: IBackGroundImageWithText = {
     imageUrl: "assets/img/slider.svg",
     header: this.languageService.translate("ABOUT_US_CONTACT.BANNER_HEADER"),
@@ -248,19 +248,18 @@ export class PackageDetailsComponent {
   //   }
   // }
   setCalendarLimits() {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  this.minDate = today;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    this.minDate = today;
 
-  if (this.packageDetails?.packageType == 2) {
-    const max = new Date();
-    max.setMonth(max.getMonth() + 1);
-    this.maxDate = max;
-  } else {
-    this.maxDate = null;
+    if (this.packageDetails?.packageType == 2) {
+      const max = new Date();
+      max.setMonth(max.getMonth() + 1);
+      this.maxDate = max;
+    } else {
+      this.maxDate = null;
+    }
   }
-}
-
 
   validateMinDates() {
     let validationValue = 0;
@@ -277,13 +276,49 @@ export class PackageDetailsComponent {
       } else {
         this.isDateInvalid = false;
         this.errorMessage = "";
-        this.isoDates = this.dates.map((date: any) => date.toISOString());
+        // this.isoDates = this.dates.map((date: any) =>
+        //   date.toISOString()
+        // );
+           this.isoDates = this.dates.map((date: any) => {
+        const now = new Date(); // Get current time
+        date.setHours(now.getHours(), now.getMinutes(), now.getSeconds());
+
+        return (
+          `${date.getFullYear()}-${(date.getMonth() + 1)
+            .toString()
+            .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}` +
+          `T${date.getHours().toString().padStart(2, "0")}:${date
+            .getMinutes()
+            .toString()
+            .padStart(2, "0")}:${date
+            .getSeconds()
+            .toString()
+            .padStart(2, "0")}Z`
+        );
+      });
         this.orderObject.scheduleDates = this.isoDates;
       }
     } else {
       this.isDateInvalid = false;
       this.errorMessage = "";
-      this.isoDates = this.dates.map((date: any) => date.toISOString());
+      // this.isoDates = this.dates.map((date: any) => date.toISOString());
+      this.isoDates = this.dates.map((date: any) => {
+        const now = new Date(); // Get current time
+        date.setHours(now.getHours(), now.getMinutes(), now.getSeconds());
+
+        return (
+          `${date.getFullYear()}-${(date.getMonth() + 1)
+            .toString()
+            .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}` +
+          `T${date.getHours().toString().padStart(2, "0")}:${date
+            .getMinutes()
+            .toString()
+            .padStart(2, "0")}:${date
+            .getSeconds()
+            .toString()
+            .padStart(2, "0")}Z`
+        );
+      });
       this.orderObject.scheduleDates = this.isoDates;
     }
   }
@@ -446,53 +481,73 @@ export class PackageDetailsComponent {
           console.log(res);
           this.toaster.successToaster("تم اضافة الطلب بنجاح");
           const orderId = res.data.orderId;
-          if(this.paymentSelect.paymentId == 2)
-          window.location.href = `https://payment.matlop.com/payment/creditcardweb?orderid=${orderId}`;
-        else
-          window.location.href = `https://app-thank-you/thank-you?status=paid&id=${orderId}&amount=${this.orderObject.totalAmount}&message=success`;
-      }
-    );
-  }
+          if (this.paymentSelect.paymentId == 2)
+            window.location.href = `https://payment.matlop.com/payment/creditcardweb?orderid=${orderId}`;
+          else
+            window.location.href = `https://app-thank-you/thank-you?status=paid&id=${orderId}&amount=${this.orderObject.totalAmount}&message=success`;
+        }
+      );
+    }
   }
 
   onPromoCodeCheck() {
     console.log(this.promoCodeValue);
-      if (this.promoCodeValue) {
-      this.ApiService.get(`Copone/Verfiy/${this.promoCodeValue}/${+this.orderObject.clientId}`).subscribe((loc: any) => {
-        this.invalidCoupn = false;
-        this.validCoupon = true;
-        this.toaster.successToaster('Coupon Addedd Successfully');
-        this.discountType = loc.data.coponeType;
-        this.packageDetails.couponPrice = 0;
-        this.packageDetails.couponDiscount = 0;
-        this.usedNumber=loc.data.usedNumber
-        if (loc.data.coponeType == 1) {
-          this.packageDetails.couponDiscount = loc.data.amount;
-          let priceAfterDiscountPrecentage = this.packageDetails.price - this.calculateSalePrice(this.packageDetails.price, loc.data.amount);
-          if(loc.data.hasMaxAmount && priceAfterDiscountPrecentage >= loc.data.maxAmount) {
-            this.packageDetails.couponPrice =  this.packageDetails.price - loc.data.maxAmount;
+    if (this.promoCodeValue) {
+      this.ApiService.get(
+        `Copone/Verfiy/${this.promoCodeValue}/${+this.orderObject.clientId}`
+      ).subscribe(
+        (loc: any) => {
+          this.invalidCoupn = false;
+          this.validCoupon = true;
+          this.toaster.successToaster("Coupon Addedd Successfully");
+          this.discountType = loc.data.coponeType;
+          this.packageDetails.couponPrice = 0;
+          this.packageDetails.couponDiscount = 0;
+          this.usedNumber = loc.data.usedNumber;
+          if (loc.data.coponeType == 1) {
+            this.packageDetails.couponDiscount = loc.data.amount;
+            let priceAfterDiscountPrecentage =
+              this.packageDetails.price -
+              this.calculateSalePrice(
+                this.packageDetails.price,
+                loc.data.amount
+              );
+            if (
+              loc.data.hasMaxAmount &&
+              priceAfterDiscountPrecentage >= loc.data.maxAmount
+            ) {
+              this.packageDetails.couponPrice =
+                this.packageDetails.price - loc.data.maxAmount;
+            } else {
+              this.packageDetails.couponPrice = this.calculateSalePrice(
+                this.packageDetails.price,
+                loc.data.amount
+              );
+            }
+            console.log(this.packageDetails);
           } else {
-            this.packageDetails.couponPrice = this.calculateSalePrice(this.packageDetails.price, loc.data.amount);
+            this.packageDetails.couponDiscount = loc.data.amount;
+            this.packageDetails.couponPrice =
+              this.packageDetails.price - this.packageDetails.couponDiscount;
+            console.log(this.packageDetails);
           }
-          console.log(this.packageDetails);
-        } else {
-          this.packageDetails.couponDiscount = loc.data.amount;
-          this.packageDetails.couponPrice = this.packageDetails.price - this.packageDetails.couponDiscount;
-          console.log(this.packageDetails);
+        },
+        (err) => {
+          this.invalidCoupn = true;
+          this.validCoupon = false;
+          this.invalidCoupnMessage = err.error.message;
+          // this.toaster.errorToaster('Invalid Coupon');
         }
-      }, err => {
-        this.invalidCoupn = true;
-        this.validCoupon = false;
-        this.invalidCoupnMessage = err.error.message;
-        // this.toaster.errorToaster('Invalid Coupon');
-      })
+      );
     } else {
-      this.toaster.errorToaster('Please Add Coupon');
+      this.toaster.errorToaster("Please Add Coupon");
     }
   }
 
-   calculateSalePrice(originalPrice: number, discountPercentage: number): number {
+  calculateSalePrice(
+    originalPrice: number,
+    discountPercentage: number
+  ): number {
     return originalPrice - (originalPrice * discountPercentage) / 100;
   }
-
 }
