@@ -478,14 +478,15 @@ export class PackageDetailsComponent {
       console.log(this.orderObject);
       this.ApiService.post("Order/Create", this.orderObject).subscribe(
         (res: any) => {
-          console.log(res);
-          this.toaster.successToaster("تم اضافة الطلب بنجاح");
+          // console.log(res);
+          // this.toaster.successToaster("تم اضافة الطلب بنجاح");
           const orderId = res.data.orderId;
           if (this.paymentSelect.paymentId == 2)
             window.location.href = `https://payment.matlop.com/payment/creditcardweb?orderid=${orderId}`;
           else
-            window.location.href = `https://app-thank-you/thank-you?status=paid&id=${orderId}&amount=${this.orderObject.totalAmount}&message=success`;
-        }
+            // window.location.href = `https://app-thank-you/thank-you?status=paid&id=${orderId}&amount=${this.orderObject.totalAmount}&message=success`;
+            window.location.href = `https://app-thank-you/thank-you?status=paid&id=${orderId}&amount=${this.orderObject.orderTotal}&message=success`;
+          }
       );
     }
   }
