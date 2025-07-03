@@ -43,7 +43,7 @@
                 </div>
               </div>
               <div class="amount">
-                <p>{{ packageDetails.price }} ريال</p>
+                <p>{{ packageDetails.price }}  {{ "rsa" | translate }}</p>
               </div>
             </div>
             <div class="section-three">
@@ -198,15 +198,15 @@
             <div class="promo-code-section">
 
               <div class="promo-title">
-                <p>رمز الخصم (إن وُجد)</p>
+                <p>{{'PACKAGE_DETAILS.promo_code_find'|translate}}</p>
               </div>
               <div class="promo-desc">
-                <p>عندك كود خصم؟ دخّله هنا قبل تأكيد الطلب للاستفادة من العرض.</p>
+                <p>{{'PACKAGE_DETAILS.promo_code_info'|translate}}</p>
               </div>
               <div class="form-group">
                 <div class="input-wrapper">
-                  <input id="saudiNumber"[disabled]="usedNumber?usedNumber==0:false" [readOnly]="usedNumber?usedNumber==0:false" [(ngModel)]="promoCodeValue" type="text" placeholder="رمز الخصم " />
-                  <button class="input-btn" [class.disabled]="usedNumber?usedNumber==0:false" [disabled]="usedNumber==0" (click)="onPromoCodeCheck()">تأكيد</button>
+                  <input id="saudiNumber"[disabled]="usedNumber?usedNumber==0:false" [readOnly]="usedNumber?usedNumber==0:false" [(ngModel)]="promoCodeValue" type="text" placeholder="{{'PACKAGE_DETAILS.promo_code'|translate}}" />
+                  <button class="input-btn" [class.disabled]="usedNumber?usedNumber==0:false" [disabled]="usedNumber==0" (click)="onPromoCodeCheck()">{{'actions.confirm'|translate}}</button>
                 </div>
               </div>
             </div>

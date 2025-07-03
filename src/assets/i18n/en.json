@@ -4,7 +4,7 @@
   "rs": "SAR",
   "cancel": "Cancel",
   "no_data_found": "No data found",
-  "Pending":"Pending",
+  "Pending": "Pending",
   "actions": {
     "send": "Send",
     "send_sms": "Send a  message",
@@ -16,7 +16,9 @@
     "add": "Add",
     "close": "Close",
     "select": "Select",
-    "cancel":"Cancel"
+    "cancel": "Cancel",
+    "confirm":"Confirm",
+    "send_request":"Send request"
   },
   "errors": {
     "required": "This field is required",
@@ -235,6 +237,9 @@
     "TIME_PLACEHOLDER": "Choose suitable time",
     "DATE_PLACEHOLDER": "Select preferred date",
     "ADD_LOCATION_MODAL_TITLE": "Add New Location",
+    "promo_code":"Promo code",
+    "promo_code_find": "Promo code (if available)",
+    "promo_code_info": "Have a discount code? Enter it here before confirming your order to benefit from the offer.",
     "VALIDATION": {
       "LOCATION": "Please select location",
       "PAYMENT": "Please select payment method",
@@ -374,5 +379,12 @@
     "EXPOSE5": "We may publish your inquiry to help others understand or solve similar issues.",
     "BANNER_HEADER": "Privacy Policy",
     "BANNER_DESC": "This privacy policy explains how personal information is collected, used, and protected when you use this website operated by the Matloob platform"
+  },
+   "location":{
+    "country_name":"Country name",
+    "city_name":"City Name",
+    "sector_name":"Sector Name",
+    "block_name":"Block name",
+    "add_location":"Add location"
   }
 }
