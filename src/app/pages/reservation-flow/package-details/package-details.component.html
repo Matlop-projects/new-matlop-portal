@@ -1,102 +1,162 @@
 <app-background-image-with-text [options]="bkg_text_options"></app-background-image-with-text>
-
 <div class="package-details-container container">
   <div class="content">
     <div class="wallet-container mt-3">
       <div class="d-flex justify-content-between flex-wrap">
         <div class="collection">
-          <span class="bold ">{{ "PACKAGE_DETAILS.wallet" | translate }}</span>
+          <span class="bold ">{{ "PACKAGE_DETAILS.wallet" | translate }} :</span>
           <span class="bold">{{ walletBalance }} {{ "rsa" | translate }}</span>
         </div>
-
         <span>
-          <button class="open-wallet btn" (click)="showWalletDialog = true">
+          <button class="open-wallet btn" (click)="showWalletDialogOptions = true">
             {{ "PACKAGE_DETAILS.add_wallet" | translate }}
           </button>
         </span>
       </div>
     </div>
     <div class="row">
+      <div class="promo-code-section">
+        <div class="promo-title">
+          <p>{{ "PACKAGE_DETAILS.PROMO_CODE_TITLE" | translate }}</p>
+        </div>
+        <div class="promo-desc">
+          <p>{{ "PACKAGE_DETAILS.PROMO_CODE_DESC" | translate }}</p>
+        </div>
+        <div class="form-group">
+          <div class="input-wrapper">
+            <input id="saudiNumber" [(ngModel)]="promoCodeValue" type="text"
+              placeholder="{{ 'PACKAGE_DETAILS.PROMO_CODE_PLACEHOLDER' | translate }}" />
+            <button class="input-btn" (click)="onPromoCodeCheck()">{{ "PACKAGE_DETAILS.CONFIRM_BUTTON" | translate
+              }}</button>
+          </div>
+        </div>
+      </div>
+
+
       <div class="packaeg-details-section col-lg-12" *ngIf="packageDetails">
-        <div class="card-content">
-          <div class="content">
-            <div class="section-one">
-              <div class="details">
-                <div class="vat-section">
-                  <p>{{ "PACKAGE_DETAILS.VAT_INCLUDED" | translate }}</p>
+        <div class="row">
+          <div class="card-content col-lg-9">
+            <div class="content">
+              <div class="section-one">
+                <div class="details">
+                  <div class="vat-section">
+                    <p>{{ "PACKAGE_DETAILS.VAT_INCLUDED" | translate }}</p>
+                  </div>
+                  <div class="package-name">
+                    <p class="name">
+                      {{
+                      selectedLang == "ar"
+                      ? packageDetails.nameAr
+                      : packageDetails.nameEn
+                      }}
+                    </p>
+                    <p class="type">
+                      ({{
+                      selectedLang == "ar"
+                      ? packageDetails.typeOfPackageNameAr
+                      : packageDetails.typeOfPackageName
+                      }})
+                    </p>
+                  </div>
                 </div>
-                <div class="package-name">
-                  <p class="name">
-                    {{
-                    selectedLang == "ar"
-                    ? packageDetails.nameAr
-                    : packageDetails.nameEn
-                    }}
-                  </p>
-                  <p class="type">
-                    ({{
-                    selectedLang == "ar"
-                    ? packageDetails.typeOfPackageNameAr
-                    : packageDetails.typeOfPackageName
-                    }})
-                  </p>
+                <div class="amount">
+                  <p>{{ packageDetails.price }} ريال</p>
                 </div>
               </div>
-              <div class="amount">
-                <p>{{ packageDetails.price }} ريال</p>
-              </div>
-            </div>
-            <div class="section-three">
-              <p [innerHTML]="
+              <div class="section-three">
+                <p [innerHTML]="
                   selectedLang == 'ar'
                     ? packageDetails.descriptionAr
                     : packageDetails.descriptionEn
                 "></p>
+              </div>
+              <div class="section-two mt-4">
+                <div class="contents">
+                  <img src="assets/images/icons-svg/profile.svg" alt="" />
+                  <div class="title">
+                    <p>{{ "PACKAGE_DETAILS.TECHNICIANS_COUNT" | translate }}</p>
+                  </div>
+                  <div class="value">
+                    <p>({{packageDetails.providerNumber}} {{ 'PACKAGES.PROVIDER' | translate }})</p>
+                  </div>
+                </div>
+                <div class="contents">
+                  <img src="assets/images/icons-svg/hash.svg" alt="" />
+                  <div class="title">
+                    <p>{{ "PACKAGE_DETAILS.VISITS_COUNT" | translate }}</p>
+                  </div>
+                  <div class="value">
+                    <p>
+                      ({{ packageDetails.visitNumber }}
+                      {{ "PACKAGE_DETAILS.VISITS_COUNT" | translate }})
+                    </p>
+                  </div>
+                </div>
+                <div class="contents">
+                  <img src="assets/images/icons-svg/clock.svg" alt="" />
+                  <div class="title">
+                    <p>{{ "PACKAGE_DETAILS.VISIT_DURATION" | translate }}</p>
+                  </div>
+                  <div class="value">
+                    <p>
+                      ({{ packageDetails.visitHours }}
+                      {{ "PACKAGE_DETAILS.VISIT_DURATION" | translate }})
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="section-two mt-4">
-              <div class="contents">
-                <img src="assets/images/icons-svg/profile.svg" alt="" />
+          </div>
+          <div class="payment-summary col-lg-3">
+            <div class="content">
+              <div class="summary-card">
                 <div class="title">
-                  <p>{{ "PACKAGE_DETAILS.TECHNICIANS_COUNT" | translate }}</p>
+                  <p>{{ "PACKAGE_DETAILS.SUMMARY_TITLE" | translate }}</p>
                 </div>
-                <div class="value">
-                  <p>(#### )</p>
-                </div>
-              </div>
-              <div class="contents">
-                <img src="assets/images/icons-svg/hash.svg" alt="" />
-                <div class="title">
-                  <p>{{ "PACKAGE_DETAILS.VISITS_COUNT" | translate }}</p>
-                </div>
-                <div class="value">
-                  <p>
-                    ({{ packageDetails.visitNumber }}
-                    {{ "PACKAGE_DETAILS.VISITS_COUNT" | translate }})
-                  </p>
-                </div>
-              </div>
-              <div class="contents">
-                <img src="assets/images/icons-svg/clock.svg" alt="" />
-                <div class="title">
-                  <p>{{ "PACKAGE_DETAILS.VISIT_DURATION" | translate }}</p>
-                </div>
-                <div class="value">
-                  <p>
-                    ({{ packageDetails.visitHours }}
-                    {{ "PACKAGE_DETAILS.VISIT_DURATION" | translate }})
-                  </p>
+                <div class="summary-details mt-4">
+                  <div class="collection">
+                    <div class="desc">
+                      <p>{{ "PACKAGE_DETAILS.PRICE" | translate }}</p>
+                      <p class="vat">{{ "PACKAGE_DETAILS.INCLUDE_VAT" | translate }}</p>
+                    </div>
+                    <div class="value">
+                      <p>{{ packageDetails.price }} ريال</p>
+                    </div>
+                  </div>
+                  <div class="collection">
+                    <div class="desc">
+                      <p>{{ "PACKAGE_DETAILS.VAT" | translate }}</p>
+                    </div>
+                    <div class="value">
+                      <p>{{calculate15Percent(packageDetails.price)}} ريال</p>
+                    </div>
+                  </div>
+                  <div class="collection">
+                    <div class="desc">
+                      <p>{{ "PACKAGE_DETAILS.DISCOUNT" | translate }}</p>
+                    </div>
+                    <div class="value">
+                      <p>300</p>
+                    </div>
+                  </div>
+                  <div class="collection total-price">
+                    <div class="desc">
+                      <p>{{ "PACKAGE_DETAILS.TOTAL_PRICE" | translate }}</p>
+                    </div>
+                    <div class="total-price-value">
+                      <p>300</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
         <div class="order-section">
           <div class="row">
             <div class="title col-lg-12">
               <p>{{ "PACKAGE_DETAILS.REQUEST_DATA" | translate }}</p>
             </div>
-
             <div class="location-section mt-4 col-lg-12">
               <label>{{ "PACKAGE_DETAILS.LOCATION" | translate }}</label><span class="red-mark">*</span>
               <div class="actions-section">
@@ -109,7 +169,6 @@
                 </div>
               </div>
             </div>
-
             <div class="date-picker-section col-lg-6">
               <label>{{ "PACKAGE_DETAILS.DATE" | translate }}</label><span class="red-mark">*</span>
               <p-datepicker [ngClass]="{ 'input-error': isDateInvalid }" [(ngModel)]="dates"
@@ -120,14 +179,12 @@
                 {{ errorMessage }}
               </small>
             </div>
-
             <div class="time-picker-section col-lg-6">
               <label>{{ "PACKAGE_DETAILS.WORK_TIME" | translate }}</label><span class="red-mark">*</span>
               <p-select [options]="workingHoursList" [(ngModel)]="workingHoursSelect"
                 (onChange)="onWorkingHoursChange($event)" optionLabel="finalWorking"
                 [placeholder]="'PACKAGE_DETAILS.SELECT_WORK_TIME' | translate" />
             </div>
-
             <div class="payment-way-section col-lg-12" *ngIf="paymentList.length > 0">
               <label>{{ "PACKAGE_DETAILS.PAYMENT_METHOD" | translate }}</label><span class="red-mark">*</span>
               <p-select [options]="paymentList" [(ngModel)]="paymentSelect" [optionDisabled]="'disabled'"
@@ -135,8 +192,7 @@
                   'PACKAGE_DETAILS.SELECT_PAYMENT_METHOD' | translate
                 " />
             </div>
-
-            <div class="equepment-section col-lg-12">
+            <div class="equepment-section col-lg-12" *ngIf="equipments">
               <label>{{ "PACKAGE_DETAILS.EQUIPMENT" | translate }}</label>
               <p class="clarify">
                 {{ "PACKAGE_DETAILS.SELECT_EQUIPMENT" | translate }}
@@ -154,7 +210,6 @@
                 </div>
               </div>
             </div>
-
             <div class="media-section col-lg-12">
               <label>{{ "PACKAGE_DETAILS.MEDIA" | translate }}</label>
               <div class="desc">
@@ -188,33 +243,13 @@
                 </div>
               </div>
             </div>
-
             <div class="note-section col-lg-12">
               <label>{{ "PACKAGE_DETAILS.ORDER_NOTE" | translate }}</label>
               <textarea class="form-control mb-3 mt-3" [placeholder]="'PACKAGE_DETAILS.NOTE_PLACEHOLDER' | translate"
                 name="notes" [(ngModel)]="orderObject.notes"></textarea>
             </div>
-
-            <div class="promo-code-section">
-
-              <div class="promo-title">
-                <p>رمز الخصم (إن وُجد)</p>
-              </div>
-              <div class="promo-desc">
-                <p>عندك كود خصم؟ دخّله هنا قبل تأكيد الطلب للاستفادة من العرض.</p>
-              </div>
-              <div class="form-group">
-                <div class="input-wrapper">
-                  <input id="saudiNumber" [(ngModel)]="promoCodeValue" type="text" placeholder="رمز الخصم " />
-                  <button class="input-btn" (click)="onPromoCodeCheck()">تأكيد</button>
-                </div>
-              </div>
-            </div>
-
-
           </div>
         </div>
-
         <div class="instructions-section">
           <label>{{ "PACKAGE_DETAILS.MAIN_INSTRUCTIONS" | translate }}</label>
           <p [innerHTML]="
@@ -223,13 +258,15 @@
                 : packageDetails.enInstraction
             "></p>
         </div>
-
         <div class="submit-btn-section">
           <button class="submit-btn-form" (click)="createOrder()">
             {{ "PACKAGE_DETAILS.SUBMIT" | translate }}
           </button>
         </div>
       </div>
+
+
+
     </div>
   </div>
 </div>
@@ -237,21 +274,85 @@
   [(visible)]="showAddLocationDialog" [style]="{ width: '25rem' }">
   <app-add-location (value)="onAddLocation($event)"></app-add-location>
 </p-dialog>
-<p-dialog header="{{ 'PACKAGE_DETAILS.add_wallet' | translate }}" [modal]="true" [(visible)]="showWalletDialog"
+<div class="wallet-card-container">
+  <p-dialog header="{{ 'PACKAGE_DETAILS.add_wallet' | translate }}" [modal]="true" [(visible)]="showWalletDialogOptions"
+    [style]="{ width: '37rem' }">
+    <div>
+      <div class="content row">
+        <div class="wallet-card col-lg-6 col-md-6 col-sm-12">
+          <div class="card-content" (click)="walletActions('d')">
+            <img src="assets/images/icons-svg/deposit.png" alt="">
+            <p>{{ "PACKAGE_DETAILS.RECHARGE_WALLET" | translate }}</p>
+          </div>
+        </div>
+        <div class="wallet-card col-lg-6 col-md-6 col-sm-12">
+          <div class="card-content" (click)="walletActions('w')">
+            <img src="assets/images/icons-svg/withdrawal.png" alt="">
+            <p>{{ "PACKAGE_DETAILS.WITHDRAWAL_WALLET" | translate }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-dialog>
+</div>
+<p-dialog header="{{ 'PACKAGE_DETAILS.add_wallet' | translate }}" [modal]="true" [(visible)]="openWithdrawalDialog"
   [style]="{ width: '27rem' }">
   <div>
     <div class="time-picker-section">
       <label>{{ "PACKAGE_DETAILS.wallet_amount" | translate }}</label><span class="red-mark">*</span>
-      <input class="w-100 mt-1" type="number" pInputText [(ngModel)]="walletAmount" />
+      <p-inputnumber class="w-100 mt-1" mode="decimal" inputId="integeronly" pInputText [max]="walletBalance"
+        [(ngModel)]="walletAmount" />
+      <div class="error-section">
+        <div class="max-amoutn-error" *ngIf="walletBalance < walletAmount">
+          <p style="color: rgb(168, 31, 31);">{{ "PACKAGE_DETAILS.MAX_AMOUNT" | translate }}</p>
+        </div>
+        <div class="max-amoutn-error" *ngIf=" walletAmount < 0">
+          <p style="color: rgb(168, 31, 31);">{{ "PACKAGE_DETAILS.MIN_AMOUNT" | translate }}</p>
+        </div>
+      </div>
     </div>
     <div class="d-flex justify-content-between mt-3">
-      <button class="btn btn-wallet btn-danger w-49" (click)="showWalletDialog = false">
-        {{'cancel' | translate}}
+      <button class="btn btn-wallet btn-danger w-49" (click)="openWithdrawalDialog = false">
+        {{'PACKAGE_DETAILS.CANCEL_BUTTON' | translate}}
       </button>
-      <button class="btn btn-primary w-49 btn-wallet" [disabled]="walletAmount <= 0||!walletAmount"
-        (click)="addWalletSubmit()">
+      <button class="btn btn-primary w-49 btn-wallet"
+        [disabled]="walletAmount <= 0 || !walletAmount || walletBalance < walletAmount" (click)="addWalletSubmit('w')">
         {{ "PACKAGE_DETAILS.add_wallet" | translate }}
       </button>
+    </div>
+  </div>
+</p-dialog>
+<p-dialog header="{{ 'PACKAGE_DETAILS.DEPOSITE_ACTION' | translate }}" [modal]="true" [(visible)]="openDepositelDialog"
+  [style]="{ width: '27rem' }">
+  <div>
+    <div class="time-picker-section">
+      <label>{{ "PACKAGE_DETAILS.wallet_amount" | translate }}</label><span class="red-mark">*</span>
+      <p-inputnumber class="w-100 mt-1" mode="decimal" inputId="integeronly" pInputText [max]="walletBalance"
+        [(ngModel)]="walletAmount" />
+      <div class="error-section">
+        <div class="max-amoutn-error" *ngIf="walletAmount < 0">
+          <p style="color: rgb(168, 31, 31);">{{ "PACKAGE_DETAILS.MIN_AMOUNT" | translate }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between mt-3">
+      <button class="btn btn-wallet btn-danger w-49" (click)="openDepositelDialog = false">
+        {{'PACKAGE_DETAILS.CANCEL_BUTTON' | translate}}
+      </button>
+      <button class="btn btn-primary w-49 btn-wallet" [disabled]="walletAmount <= 0 || !walletAmount"
+        (click)="addWalletSubmit('d')">
+        {{ "PACKAGE_DETAILS.PAY" | translate }}
+      </button>
+    </div>
+  </div>
+</p-dialog>
+<p-dialog header="{{ 'PACKAGE_DETAILS.DEPOSITE_PAYMENT' | translate }}" [modal]="true"
+  [(visible)]="depositePaymentDialog" [style]="{ width: '35rem' }">
+  <div>
+    <div class="iframe-container">
+      <iframe #paymentFrame [src]="safeIframeUrl" width="100%" height="600" frameborder="0" allowfullscreen
+        (load)="onIframeLoad(paymentFrame)">
+      </iframe>
     </div>
   </div>
 </p-dialog>
