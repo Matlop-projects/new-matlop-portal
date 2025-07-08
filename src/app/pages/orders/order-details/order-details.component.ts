@@ -6,6 +6,10 @@ import { environment } from "../../../../environments/environment";
 import { DialogModule } from "primeng/dialog";
 import { OrderCancelComponent } from "../order-cancel/order-cancel.component";
 import { FormsModule } from "@angular/forms";
+import { SelectModule } from "primeng/select";
+import { FloatLabelModule } from "primeng/floatlabel";
+import { TranslateModule } from "@ngx-translate/core";
+import { LanguageService } from "../../../services/language.service";
 @Component({
   selector: "app-order-details",
   standalone: true,
@@ -16,6 +20,9 @@ import { FormsModule } from "@angular/forms";
     DialogModule,
     OrderCancelComponent,
     FormsModule,
+    SelectModule,
+    FloatLabelModule,
+    TranslateModule
   ],
   templateUrl: "./order-details.component.html",
   styleUrl: "./order-details.component.scss",
@@ -24,24 +31,48 @@ export class OrderDetailsComponent implements OnInit {
   orderDetails: any;
   visibleCancelOrder: boolean = false;
   visibleAdditionalItem: boolean = false;
+  visiblePaymentWay:boolean=false;
   orderAdditionalNotes: string = "";
+  selectedPaymentValue:any[]=[]
   baseUrl = environment.baseImageUrl;
+  PaymentWayList:any[]=[]
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
   private apiService = inject(ApiService);
-
-  get orderId() {
+ selectedLang: any;
+  languageService = inject(LanguageService);  get orderId() {
     return this.route.snapshot.paramMap.get("id");
   }
   ngOnInit(): void {
     this.getOrderDetails();
+     this.selectedLang = this.languageService.translationService.currentLang || 'ar';
+    this.languageService.translationService.onLangChange.subscribe(() => {
+      this.selectedLang = this.languageService.translationService.currentLang;
+    })
   }
-
+confirmPaymentWay(){
+  let body={
+  "paymentId":this.selectedPaymentValue[0].code,
+  "enName": this.selectedPaymentValue[0].en,
+  "arName": this.selectedPaymentValue[0].ar,
+  "enDescription": this.selectedPaymentValue[0].descEn,
+  "arDescription": this.selectedPaymentValue[0].descAr
+  }
+  this.apiService.put('PaymentWay/UpdatePaymentWay',body).subscribe(res=>{
+    if(res){
+      this.visiblePaymentWay=false;
+      this.getOrderDetails()
+    }
+  })
+}
   getOrderDetails() {
     this.apiService.get(`order/get/${this.orderId}`).subscribe((res: any) => {
-      if (res.data) this.orderDetails = res.data;
-      console.log(this.orderDetails);
+      if (res.data){ 
+        this.orderDetails = res.data;
+        if(res.data.orderStatusName=='Pending')
+          this.getAllPaymentWay()
+      }
     });
   }
 
@@ -59,6 +90,26 @@ export class OrderDetailsComponent implements OnInit {
   onAdditionalOrder() {
     this.visibleAdditionalItem = true;
   }
+  getAllPaymentWay(){
+    this.apiService.get('PaymentWay/GetAll').subscribe((res:any)=>{
+        this.PaymentWayList=[]
+        if(res.data)
+      res.data.map((item:any)=>{
+        this.PaymentWayList.push({
+          name:this.selectedLang=='en'? item.enName:item.arName,
+          code:item.paymentId,
+          en:item.enName,
+          ar:item.arName,
+          descAr:item.arDescription,
+          descEn:item.enDescription
+        })
+      })
+    })
+  }
+  onPaymentWaySelect(payment:number){
+     this.selectedPaymentValue=this.PaymentWayList.filter(item=>item.code==payment)
+  }
+
   confirmAdditionalItem() {
     let payload = {
       orderId: this.orderId,

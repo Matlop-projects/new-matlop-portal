@@ -23,8 +23,8 @@
     <app-how-we-work-section></app-how-we-work-section>
 </div>
 
-<div class="faqs-section" style="margin-top: 3rem;">
-    <app-faqs-section></app-faqs-section>
+<div class="faqs-section" style="margin-top: 3rem;" *ngIf="faqsList.length>0">
+    <app-faqs-section (value)="onFaqsData($event)"></app-faqs-section>
 </div>
 
 <div class="order-now-section" style="margin-top: 3rem;">

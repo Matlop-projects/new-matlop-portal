@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output, output } from '@angular/core';
 import { ApiService } from '../../../services/api.service';
 import { ToasterService } from '../../../services/toaster.service';
 import { PanelModule } from 'primeng/panel';
@@ -14,7 +14,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './faqs-section.component.scss'
 })
 export class FaqsSectionComponent {
-
+@Output() value =new EventEmitter()
   faqsList: any[] = [];
   api = inject(ApiService);
   toaster = inject(ToasterService);
@@ -33,6 +33,7 @@ export class FaqsSectionComponent {
     this.api.get('FAQs/GetAll').subscribe((res: any) => {
       console.log(res);
       this.faqsList = res.data;
+      this.value.emit(this.faqsList)
     })
   }
 

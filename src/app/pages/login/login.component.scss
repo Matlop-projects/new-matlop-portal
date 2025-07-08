@@ -70,7 +70,13 @@
   }
   }
 }
-
+@media only screen and (min-width:250.98px) and (max-width: 605px) {
+  .login-container{
+    .content{
+      flex-basis: 95%;
+    }
+  }
+}
   // Small devices (portrait phones)
 @media only screen and (min-width:250.98px) and (max-width: 575.98px) {
   .hide-part {

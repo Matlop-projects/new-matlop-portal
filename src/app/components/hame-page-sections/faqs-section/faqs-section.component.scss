@@ -1,23 +1,29 @@
 .faqs-section-container {
-    .content {
-        padding: 20px;
+  .content {
+    padding: 20px;
 
-        .title {
-            text-align: center;
-            p {
-                font-size: 48px;
-                font-weight: 500;
-                color: #0D0D0D;
-            }
-        }
-
-        .desc {
-            text-align: center;
-            p {
-                font-size: 20px;
-                font-weight: 400;
-                color: #737373;
-            }
-        }
+    .title {
+      text-align: center;
+      p {
+        font-size: 48px;
+        font-weight: 500;
+        color: #0d0d0d;
+      }
     }
+
+    .desc {
+      text-align: center;
+      p {
+        font-size: 20px;
+        font-weight: 400;
+        color: #737373;
+      }
+    }
+  }
+}
+.no-data {
+  margin-top: 250px;
+  h1{
+    margin: 190px 0px;
+  }
 }

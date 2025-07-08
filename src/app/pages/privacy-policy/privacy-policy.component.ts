@@ -7,7 +7,7 @@ import { NgFor } from '@angular/common';
 @Component({
   selector: 'app-privacy-policy',
   standalone: true,
-  imports: [BackgroundImageWithTextComponent, TranslatePipe , NgFor],
+  imports: [BackgroundImageWithTextComponent, TranslatePipe,NgFor],
   templateUrl: './privacy-policy.component.html',
   styleUrl: './privacy-policy.component.scss'
 })

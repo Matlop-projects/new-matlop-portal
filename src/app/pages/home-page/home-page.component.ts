@@ -7,14 +7,18 @@ import { SliderSectionComponent } from '../../components/hame-page-sections/slid
 import { SpecialServicesSectionComponent } from '../../components/hame-page-sections/special-services-section/special-services-section.component';
 import { WhoAreWeSectionComponent } from '../../components/hame-page-sections/who-are-we-section/who-are-we-section.component';
 import { FaqsSectionComponent } from "../../components/hame-page-sections/faqs-section/faqs-section.component";
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [DescriptionSectionComponent, HowWeWorkSectionComponent, MainServicesSectionComponent, OrderNowSectionComponent, SliderSectionComponent, SpecialServicesSectionComponent, WhoAreWeSectionComponent, FaqsSectionComponent],
+  imports: [DescriptionSectionComponent,NgIf, HowWeWorkSectionComponent, MainServicesSectionComponent, OrderNowSectionComponent, SliderSectionComponent, SpecialServicesSectionComponent, WhoAreWeSectionComponent, FaqsSectionComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
 export class HomePageComponent {
-
+  faqsList:any[]=[]
+  onFaqsData(event:any){
+    this.faqsList=event
+  }
 }

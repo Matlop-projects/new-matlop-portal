@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
@@ -9,5 +10,8 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './who-are-we-section.component.scss'
 })
 export class WhoAreWeSectionComponent {
-
+  private router =inject(Router)
+  goToFAQS(){
+    this.router.navigateByUrl('faqs-section')
+  }
 }

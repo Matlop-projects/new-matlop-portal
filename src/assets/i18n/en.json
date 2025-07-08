@@ -1,6 +1,25 @@
 {
-  "rsa": "RSA",
+  "rsa": "SAR",
+  "ryal": "SAR",
+  "rs": "SAR",
   "cancel": "Cancel",
+  "no_data_found": "No data found",
+  "Pending": "Pending",
+  "actions": {
+    "send": "Send",
+    "send_sms": "Send a  message",
+    "login": "Login",
+    "change": "Change",
+    "back": "Back",
+    "addNew": "Add New",
+    "update": "Update",
+    "add": "Add",
+    "close": "Close",
+    "select": "Select",
+    "cancel": "Cancel",
+    "confirm":"Confirm",
+    "send_request":"Send request"
+  },
   "errors": {
     "required": "This field is required",
     "minLength": "Characters  must be at least",
@@ -58,6 +77,17 @@
     "DESCRIPTION": "From plumbing and electricity to air conditioning and carpentry, we provide comprehensive solutions with high professionalism and prompt execution tailored to your needs.",
     "ORDER_NOW": "Request Service Now",
     "DOWNLOAD_APP": "Download the app now"
+  },
+  "forget_pass": {
+    "title": "Forget Password",
+    "mobile": " Mobile Number",
+    "mobile_required": "Mobile number is required",
+    "add_new_pass": "Add New Password",
+    "enter_new_pass": "Enter new password",
+    "new_pass_required": " New password is required",
+    "confirm_pass": "Confirm password",
+    "confirm_required": "Confirm password is required",
+    "not_matched": "Passwords do not match"
   },
   "DESCRIPTION": {
     "CARD_1": {
@@ -208,6 +238,9 @@
     "TIME_PLACEHOLDER": "Choose suitable time",
     "DATE_PLACEHOLDER": "Select preferred date",
     "ADD_LOCATION_MODAL_TITLE": "Add New Location",
+    "promo_code":"Promo code",
+    "promo_code_find": "Promo code (if available)",
+    "promo_code_info": "Have a discount code? Enter it here before confirming your order to benefit from the offer.",
     "VALIDATION": {
       "LOCATION": "Please select location",
       "PAYMENT": "Please select payment method",
@@ -286,6 +319,40 @@
     "SHOW_DETAILS": "Show Details",
     "NO_ORDERS": "No orders at the moment"
   },
+  "order_details": {
+    "orders": "Orders",
+    "details": "Order Details",
+    "pkg_details": "Package Details",
+    "pkg_name": "Package Name",
+    "visit_duration": "Visit Duration",
+    "hours": "Hours",
+    "visitor_count": "Number of Technicians",
+    "tech": "Technician",
+    "info": "Order Information",
+    "date": "Order Date",
+    "time": "Order Time",
+    "status": "Order Status",
+    "paymentWay": "Payment Method",
+    "orderAdded": "Additional Orders",
+    "mintanance": "Add Extra Maintenance Request",
+    "no_added_ordered": "No Additional Orders",
+    "total": "Total",
+    "retry_payment": "Retry Payment",
+    "canceld_order": "Cancel Order",
+    "visit_mo3ed": "Visit Schedule",
+    "equipments": "Equipment",
+    "no_equipments": "No Equipment",
+    "img_order": "Order Images",
+    "no_video_support": "This browser does not support video",
+    "no_img": "No Images Available",
+    "main_instractions": "Main Instructions",
+    "add_added_order": "Add Additional Request",
+    "note": "Note",
+    "notes": "Notes",
+    "can_canceled": "You can cancel the order up to 24 hours in advance",
+    "select_payment": "Select Payment Method",
+    "add_order": "Add Order"
+  },
   "ORDER_TRACKING": {
     "BANNER_HEADER": "Track your orders instantly",
     "BANNER_DESC": "Stay updated with the status of your current orders and latest updates"
@@ -339,5 +406,12 @@
     "EXPOSE5": "We may publish your inquiry to help others understand or solve similar issues.",
     "BANNER_HEADER": "Privacy Policy",
     "BANNER_DESC": "This privacy policy explains how personal information is collected, used, and protected when you use this website operated by the Matloob platform"
+  },
+   "location":{
+    "country_name":"Country name",
+    "city_name":"City Name",
+    "sector_name":"Sector Name",
+    "block_name":"Block name",
+    "add_location":"Add location"
   }
 }

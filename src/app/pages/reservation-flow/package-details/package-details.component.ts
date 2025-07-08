@@ -55,7 +55,7 @@ export class PackageDetailsComponent {
   cities: any;
   toaster = inject(ToasterService);
   selectedEquipments: { equipmentId: number }[] = []; // declare at top of your TS file
-
+  usedNumber: any;
   bkg_text_options: IBackGroundImageWithText = {
     imageUrl: "assets/img/slider.svg",
     header: this.languageService.translate("ABOUT_US_CONTACT.BANNER_HEADER"),
@@ -122,13 +122,13 @@ export class PackageDetailsComponent {
 
   ngOnInit(): void {
     this.packageId = this.route.snapshot.params["packageId"];
+    this.orderObject.clientId = localStorage.getItem("userId");
+    this.orderObject.packageId = this.packageId;
     this.getLocation();
     this.getPackageDetailsById(this.packageId);
     this.setCalendarLimits();
     this.getWorkingHours();
     this.getEquipmentsList(this.packageId);
-    this.orderObject.clientId = localStorage.getItem("userId");
-    this.orderObject.packageId = this.packageId;
     this.selectedLang = this.languageService.translationService.currentLang;
     this.languageService.translationService.onLangChange.subscribe(() => {
       this.selectedLang = this.languageService.translationService.currentLang;
@@ -172,7 +172,7 @@ export class PackageDetailsComponent {
     this.ApiService.get("Location/GetByUserId/" + userId).subscribe(
       (res: any) => {
         if (res.data) {
-          this.locations = res.data.map((item: any) => ({
+          this.locations = res.data?.map((item: any) => ({
             name: item.countryName,
             code: item.locationId,
           }));
@@ -238,20 +238,33 @@ export class PackageDetailsComponent {
       }
     );
   }
+  // setCalendarLimits() {
+  //   if (this.packageDetails) {
+  //     if (this.packageDetails.packageType == 2) {
+  //       this.minDate = new Date();
+  //       this.minDate.setDate(this.minDate.getDate() + 1);
+
+  //       this.maxDate = new Date();
+  //       this.maxDate.setMonth(this.maxDate.getMonth() + 1);
+  //     } else {
+  //       this.minDate = new Date();
+  //       this.minDate.setDate(this.minDate.getDate() + 1);
+
+  //       this.maxDate = null;
+  //     }
+  //   }
+  // }
   setCalendarLimits() {
-    if (this.packageDetails) {
-      if (this.packageDetails.packageType == 2) {
-        this.minDate = new Date();
-        this.minDate.setDate(this.minDate.getDate() + 1);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    this.minDate = today;
 
-        this.maxDate = new Date();
-        this.maxDate.setMonth(this.maxDate.getMonth() + 1);
-      } else {
-        this.minDate = new Date();
-        this.minDate.setDate(this.minDate.getDate() + 1);
-
-        this.maxDate = null;
-      }
+    if (this.packageDetails?.packageType == 2) {
+      const max = new Date();
+      max.setMonth(max.getMonth() + 1);
+      this.maxDate = max;
+    } else {
+      this.maxDate = null;
     }
   }
 
@@ -270,20 +283,56 @@ export class PackageDetailsComponent {
       } else {
         this.isDateInvalid = false;
         this.errorMessage = "";
-        this.isoDates = this.dates.map((date: any) => date.toISOString());
+        // this.isoDates = this.dates.map((date: any) =>
+        //   date.toISOString()
+        // );
+        this.isoDates = this.dates.map((date: any) => {
+          const now = new Date(); // Get current time
+          date.setHours(now.getHours(), now.getMinutes(), now.getSeconds());
+
+          return (
+            `${date.getFullYear()}-${(date.getMonth() + 1)
+              .toString()
+              .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}` +
+            `T${date.getHours().toString().padStart(2, "0")}:${date
+              .getMinutes()
+              .toString()
+              .padStart(2, "0")}:${date
+                .getSeconds()
+                .toString()
+                .padStart(2, "0")}Z`
+          );
+        });
         this.orderObject.scheduleDates = this.isoDates;
       }
     } else {
       this.isDateInvalid = false;
       this.errorMessage = "";
-      this.isoDates = this.dates.map((date: any) => date.toISOString());
+      // this.isoDates = this.dates.map((date: any) => date.toISOString());
+      this.isoDates = this.dates.map((date: any) => {
+        const now = new Date(); // Get current time
+        date.setHours(now.getHours(), now.getMinutes(), now.getSeconds());
+
+        return (
+          `${date.getFullYear()}-${(date.getMonth() + 1)
+            .toString()
+            .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}` +
+          `T${date.getHours().toString().padStart(2, "0")}:${date
+            .getMinutes()
+            .toString()
+            .padStart(2, "0")}:${date
+              .getSeconds()
+              .toString()
+              .padStart(2, "0")}Z`
+        );
+      });
       this.orderObject.scheduleDates = this.isoDates;
     }
   }
 
   getWorkingHours() {
     this.ApiService.get(`WorkingTime/GetAll`).subscribe((hours: any) => {
-      this.workingHoursList = hours.data.map((item: any) => ({
+      this.workingHoursList = hours.data?.map((item: any) => ({
         ...item,
         finalWorking: `${new Date(item.startDate).toLocaleTimeString("en-GB", {
           hour: "2-digit",
@@ -309,7 +358,7 @@ export class PackageDetailsComponent {
       (res: any) => {
         console.log(res);
 
-        this.equipments = res.data.map((item: any) => ({
+        this.equipments = res.data?.map((item: any) => ({
           ...item,
           status: false, // ✅ Add status property
         }));
@@ -400,6 +449,8 @@ export class PackageDetailsComponent {
   }
 
   addWalletSubmit(type: string) {
+    console.log(type);
+    
     if (type == 'w') {
       let body = {
         userId: this.orderObject.clientId,
@@ -446,13 +497,14 @@ export class PackageDetailsComponent {
       console.log(this.orderObject);
       this.ApiService.post("Order/Create", this.orderObject).subscribe(
         (res: any) => {
-          console.log(res);
-          this.toaster.successToaster(this.languageService.translate("PACKAGE_DETAILS.ORDER_ADDED_SUCCESS"));
+          // console.log(res);
+          // this.toaster.successToaster("تم اضافة الطلب بنجاح");
           const orderId = res.data.orderId;
           if (this.paymentSelect.paymentId == 2)
             window.location.href = `https://payment.matlop.com/payment/creditcardweb?orderid=${orderId}`;
           else
-            window.location.href = `https://app-thank-you/thank-you?status=paid&id=${orderId}&amount=${this.orderObject.totalAmount}&message=success`;
+            // window.location.href = `https://app-thank-you/thank-you?status=paid&id=${orderId}&amount=${this.orderObject.totalAmount}&message=success`;
+            window.location.href = `https://app-thank-you/thank-you?status=paid&id=${orderId}&amount=${this.orderObject.orderTotal}&message=success`;
         }
       );
     }
@@ -474,20 +526,20 @@ export class PackageDetailsComponent {
           if (loc.data.hasMaxAmount && priceAfterDiscountPrecentage >= loc.data.maxAmount) {
             this.packageDetails.couponPrice = this.packageDetails.price - loc.data.maxAmount;
           } else {
-            this.packageDetails.couponPrice = this.calculateSalePrice(this.packageDetails.price, loc.data.amount);
+            this.packageDetails.couponDiscount = loc.data.amount;
+            this.packageDetails.couponPrice =
+              this.packageDetails.price - this.packageDetails.couponDiscount;
+            console.log(this.packageDetails);
           }
-          console.log(this.packageDetails);
-        } else {
-          this.packageDetails.couponDiscount = loc.data.amount;
-          this.packageDetails.couponPrice = this.packageDetails.price - this.packageDetails.couponDiscount;
-          console.log(this.packageDetails);
         }
-      }, err => {
-        this.invalidCoupn = true;
-        this.validCoupon = false;
-        this.invalidCoupnMessage = err.error.message;
-        this.toaster.errorToaster(this.languageService.translate("PACKAGE_DETAILS.INVALID_COUPON"));
-      })
+      }
+        , err => {
+          this.invalidCoupn = true;
+          this.validCoupon = false;
+          this.invalidCoupnMessage = err.error.message;
+          this.toaster.errorToaster(this.languageService.translate("PACKAGE_DETAILS.INVALID_COUPON"));
+        }
+      )
     } else {
       this.toaster.errorToaster(this.languageService.translate("PACKAGE_DETAILS.PLEASE_ADD_COUPON"));
     }
@@ -537,6 +589,6 @@ export class PackageDetailsComponent {
   }
 
   calculate15Percent(value: number): number {
-  return value * 0.15;
-}
+    return value * 0.15;
+  }
 }

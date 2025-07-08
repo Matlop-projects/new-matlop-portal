@@ -50,7 +50,7 @@ private Router = inject(Router)
    dateOfBirth: new FormControl<any>('', {
   validators: [Validators.required],
 }),
-      imgSrc:  new FormControl("",),
+      imgSrc:  new FormControl<any>("",),
   });
 
   ngOnInit(): void {
@@ -79,7 +79,6 @@ private Router = inject(Router)
   getUserById(){
      this.apiService.get(`client/getById/${this.userId}`).subscribe((res:any)=>{
       this.user = res.data;
-      console.log('fff',this.user)
       this.form.patchValue({
         firstName: this.user?.firstName,
         email: this.user?.email,
@@ -109,7 +108,9 @@ let payload={
 this.apiService.put('client/update',payload).subscribe(res=>{
   if(res){
     this.getUserById()
-    this.showBtn=false
+    this.showBtn=false;
+    localStorage.setItem('img',this.form.value.imgSrc);
+    this.Router.navigateByUrl('home')
   }
 })
 

@@ -18,6 +18,8 @@ import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.co
 import { TermsConditionsComponent } from './pages/terms-conditions/terms-conditions.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ThankYouComponent } from './pages/thank-you/thank-you.component';
+import { FaqsSectionComponent } from './components/hame-page-sections/faqs-section/faqs-section.component';
+import { ForgetPasswordComponentimplements } from './pages/forget-password/forget-password.component';
 
 
 
@@ -37,8 +39,8 @@ export const routes: Routes = [
     pathMatch: 'full'
   },
       { path: 'login', component: LoginComponent },
-      { path: 'signup', component: SignupComponent }
-      // { path: 'forget_password', component: ForgetPasswordComponent },
+      { path: 'signup', component: SignupComponent },
+      { path: 'forget_password', component: ForgetPasswordComponentimplements },
       // { path: 'reset_password', component: ResetPasswordComponent },
     ]
   },
@@ -61,6 +63,9 @@ export const routes: Routes = [
       { path: 'terms-conditions', component: TermsConditionsComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'thank-you', component: ThankYouComponent },
+      { path: 'faqs-section', component: FaqsSectionComponent },
+
+
       // { path: 'product_details/:productId/:traderId', component: ProductDetailsComponent },
       // { path: 'wishlist', component: FavItemsComponent ,canActivate: [authGuard] },
       // { path: 'cart', component: ShoppingCartComponent , canActivate: [authGuard] },

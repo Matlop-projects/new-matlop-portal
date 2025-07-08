@@ -78,9 +78,9 @@ export class AboutUsComponent {
     mobile: new FormControl("", {
       validators: [
         Validators.required,
-        Validations.mobileStartWithNumber_5_Validator(),
-        Validators.minLength(9),
-        Validators.maxLength(9)
+        Validators.pattern(/^05\d{8}$/),
+        Validators.minLength(10),
+        Validators.maxLength(10)
       ]
     }),
     message: new FormControl("", {
@@ -99,8 +99,6 @@ export class AboutUsComponent {
 
   onContactUs() {
     this.apiService.post("ContactUs/Create", this.form.value).subscribe((res) => {
-      if (res) {
-      }
     });
   }
 }

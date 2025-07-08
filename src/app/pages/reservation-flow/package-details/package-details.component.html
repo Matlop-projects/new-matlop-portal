@@ -31,8 +31,6 @@
           </div>
         </div>
       </div>
-
-
       <div class="packaeg-details-section col-lg-12" *ngIf="packageDetails">
         <div class="row">
           <div class="card-content col-lg-9">
@@ -269,90 +267,90 @@
 
     </div>
   </div>
-</div>
-<p-dialog header="{{ 'PACKAGE_DETAILS.ADD_LOCATION_MODAL_TITLE' | translate }}" [modal]="true"
-  [(visible)]="showAddLocationDialog" [style]="{ width: '25rem' }">
-  <app-add-location (value)="onAddLocation($event)"></app-add-location>
-</p-dialog>
-<div class="wallet-card-container">
-  <p-dialog header="{{ 'PACKAGE_DETAILS.add_wallet' | translate }}" [modal]="true" [(visible)]="showWalletDialogOptions"
-    [style]="{ width: '37rem' }">
+  <p-dialog header="{{ 'PACKAGE_DETAILS.ADD_LOCATION_MODAL_TITLE' | translate }}" [modal]="true"
+    [(visible)]="showAddLocationDialog" [style]="{ width: '25rem' }">
+    <app-add-location (value)="onAddLocation($event)"></app-add-location>
+  </p-dialog>
+  <div class="wallet-card-container">
+    <p-dialog header="{{ 'PACKAGE_DETAILS.add_wallet' | translate }}" [modal]="true"
+      [(visible)]="showWalletDialogOptions" [style]="{ width: '37rem' }">
+      <div>
+        <div class="content row">
+          <div class="wallet-card col-lg-6 col-md-6 col-sm-12">
+            <div class="card-content" (click)="walletActions('d')">
+              <img src="assets/images/icons-svg/deposit.png" alt="">
+              <p>{{ "PACKAGE_DETAILS.RECHARGE_WALLET" | translate }}</p>
+            </div>
+          </div>
+          <div class="wallet-card col-lg-6 col-md-6 col-sm-12">
+            <div class="card-content" (click)="walletActions('w')">
+              <img src="assets/images/icons-svg/withdrawal.png" alt="">
+              <p>{{ "PACKAGE_DETAILS.WITHDRAWAL_WALLET" | translate }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-dialog>
+  </div>
+  <p-dialog header="{{ 'PACKAGE_DETAILS.add_wallet' | translate }}" [modal]="true" [(visible)]="openWithdrawalDialog"
+    [style]="{ width: '27rem' }">
     <div>
-      <div class="content row">
-        <div class="wallet-card col-lg-6 col-md-6 col-sm-12">
-          <div class="card-content" (click)="walletActions('d')">
-            <img src="assets/images/icons-svg/deposit.png" alt="">
-            <p>{{ "PACKAGE_DETAILS.RECHARGE_WALLET" | translate }}</p>
+      <div class="time-picker-section">
+        <label>{{ "PACKAGE_DETAILS.wallet_amount" | translate }}</label><span class="red-mark">*</span>
+        <p-inputnumber class="w-100 mt-1" mode="decimal" inputId="integeronly" pInputText [max]="walletBalance"
+          [(ngModel)]="walletAmount" />
+        <div class="error-section">
+          <div class="max-amoutn-error" *ngIf="walletBalance < walletAmount">
+            <p style="color: rgb(168, 31, 31);">{{ "PACKAGE_DETAILS.MAX_AMOUNT" | translate }}</p>
+          </div>
+          <div class="max-amoutn-error" *ngIf=" walletAmount < 0">
+            <p style="color: rgb(168, 31, 31);">{{ "PACKAGE_DETAILS.MIN_AMOUNT" | translate }}</p>
           </div>
         </div>
-        <div class="wallet-card col-lg-6 col-md-6 col-sm-12">
-          <div class="card-content" (click)="walletActions('w')">
-            <img src="assets/images/icons-svg/withdrawal.png" alt="">
-            <p>{{ "PACKAGE_DETAILS.WITHDRAWAL_WALLET" | translate }}</p>
-          </div>
-        </div>
+      </div>
+      <div class="d-flex justify-content-between mt-3">
+        <button class="btn btn-wallet btn-danger w-49" (click)="openWithdrawalDialog = false">
+          {{'PACKAGE_DETAILS.CANCEL_BUTTON' | translate}}
+        </button>
+        <button class="btn btn-primary w-49 btn-wallet"
+          [disabled]="walletAmount <= 0 || !walletAmount || walletBalance < walletAmount"
+          (click)="addWalletSubmit('w')">
+          {{ "PACKAGE_DETAILS.add_wallet" | translate }}
+        </button>
       </div>
     </div>
   </p-dialog>
-</div>
-<p-dialog header="{{ 'PACKAGE_DETAILS.add_wallet' | translate }}" [modal]="true" [(visible)]="openWithdrawalDialog"
-  [style]="{ width: '27rem' }">
-  <div>
-    <div class="time-picker-section">
-      <label>{{ "PACKAGE_DETAILS.wallet_amount" | translate }}</label><span class="red-mark">*</span>
-      <p-inputnumber class="w-100 mt-1" mode="decimal" inputId="integeronly" pInputText [max]="walletBalance"
-        [(ngModel)]="walletAmount" />
-      <div class="error-section">
-        <div class="max-amoutn-error" *ngIf="walletBalance < walletAmount">
-          <p style="color: rgb(168, 31, 31);">{{ "PACKAGE_DETAILS.MAX_AMOUNT" | translate }}</p>
-        </div>
-        <div class="max-amoutn-error" *ngIf=" walletAmount < 0">
-          <p style="color: rgb(168, 31, 31);">{{ "PACKAGE_DETAILS.MIN_AMOUNT" | translate }}</p>
+  <p-dialog header="{{ 'PACKAGE_DETAILS.DEPOSITE_ACTION' | translate }}" [modal]="true"
+    [(visible)]="openDepositelDialog" [style]="{ width: '27rem' }">
+    <div>
+      <div class="time-picker-section">
+        <label>{{ "PACKAGE_DETAILS.wallet_amount" | translate }}</label><span class="red-mark">*</span>
+        <p-inputnumber class="w-100 mt-1" mode="decimal" inputId="integeronly" pInputText [max]="walletBalance"
+          [(ngModel)]="walletAmount" />
+        <div class="error-section">
+          <div class="max-amoutn-error" *ngIf="walletAmount < 0">
+            <p style="color: rgb(168, 31, 31);">{{ "PACKAGE_DETAILS.MIN_AMOUNT" | translate }}</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="d-flex justify-content-between mt-3">
-      <button class="btn btn-wallet btn-danger w-49" (click)="openWithdrawalDialog = false">
-        {{'PACKAGE_DETAILS.CANCEL_BUTTON' | translate}}
-      </button>
-      <button class="btn btn-primary w-49 btn-wallet"
-        [disabled]="walletAmount <= 0 || !walletAmount || walletBalance < walletAmount" (click)="addWalletSubmit('w')">
-        {{ "PACKAGE_DETAILS.add_wallet" | translate }}
-      </button>
-    </div>
-  </div>
-</p-dialog>
-<p-dialog header="{{ 'PACKAGE_DETAILS.DEPOSITE_ACTION' | translate }}" [modal]="true" [(visible)]="openDepositelDialog"
-  [style]="{ width: '27rem' }">
-  <div>
-    <div class="time-picker-section">
-      <label>{{ "PACKAGE_DETAILS.wallet_amount" | translate }}</label><span class="red-mark">*</span>
-      <p-inputnumber class="w-100 mt-1" mode="decimal" inputId="integeronly" pInputText [max]="walletBalance"
-        [(ngModel)]="walletAmount" />
-      <div class="error-section">
-        <div class="max-amoutn-error" *ngIf="walletAmount < 0">
-          <p style="color: rgb(168, 31, 31);">{{ "PACKAGE_DETAILS.MIN_AMOUNT" | translate }}</p>
-        </div>
+      <div class="d-flex justify-content-between mt-3">
+        <button class="btn btn-wallet btn-danger w-49" (click)="openDepositelDialog = false">
+          {{'PACKAGE_DETAILS.CANCEL_BUTTON' | translate}}
+        </button>
+        <button class="btn btn-primary w-49 btn-wallet" [disabled]="walletAmount <= 0 || !walletAmount"
+          (click)="addWalletSubmit('d')">
+          {{ "PACKAGE_DETAILS.PAY" | translate }}
+        </button>
       </div>
     </div>
-    <div class="d-flex justify-content-between mt-3">
-      <button class="btn btn-wallet btn-danger w-49" (click)="openDepositelDialog = false">
-        {{'PACKAGE_DETAILS.CANCEL_BUTTON' | translate}}
-      </button>
-      <button class="btn btn-primary w-49 btn-wallet" [disabled]="walletAmount <= 0 || !walletAmount"
-        (click)="addWalletSubmit('d')">
-        {{ "PACKAGE_DETAILS.PAY" | translate }}
-      </button>
+  </p-dialog>
+  <p-dialog header="{{ 'PACKAGE_DETAILS.DEPOSITE_PAYMENT' | translate }}" [modal]="true"
+    [(visible)]="depositePaymentDialog" [style]="{ width: '35rem' }">
+    <div>
+      <div class="iframe-container">
+        <iframe #paymentFrame [src]="safeIframeUrl" width="100%" height="600" frameborder="0" allowfullscreen
+          (load)="onIframeLoad(paymentFrame)">
+        </iframe>
+      </div>
     </div>
-  </div>
-</p-dialog>
-<p-dialog header="{{ 'PACKAGE_DETAILS.DEPOSITE_PAYMENT' | translate }}" [modal]="true"
-  [(visible)]="depositePaymentDialog" [style]="{ width: '35rem' }">
-  <div>
-    <div class="iframe-container">
-      <iframe #paymentFrame [src]="safeIframeUrl" width="100%" height="600" frameborder="0" allowfullscreen
-        (load)="onIframeLoad(paymentFrame)">
-      </iframe>
-    </div>
-  </div>
-</p-dialog>
+  </p-dialog>

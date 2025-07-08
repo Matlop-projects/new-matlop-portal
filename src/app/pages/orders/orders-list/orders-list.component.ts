@@ -46,8 +46,10 @@ export class OrdersListComponent implements OnInit {
     locationId: 0,
   };
   private apiService = inject(ApiService);
+  currentlang='en'
   ngOnInit(): void {
     const storedData = localStorage.getItem("userData");
+      this.currentlang=this.languageService.translationService.currentLang
 
     if (storedData !== null) {
       const parsed = JSON.parse(storedData);
@@ -58,6 +60,7 @@ export class OrdersListComponent implements OnInit {
     this.getAllOrders();
 
     this.languageService.translationService.onLangChange.subscribe(() => {
+      this.currentlang=this.languageService.translationService.currentLang
       this.bkg_text_options.header = this.languageService.translate('ORDER_TRACKING.BANNER_HEADER');
     this.bkg_text_options.description = this.languageService.translate('ORDER_TRACKING.BANNER_DESC');
     });
