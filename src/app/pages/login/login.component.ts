@@ -34,12 +34,11 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder,@Inject(DOCUMENT) private document: Document, private api: ApiService, private translate: TranslateService, private router: Router ,private userDataSignals: LoginSignalUserDataService) {
     this.loginForm = this.fb.group({
-      userName: ['0555555554',  [
+      userName: ['0555555555',  [
             Validators.required,
             Validators.maxLength(10),
             Validators.pattern(/^05\d{8}$/),
           ],],
-      password: ['Ahmed123', [Validators.required]],
       loginMethod: [1]
     });
 
