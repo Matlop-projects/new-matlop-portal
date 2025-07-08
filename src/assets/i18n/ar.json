@@ -190,11 +190,12 @@
     "VISIT_DURATION": "مدة الزيارة",
     "HOUR": "ساعات",
     "DETAILS": "تفاصيل الباقة",
-    "NO_PACKAGES": "لا توجد باقات متاحة"
+    "NO_PACKAGES": "لا توجد باقات متاحة",
+    "PROVIDER" : "فني"
   },
-  "PACKAGE_DETAILS": {
+"PACKAGE_DETAILS": {
     "wallet": "رصيد المحفظة الحالي",
-    "add_wallet": "إضافة رصيد",
+    "add_wallet": "معاملات المحفظة",
     "wallet_amount": "مبلغ المحفظة",
     "VAT_INCLUDED": "شامل الضريبة",
     "TECHNICIANS_COUNT": "عدد الفنيين",
@@ -248,7 +249,33 @@
       "MIN_DATES": "يجب تحديد على الأقل {{count}} تاريخ"
     },
     "SUCCESS": "تم إضافة الطلب بنجاح",
-    "LOCATION_ADDED": "تم إضافة الموقع بنجاح"
+    "LOCATION_ADDED": "تم إضافة الموقع بنجاح",
+    "MAX_AMOUNT": "القيمة اكبر من رصيدك ",
+    "MIN_AMOUNT": "لا يمكن ان يكون الرقت بالسالب",
+    "DEPOSITE_ACTION": "إيداع",
+    "DEPOSITE_PAYMENT": "دفع الإيداع",
+    "PAY": "اشحن",
+    "PROMO_CODE_TITLE": "رمز الخصم (إن وُجد)",
+    "PROMO_CODE_DESC": "عندك كود خصم؟ دخّله هنا قبل تأكيد الطلب للاستفادة من العرض.",
+    "PROMO_CODE_PLACEHOLDER": "رمز الخصم",
+    "CONFIRM_BUTTON": "تأكيد",
+    "RECHARGE_WALLET": "إعادة شحن المحفظة",
+    "WITHDRAWAL_WALLET": "سحب من المحفظة",
+    "CANCEL_BUTTON": "إلغاء",
+    "LOCATION_ADDED_SUCCESS": "تم إضافة الموقع بنجاح",
+    "BALANCE_ADDED_SUCCESS": "تم إضافة الرصيد بنجاح",
+    "ORDER_ADDED_SUCCESS": "تم إضافة الطلب بنجاح",
+    "PAYMENT_SUCCESS": "تم الدفع بنجاح",
+    "PAYMENT_FAILED": "فشل في الدفع",
+    "COUPON_ADDED_SUCCESS": "تمت إضافة الكوبون بنجاح",
+    "INVALID_COUPON": "كوبون غير صالح",
+    "PLEASE_ADD_COUPON": "الرجاء إضافة كوبون",
+     "SUMMARY_TITLE": "الملخص",
+    "PRICE": "السعر",
+    "INCLUDE_VAT": " السعر شامل الضريبة",
+    "VAT": "الضريبة",
+    "DISCOUNT": "الخصم",
+    "TOTAL_PRICE": "السعر الكلي"
   },
   "ABOUT_US_CONTACT": {
     "START_JOURNEY": "من هنا تبدأ رحلتك",

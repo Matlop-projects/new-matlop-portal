@@ -190,11 +190,12 @@
     "VISIT_DURATION": "Visit Duration",
     "HOUR": "hours",
     "DETAILS": "Package Details",
-    "NO_PACKAGES": "No packages available"
+    "NO_PACKAGES": "No packages available",
+    "PROVIDER" : "Technicians"
   },
-  "PACKAGE_DETAILS": {
-    "wallet": " Current Wallet Ballance",
-    "add_wallet": "Add Ballance",
+"PACKAGE_DETAILS": {
+    "wallet": "Current Wallet Ballance",
+    "add_wallet": "Wallet Transactions",
     "wallet_amount": "Wallet Amount",
     "VAT_INCLUDED": "VAT Included",
     "TECHNICIANS_COUNT": "Technicians Count",
@@ -248,7 +249,33 @@
       "MIN_DATES": "You must select at least {{count}} dates"
     },
     "SUCCESS": "Order placed successfully",
-    "LOCATION_ADDED": "Location added successfully"
+    "LOCATION_ADDED": "Location added successfully",
+    "MAX_AMOUNT": "This value is more than you wallet amount",
+    "MIN_AMOUNT": "Can't be a negative number",
+    "DEPOSITE_ACTION": "Deposit",
+    "DEPOSITE_PAYMENT": "Deposit Payment",
+    "PAY": "Pay",
+    "PROMO_CODE_TITLE": "Discount Code (if available)",
+    "PROMO_CODE_DESC": "Have a discount code? Enter it here before confirming your order to take advantage of the offer.",
+    "PROMO_CODE_PLACEHOLDER": "Discount Code",
+    "CONFIRM_BUTTON": "Confirm",
+    "RECHARGE_WALLET": "Recharge wallet",
+    "WITHDRAWAL_WALLET": "Withdrawal Wallet",
+    "CANCEL_BUTTON": "Cancel",
+    "LOCATION_ADDED_SUCCESS": "Location added successfully",
+    "BALANCE_ADDED_SUCCESS": "Balance added successfully",
+    "ORDER_ADDED_SUCCESS": "Order added successfully",
+    "PAYMENT_SUCCESS": "Payment successful",
+    "PAYMENT_FAILED": "Payment failed",
+    "COUPON_ADDED_SUCCESS": "Coupon Added Successfully",
+    "INVALID_COUPON": "Invalid Coupon",
+    "PLEASE_ADD_COUPON": "Please Add Coupon",
+    "SUMMARY_TITLE": "Summary",
+    "PRICE": "Price",
+    "INCLUDE_VAT": "Price Include VAT",
+    "VAT": "VAT",
+    "DISCOUNT": "Discount",
+    "TOTAL_PRICE": "Total Price"
   },
   "ABOUT_US_CONTACT": {
     "START_JOURNEY": "Your journey starts here",

@@ -3,6 +3,82 @@
     background: white !important;
   }
 
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  .payment-summary {
+    .content {
+      margin-block: 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease; // Smooth animation
+      border-radius: 32px;
+
+      .summary-card {
+        padding: 20px;
+        border-radius: 32px;
+        min-height: 299px;
+        border: 1px solid #e6e6e6;
+        background-color: white;
+
+        .title {
+          p {
+            font-size: 24px;
+            font-weight: 700;
+          }
+        }
+
+        .summary-details {
+          .collection {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .desc {
+              p {
+                font-size: 24px;
+                font-weight: 700;
+              }
+
+              .vat {
+                font-size: 12px;
+                color: rgb(200, 200, 200);
+                position: relative;
+                bottom: 12px;
+              }
+            }
+
+            .value {
+              p {
+                font-size: 24px;
+                font-weight: 700;
+                color: #a3a3a3;
+              }
+            }
+          }
+
+          .total-price {
+            border-top: 1px solid rgb(209, 209, 209);
+            padding-top: 10px;
+
+            .desc {
+              p {
+                font-size: 30px;
+                font-weight: 700;
+              }
+            }
+
+            .total-price-value {
+              font-size: 30px;
+              font-weight: 700;
+              color: #a3a3a3;
+            }
+          }
+        }
+      }
+    }
+  }
+
   .package-details-container {
     .red-mark {
       color: red;
@@ -12,10 +88,6 @@
       margin-bottom: 10px;
     }
 
-    p {
-      margin: 0;
-      padding: 0;
-    }
 
     .content {
       .card-content {
@@ -311,64 +383,66 @@
           }
         }
 
-        .promo-code-section {
-          margin-top: 30px;
 
-          .promo-title {
-            font-weight: 500;
-            font-size: 18px;
-          }
 
-          .promo-desc {
-            font-weight: 500;
-            font-size: 15px;
-            color: #B4B4B4;
-          }
+      }
 
-          .form-group {
-            display: flex;
-            flex-direction: column;
+      .promo-code-section {
+        margin-top: 30px;
 
-            .input-wrapper {
-              position: relative;
+        .promo-title {
+          font-weight: 500;
+          font-size: 18px;
+        }
 
-              input {
-                width: 100%;
-                padding: 16px 8px 16px 8px; // Extra right padding for the button
-                border: 1px solid #E6E6E6;
-                border-radius: 34px;
-                font-size: 14px;
-                min-height: 70px;
-              }
+        .promo-desc {
+          font-weight: 500;
+          font-size: 15px;
+          color: #B4B4B4;
+        }
 
-              .input-btn {
-                position: absolute;
-                top: 50%;
-                right: 10px;
-                transform: translateY(-50%);
-                padding: 6px 12px;
-                font-size: 13px;
-                background-color: #007bff;
-                color: white;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                background: linear-gradient(to right, #bffd2b, #05bce8);
-                color: #fff;
-                font-weight: bolder;
-                padding: 11px 80px;
-                border-radius: 32px;
-                border: none;
+        .form-group {
+          display: flex;
+          flex-direction: column;
 
-                &:lang(ar) {
-                  left: 10px;
-                  right: unset;
-                }
+          .input-wrapper {
+            position: relative;
+
+            input {
+              width: 100%;
+              padding: 16px 8px 16px 8px; // Extra right padding for the button
+              border: 1px solid #E6E6E6;
+              border-radius: 25px;
+              font-size: 14px;
+              min-height: 70px;
+            }
+
+            .input-btn {
+              position: absolute;
+              top: 50%;
+              right: 10px;
+              transform: translateY(-50%);
+              padding: 6px 12px;
+              font-size: 13px;
+              background-color: #007bff;
+              color: white;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              background: linear-gradient(to right, #bffd2b, #05bce8);
+              color: #fff;
+              font-weight: bolder;
+              padding: 11px 80px;
+              border-radius: 32px;
+              border: none;
+
+              &:lang(ar) {
+                left: 10px;
+                right: unset;
               }
             }
           }
         }
-
       }
 
       .instructions-section {
@@ -401,6 +475,45 @@
       }
     }
   }
+
+  .wallet-card-container {
+    .content {
+      .wallet-card {
+        padding: 16px;
+        transition: transform 0.3s ease; // Enable smooth transition
+
+        .card-content {
+          border-radius: 34px;
+          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+          min-height: 200px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          gap: 10px;
+          cursor: pointer;
+          transition: transform 0.3s ease; // Smooth animation
+          background: linear-gradient(108.89deg, rgba(191, 253, 43, 0.2) 2.71%, rgba(19, 202, 197, 0.2) 97.54%);
+        }
+
+        &:hover {
+          .card-content {
+            transform: translateY(-10px); // Move up on hover
+          }
+        }
+
+        img {
+          width: 5rem;
+        }
+      }
+    }
+  }
+
+  p-inputnumber {
+    border: none !important;
+    padding: 0 !important;
+  }
+
 }
 
 .wallet-container {

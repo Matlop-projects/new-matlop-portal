@@ -11,11 +11,15 @@ import { AddLocationComponent } from "../../../components/add-location/add-locat
 import { DatePicker } from "primeng/datepicker";
 import { TranslatePipe } from "@ngx-translate/core";
 import { TooltipModule } from "primeng/tooltip";
+import { InputNumberModule } from 'primeng/inputnumber';
+
 import {
   BackgroundImageWithTextComponent,
   IBackGroundImageWithText,
 } from "../../../components/background-image-with-text/background-image-with-text.component";
 import { InputTextModule } from "primeng/inputtext";
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 @Component({
   selector: "app-package-details",
   standalone: true,
@@ -33,6 +37,7 @@ import { InputTextModule } from "primeng/inputtext";
     FormsModule,
     AddLocationComponent,
     BackgroundImageWithTextComponent,
+    InputNumberModule
   ],
   templateUrl: "./package-details.component.html",
   styleUrl: "./package-details.component.scss",
@@ -41,9 +46,10 @@ export class PackageDetailsComponent {
   private ApiService = inject(ApiService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private sanitizer = inject(DomSanitizer);
   selectedLang: any;
   walletBalance = 0;
-  walletAmount: any;
+  walletAmount: any = 0;
   languageService = inject(LanguageService);
   packageId: any;
   cities: any;
@@ -74,9 +80,14 @@ export class PackageDetailsComponent {
 
   paymentSelect: any;
   isDragging = false;
-  showWalletDialog = false;
+  showWalletDialogOptions = false;
+  openWithdrawalDialog: boolean = false;
+  openDepositelDialog: boolean = false;
+  depositePaymentDialog: boolean = false;
   workingHoursSelect: any;
   workingHoursList: any;
+  safeIframeUrl: SafeResourceUrl | undefined;
+
 
   dates: any;
   minDate: Date | null = null; // Initialize as null
@@ -128,6 +139,9 @@ export class PackageDetailsComponent {
         "ABOUT_US_CONTACT.BANNER_DESC"
       );
     });
+    const today = new Date();
+    this.minDate = new Date(today);
+    this.minDate.setDate(today.getDate() + 1);
   }
 
   getWalletBalance() {
@@ -178,7 +192,7 @@ export class PackageDetailsComponent {
   API_addLocation(payload: any) {
     this.ApiService.post("Location/Create", payload).subscribe((res) => {
       if (res) {
-        this.toaster.successToaster("تم اضافه موقع");
+        this.toaster.successToaster(this.languageService.translate("PACKAGE_DETAILS.LOCATION_ADDED_SUCCESS"));
         this.getLocation();
       }
     });
@@ -223,13 +237,6 @@ export class PackageDetailsComponent {
         disabled: this.walletBalance < this.packageDetails.price, // Disable if wallet balance is 0 or less
       }
     );
-    // console.log(
-    //   this.walletBalance,
-    //   "--------",
-    //   this.packageDetails.price,
-    //   "===",
-    //   this.walletBalance < this.packageDetails.price
-    // );
   }
   // setCalendarLimits() {
   //   if (this.packageDetails) {
@@ -279,23 +286,23 @@ export class PackageDetailsComponent {
         // this.isoDates = this.dates.map((date: any) =>
         //   date.toISOString()
         // );
-           this.isoDates = this.dates.map((date: any) => {
-        const now = new Date(); // Get current time
-        date.setHours(now.getHours(), now.getMinutes(), now.getSeconds());
+        this.isoDates = this.dates.map((date: any) => {
+          const now = new Date(); // Get current time
+          date.setHours(now.getHours(), now.getMinutes(), now.getSeconds());
 
-        return (
-          `${date.getFullYear()}-${(date.getMonth() + 1)
-            .toString()
-            .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}` +
-          `T${date.getHours().toString().padStart(2, "0")}:${date
-            .getMinutes()
-            .toString()
-            .padStart(2, "0")}:${date
-            .getSeconds()
-            .toString()
-            .padStart(2, "0")}Z`
-        );
-      });
+          return (
+            `${date.getFullYear()}-${(date.getMonth() + 1)
+              .toString()
+              .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}` +
+            `T${date.getHours().toString().padStart(2, "0")}:${date
+              .getMinutes()
+              .toString()
+              .padStart(2, "0")}:${date
+                .getSeconds()
+                .toString()
+                .padStart(2, "0")}Z`
+          );
+        });
         this.orderObject.scheduleDates = this.isoDates;
       }
     } else {
@@ -314,9 +321,9 @@ export class PackageDetailsComponent {
             .getMinutes()
             .toString()
             .padStart(2, "0")}:${date
-            .getSeconds()
-            .toString()
-            .padStart(2, "0")}Z`
+              .getSeconds()
+              .toString()
+              .padStart(2, "0")}Z`
         );
       });
       this.orderObject.scheduleDates = this.isoDates;
@@ -440,23 +447,35 @@ export class PackageDetailsComponent {
     if (mimeType.startsWith("video/")) return 2;
     return null;
   }
-  addWalletSubmit() {
-    let body = {
-      userId: this.orderObject.clientId,
-      walletTransactionId: 0,
-      transactionType: 1,
-      amount: this.walletAmount,
-    };
-    this.ApiService.post("Wallet/WalletTransaction", body).subscribe(
-      (res: any) => {
-        if (res) {
-          this.toaster.successToaster("تم اضافة الرصيد بنجاح");
-          this.showWalletDialog = false;
-          this.getPackageDetailsById(this.packageId);
+
+  addWalletSubmit(type: string) {
+    console.log(type);
+    
+    if (type == 'w') {
+      let body = {
+        userId: this.orderObject.clientId,
+        walletTransactionId: 0,
+        transactionType: 2,
+        amount: this.walletAmount,
+      };
+      this.ApiService.post("Wallet/WalletTransaction", body).subscribe(
+        (res: any) => {
+          if (res) {
+            this.toaster.successToaster(this.languageService.translate("PACKAGE_DETAILS.BALANCE_ADDED_SUCCESS"));
+            this.showWalletDialogOptions = false;
+            this.getPackageDetailsById(this.packageId);
+          }
         }
-      }
-    );
+      );
+    } else {
+      console.log(this.walletAmount);
+      const url = `https://payment.matlop.com/Wallet/creditcard?userId=${this.orderObject.clientId}&amount=${+this.walletAmount}`;
+      this.safeIframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+      this.openDepositelDialog = false;
+      this.depositePaymentDialog = true;
+    }
   }
+
   createOrder() {
     if (this.orderObject.locationId == null) {
       this.toaster.errorToaster(
@@ -486,7 +505,7 @@ export class PackageDetailsComponent {
           else
             // window.location.href = `https://app-thank-you/thank-you?status=paid&id=${orderId}&amount=${this.orderObject.totalAmount}&message=success`;
             window.location.href = `https://app-thank-you/thank-you?status=paid&id=${orderId}&amount=${this.orderObject.orderTotal}&message=success`;
-          }
+        }
       );
     }
   }
@@ -494,61 +513,82 @@ export class PackageDetailsComponent {
   onPromoCodeCheck() {
     console.log(this.promoCodeValue);
     if (this.promoCodeValue) {
-      this.ApiService.get(
-        `Copone/Verfiy/${this.promoCodeValue}/${+this.orderObject.clientId}`
-      ).subscribe(
-        (loc: any) => {
-          this.invalidCoupn = false;
-          this.validCoupon = true;
-          this.toaster.successToaster("Coupon Addedd Successfully");
-          this.discountType = loc.data.coponeType;
-          this.packageDetails.couponPrice = 0;
-          this.packageDetails.couponDiscount = 0;
-          this.usedNumber = loc.data.usedNumber;
-          if (loc.data.coponeType == 1) {
-            this.packageDetails.couponDiscount = loc.data.amount;
-            let priceAfterDiscountPrecentage =
-              this.packageDetails.price -
-              this.calculateSalePrice(
-                this.packageDetails.price,
-                loc.data.amount
-              );
-            if (
-              loc.data.hasMaxAmount &&
-              priceAfterDiscountPrecentage >= loc.data.maxAmount
-            ) {
-              this.packageDetails.couponPrice =
-                this.packageDetails.price - loc.data.maxAmount;
-            } else {
-              this.packageDetails.couponPrice = this.calculateSalePrice(
-                this.packageDetails.price,
-                loc.data.amount
-              );
-            }
-            console.log(this.packageDetails);
+      this.ApiService.get(`Copone/Verfiy/${this.promoCodeValue}/${+this.orderObject.clientId}`).subscribe((loc: any) => {
+        this.invalidCoupn = false;
+        this.validCoupon = true;
+        this.toaster.successToaster(this.languageService.translate("PACKAGE_DETAILS.COUPON_ADDED_SUCCESS"));
+        this.discountType = loc.data.coponeType;
+        this.packageDetails.couponPrice = 0;
+        this.packageDetails.couponDiscount = 0;
+        if (loc.data.coponeType == 1) {
+          this.packageDetails.couponDiscount = loc.data.amount;
+          let priceAfterDiscountPrecentage = this.packageDetails.price - this.calculateSalePrice(this.packageDetails.price, loc.data.amount);
+          if (loc.data.hasMaxAmount && priceAfterDiscountPrecentage >= loc.data.maxAmount) {
+            this.packageDetails.couponPrice = this.packageDetails.price - loc.data.maxAmount;
           } else {
             this.packageDetails.couponDiscount = loc.data.amount;
             this.packageDetails.couponPrice =
               this.packageDetails.price - this.packageDetails.couponDiscount;
             console.log(this.packageDetails);
           }
-        },
-        (err) => {
+        }
+      }
+        , err => {
           this.invalidCoupn = true;
           this.validCoupon = false;
           this.invalidCoupnMessage = err.error.message;
-          // this.toaster.errorToaster('Invalid Coupon');
+          this.toaster.errorToaster(this.languageService.translate("PACKAGE_DETAILS.INVALID_COUPON"));
         }
-      );
+      )
     } else {
-      this.toaster.errorToaster("Please Add Coupon");
+      this.toaster.errorToaster(this.languageService.translate("PACKAGE_DETAILS.PLEASE_ADD_COUPON"));
     }
   }
 
-  calculateSalePrice(
-    originalPrice: number,
-    discountPercentage: number
-  ): number {
+  calculateSalePrice(originalPrice: number, discountPercentage: number): number {
     return originalPrice - (originalPrice * discountPercentage) / 100;
+  }
+
+  walletActions(walletActionType: string) {
+    this.showWalletDialogOptions = false;
+    this.showWalletDialogOptions = false;
+    if (walletActionType == 'w') {
+      this.openWithdrawalDialog = true;
+    } else {
+      this.openDepositelDialog = true;
+    }
+  }
+
+  onIframeLoad(iframe: HTMLIFrameElement) {
+    try {
+      const currentUrl = iframe.contentWindow?.location.href;
+
+      if (currentUrl?.includes('Thankyou')) {
+        const url = new URL(currentUrl);
+        const id = url.searchParams.get('id');
+        const status = url.searchParams.get('status');
+        const amount = url.searchParams.get('amount');
+        const message = url.searchParams.get('message');
+
+        console.log('✅ Payment URL:', { id, status, amount, message });
+
+        if (status === 'paid') {
+          this.toaster.successToaster(this.languageService.translate("PACKAGE_DETAILS.PAYMENT_SUCCESS"));
+          this.getWalletBalance();
+          this.getPackageDetailsById(this.packageId);
+
+        } else {
+          this.toaster.errorToaster(this.languageService.translate("PACKAGE_DETAILS.PAYMENT_FAILED"));
+        }
+
+        this.depositePaymentDialog = false; // Close dialog if you want
+      }
+    } catch (err) {
+      console.warn('🚫 Could not access iframe URL due to cross-origin:', err);
+    }
+  }
+
+  calculate15Percent(value: number): number {
+    return value * 0.15;
   }
 }

@@ -44,13 +44,13 @@
                                 <p>{{ 'PACKAGES.TECHNICIANS_COUNT' | translate }}</p>
                             </div>
                             <div class="value">
-                                <p>({{package.providerNumber}})</p>
+                                <p>({{package.providerNumber}} {{ 'PACKAGES.PROVIDER' | translate }})</p>
                             </div>
                         </div>
                         <div class="contents">
                             <img src="assets/images/icons-svg/hash.svg" alt="" />
                             <div class="title">
-                                <p>{{ 'PACKAGES.VISIT_COUNT' | translate }}</p>
+                                <p>({{ 'PACKAGES.VISIT_COUNT' | translate }} {{ 'PACKAGES.PROVIDER' | translate }})</p>
                             </div>
                             <div class="value">
                                 <p>({{ package.visitNumber }} {{ 'PACKAGES.VISIT' | translate }})</p>
