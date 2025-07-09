@@ -17,8 +17,9 @@
     "close": "Close",
     "select": "Select",
     "cancel": "Cancel",
-    "confirm":"Confirm",
-    "send_request":"Send request"
+    "confirm": "Confirm",
+    "send_request": "Send request",
+    "request": "Request"
   },
   "errors": {
     "required": "This field is required",
@@ -191,9 +192,9 @@
     "HOUR": "hours",
     "DETAILS": "Package Details",
     "NO_PACKAGES": "No packages available",
-    "PROVIDER" : "Technicians"
+    "PROVIDER": "Technicians"
   },
-"PACKAGE_DETAILS": {
+  "PACKAGE_DETAILS": {
     "wallet": "Current Wallet Ballance",
     "add_wallet": "Wallet Transactions",
     "wallet_amount": "Wallet Amount",
@@ -238,7 +239,7 @@
     "TIME_PLACEHOLDER": "Choose suitable time",
     "DATE_PLACEHOLDER": "Select preferred date",
     "ADD_LOCATION_MODAL_TITLE": "Add New Location",
-    "promo_code":"Promo code",
+    "promo_code": "Promo code",
     "promo_code_find": "Promo code (if available)",
     "promo_code_info": "Have a discount code? Enter it here before confirming your order to benefit from the offer.",
     "VALIDATION": {
@@ -407,11 +408,11 @@
     "BANNER_HEADER": "Privacy Policy",
     "BANNER_DESC": "This privacy policy explains how personal information is collected, used, and protected when you use this website operated by the Matloob platform"
   },
-   "location":{
-    "country_name":"Country name",
-    "city_name":"City Name",
-    "sector_name":"Sector Name",
-    "block_name":"Block name",
-    "add_location":"Add location"
+  "location": {
+    "country_name": "Country name",
+    "city_name": "City Name",
+    "sector_name": "Sector Name",
+    "block_name": "Block name",
+    "add_location": "Add location"
   }
 }
