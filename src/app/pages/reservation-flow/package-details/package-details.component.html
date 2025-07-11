@@ -169,7 +169,7 @@
             </div>
             <div class="date-picker-section col-lg-6">
               <label>{{ "PACKAGE_DETAILS.DATE" | translate }}</label><span class="red-mark">*</span>
-              <p-datepicker [ngClass]="{ 'input-error': isDateInvalid }" [(ngModel)]="dates"
+              <p-datepicker [ngClass]="{ 'input-error': isDateInvalid }" [(ngModel)]="dates"   [inputStyle]="{ direction: 'rtl' }"
                 [placeholder]="'PACKAGE_DETAILS.SELECT_DATE' | translate" (onSelect)="validateMinDates()"
                 selectionMode="multiple" [disabledDays]="[5, 6]" [minDate]="minDate" [maxDate]="maxDate"
                 [readonlyInput]="true" />
