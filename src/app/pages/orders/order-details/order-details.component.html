@@ -121,9 +121,9 @@
         *ngIf="orderDetails.orderStatusName == 'Pending'"
         class="buttons text-start"
       >
-        <button class="btn pay" (click)="visiblePaymentWay = true">
+        <!-- <button class="btn pay" (click)="visiblePaymentWay = true">
           {{ "order_details.retry_payment" |translate}}
-        </button>
+        </button> -->
         <button class="btn cancel" (click)="onCancelOrder()">
           {{ "order_details.canceld_order" |translate}}
         </button>

@@ -5,11 +5,12 @@ import { Router } from "@angular/router";
 import { BackgroundImageWithTextComponent, IBackGroundImageWithText } from '../../../components/background-image-with-text/background-image-with-text.component';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageService } from '../../../services/language.service';
+import { PaginationComponent } from '../../../components/pagination/pagination.component';
 
 @Component({
   selector: "app-orders-list",
   standalone: true,
-  imports: [NgFor, NgIf, TitleCasePipe, BackgroundImageWithTextComponent , TranslatePipe],
+  imports: [NgFor, NgIf, TitleCasePipe,PaginationComponent, BackgroundImageWithTextComponent , TranslatePipe],
   templateUrl: "./orders-list.component.html",
   styleUrl: "./orders-list.component.scss",
 })
@@ -29,6 +30,7 @@ export class OrdersListComponent implements OnInit {
   orders: any = [];
   activeStatus = "pending";
   ordersCount: any
+  totalCount=0;
 
   searchObject = {
     pageNumber: 0,
@@ -65,6 +67,12 @@ export class OrdersListComponent implements OnInit {
     this.bkg_text_options.description = this.languageService.translate('ORDER_TRACKING.BANNER_DESC');
     });
   }
+  onPageChange(page:any){
+    this.searchObject.pageNumber=page
+    console.log("🚀 ~ OrdersListComponent ~ onPageChange ~ page:", page)
+        this.getAllOrders();
+
+  }
   onSelectStatus(value: string) {
     this.activeStatus = value;
     if (value == "pending") {
@@ -82,6 +90,7 @@ export class OrdersListComponent implements OnInit {
       .subscribe((res) => {
         if (res.data.dataList) {
           this.orders = res.data.dataList;
+          this.totalCount=res.data.totalCount
         }
       });
   }
