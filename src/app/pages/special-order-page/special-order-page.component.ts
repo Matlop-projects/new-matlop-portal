@@ -18,7 +18,37 @@ import { ToasterService } from '../../services/toaster.service';
 import { AddLocationComponent } from '../../components/add-location/add-location.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { DatePickerModule } from 'primeng/datepicker';
-
+import { PrimeNG } from 'primeng/config';
+const primengTranslations = {
+  ar: {
+    dayNames: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
+    dayNamesShort: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
+    dayNamesMin: ['ح', 'ن', 'ث', 'ر', 'خ', 'ج', 'س'],
+    monthNames: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+                 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+    monthNamesShort:  ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+                 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+    today: 'اليوم',
+    clear: 'مسح',
+    dateFormat: 'dd/mm/yy',
+    firstDayOfWeek: 0,
+    weekHeader: 'أسبوع',
+  },
+  en: {
+    dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+    monthNames: ['January', 'February', 'March', 'April', 'May', 'June',
+                 'July', 'August', 'September', 'October', 'November', 'December'],
+    monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    today: 'Today',
+    clear: 'Clear',
+    dateFormat: 'dd/mm/yy',
+    firstDayOfWeek: 0,
+    weekHeader: 'Wk',
+  }
+};
 @Component({
   selector: 'app-special-order-page',
   standalone: true,
@@ -71,11 +101,20 @@ export class SpecialOrderPageComponent {
     specialOrderStatus: new FormControl(1),
     media: new FormControl<any[]>([])
   });
+primengConfig=inject(PrimeNG)
 
   constructor() {
     this.getLocation();
+     this.selectedLang = this.languageService.translationService.currentLang;
+    this.displayDatepickerConfig(this.selectedLang)
+    this.languageService.translationService.onLangChange.subscribe(() => {
+      this.selectedLang = this.languageService.translationService.currentLang;
+      this.displayDatepickerConfig(this.selectedLang)
+    });
   }
-
+displayDatepickerConfig(lang:string) {
+    this.primengConfig.setTranslation(primengTranslations[lang=='en'?'en':'ar']);
+  }
   onDragOver(event: DragEvent) {
     event.preventDefault();
     this.isDragging = true;

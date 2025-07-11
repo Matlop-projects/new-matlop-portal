@@ -10,6 +10,38 @@ import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { FloatLabel, FloatLabelModule } from 'primeng/floatlabel';
+import { PrimeNG } from 'primeng/config';
+import { LanguageService } from '../../services/language.service';
+const primengTranslations = {
+  ar: {
+    dayNames: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
+    dayNamesShort: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
+    dayNamesMin: ['ح', 'ن', 'ث', 'ر', 'خ', 'ج', 'س'],
+    monthNames: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+                 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+    monthNamesShort:  ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+                 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+    today: 'اليوم',
+    clear: 'مسح',
+    dateFormat: 'dd/mm/yy',
+    firstDayOfWeek: 0,
+    weekHeader: 'أسبوع',
+  },
+  en: {
+    dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+    monthNames: ['January', 'February', 'March', 'April', 'May', 'June',
+                 'July', 'August', 'September', 'October', 'November', 'December'],
+    monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    today: 'Today',
+    clear: 'Clear',
+    dateFormat: 'dd/mm/yy',
+    firstDayOfWeek: 0,
+    weekHeader: 'Wk',
+  }
+};
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -29,6 +61,8 @@ genderList:any[]=[
 ]
 private apiService = inject(ApiService);
 private Router = inject(Router)
+primengConfig=inject(PrimeNG)
+
  form = new FormGroup({
     firstName: new FormControl("",{
       validators:[
@@ -52,9 +86,17 @@ private Router = inject(Router)
 }),
       imgSrc:  new FormControl<any>("",),
   });
+  languageService = inject(LanguageService);
+  selectedLang: any;
 
   ngOnInit(): void {
    this.getUserById();
+    this.selectedLang = this.languageService.translationService.currentLang;
+    this.displayDatepickerConfig(this.selectedLang)
+    this.languageService.translationService.onLangChange.subscribe(() => {
+      this.selectedLang = this.languageService.translationService.currentLang;
+      this.displayDatepickerConfig(this.selectedLang)
+    });
   }
   onFileSelected(event: Event) {
   const input = event.target as HTMLInputElement;
@@ -72,7 +114,9 @@ private Router = inject(Router)
 
   reader.readAsDataURL(file);
 }
-
+displayDatepickerConfig(lang:string) {
+    this.primengConfig.setTranslation(primengTranslations[lang=='en'?'en':'ar']);
+  }
   onEditMode(){
     this.showBtn=true
   }

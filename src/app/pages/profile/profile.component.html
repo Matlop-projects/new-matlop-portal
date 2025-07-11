@@ -92,6 +92,7 @@
           <p-floatlabel>
             <p-datepicker
               class="w-100 text-start"
+              [inputStyle]="{ direction: 'rtl' }"
               [class.disabled-date]="!showBtn"
               [dateFormat]="'yy-mm-dd'"
               [formControlName]="'dateOfBirth'"
