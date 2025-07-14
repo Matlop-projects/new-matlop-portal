@@ -36,7 +36,7 @@
 
             .desc {
               p {
-                font-size: 24px;
+                font-size: 21px;
                 font-weight: 700;
               }
 
@@ -50,9 +50,9 @@
 
             .value {
               p {
-                font-size: 24px;
+                font-size: 19px;
                 font-weight: 700;
-                color: #a3a3a3;
+                color: #0eafba;
               }
             }
           }
@@ -63,15 +63,15 @@
 
             .desc {
               p {
-                font-size: 30px;
+                font-size: 25px;
                 font-weight: 700;
               }
             }
 
             .total-price-value {
-              font-size: 30px;
+              font-size: 25px;
               font-weight: 700;
-              color: #a3a3a3;
+              color: #0eafba;
             }
           }
         }
@@ -519,7 +519,7 @@
 .wallet-container {
   background: #ececec;
   padding: 10px 20px;
-  border-radius: 32px;
+  border-radius: 19px;
   margin-bottom: 10px;
   align-items: center;
 

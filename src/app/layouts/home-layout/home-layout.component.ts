@@ -27,8 +27,18 @@ export class HomeLayoutComponent {
   toaster = inject(ToasterService);
 
   constructor(private translate: TranslateService) {
-    this.translate.setDefaultLang('ar');
-    this.languageService.use('ar');
+    // Check for stored or current language
+    const savedLang = this.languageService.translationService.currentLang || localStorage.getItem('lang');
+
+    if (savedLang) {
+      this.translate.setDefaultLang(savedLang);
+      this.languageService.use(savedLang);
+      this.currentLang = savedLang;
+    } else {
+      this.translate.setDefaultLang('ar');
+      this.languageService.use('ar');
+      this.currentLang = 'ar';
+    }
   }
 
   ngOnInit(): void {
@@ -38,3 +48,4 @@ export class HomeLayoutComponent {
     });
   }
 }
+
