@@ -77,6 +77,7 @@ export class LoginComponent {
   }
 
   onLogin(loginfrom: any) {
+    this.openOtpModal = false;
     this.api.login(loginfrom).subscribe((res: any) => {
       this.mobileNumber = res.mobilePhone;
       this.openOtpModal = res.status;

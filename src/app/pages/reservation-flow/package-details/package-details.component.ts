@@ -26,9 +26,9 @@ const primengTranslations = {
     dayNamesShort: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
     dayNamesMin: ['ح', 'ن', 'ث', 'ر', 'خ', 'ج', 'س'],
     monthNames: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
-                 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
-    monthNamesShort:  ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
-                 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+      'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+    monthNamesShort: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+      'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
     today: 'اليوم',
     clear: 'مسح',
     dateFormat: 'dd/mm/yy',
@@ -40,9 +40,9 @@ const primengTranslations = {
     dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
     monthNames: ['January', 'February', 'March', 'April', 'May', 'June',
-                 'July', 'August', 'September', 'October', 'November', 'December'],
+      'July', 'August', 'September', 'October', 'November', 'December'],
     monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     today: 'Today',
     clear: 'Clear',
     dateFormat: 'dd/mm/yy',
@@ -78,7 +78,7 @@ export class PackageDetailsComponent {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private sanitizer = inject(DomSanitizer);
-  primengConfig=inject(PrimeNG)
+  primengConfig = inject(PrimeNG)
   selectedLang: any;
   walletBalance = 0;
   walletAmount: any = 0;
@@ -142,6 +142,7 @@ export class PackageDetailsComponent {
     vistTimeId: null,
     orderSubTotal: 0,
     orderTotal: 0,
+    virtualPrice: 0,
     scheduleDates: [],
     orderEquipments: [],
   };
@@ -177,8 +178,8 @@ export class PackageDetailsComponent {
     this.minDate = new Date(today);
     this.minDate.setDate(today.getDate() + 1);
   }
-displayDatepickerConfig(lang:string) {
-    this.primengConfig.setTranslation(primengTranslations[lang=='en'?'en':'ar']);
+  displayDatepickerConfig(lang: string) {
+    this.primengConfig.setTranslation(primengTranslations[lang == 'en' ? 'en' : 'ar']);
   }
 
   getWalletBalance() {
@@ -198,7 +199,12 @@ displayDatepickerConfig(lang:string) {
         this.packageDetails = item.data;
         this.packageDetails.couponPrice = 0;
         this.packageDetails.couponDiscount = 0;
+        this.packageDetails.orderSubTotal = 0;
+        this.packageDetails.orderTotal = 0;
+        this.orderObject.orderSubTotal = item.data.price;
         this.orderObject.orderTotal = item.data.price;
+        this.packageDetails.virtualPrice = item.data.price
+        console.log(this.orderObject);
         this.getWalletBalance();
       }
     );
@@ -210,7 +216,7 @@ displayDatepickerConfig(lang:string) {
       (res: any) => {
         if (res.data) {
           this.locations = res.data?.map((item: any) => ({
-            name: item.countryName,
+            name: item.name,
             code: item.locationId,
           }));
         }
@@ -408,19 +414,46 @@ displayDatepickerConfig(lang:string) {
   toggleStatus(equipment: any) {
     equipment.status = !equipment.status;
 
-    // After toggling, regenerate the selectedEquipments array
+    // Filter selected equipments
     this.selectedEquipments = this.equipments
       .filter((item: any) => item.status)
       .map((item: any) => ({
         equipmentId: item.equipmentId,
         orderEquipmentId: 0,
         orderId: 0,
+        price: item.price,
+        nameAr: item.arName,
+        nameEn: item.enName
       }));
 
-    console.log(this.selectedEquipments); // check in console
+    // Calculate total price of selected equipments
+    const equipmentsPrice = (this.selectedEquipments as any[]).reduce(
+      (total, item) => total + item.price,
+      0
+    );
+
+    // Update the object
     this.orderObject.orderEquipments = this.selectedEquipments;
+    this.orderObject.equipmentsPrice = equipmentsPrice;
+
+    // Recalculate the full total: base price + equipments
+    const basePrice = this.orderObject.orderSubTotal || 0; // or whatever base price
+    this.packageDetails.virtualPrice = basePrice + equipmentsPrice;
+    this.orderObject.orderTotal = basePrice + equipmentsPrice;
+    this.packageDetails.orderTotal = basePrice + equipmentsPrice;
+    // Also reflect the price in packageDetails if needed
+    this.packageDetails.equipmentsPrice = equipmentsPrice;
+
     console.log(this.orderObject);
+
+    // if(this.promoCodeValue) {
+    //   this.onPromoCodeCheck();
+    // }
   }
+
+
+
+
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
@@ -487,7 +520,7 @@ displayDatepickerConfig(lang:string) {
 
   addWalletSubmit(type: string) {
     console.log(type);
-    
+
     if (type == 'w') {
       let body = {
         userId: this.orderObject.clientId,
@@ -537,47 +570,73 @@ displayDatepickerConfig(lang:string) {
           // console.log(res);
           // this.toaster.successToaster("تم اضافة الطلب بنجاح");
           const orderId = res.data.orderId;
-          if (this.paymentSelect.paymentId == 2)
+          if (this.paymentSelect.paymentId == 2) {
             window.location.href = `https://payment.matlop.com/payment/creditcardweb?orderid=${orderId}`;
-          else
-            // window.location.href = `https://app-thank-you/thank-you?status=paid&id=${orderId}&amount=${this.orderObject.totalAmount}&message=success`;
-            window.location.href = `https://app-thank-you/thank-you?status=paid&id=${orderId}&amount=${this.orderObject.orderTotal}&message=success`;
+          } else {
+            console.log(this.orderObject.orderTotal);
+            // window.location.href = `${window.location.origin}/thank-you?status=paid&id=${orderId}&amount=${this.orderObject.orderTotal}&message=success`;
+            window.location.href = `${window.location.origin}/#${this.router.serializeUrl(
+              this.router.createUrlTree([
+                '/thank-you'
+              ], {
+                queryParams: {
+                  status: 'paid',
+                  id: orderId,
+                  amount: this.orderObject.orderTotal,
+                  message: 'success'
+                }
+              })
+            )}`;
+          }
         }
       );
     }
   }
 
+
+
   onPromoCodeCheck() {
+    this.packageDetails.virtualPrice = this.orderObject.orderTotal;
     console.log(this.promoCodeValue);
     if (this.promoCodeValue) {
       this.ApiService.get(`Copone/Verfiy/${this.promoCodeValue}/${+this.orderObject.clientId}`).subscribe((loc: any) => {
         this.invalidCoupn = false;
         this.validCoupon = true;
+        this.orderObject.coponeId = loc.data.couponId;
         this.toaster.successToaster(this.languageService.translate("PACKAGE_DETAILS.COUPON_ADDED_SUCCESS"));
         this.discountType = loc.data.coponeType;
         this.packageDetails.couponPrice = 0;
         this.packageDetails.couponDiscount = 0;
         if (loc.data.coponeType == 1) {
           this.packageDetails.couponDiscount = loc.data.amount;
-          let priceAfterDiscountPrecentage = this.packageDetails.price - this.calculateSalePrice(this.packageDetails.price, loc.data.amount);
+          let priceAfterDiscountPrecentage = this.packageDetails.virtualPrice - this.calculateSalePrice(this.packageDetails.virtualPrice, loc.data.amount);
           if (loc.data.hasMaxAmount && priceAfterDiscountPrecentage >= loc.data.maxAmount) {
-            this.packageDetails.couponPrice = this.packageDetails.price - loc.data.maxAmount;
+            console.log(priceAfterDiscountPrecentage, 'in');
+            console.log(this.packageDetails.virtualPrice, '-----', loc.data.maxAmount);
+            this.packageDetails.virtualPrice = this.packageDetails.virtualPrice - loc.data.maxAmount;
           } else {
+            console.log(priceAfterDiscountPrecentage, 'out');
             this.packageDetails.couponDiscount = loc.data.amount;
             this.packageDetails.couponPrice =
               this.packageDetails.price - this.packageDetails.couponDiscount;
-            console.log(this.packageDetails);
+            this.packageDetails.virtualPrice = this.packageDetails.virtualPrice - priceAfterDiscountPrecentage;
           }
+        } else {
+          this.packageDetails.couponDiscount = loc.data.amount;
+          this.packageDetails.virtualPrice = this.packageDetails.virtualPrice - loc.data.amount;
         }
+        console.log(this.packageDetails);
+        console.log(this.orderObject);
+      }, err => {
+        this.invalidCoupn = true;
+        this.validCoupon = false;
+        this.invalidCoupnMessage = err.error.message;
+        // this.toaster.errorToaster(this.languageService.translate("PACKAGE_DETAILS.INVALID_COUPON"));
       }
-        , err => {
-          this.invalidCoupn = true;
-          this.validCoupon = false;
-          this.invalidCoupnMessage = err.error.message;
-          this.toaster.errorToaster(this.languageService.translate("PACKAGE_DETAILS.INVALID_COUPON"));
-        }
       )
     } else {
+      this.packageDetails.couponPrice = 0;
+      this.packageDetails.couponDiscount = 0;
       this.toaster.errorToaster(this.languageService.translate("PACKAGE_DETAILS.PLEASE_ADD_COUPON"));
     }
   }
@@ -626,6 +685,6 @@ displayDatepickerConfig(lang:string) {
   }
 
   calculate15Percent(value: number): number {
-    return value * 0.15;
+    return parseFloat((value * 0.15).toFixed(2));
   }
 }

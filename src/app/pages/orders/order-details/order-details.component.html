@@ -149,7 +149,7 @@
       <div class="bold mt-3">{{ "order_details.equipments"|translate }}</div>
       <div class="d-flex justify-content-start flex-wrap mt-2">
         <ng-container *ngFor="let item of orderDetails.orderEquipmentResponse">
-          <div class="bold m-2">{{ item.arName }}</div>
+          <div class="bold m-2">{{this.selectedLang == 'ar' ? item.arName : item.enName }}</div>
         </ng-container>
       </div>
 

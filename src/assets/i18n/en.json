@@ -214,6 +214,7 @@
     "PAYMENT_METHOD": "Payment Method",
     "SELECT_PAYMENT_METHOD": "Select Payment Method",
     "EQUIPMENT": "Equipment",
+    "EQUIPMENT_PRICE": "Equipments Price",
     "SELECT_EQUIPMENT": "Select Equipment",
     "MEDIA": "Media",
     "MEDIA_HINT": "Please upload photos showing the service location or the issue type...",
@@ -414,5 +415,12 @@
     "sector_name": "Sector Name",
     "block_name": "Block name",
     "add_location": "Add location"
+  },
+   "thank_you": {
+    "title": "Thank You!",
+    "intro": "Thank you for choosing Matlop.",
+    "success": "Your order has been created successfully and we will contact you soon.",
+    "failure": "Unfortunately, your payment was not successful. Please try again or contact our support.",
+    "home": "Home"
   }
 }

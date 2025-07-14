@@ -7,6 +7,7 @@ import { DialogModule } from "primeng/dialog";
 import { TranslatePipe } from "@ngx-translate/core";
 import { BehaviorSubject } from "rxjs";
 import { LanguageService } from "../../services/language.service";
+
 export enum ModuleTypeEnum {
   Text = 0,
   Order = 1,
@@ -30,87 +31,86 @@ export enum ModuleTypeEnum {
 })
 export class NotificationComponent {
   @ViewChild("op") popoverRef: any;
+  @ViewChild("op") popover: Popover | undefined;
 
   private ApiService = inject(ApiService);
-  is_fixed: boolean = false;
+  is_fixed = false;
   notificationsList: any;
   showDialog = false;
   selectedNotification: any | null = null;
   totlaCount = 0;
   totalUnSeen = 0;
-  @ViewChild("op") popover: Popover | undefined; // Reference to the popover
   private totalUnSeenCount$ = new BehaviorSubject<number | null>(null);
   private audio = new Audio("assets/sounds/notifications.mp3");
   private isUserInteracted = false;
   selectedLang: any;
   languageService = inject(LanguageService);
-  constructor(private router: Router) { }
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     window.addEventListener("click", () => (this.isUserInteracted = true), {
       once: true,
     });
+
     this.getNotifications();
+
     this.languageService.translationService.onLangChange.subscribe(() => {
       this.selectedLang = this.languageService.translationService.currentLang;
       this.getNotifications();
     });
+
     setInterval(() => {
       this.getNotifications();
-    }, 180000);
+    }, 180000); // 3 minutes
   }
 
   getNotifications() {
-  const expirationTimeStr = localStorage.getItem("token");
+    const expirationTime = this.getTokenExpirationFromJWT();
 
-  if (!expirationTimeStr) {
-    console.log('⛔ No token found');
-    return;
-  }
-
-  const expirationTime = Number(expirationTimeStr);
-
-  if (isNaN(expirationTime)) {
-    return;
-  }
-
-  if (this.isTokenExpired(expirationTime)) {
-    return;
-  }
-
-  this.ApiService.get("Notification/GetNotifications").subscribe((noti: any) => {
-    this.notificationsList = noti.data.data;
-    this.totlaCount = noti.data.totalCount;
-    this.totalUnSeen = noti.data.totalUnSeenCount;
-
-    const newCount = noti.data.totalUnSeenCount;
-    const oldCount = this.totalUnSeenCount$.value;
-
-    if (
-      oldCount !== null &&
-      newCount > oldCount &&
-      this.isUserInteracted
-    ) {
-      this.playSound();
+    if (!expirationTime || this.isTokenExpired(expirationTime)) {
+      console.log("⛔ Token is missing or expired");
+      return;
     }
 
-    this.totalUnSeenCount$.next(newCount);
-  });
-}
+    this.ApiService.get("Notification/GetNotifications").subscribe((noti: any) => {
+      this.notificationsList = noti.data.data;
+      this.totlaCount = noti.data.totalCount;
+      this.totalUnSeen = noti.data.totalUnSeenCount;
 
+      const newCount = noti.data.totalUnSeenCount;
+      const oldCount = this.totalUnSeenCount$.value;
+
+      if (oldCount !== null && newCount > oldCount && this.isUserInteracted) {
+        this.playSound();
+      }
+
+      this.totalUnSeenCount$.next(newCount);
+    });
+  }
+
+  getTokenExpirationFromJWT(): number | null {
+    const token = localStorage.getItem("token");
+    if (!token) return null;
+
+    try {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      return payload.exp ? payload.exp * 1000 : null; // convert seconds → ms
+    } catch (error) {
+      console.error("❌ Failed to decode token:", error);
+      return null;
+    }
+  }
 
   isTokenExpired(expirationTimestamp: number): boolean {
-    const now = Date.now(); // current time in milliseconds
-    return now > expirationTimestamp;
+    return Date.now() > expirationTimestamp;
   }
 
   onClickNotification(): void {
-    if (this.popoverRef.overlayVisible) {
+    if (this.popoverRef?.overlayVisible) {
       this.is_fixed = true;
       setTimeout(() => {
-        const popoverEl = document.querySelector(
-          ".p-popover.p-component"
-        ) as HTMLElement;
+        const popoverEl = document.querySelector(".p-popover.p-component") as HTMLElement;
         if (popoverEl) {
           popoverEl.style.position = "fixed";
         }
@@ -122,9 +122,7 @@ export class NotificationComponent {
 
   playSound() {
     this.audio.currentTime = 0;
-    this.audio
-      .play()
-      .catch((error) => console.log("Audio play blocked:", error));
+    this.audio.play().catch((error) => console.log("Audio play blocked:", error));
   }
 
   getModuleIcon(module: number): string {
@@ -146,7 +144,6 @@ export class NotificationComponent {
       this.showDialog = true;
       this.seenNotification(notification.notificationId);
     } else {
-      // Navigate to the appropriate route based on the module type
       const route =
         notification.module === ModuleTypeEnum.Order
           ? `/order/edit/${notification.entityId}`
@@ -154,15 +151,12 @@ export class NotificationComponent {
       this.seenNotification(notification.notificationId);
       this.router.navigate([route]);
     }
+
     this.closePopover();
   }
 
   seenNotification(orderId: any) {
-    this.ApiService.put(
-      `Notification/seenNotification?id=${orderId}`,
-      {}
-    ).subscribe((res: any) => {
-      console.log(res);
+    this.ApiService.put(`Notification/seenNotification?id=${orderId}`, {}).subscribe(() => {
       this.getNotifications();
     });
   }
@@ -170,7 +164,7 @@ export class NotificationComponent {
   closePopover() {
     if (this.popover) {
       this.popover.hide();
-      this.is_fixed = false; // allow normal behavior again
+      this.is_fixed = false;
     }
   }
 
@@ -185,25 +179,15 @@ export class NotificationComponent {
     const days = Math.floor(hours / 24);
 
     if (lang === "ar") {
-      if (seconds < 60) {
-        return `منذ ${seconds} ثانية`;
-      } else if (minutes < 60) {
-        return `منذ ${minutes} دقيقة`;
-      } else if (hours < 24) {
-        return `منذ ${hours} ساعة`;
-      } else {
-        return `منذ ${days} يوم`;
-      }
+      if (seconds < 60) return `منذ ${seconds} ثانية`;
+      else if (minutes < 60) return `منذ ${minutes} دقيقة`;
+      else if (hours < 24) return `منذ ${hours} ساعة`;
+      else return `منذ ${days} يوم`;
     } else {
-      if (seconds < 60) {
-        return `since ${seconds} second${seconds !== 1 ? "s" : ""}`;
-      } else if (minutes < 60) {
-        return `since ${minutes} minute${minutes !== 1 ? "s" : ""}`;
-      } else if (hours < 24) {
-        return `since ${hours} hour${hours !== 1 ? "s" : ""}`;
-      } else {
-        return `since ${days} day${days !== 1 ? "s" : ""}`;
-      }
+      if (seconds < 60) return `since ${seconds} second${seconds !== 1 ? "s" : ""}`;
+      else if (minutes < 60) return `since ${minutes} minute${minutes !== 1 ? "s" : ""}`;
+      else if (hours < 24) return `since ${hours} hour${hours !== 1 ? "s" : ""}`;
+      else return `since ${days} day${days !== 1 ? "s" : ""}`;
     }
   }
 }

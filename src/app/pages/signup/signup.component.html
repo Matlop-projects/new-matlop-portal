@@ -171,68 +171,6 @@
           </div>
         </div>
 
-        <!-- Password -->
-        <div class="d-flex flex-col gap-2">
-          <label for="password">{{ "signup.password" | translate }}</label>
-          <p-password
-            formControlName="password"
-            [toggleMask]="true"
-            [feedback]="false"
-          ></p-password>
-          <div
-            *ngIf="
-              signupForm.get('password')?.invalid &&
-              (signupForm.get('password')?.touched ||
-                signupForm.get('password')?.dirty)
-            "
-          >
-            <div
-              *ngIf="signupForm.get('password')?.errors?.['required']"
-              class="text-danger"
-            >
-              {{ "errors.required" | translate }}
-            </div>
-            <div
-              *ngIf="signupForm.get('password')?.errors?.['pattern']"
-              class="text-danger"
-            >
-              {{ "errors.passwordPattern" | translate }}
-            </div>
-          </div>
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="d-flex flex-col gap-2">
-          <label for="confirmPassword">{{
-            "signup.confirm_password" | translate
-          }}</label>
-          <p-password
-            formControlName="confirmPassword"
-            [toggleMask]="true"
-            [feedback]="false"
-          ></p-password>
-          <div
-            *ngIf="
-              signupForm.get('confirmPassword')?.invalid &&
-              (signupForm.get('confirmPassword')?.touched ||
-                signupForm.get('confirmPassword')?.dirty)
-            "
-          >
-            <div
-              *ngIf="signupForm.get('confirmPassword')?.errors?.['required']"
-              class="text-danger"
-            >
-              {{ "errors.required" | translate }}
-            </div>
-            <div
-              *ngIf="signupForm.errors?.['passwordMismatch'] && signupForm.get('confirmPassword')?.touched"
-              class="text-danger"
-            >
-              {{ "errors.passwordMismatch" | translate }}
-            </div>
-          </div>
-        </div>
-
         <!-- Gender -->
         <div class="d-flex flex-row gap-3">
           <label>{{ "signup.gender" | translate }}</label>
