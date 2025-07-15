@@ -57,6 +57,43 @@
             </div>
             <div class="tax">{{ "ORDERS.VAT_INCLUDED" | translate }}</div>
           </div> -->
+           <div class="mt-5 d-flex justify-content-between">
+            <span class="bold">{{'PACKAGE_DETAILS.PRICE'|translate}}</span>
+            <span>{{item.price??0}} {{'ORDERS.SAR' | translate}}</span>
+          </div>
+              <div class="mt-3 d-flex justify-content-between">
+            <span class="bold">{{'amount'|translate}}</span>
+            <span>{{item.amount??0}}</span>
+          </div>
+          <div class="mt-3">
+            <span class="bold block">{{ "PACKAGE_DETAILS.MEDIA" | translate }} </span>
+           
+           <ng-container *ngIf="item.media && item.media.length > 0; else noMedia">
+           <div class="mt-2" *ngFor="let mediaItem of item.media">
+              <img
+                *ngIf="mediaItem.mediaTypeEnum == 1"
+                [src]="baseImgUrl + mediaItem.src"
+                class="media-image m-1"
+                alt="Media Image"
+                width="150px"
+                height="150px"
+              />
+              <video
+                *ngIf="mediaItem.mediaTypeEnum == 2"
+                [src]="baseImgUrl + mediaItem.src"
+                class="media-video m-1"
+                width="150px"
+                height="150px"
+                controls
+              ></video>
+             </div>
+          </ng-container>
+           <ng-template #noMedia>
+             <div class="text-center">
+               <span class="bold">{{ "no_data_found" | translate }}</span>
+             </div>
+           </ng-template>
+          </div>
           <div class="mt-3">
             <span class="bold">{{ "order_details.notes" | translate }} </span>
 

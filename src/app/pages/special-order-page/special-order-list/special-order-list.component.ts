@@ -8,6 +8,7 @@ import {
 } from "../../../components/background-image-with-text/background-image-with-text.component";
 import { TranslatePipe } from "@ngx-translate/core";
 import { LanguageService } from "../../../services/language.service";
+import { environment } from "../../../../environments/environment";
 
 @Component({
   selector: "app-special-order-list",
@@ -24,7 +25,7 @@ import { LanguageService } from "../../../services/language.service";
 })
 export class SpecialOrderListComponent implements OnInit {
   languageService = inject(LanguageService);
-
+  baseImgUrl=environment.baseImageUrl
   bkg_text_options: IBackGroundImageWithText = {
     imageUrl: "assets/img/order-slider.svg",
     header: this.languageService.translate("ORDER_TRACKING.BANNER_HEADER"),
@@ -43,7 +44,7 @@ export class SpecialOrderListComponent implements OnInit {
     pageSize: 8,
     sortingExpression: "",
     sortingDirection: 0,
-    clientId: 0,
+    clientId: 1,
     specialOrderId: 0,
     amount: 0,
     media: "string",
@@ -59,7 +60,7 @@ export class SpecialOrderListComponent implements OnInit {
     if (storedData !== null) {
       const parsed = JSON.parse(storedData);
       const id: number = Number(parsed.id);
-      this.searchObject.clientId = id;
+      this.searchObject.clientId = 1;
       this.getOrdersCount(id);
     }
     this.getAllOrders();
@@ -96,7 +97,7 @@ export class SpecialOrderListComponent implements OnInit {
   }
   getOrdersCount(clientId: number) {
     this.apiService
-      .get(`SpecialOrder/GetSpecialOrderCountsByClientId`, { clientId: clientId ,specialOrderEnum:2})
+      .get(`SpecialOrder/GetSpecialOrderCountsByClientId`, { clientId: 1 ,specialOrderEnum:2})
       .subscribe((res: any) => {
         if (res.data) {
           this.ordersCount = res.data;
