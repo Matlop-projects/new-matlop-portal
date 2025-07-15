@@ -22,7 +22,7 @@ import { LanguageService } from "../../../services/language.service";
     FormsModule,
     SelectModule,
     FloatLabelModule,
-    TranslateModule
+    TranslateModule,
   ],
   templateUrl: "./order-details.component.html",
   styleUrl: "./order-details.component.scss",
@@ -31,47 +31,80 @@ export class OrderDetailsComponent implements OnInit {
   orderDetails: any;
   visibleCancelOrder: boolean = false;
   visibleAdditionalItem: boolean = false;
-  visiblePaymentWay:boolean=false;
+  visiblePaymentWay: boolean = false;
   orderAdditionalNotes: string = "";
-  selectedPaymentValue:any[]=[]
+  selectedPaymentValue: any[] = [];
   baseUrl = environment.baseImageUrl;
-  PaymentWayList:any[]=[]
+  PaymentWayList: any[] = [];
+  dateClass: string[] = [];
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
   private apiService = inject(ApiService);
- selectedLang: any;
-  languageService = inject(LanguageService);  get orderId() {
+  selectedLang: any;
+  languageService = inject(LanguageService);
+  get orderId() {
     return this.route.snapshot.paramMap.get("id");
   }
+  get totalEquipmentPrice(): number {
+  return this.orderDetails.orderEquipmentResponse?.reduce((sum:number, item:any) => sum + item.price, 0) || 0;
+}
+
   ngOnInit(): void {
     this.getOrderDetails();
-     this.selectedLang = this.languageService.translationService.currentLang || 'ar';
+    this.getorderSchedule();
+    this.selectedLang =
+      this.languageService.translationService.currentLang || "ar";
     this.languageService.translationService.onLangChange.subscribe(() => {
       this.selectedLang = this.languageService.translationService.currentLang;
-    })
+      this.getOrderDetails();
+      this.getorderSchedule();
+    });
   }
-confirmPaymentWay(){
-  let body={
-  "paymentId":this.selectedPaymentValue[0].code,
-  "enName": this.selectedPaymentValue[0].en,
-  "arName": this.selectedPaymentValue[0].ar,
-  "enDescription": this.selectedPaymentValue[0].descEn,
-  "arDescription": this.selectedPaymentValue[0].descAr
+  getorderSchedule() {
+    this.apiService
+      .get(`Order/GetOrderSchedule/${this.orderId}`)
+      .subscribe((res: any) => {
+        if (res.data) {
+          this.orderDetails.orderSchedule = res.data;
+          this.checkdateVisited(this.orderDetails.orderSchedule);
+        }
+      });
   }
-  this.apiService.put('PaymentWay/UpdatePaymentWay',body).subscribe(res=>{
-    if(res){
-      this.visiblePaymentWay=false;
-      this.getOrderDetails()
+  checkdateVisited(date: any) {
+    const visitDate = new Date(date);
+    const now = new Date();
+
+    if (visitDate.getTime() < now.getTime()) {
+      return "past-date-visit";
+    } else if (visitDate.getTime() > now.getTime()) {
+      return "future-date-visit";
+    } else {
+      return "current-date-visit";
     }
-  })
-}
+  }
+  confirmPaymentWay() {
+    let body = {
+      paymentId: this.selectedPaymentValue[0].code,
+      enName: this.selectedPaymentValue[0].en,
+      arName: this.selectedPaymentValue[0].ar,
+      enDescription: this.selectedPaymentValue[0].descEn,
+      arDescription: this.selectedPaymentValue[0].descAr,
+    };
+    this.apiService
+      .put("PaymentWay/UpdatePaymentWay", body)
+      .subscribe((res) => {
+        if (res) {
+          this.visiblePaymentWay = false;
+          this.getOrderDetails();
+        }
+      });
+  }
   getOrderDetails() {
     this.apiService.get(`order/get/${this.orderId}`).subscribe((res: any) => {
-      if (res.data){ 
+      if (res.data) {
         this.orderDetails = res.data;
-        if(res.data.orderStatusName=='Pending')
-          this.getAllPaymentWay()
+        if (res.data.orderStatusName == "Pending") this.getAllPaymentWay();
       }
     });
   }
@@ -90,24 +123,26 @@ confirmPaymentWay(){
   onAdditionalOrder() {
     this.visibleAdditionalItem = true;
   }
-  getAllPaymentWay(){
-    this.apiService.get('PaymentWay/GetAll').subscribe((res:any)=>{
-        this.PaymentWayList=[]
-        if(res.data)
-      res.data.map((item:any)=>{
-        this.PaymentWayList.push({
-          name:this.selectedLang=='en'? item.enName:item.arName,
-          code:item.paymentId,
-          en:item.enName,
-          ar:item.arName,
-          descAr:item.arDescription,
-          descEn:item.enDescription
-        })
-      })
-    })
+  getAllPaymentWay() {
+    this.apiService.get("PaymentWay/GetAll").subscribe((res: any) => {
+      this.PaymentWayList = [];
+      if (res.data)
+        res.data.map((item: any) => {
+          this.PaymentWayList.push({
+            name: this.selectedLang == "en" ? item.enName : item.arName,
+            code: item.paymentId,
+            en: item.enName,
+            ar: item.arName,
+            descAr: item.arDescription,
+            descEn: item.enDescription,
+          });
+        });
+    });
   }
-  onPaymentWaySelect(payment:number){
-     this.selectedPaymentValue=this.PaymentWayList.filter(item=>item.code==payment)
+  onPaymentWaySelect(payment: number) {
+    this.selectedPaymentValue = this.PaymentWayList.filter(
+      (item) => item.code == payment
+    );
   }
 
   confirmAdditionalItem() {
