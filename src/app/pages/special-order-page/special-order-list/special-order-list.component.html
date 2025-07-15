@@ -1,6 +1,10 @@
 <div class="container">
-  <div class="d-flex justify-content-between flex-wrap">
-    <div class="status w-70 flex-grow-1">
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-default w-250" (click)="onRequest()">
+      {{ "actions.request" | translate }}
+    </button>
+  </div>
+    <div class="status">
       <span
         [class.active-status]="activeStatus == 'pending'"
         class="btn"
@@ -26,11 +30,6 @@
         <span class="count">{{ ordersCount?.canceledOrdersCount || 0 }}</span>
       </span>
     </div>
-    <button class="btn btn-default w-250 flex-grow-1" (click)="onRequest()">
-      {{ "actions.request" | translate }}
-    </button>
-  </div>
-
   <div class="orders mt-5">
     <ng-container *ngIf="orders.length > 0; else empty">
       <div class="card mt-3 mb-3" *ngFor="let item of orders">
