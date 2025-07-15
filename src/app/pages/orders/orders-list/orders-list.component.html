@@ -38,7 +38,7 @@
               currentlang == "en" ? item.serviceNameEn : item.serviceNameAr
             }}</span>
             <span [class]="activeStatus" class="all-status">
-              {{ activeStatus | titlecase | translate }}
+              {{ item.orderStatusName  | translate }}
               <span class="pi pi-circle-on"></span>
             </span>
           </div>

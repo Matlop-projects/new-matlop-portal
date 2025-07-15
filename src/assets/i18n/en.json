@@ -6,6 +6,7 @@
   "total": "Total",
   "no_data_found": "No data found",
   "Pending": "Pending",
+  "AssignedToProvider":"Assigned to Provider",
   "actions": {
     "send": "Send",
     "send_sms": "Send a  message",

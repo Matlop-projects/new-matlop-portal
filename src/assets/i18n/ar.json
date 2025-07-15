@@ -6,6 +6,7 @@
   "total":"اجمالي",
   "no_data_found": "لا توجد بيانات حاليا",
   "Pending": "تحت الطلب",
+  "AssignedToProvider":"مُعَين لمقدم الخدمة",
   "actions": {
     "send": "إرسال",
     "send_sms": "إرسال رسالة",
