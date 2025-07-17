@@ -553,7 +553,31 @@
 .w-250 {
   min-width: 250px;
 }
-.disabled{
-  background: gray!important;
-  cursor: not-allowed!important;
+
+.disabled {
+  background: gray !important;
+  cursor: not-allowed !important;
+}
+
+
+.coupon-discount {
+  position: relative;
+  bottom: 10px;
+
+  .max-amount-text {
+    font-size: 12px;
+    color: rgb(200, 200, 200);
+  }
+
+  .suadi-max-ryal-img {
+    position: relative;
+    bottom: 7px;
+  }
+}
+
+.hint {
+  position: relative;
+  bottom: 10px;
+  font-size: 12px !important;
+  color: rgb(200, 200, 200);
 }

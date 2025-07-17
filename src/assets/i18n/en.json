@@ -248,6 +248,8 @@
     "promo_code": "Promo code",
     "promo_code_find": "Promo code (if available)",
     "promo_code_info": "Have a discount code? Enter it here before confirming your order to benefit from the offer.",
+    "hasMasAmount": "Max Amount as",
+    "EQUIPMETNS_MAX_AMOUNT_HINT": "Equipments have no discount",
     "VALIDATION": {
       "LOCATION": "Please select location",
       "PAYMENT": "Please select payment method",
@@ -423,7 +425,7 @@
     "block_name": "Block name",
     "add_location": "Add location"
   },
-   "thank_you": {
+  "thank_you": {
     "title": "Thank You!",
     "intro": "Thank you for choosing Matlop.",
     "success": "Your order has been created successfully and we will contact you soon.",

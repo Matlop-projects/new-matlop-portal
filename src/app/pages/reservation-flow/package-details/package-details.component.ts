@@ -97,6 +97,8 @@ export class PackageDetailsComponent {
     },
   };
 
+  ifPromoCode: boolean = false;
+
   paymentList: any[] = [];
 
   packageDetails: any;
@@ -152,6 +154,7 @@ export class PackageDetailsComponent {
   equipments: any[] = [];
   locations: any;
   promoCodeValue: any;
+  priceAfterDiscountPrecentage: any;
 
   ngOnInit(): void {
     this.packageId = this.route.snapshot.params["packageId"];
@@ -160,7 +163,7 @@ export class PackageDetailsComponent {
     this.getLocation();
     this.getPackageDetailsById(this.packageId);
     this.setCalendarLimits();
-    this.getWorkingHours();
+    this.getWorkingHours(this.packageId);
     this.getEquipmentsList(this.packageId);
     this.selectedLang = this.languageService.translationService.currentLang;
     this.displayDatepickerConfig(this.selectedLang)
@@ -178,6 +181,7 @@ export class PackageDetailsComponent {
     this.minDate = new Date(today);
     this.minDate.setDate(today.getDate() + 1);
   }
+
   displayDatepickerConfig(lang: string) {
     this.primengConfig.setTranslation(primengTranslations[lang == 'en' ? 'en' : 'ar']);
   }
@@ -212,7 +216,7 @@ export class PackageDetailsComponent {
 
   getLocation() {
     const userId = localStorage.getItem("userId");
-    this.ApiService.get("Location/GetByUserId/" + userId).subscribe(
+    this.ApiService.get(`Location/GetByUserId/${userId}`).subscribe(
       (res: any) => {
         if (res.data) {
           this.locations = res.data?.map((item: any) => ({
@@ -373,8 +377,8 @@ export class PackageDetailsComponent {
     }
   }
 
-  getWorkingHours() {
-    this.ApiService.get(`WorkingTime/GetAll`).subscribe((hours: any) => {
+  getWorkingHours(PackageId: any) {
+    this.ApiService.get(`Package/GetWorkTimeByPacakgeId/${PackageId}`).subscribe((hours: any) => {
       this.workingHoursList = hours.data?.map((item: any) => ({
         ...item,
         finalWorking: `${new Date(item.startDate).toLocaleTimeString("en-GB", {
@@ -410,50 +414,6 @@ export class PackageDetailsComponent {
       }
     );
   }
-
-  toggleStatus(equipment: any) {
-    equipment.status = !equipment.status;
-
-    // Filter selected equipments
-    this.selectedEquipments = this.equipments
-      .filter((item: any) => item.status)
-      .map((item: any) => ({
-        equipmentId: item.equipmentId,
-        orderEquipmentId: 0,
-        orderId: 0,
-        price: item.price,
-        nameAr: item.arName,
-        nameEn: item.enName
-      }));
-
-    // Calculate total price of selected equipments
-    const equipmentsPrice = (this.selectedEquipments as any[]).reduce(
-      (total, item) => total + item.price,
-      0
-    );
-
-    // Update the object
-    this.orderObject.orderEquipments = this.selectedEquipments;
-    this.orderObject.equipmentsPrice = equipmentsPrice;
-
-    // Recalculate the full total: base price + equipments
-    const basePrice = this.orderObject.orderSubTotal || 0; // or whatever base price
-    this.packageDetails.virtualPrice = basePrice + equipmentsPrice;
-    this.orderObject.orderTotal = basePrice + equipmentsPrice;
-    this.packageDetails.orderTotal = basePrice + equipmentsPrice;
-    // Also reflect the price in packageDetails if needed
-    this.packageDetails.equipmentsPrice = equipmentsPrice;
-
-    console.log(this.orderObject);
-
-    // if(this.promoCodeValue) {
-    //   this.onPromoCodeCheck();
-    // }
-  }
-
-
-
-
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
@@ -582,7 +542,7 @@ export class PackageDetailsComponent {
                 queryParams: {
                   status: 'paid',
                   id: orderId,
-                  amount: this.orderObject.orderTotal,
+                  amount: res.data.orderTotal,
                   message: 'success'
                 }
               })
@@ -594,9 +554,50 @@ export class PackageDetailsComponent {
   }
 
 
+  toggleStatus(equipment: any) {
+    equipment.status = !equipment.status;
+
+    // Filter selected equipments
+    this.selectedEquipments = this.equipments
+      .filter((item: any) => item.status)
+      .map((item: any) => ({
+        equipmentId: item.equipmentId,
+        orderEquipmentId: 0,
+        orderId: 0,
+        price: item.price,
+        nameAr: item.arName,
+        nameEn: item.enName
+      }));
+
+    // Calculate total price of selected equipments
+    const equipmentsPrice = (this.selectedEquipments as any[]).reduce(
+      (total, item) => total + item.price,
+      0
+    );
+
+    // Update the object
+    this.orderObject.orderEquipments = this.selectedEquipments;
+
+    // Recalculate the full total: base price + equipments
+    console.log(this.orderObject.orderSubTotal);
+    const basePrice = this.orderObject.orderSubTotal || 0; // or whatever base price
+    this.orderObject.equipmentsPrice = equipmentsPrice;
+    if (this.ifPromoCode) {
+      this.packageDetails.virtualPrice = this.packageDetails.couponPrice + equipmentsPrice;
+    } else {
+      this.packageDetails.virtualPrice = basePrice + equipmentsPrice;
+    }
+    this.orderObject.orderTotal = basePrice + equipmentsPrice;
+    this.packageDetails.orderTotal = basePrice + equipmentsPrice;
+    // Also reflect the price in packageDetails if needed
+    this.packageDetails.equipmentsPrice = equipmentsPrice;
+    console.log(this.packageDetails);
+    // console.log(this.orderObject);
+  }
 
   onPromoCodeCheck() {
     this.packageDetails.virtualPrice = this.orderObject.orderTotal;
+    this.ifPromoCode = false;
     console.log(this.promoCodeValue);
     if (this.promoCodeValue) {
       this.ApiService.get(`Copone/Verfiy/${this.promoCodeValue}/${+this.orderObject.clientId}`).subscribe((loc: any) => {
@@ -607,27 +608,32 @@ export class PackageDetailsComponent {
         this.discountType = loc.data.coponeType;
         this.packageDetails.couponPrice = 0;
         this.packageDetails.couponDiscount = 0;
+        this.packageDetails.couponType = loc.data.coponeType;
+        this.packageDetails.hasMaxAmount = loc.data.hasMaxAmount;
+        this.packageDetails.maxAmount = loc.data.maxAmount;
         if (loc.data.coponeType == 1) {
           this.packageDetails.couponDiscount = loc.data.amount;
-          let priceAfterDiscountPrecentage = this.packageDetails.virtualPrice - this.calculateSalePrice(this.packageDetails.virtualPrice, loc.data.amount);
-          if (loc.data.hasMaxAmount && priceAfterDiscountPrecentage >= loc.data.maxAmount) {
-            console.log(priceAfterDiscountPrecentage, 'in');
-            console.log(this.packageDetails.virtualPrice, '-----', loc.data.maxAmount);
+          this.priceAfterDiscountPrecentage = this.packageDetails.price - this.calculateSalePrice(this.packageDetails.price, loc.data.amount);
+          if (loc.data.hasMaxAmount && this.priceAfterDiscountPrecentage >= loc.data.maxAmount) {
             this.packageDetails.virtualPrice = this.packageDetails.virtualPrice - loc.data.maxAmount;
+            this.packageDetails.couponPrice = this.packageDetails.virtualPrice;
           } else {
-            console.log(priceAfterDiscountPrecentage, 'out');
             this.packageDetails.couponDiscount = loc.data.amount;
-            this.packageDetails.couponPrice =
-              this.packageDetails.price - this.packageDetails.couponDiscount;
-            this.packageDetails.virtualPrice = this.packageDetails.virtualPrice - priceAfterDiscountPrecentage;
+            // this.packageDetails.couponPrice =
+            // this.packageDetails.price - this.packageDetails.couponDiscount;
+            this.packageDetails.virtualPrice = this.packageDetails.virtualPrice - this.priceAfterDiscountPrecentage;
+            this.packageDetails.couponPrice = this.packageDetails.virtualPrice;
           }
         } else {
           this.packageDetails.couponDiscount = loc.data.amount;
           this.packageDetails.virtualPrice = this.packageDetails.virtualPrice - loc.data.amount;
+          this.packageDetails.couponPrice = this.packageDetails.virtualPrice;
         }
         console.log(this.packageDetails);
         console.log(this.orderObject);
+        this.ifPromoCode = true;
       }, err => {
+        this.ifPromoCode = false;
         this.invalidCoupn = true;
         this.validCoupon = false;
         this.invalidCoupnMessage = err.error.message;
@@ -635,6 +641,8 @@ export class PackageDetailsComponent {
       }
       )
     } else {
+      this.ifPromoCode = false;
+      this.packageDetails.hasMaxAmount = false;
       this.packageDetails.couponPrice = 0;
       this.packageDetails.couponDiscount = 0;
       this.toaster.errorToaster(this.languageService.translate("PACKAGE_DETAILS.PLEASE_ADD_COUPON"));

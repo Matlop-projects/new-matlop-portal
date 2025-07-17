@@ -248,6 +248,8 @@
     "promo_code": "رمز الخصم",
     "promo_code_find": "رمز الخصم (إن وُجد)",
     "promo_code_info": "عندك كود خصم؟ دخّله هنا قبل تأكيد الطلب للاستفادة من العرض.",
+    "hasMasAmount":"بحد اقصي",
+    "EQUIPMETNS_MAX_AMOUNT_HINT": "المعدات لا تحسب مع الخصم",
     "VALIDATION": {
       "LOCATION": "يرجى اختيار الموقع",
       "PAYMENT": "يرجى اختيار طريقة الدفع",
