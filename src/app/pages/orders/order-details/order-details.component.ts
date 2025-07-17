@@ -85,21 +85,26 @@ export class OrderDetailsComponent implements OnInit {
     }
   }
   confirmPaymentWay() {
-    let body = {
-      paymentId: this.selectedPaymentValue[0].code,
-      enName: this.selectedPaymentValue[0].en,
-      arName: this.selectedPaymentValue[0].ar,
-      enDescription: this.selectedPaymentValue[0].descEn,
-      arDescription: this.selectedPaymentValue[0].descAr,
-    };
-    this.apiService
-      .put("PaymentWay/UpdatePaymentWay", body)
-      .subscribe((res) => {
-        if (res) {
-          this.visiblePaymentWay = false;
-          this.getOrderDetails();
-        }
-      });
+    console.log('ffff', this.selectedPaymentValue);
+    if (this.selectedPaymentValue[0].code == 2) {
+      window.open(`https://payment.matlop.com/payment/creditcardweb?orderid=${this.orderId}`, "_blank");
+    }
+
+    // let body = {
+    //   paymentId: this.selectedPaymentValue[0].code,
+    //   enName: this.selectedPaymentValue[0].en,
+    //   arName: this.selectedPaymentValue[0].ar,
+    //   enDescription: this.selectedPaymentValue[0].descEn,
+    //   arDescription: this.selectedPaymentValue[0].descAr,
+    // };
+    // this.apiService
+    //   .put("PaymentWay/UpdatePaymentWay", body)
+    //   .subscribe((res) => {
+    //     if (res) {
+    //       this.visiblePaymentWay = false;
+    //       this.getOrderDetails();
+    //     }
+    //   });
   }
   getOrderDetails() {
     this.apiService.get(`order/get/${this.orderId}`).subscribe((res: any) => {
@@ -129,6 +134,7 @@ export class OrderDetailsComponent implements OnInit {
       this.PaymentWayList = [];
       if (res.data)
         res.data.map((item: any) => {
+      if(item.paymentId==2||item.paymentId==3)
           this.PaymentWayList.push({
             name: this.selectedLang == "en" ? item.enName : item.arName,
             code: item.paymentId,

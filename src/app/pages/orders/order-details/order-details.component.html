@@ -164,9 +164,9 @@
         *ngIf="orderDetails.orderStatusName == 'Pending'"
         class="buttons text-start"
       >
-        <!-- <button class="btn pay" (click)="visiblePaymentWay = true">
+        <button *ngIf="orderDetails.paymentWayId==1" class="btn pay" (click)="visiblePaymentWay = true">
           {{ "order_details.retry_payment" |translate}}
-        </button> -->
+        </button>
         <button class="btn cancel" (click)="onCancelOrder()">
           {{ "order_details.canceld_order" | translate }}
         </button>
@@ -384,7 +384,7 @@
         [disabled]="selectedPaymentValue.length == 0"
         (click)="confirmPaymentWay()"
       >
-        {{ "actions.update" | translate }}
+        {{ "actions.confirm" | translate }}
       </button>
       <button
         class="btn mt-3 w-100 btn-additional-item-cancel"
