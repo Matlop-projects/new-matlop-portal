@@ -93,20 +93,23 @@
           <span class="bold">{{ "order_details.time" | translate }}</span>
           <span>{{ orderDetails.creationTime | date : "HH:mm" }}</span>
         </div>
-          <div class="d-flex justify-content-between mt-3">
+        <div class="d-flex justify-content-between mt-3">
           <span class="bold">{{ "order_details.visitTime" | translate }}</span>
-         <span>
-            <span>
-             <span class="text-gray-light">
-               {{'from'|translate}} 
-             </span>  
-              {{ orderDetails.fromWorkTimeDate  }}</span> -
           <span>
-            <span class="text-gray-light">
-               {{'to'|translate}} 
-             </span> 
-              {{ orderDetails.toWorkTimeDate  }}</span>
-         </span>
+            <span>
+              <span class="text-gray-light">
+                {{ "from" | translate }}
+              </span>
+              {{ orderDetails.fromWorkTimeDate }}</span
+            >
+            -
+            <span>
+              <span class="text-gray-light">
+                {{ "to" | translate }}
+              </span>
+              {{ orderDetails.toWorkTimeDate }}</span
+            >
+          </span>
         </div>
         <div class="d-flex justify-content-between mt-3">
           <span class="bold">{{ "order_details.status" | translate }}</span>
@@ -180,7 +183,10 @@
       </div> -->
       <div class="">
         <ng-container *ngFor="let item of orderSchedule; let index = index">
-          <div class="d-flex justify-content-between" [class]="checkdateVisited(item.visitDate)">
+          <div
+            class="d-flex justify-content-between"
+            [class]="checkdateVisited(item.visitDate)"
+          >
             <div class="bold">{{ item.visitDate | date : "dd MMM yyyy" }}</div>
             <div class="text-gray-light">
               {{ item.visitDate | date : "HH:mm a" }}
@@ -198,79 +204,90 @@
       </div> -->
       <div class="bold mt-3">
         <div class="d-flex justify-content-between">
-           <span>{{ "order_details.equipments" | translate }}</span> 
-       <span> {{'total' | translate}} {{ totalEquipmentPrice }} {{'rs'|translate}}  </span>
-    
-        </div>
-      <div class="mt-2">
-        <ng-container *ngFor="let item of orderDetails.orderEquipmentResponse">
-          <div class="bold d-flex justify-content-between m-2">
-            <span>{{ this.selectedLang == "ar" ? item.arName : item.enName }}</span>
-            <span>{{ item.price }} {{ "rs" | translate }}</span>
-          </div>
-        </ng-container>
-      </div>
-
-      <div *ngIf="orderDetails.orderEquipmentResponse.length == 0">
-        {{ "order_details.no_equipments" | translate }}
-      </div>
-      <div class="bold mt-3 d-flex justify-content-between" *ngIf="orderDetails.copones">
-       <span>{{ "order_details.copone" | translate }}</span>
-       <span> 
-         {{ orderDetails.copones?.amount }} 
-       <span *ngIf=" orderDetails.copones?.coponeType==1">{{'rs'|translate}}</span>
-       <span *ngIf=" orderDetails.copones?.coponeType==2">%</span>
-       </span>
-      </div>
-
-      <div class="mt-5 bold">
-        {{ "order_details.img_order" | translate }}
-      </div>
-      <div class="d-flex justify-content-start flex-wrap mt-3">
-        <ng-container *ngFor="let item of orderDetails.media">
-          <div class="rounded d-flex justify-content-between flex-wrap m-3">
-            <video
-              *ngIf="item.mediaTypeEnum == 2"
-              width="200"
-              height="150"
-              controls
-            >
-              <source [src]="baseUrl + item.src" type="video/mp4" />
-              {{ "order_details.no_video_support" | translate }}
-            </video>
-            <img
-              *ngIf="item.mediaTypeEnum == 1"
-              class="mt-2 rounded"
-              [src]="baseUrl + item.src"
-              width="100"
-              height="100"
-              alt=""
-            />
-          </div>
-        </ng-container>
-      </div>
-
-      <div *ngIf="orderDetails.media.length == 0">
-        {{ "order_details.no_img" | translate }}
-      </div>
-
-      <div class="">
-        <div class="bold mt-5">
-          {{ "order_details.main_instractions" | translate }}
-        </div>
-        <div class="d-flex justify-content-start mt-3">
-          <img class="m-1" src="assets/img/bubble.svg" alt="" />
-          <span
-            class="text-gray-light m-1"
-            [innerHTML]="
-              selectedLang == 'en'
-                ? orderDetails.package?.enInstraction
-                : orderDetails.package?.arInstraction
-            "
-          >
+          <span>{{ "order_details.equipments" | translate }}</span>
+          <span>
+            {{ "total" | translate }} {{ totalEquipmentPrice }}
+            {{ "rs" | translate }}
           </span>
         </div>
-        <!-- <div class="d-flex justify-content-between">
+        <div class="mt-2">
+          <ng-container
+            *ngFor="let item of orderDetails.orderEquipmentResponse"
+          >
+            <div class="bold d-flex justify-content-between m-2">
+              <span>{{
+                this.selectedLang == "ar" ? item.arName : item.enName
+              }}</span>
+              <span>{{ item.price }} {{ "rs" | translate }}</span>
+            </div>
+          </ng-container>
+        </div>
+
+        <div *ngIf="orderDetails.orderEquipmentResponse.length == 0">
+          {{ "order_details.no_equipments" | translate }}
+        </div>
+        <div
+          class="bold mt-3 d-flex justify-content-between"
+          *ngIf="orderDetails.copones"
+        >
+          <span>{{ "order_details.copone" | translate }}</span>
+          <span>
+            {{ orderDetails.copones?.amount }}
+            <span *ngIf="orderDetails.copones?.coponeType == 1">{{
+              "rs" | translate
+            }}</span>
+            <span *ngIf="orderDetails.copones?.coponeType == 2">%</span>
+          </span>
+        </div>
+
+        <div class="mt-5 bold">
+          {{ "order_details.img_order" | translate }}
+        </div>
+        <div class="d-flex justify-content-start flex-wrap mt-3">
+          <ng-container *ngFor="let item of orderDetails.media">
+            <div class="rounded d-flex justify-content-between flex-wrap m-3">
+              <video
+                *ngIf="item.mediaTypeEnum == 2"
+                width="200"
+                height="150"
+                controls
+              >
+                <source [src]="baseUrl + item.src" type="video/mp4" />
+                {{ "order_details.no_video_support" | translate }}
+              </video>
+              <img
+                *ngIf="item.mediaTypeEnum == 1"
+                class="mt-2 rounded"
+                [src]="baseUrl + item.src"
+                width="100"
+                height="100"
+                alt=""
+              />
+            </div>
+          </ng-container>
+        </div>
+
+        <div *ngIf="orderDetails.media.length == 0">
+          {{ "order_details.no_img" | translate }}
+        </div>
+
+        <div class="">
+          <div class="bold mt-5">
+            {{ "order_details.main_instractions" | translate }}
+          </div>
+          <div class="d-flex justify-content-start mt-3">
+            <img class="m-1" src="assets/img/bubble.svg" alt="" />
+            <span
+              class="text-gray-light m-1"
+              [innerHTML]="
+                selectedLang == 'en'
+                  ? orderDetails.package?.enInstraction
+                  : orderDetails.package?.arInstraction
+              "
+            >
+            </span>
+          </div>
+          <!-- <div class="d-flex justify-content-between">
           <img src="assets/img/bubble.svg" alt="" />
           <span class="text-gray-light mb-3">
             هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا
@@ -284,96 +301,97 @@
             النص من مولد النص
           </span>
         </div> -->
-      </div>
-      <div class="notes text-blue-light mt-3">
-        <span class="block">
-          <span class="pi pi-book"></span>
-          <span class="bold"> {{ "order_details.note" | translate }}</span>
-        </span>
-        <div class="mt-2 mb-2">
-          {{ orderDetails.notes }}
         </div>
-        <span>
-          {{ "order_details.can_canceled" | translate }}
-        </span>
+        <div class="notes text-blue-light mt-3">
+          <span class="block">
+            <span class="pi pi-book"></span>
+            <span class="bold"> {{ "order_details.note" | translate }}</span>
+          </span>
+          <div class="mt-2 mb-2">
+            {{ orderDetails.notes }}
+          </div>
+          <span>
+            {{ "order_details.can_canceled" | translate }}
+          </span>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<p-dialog
-  header="{{ 'order_details.canceld_order' | translate }}"
-  [modal]="true"
-  [(visible)]="visibleCancelOrder"
-  [style]="{ width: '25rem' }"
->
-  <app-order-cancel
-    (confirmOrder)="onCloseDialogWhenConfirm($event)"
-  ></app-order-cancel>
-</p-dialog>
+  <p-dialog
+    header="{{ 'order_details.canceld_order' | translate }}"
+    [modal]="true"
+    [(visible)]="visibleCancelOrder"
+    [style]="{ width: '25rem' }"
+  >
+    <app-order-cancel
+      (confirmOrder)="onCloseDialogWhenConfirm($event)"
+    ></app-order-cancel>
+  </p-dialog>
 
-<p-dialog
-  header="{{ 'order_details.add_added_order' | translate }}"
-  [modal]="true"
-  [(visible)]="visibleAdditionalItem"
-  [style]="{ width: '25rem' }"
->
-  <div>
-    <textarea
-      class="p-3 mt-3"
-      rows="5"
-      cols="30"
-      pTextarea
-      placeholder="{{ 'order_details.notes' | translate }}"
-      [(ngModel)]="orderAdditionalNotes"
-    ></textarea>
-  </div>
-  <div>
-    <button
-      class="btn mt-3 w-100 btn-additional-item"
-      [disabled]="orderAdditionalNotes == ''"
-      (click)="confirmAdditionalItem()"
-    >
-      {{ "order_details.add_order" | translate }}
-    </button>
-  </div>
-</p-dialog>
-<p-dialog
-  header="{{ 'order_details.select_payment' | translate }}"
-  [modal]="true"
-  [(visible)]="visiblePaymentWay"
-  [style]="{ width: '25rem' }"
->
-  <div class="pt-3">
-    <div class="w-100">
-      <p-floatlabel variant="on">
-        <p-select
-          appendTo="body"
-          class="w-100"
-          (onChange)="onPaymentWaySelect($event.value)"
-          [options]="PaymentWayList"
-          optionValue="code"
-          optionLabel="name"
-        />
-        <label for="on_label">{{
-          "order_details.select_payment" | translate
-        }}</label>
-      </p-floatlabel>
+  <p-dialog
+    header="{{ 'order_details.add_added_order' | translate }}"
+    [modal]="true"
+    [(visible)]="visibleAdditionalItem"
+    [style]="{ width: '25rem' }"
+  >
+    <div>
+      <textarea
+        class="p-3 mt-3"
+        rows="5"
+        cols="30"
+        pTextarea
+        placeholder="{{ 'order_details.notes' | translate }}"
+        [(ngModel)]="orderAdditionalNotes"
+      ></textarea>
     </div>
-  </div>
-  <div class="mt-3">
-    <button
-      class="btn mt-3 w-100 btn-additional-item"
-      [disabled]="selectedPaymentValue.length == 0"
-      (click)="confirmPaymentWay()"
-    >
-      {{ "actions.update" | translate }}
-    </button>
-    <button
-      class="btn mt-3 w-100 btn-additional-item-cancel"
-      (click)="visiblePaymentWay = false"
-    >
-      {{ "actions.cancel" | translate }}
-    </button>
-  </div>
-</p-dialog>
+    <div>
+      <button
+        class="btn mt-3 w-100 btn-additional-item"
+        [disabled]="orderAdditionalNotes == ''"
+        (click)="confirmAdditionalItem()"
+      >
+        {{ "order_details.add_order" | translate }}
+      </button>
+    </div>
+  </p-dialog>
+  <p-dialog
+    header="{{ 'order_details.select_payment' | translate }}"
+    [modal]="true"
+    [(visible)]="visiblePaymentWay"
+    [style]="{ width: '25rem' }"
+  >
+    <div class="pt-3">
+      <div class="w-100">
+        <p-floatlabel variant="on">
+          <p-select
+            appendTo="body"
+            class="w-100"
+            (onChange)="onPaymentWaySelect($event.value)"
+            [options]="PaymentWayList"
+            optionValue="code"
+            optionLabel="name"
+          />
+          <label for="on_label">{{
+            "order_details.select_payment" | translate
+          }}</label>
+        </p-floatlabel>
+      </div>
+    </div>
+    <div class="mt-3">
+      <button
+        class="btn mt-3 w-100 btn-additional-item"
+        [disabled]="selectedPaymentValue.length == 0"
+        (click)="confirmPaymentWay()"
+      >
+        {{ "actions.update" | translate }}
+      </button>
+      <button
+        class="btn mt-3 w-100 btn-additional-item-cancel"
+        (click)="visiblePaymentWay = false"
+      >
+        {{ "actions.cancel" | translate }}
+      </button>
+    </div>
+  </p-dialog>
+</div>
