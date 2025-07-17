@@ -13,8 +13,8 @@
       <div class="app-section">
         <p>{{ 'SLIDER.DOWNLOAD_APP' | translate }}</p>
         <div class="applecations">
-          <img src="assets/images/global/apple.svg" alt="app-store" />
-          <img src="assets/images/global/google.svg" alt="play-store" />
+          <img class="pointer" (click)="onClickDownload('apple')" src="assets/images/global/apple.svg" alt="app-store" />
+          <img class="pointer" (click)="onClickDownload('google')" src="assets/images/global/google.svg" alt="play-store" />
         </div>
       </div>
     </div>

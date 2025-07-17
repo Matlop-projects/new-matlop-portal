@@ -39,9 +39,9 @@
   <div class="container d-flex justify-content-between flex-wrap">
     <div class="d-flex justify-content-between">
       <p class="m-2 white-text">{{ 'FOOTER.FOLLOW_US' | translate }}</p>
-      <div class="social-media">
+      <div class="social-media" *ngIf="socailMedia.length > 0">
         <ng-container *ngFor="let item of socailMedia">
-          <div class="social-item">
+          <div class="social-item" (click)="onClickSocial(item.routing)">
             <img [src]="'assets/images/icons-svg/'+item.icon" alt="">
           </div>
         </ng-container>
