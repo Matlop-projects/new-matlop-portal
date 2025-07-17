@@ -32,14 +32,14 @@ export class OrdersListComponent implements OnInit {
   ordersCount: any
   totalCount=0;
 
-  searchObject = {
+  searchObject:any = {
     pageNumber: 0,
     pageSize: 8,
     sortingExpression: "",
     sortingDirection: 0,
     clientId: 0,
     paymentWayId: 0,
-    orderStatus: 0,
+    orderStatus: null,
     packageId: 0,
     nextVistTime: null,
     coponeId: 0,
@@ -76,7 +76,7 @@ export class OrdersListComponent implements OnInit {
   onSelectStatus(value: string) {
     this.activeStatus = value;
     if (value == "pending") {
-      this.searchObject.orderStatus = 0;
+      this.searchObject.orderStatus = null;
     } else if (value == "complete") {
       this.searchObject.orderStatus = 7;
     } else {

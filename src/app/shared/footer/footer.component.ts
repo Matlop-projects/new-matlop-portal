@@ -1,42 +1,63 @@
-import { NgFor } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
-import { ApiService } from '../../services/api.service';
-import { RouterLink } from '@angular/router';
+import { NgFor, NgIf } from "@angular/common";
+import { Component, inject } from "@angular/core";
+import { TranslatePipe } from "@ngx-translate/core";
+import { ApiService } from "../../services/api.service";
+import { RouterLink } from "@angular/router";
 
 @Component({
-  selector: 'app-footer',
+  selector: "app-footer",
   standalone: true,
-  imports: [NgFor , TranslatePipe,RouterLink],
-  templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss'
+  imports: [NgFor, TranslatePipe, RouterLink,NgIf],
+  templateUrl: "./footer.component.html",
+  styleUrl: "./footer.component.scss",
 })
 export class FooterComponent {
-
-  socailMedia =[
-    {
-      icon: 'face.svg',
-      routing: ''
-    },
-    {
-      icon: 'twitter.svg',
-      routing: ''
-    },
-    {
-      icon: 'instgram.svg',
-      routing: ''
-    },
-    // {
-    //   icon: 'pi pi-whatsapp',
-    //   routing: ''
-    // },
-  ]
+  socailMedia:any[] = [];
 
   year = new Date().getFullYear();
 
-  api = inject(ApiService)
+  api = inject(ApiService);
   ngOnInit(): void {
- 
+    this.getAlllinks();
   }
+  getAlllinks() {
+    this.api.get("settings/getAll").subscribe((res: any) => {
+      if (res.data) {
+        this.socailMedia = [
+          {
+            icon: "face.svg",
+            routing: res.data.faceBookLink || "",
+          },
+          {
+            icon: "twitter.svg",
+            routing: res.data.xLink || "",
+          },
+          {
+            icon: "instgram.svg",
+            routing: res.data.instagramLink || "",
+          },
+          // {
+          //   icon: "whatsapp.svg",
+          //   routing: res.data.whatsappLink || "",
+          // },
+          // {
+          //   icon: "youtube.svg",
+          //   routing: res.data.youtubeLink || "",
+          // },
+          // {
+          //   icon: "tiktok.svg",
+          //   routing: res.data.tiktokLink || "",
+          // },
+        ];
+      }
+    });
+  }
+  onClickSocial(routing: string) {
+          console.log("🚀 ~ FooterComponent ~ onClickSocial ~ routing:", routing);
 
+    if (routing) {
+
+      window.open(routing, "_blank");
+    }
+  }
 }

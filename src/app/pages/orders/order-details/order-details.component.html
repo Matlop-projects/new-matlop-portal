@@ -1,10 +1,10 @@
 <div class="container mt-5">
   <div class="bread-crump">
     <span class="text-gray-light pointer" (click)="goToOrders()">{{
-      "order_details.orders"|translate
+      "order_details.orders" | translate
     }}</span
     >/
-    <span class="bold">{{ "order_details.details" |translate}}</span>
+    <span class="bold">{{ "order_details.details" | translate }}</span>
   </div>
 
   <div
@@ -14,78 +14,121 @@
     <div class="details-info flex-grow-1">
       <div class="card pkg-details">
         <div class="d-flex justify-content-between">
-          <span class="bold">{{ "order_details.pkg_details"|translate }}</span>
+          <span class="bold">{{
+            "order_details.pkg_details" | translate
+          }}</span>
           <span class="bk-blue-light border-rd-32">
             <span class="bold text-blue-light">{{
-              orderDetails.totalWithAdditional
+              orderDetails.orderSubTotal
             }}</span>
-            <span class="text-blue-light"> {{ "ryal"|translate }} </span>
+            <span class="text-blue-light"> {{ "ryal" | translate }} </span>
           </span>
         </div>
         <div>
-          <span class="block text-gray-light"> #{{ "order_details.pkg_name"|translate }}</span>
-          <span class="block bold"> {{selectedLang=='en'? orderDetails?.package?.nameEn :orderDetails?.package?.nameAr}}</span>
+          <span class="block text-gray-light">
+            #{{ "order_details.pkg_name" | translate }}</span
+          >
+          <span class="block bold">
+            {{
+              selectedLang == "en"
+                ? orderDetails?.package?.nameEn
+                : orderDetails?.package?.nameAr
+            }}</span
+          >
         </div>
         <div
           class="desc text-gray-light"
-          [innerHTML]="selectedLang=='en'? orderDetails?.package?.descriptionEn:orderDetails?.package?.descriptionAr"
+          [innerHTML]="
+            selectedLang == 'en'
+              ? orderDetails?.package?.descriptionEn
+              : orderDetails?.package?.descriptionAr
+          "
         ></div>
         <div class="numbers-info mt-3 d-flex justify-content-between flex-wrap">
           <div class="bk-white">
             <span class="pi pi-clock"></span>
-            <span class="name text-gray-light">{{ "order_details.visit_duration"|translate }}</span>
+            <span class="name text-gray-light">{{
+              "order_details.visit_duration" | translate
+            }}</span>
             <span class="bold"
-              >({{ orderDetails?.package?.visitHours }}) {{ "order_details.hours"|translate }}</span
+              >({{ orderDetails?.package?.visitHours }})
+              {{ "order_details.hours" | translate }}</span
             >
           </div>
           <div class="bk-white">
             <span class="pi pi-user"></span>
-            <span class="name text-gray-light">{{ "order_details.visitor_count"|translate }}</span>
+            <span class="name text-gray-light">{{
+              "order_details.visitor_count" | translate
+            }}</span>
             <span class="bold"
-              >({{ orderDetails?.package?.providerNumber }}) {{ "order_details.tech"|translate }}</span
+              >({{ orderDetails?.package?.providerNumber }})
+              {{ "order_details.tech" | translate }}</span
             >
           </div>
           <div class="bk-white">
             <span class="pi pi-hashtag"></span>
 
-            <span class="name text-gray-light">{{ "ORDERS.VISITS"|translate }}</span>
+            <span class="name text-gray-light">{{
+              "ORDERS.VISITS" | translate
+            }}</span>
             <span class="bold"
-              >({{ orderDetails?.package?.visitNumber }}) {{ "ORDERS.VISITS_UNIT" |translate}}</span
+              >({{ orderDetails?.package?.visitNumber }})
+              {{ "ORDERS.VISITS_UNIT" | translate }}</span
             >
           </div>
         </div>
       </div>
       <div class="card info mt-3 bold">
         <div class="d-flex justify-content-between">
-          <span class="bold fz-20">{{ "order_details.info" |translate}}</span>
-          <span class="text-gray-light">#{{ "PACKAGES.INCLUDING_TAX"|translate }}</span>
+          <span class="bold fz-20">{{ "order_details.info" | translate }}</span>
+          <span class="text-gray-light"
+            >#{{ "PACKAGES.INCLUDING_TAX" | translate }}</span
+          >
         </div>
         <div class="d-flex justify-content-between mt-3">
-          <span class="bold">{{ "order_details.date" |translate}}</span>
+          <span class="bold">{{ "order_details.date" | translate }}</span>
           <span>{{ orderDetails.creationTime | date : "dd MMM yyyy" }}</span>
         </div>
         <div class="d-flex justify-content-between mt-3">
-          <span class="bold">{{ "order_details.time"|translate }}</span>
+          <span class="bold">{{ "order_details.time" | translate }}</span>
           <span>{{ orderDetails.creationTime | date : "HH:mm" }}</span>
         </div>
         <div class="d-flex justify-content-between mt-3">
-          <span class="bold">{{ "order_details.status"|translate }}</span>
+          <span class="bold">{{ "order_details.visitTime" | translate }}</span>
+          <span>
+            <span>
+              <span class="text-gray-light">
+                {{ "from" | translate }}
+              </span>
+              {{ orderDetails.fromWorkTimeDate }}</span
+            >
+            -
+            <span>
+              <span class="text-gray-light">
+                {{ "to" | translate }}
+              </span>
+              {{ orderDetails.toWorkTimeDate }}</span
+            >
+          </span>
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+          <span class="bold">{{ "order_details.status" | translate }}</span>
           <span [class]="orderDetails.orderStatusName" class="border-rd-32">{{
-            orderDetails.orderStatusName|translate
+            orderDetails.orderStatusName | translate
           }}</span>
         </div>
         <div class="d-flex justify-content-between mt-3">
-          <span class="bold">{{ "order_details.paymentWay"|translate }}</span>
+          <span class="bold">{{ "order_details.paymentWay" | translate }}</span>
           <span class="bk-green-light text-green-light border-rd-32">{{
-           orderDetails.paymentWayName
+            orderDetails.paymentWayName
           }}</span>
         </div>
       </div>
       <div class="card mt-3 added_order">
         <div class="d-flex justify-content-between">
-          <span class="bold">{{ "order_details.orderAdded"|translate }}</span>
+          <span class="bold">{{ "order_details.orderAdded" | translate }}</span>
           <span class="btn-add-order pointer" (click)="onAdditionalOrder()">{{
-            "order_details.mintanance"|translate
+            "order_details.mintanance" | translate
           }}</span>
         </div>
         <ng-container
@@ -100,7 +143,7 @@
         </ng-container>
         <ng-template #empty>
           <div class="">
-            {{ "order_details.no_added_ordered" |translate}}
+            {{ "order_details.no_added_ordered" | translate }}
           </div>
         </ng-template>
 
@@ -108,35 +151,48 @@
           *ngIf="orderDetails.orderAddtionalItem.length > 0"
           class="total text-start mt-4"
         >
-          <span>{{ "order_details.total" |translate}}</span>
+          <span>{{ "order_details.total" | translate }}</span>
           <span class="bold">
             {{
               orderDetails.totalWithAdditional - orderDetails.orderTotal
             }}</span
           >
-          <span> {{ "rs" |translate}}</span>
+          <span> {{ "rs" | translate }}</span>
         </div>
       </div>
       <div
         *ngIf="orderDetails.orderStatusName == 'Pending'"
         class="buttons text-start"
       >
-        <!-- <button class="btn pay" (click)="visiblePaymentWay = true">
+        <button *ngIf="orderDetails.paymentWayId!=1" class="btn pay" (click)="visiblePaymentWay = true">
           {{ "order_details.retry_payment" |translate}}
-        </button> -->
+        </button>
         <button class="btn cancel" (click)="onCancelOrder()">
-          {{ "order_details.canceld_order" |translate}}
+          {{ "order_details.canceld_order" | translate }}
         </button>
       </div>
     </div>
     <div class="card w-30 visit flex-grow-1">
       <div class="d-flex justify-content-between mb-3">
-        <span class="bold">{{ "order_details.visit_mo3ed"|translate }}</span>
+        <span class="bold">{{ "order_details.visit_mo3ed" | translate }}</span>
         <img src="assets/img/edit.svg" alt="" />
       </div>
-      <div class="d-flex justify-content-between bkg-1">
+      <!-- <div class="d-flex justify-content-between bkg-1">
         <span>{{ orderDetails.nextVistDate | date : "dd MMM yyyy" }}</span>
         <span>{{ orderDetails.nextVistDate | date : "HH:mm a" }}</span>
+      </div> -->
+      <div class="">
+        <ng-container *ngFor="let item of orderSchedule; let index = index">
+          <div
+            class="d-flex justify-content-between"
+            [class]="checkdateVisited(item.visitDate)"
+          >
+            <div class="bold">{{ item.visitDate | date : "dd MMM yyyy" }}</div>
+            <div class="text-gray-light">
+              {{ item.visitDate | date : "HH:mm a" }}
+            </div>
+          </div>
+        </ng-container>
       </div>
       <!-- <div class="d-flex justify-content-between bkg-2">
         <span>{{ "20 نوفمبر 2025" }}</span>
@@ -146,53 +202,92 @@
         <span>{{ "20 نوفمبر 2025" }}</span>
         <span>{{ "08:00" }} {{ "م" }}</span>
       </div> -->
-      <div class="bold mt-3">{{ "order_details.equipments"|translate }}</div>
-      <div class="d-flex justify-content-start flex-wrap mt-2">
-        <ng-container *ngFor="let item of orderDetails.orderEquipmentResponse">
-          <div class="bold m-2">{{this.selectedLang == 'ar' ? item.arName : item.enName }}</div>
-        </ng-container>
-      </div>
-
-      <div *ngIf="orderDetails.orderEquipmentResponse.length == 0">
-        {{ "order_details.no_equipments"|translate }}
-      </div>
-      <div class="mt-5 bold">
-        {{ "order_details.img_order" |translate}}
-      </div>
-      <div class="d-flex justify-content-start flex-wrap mt-3">
-        <ng-container *ngFor="let item of orderDetails.media">
-          <div class="rounded d-flex justify-content-between flex-wrap m-3">
-            <video *ngIf="item.mediaTypeEnum==2" width="200" height="150" controls>
-              <source [src]="baseUrl + item.src" type="video/mp4" />
-              {{'order_details.no_video_support'|translate}}
-            </video>
-            <img
-            *ngIf="item.mediaTypeEnum==1"
-              class="mt-2 rounded"
-              [src]="baseUrl + item.src"
-              width="100"
-              height="100"
-              alt=""
-            />
-          </div>
-        </ng-container>
-      </div>
-
-      <div *ngIf="orderDetails.media.length == 0">
-        {{ "order_details.no_img"|translate }}
-      </div>
-
-      <div class="">
-        <div class="bold mt-5">{{ "order_details.main_instractions"|translate }}</div>
-        <div class="d-flex justify-content-start mt-3">
-          <img class="m-1" src="assets/img/bubble.svg" alt="" />
-          <span
-            class="text-gray-light m-1"
-            [innerHTML]="selectedLang=='en'? orderDetails.package?.enInstraction:orderDetails.package?.arInstraction"
-          >
+      <div class="bold mt-3">
+        <div class="d-flex justify-content-between">
+          <span>{{ "order_details.equipments" | translate }}</span>
+          <span>
+            {{ "total" | translate }} {{ totalEquipmentPrice }}
+            {{ "rs" | translate }}
           </span>
         </div>
-        <!-- <div class="d-flex justify-content-between">
+        <div class="mt-2">
+          <ng-container
+            *ngFor="let item of orderDetails.orderEquipmentResponse"
+          >
+            <div class="bold d-flex justify-content-between m-2">
+              <span>{{
+                this.selectedLang == "ar" ? item.arName : item.enName
+              }}</span>
+              <span>{{ item.price }} {{ "rs" | translate }}</span>
+            </div>
+          </ng-container>
+        </div>
+
+        <div *ngIf="orderDetails.orderEquipmentResponse.length == 0">
+          {{ "order_details.no_equipments" | translate }}
+        </div>
+        <div
+          class="bold mt-3 d-flex justify-content-between"
+          *ngIf="orderDetails.copones"
+        >
+          <span>{{ "order_details.copone" | translate }}</span>
+          <span>
+            {{ orderDetails.copones?.amount }}
+            <span *ngIf="orderDetails.copones?.coponeType == 1">{{
+              "rs" | translate
+            }}</span>
+            <span *ngIf="orderDetails.copones?.coponeType == 2">%</span>
+          </span>
+        </div>
+
+        <div class="mt-5 bold">
+          {{ "order_details.img_order" | translate }}
+        </div>
+        <div class="d-flex justify-content-start flex-wrap mt-3">
+          <ng-container *ngFor="let item of orderDetails.media">
+            <div class="rounded d-flex justify-content-between flex-wrap m-3">
+              <video
+                *ngIf="item.mediaTypeEnum == 2"
+                width="200"
+                height="150"
+                controls
+              >
+                <source [src]="baseUrl + item.src" type="video/mp4" />
+                {{ "order_details.no_video_support" | translate }}
+              </video>
+              <img
+                *ngIf="item.mediaTypeEnum == 1"
+                class="mt-2 rounded"
+                [src]="baseUrl + item.src"
+                width="100"
+                height="100"
+                alt=""
+              />
+            </div>
+          </ng-container>
+        </div>
+
+        <div *ngIf="orderDetails.media.length == 0">
+          {{ "order_details.no_img" | translate }}
+        </div>
+
+        <div class="">
+          <div class="bold mt-5">
+            {{ "order_details.main_instractions" | translate }}
+          </div>
+          <div class="d-flex justify-content-start mt-3">
+            <img class="m-1" src="assets/img/bubble.svg" alt="" />
+            <span
+              class="text-gray-light m-1"
+              [innerHTML]="
+                selectedLang == 'en'
+                  ? orderDetails.package?.enInstraction
+                  : orderDetails.package?.arInstraction
+              "
+            >
+            </span>
+          </div>
+          <!-- <div class="d-flex justify-content-between">
           <img src="assets/img/bubble.svg" alt="" />
           <span class="text-gray-light mb-3">
             هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا
@@ -206,94 +301,97 @@
             النص من مولد النص
           </span>
         </div> -->
-      </div>
-      <div class="notes text-blue-light mt-3">
-        <span class="block">
-          <span class="pi pi-book"></span>
-          <span class="bold"> {{ "order_details.note"|translate }}</span>
-        </span>
-         <div class="mt-2 mb-2">
-            {{orderDetails.notes}}
-         </div>
-        <span>
-          {{ "order_details.can_canceled"|translate }}
-        </span>
+        </div>
+        <div class="notes text-blue-light mt-3">
+          <span class="block">
+            <span class="pi pi-book"></span>
+            <span class="bold"> {{ "order_details.note" | translate }}</span>
+          </span>
+          <div class="mt-2 mb-2">
+            {{ orderDetails.notes }}
+          </div>
+          <span>
+            {{ "order_details.can_canceled" | translate }}
+          </span>
+        </div>
       </div>
     </div>
   </div>
+
+  <p-dialog
+    header="{{ 'order_details.canceld_order' | translate }}"
+    [modal]="true"
+    [(visible)]="visibleCancelOrder"
+    [style]="{ width: '25rem' }"
+  >
+    <app-order-cancel
+      (confirmOrder)="onCloseDialogWhenConfirm($event)"
+    ></app-order-cancel>
+  </p-dialog>
+
+  <p-dialog
+    header="{{ 'order_details.add_added_order' | translate }}"
+    [modal]="true"
+    [(visible)]="visibleAdditionalItem"
+    [style]="{ width: '25rem' }"
+  >
+    <div>
+      <textarea
+        class="p-3 mt-3"
+        rows="5"
+        cols="30"
+        pTextarea
+        placeholder="{{ 'order_details.notes' | translate }}"
+        [(ngModel)]="orderAdditionalNotes"
+      ></textarea>
+    </div>
+    <div>
+      <button
+        class="btn mt-3 w-100 btn-additional-item"
+        [disabled]="orderAdditionalNotes == ''"
+        (click)="confirmAdditionalItem()"
+      >
+        {{ "order_details.add_order" | translate }}
+      </button>
+    </div>
+  </p-dialog>
+  <p-dialog
+    header="{{ 'order_details.select_payment' | translate }}"
+    [modal]="true"
+    [(visible)]="visiblePaymentWay"
+    [style]="{ width: '25rem' }"
+  >
+    <div class="pt-3">
+      <div class="w-100">
+        <p-floatlabel variant="on">
+          <p-select
+            appendTo="body"
+            class="w-100"
+            (onChange)="onPaymentWaySelect($event.value)"
+            [options]="PaymentWayList"
+            optionValue="code"
+            optionLabel="name"
+          />
+          <label for="on_label">{{
+            "order_details.select_payment" | translate
+          }}</label>
+        </p-floatlabel>
+      </div>
+    </div>
+    <div class="mt-3">
+      <button
+        class="btn mt-3 w-100 btn-additional-item"
+        [disabled]="selectedPaymentValue.length == 0"
+        (click)="confirmPaymentWay()"
+      >
+        {{ "actions.confirm" | translate }}
+      </button>
+      <button
+        class="btn mt-3 w-100 btn-additional-item-cancel"
+        (click)="visiblePaymentWay = false"
+      >
+        {{ "actions.cancel" | translate }}
+      </button>
+    </div>
+  </p-dialog>
 </div>
-
-<p-dialog
-  header="{{'order_details.canceld_order'|translate}}"
-  [modal]="true"
-  [(visible)]="visibleCancelOrder"
-  [style]="{ width: '25rem' }"
->
-  <app-order-cancel
-    (confirmOrder)="onCloseDialogWhenConfirm($event)"
-  ></app-order-cancel>
-</p-dialog>
-
-<p-dialog
-  header="{{'order_details.add_added_order'|translate}}"
-  [modal]="true"
-  [(visible)]="visibleAdditionalItem"
-  [style]="{ width: '25rem' }"
->
-  <div>
-    <textarea
-      class="p-3 mt-3"
-      rows="5"
-      cols="30"
-      pTextarea
-      placeholder="{{'order_details.notes'|translate}}"
-      [(ngModel)]="orderAdditionalNotes"
-    ></textarea>
-  </div>
-  <div>
-    <button
-      class="btn mt-3 w-100 btn-additional-item"
-      [disabled]="orderAdditionalNotes == ''"
-      (click)="confirmAdditionalItem()"
-    >
-      {{ "order_details.add_order"|translate }}
-    </button>
-  </div>
-</p-dialog>
-<p-dialog
-  header="{{'order_details.select_payment'|translate}}"
-  [modal]="true"
-  [(visible)]="visiblePaymentWay"
-  [style]="{ width: '25rem' }"
->
-  <div class="pt-3">
-    <div class="w-100">
-      <p-floatlabel variant="on">
-        <p-select
-          appendTo="body"
-          class="w-100"
-          (onChange)="onPaymentWaySelect($event.value)"
-          [options]="PaymentWayList"
-          optionValue="code"
-          optionLabel="name"
-        />
-        <label for="on_label">{{ "order_details.select_payment" | translate }}</label>
-      </p-floatlabel>
-    </div>
-  </div>
-  <div class="mt-3">
-    <button
-      class="btn mt-3 w-100 btn-additional-item"
-      [disabled]="selectedPaymentValue.length == 0"
-      (click)="confirmPaymentWay()"
-    >
-      {{ "actions.update" | translate }}
-    </button>
-    <button
-      class="btn mt-3 w-100 btn-additional-item-cancel"
-      (click)="visiblePaymentWay = false"
-    >
-      {{ "actions.cancel" | translate }}
-    </button>
-  </div>
-</p-dialog>

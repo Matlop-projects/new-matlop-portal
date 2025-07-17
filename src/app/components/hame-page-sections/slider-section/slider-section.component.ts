@@ -14,4 +14,11 @@ export class SliderSectionComponent {
   onClickOrder() {
     this.router.navigateByUrl("services-list");
   }
+  onClickDownload(app: string) {
+    if (app === "apple") {
+      window.open("https://play.google.com/store/apps/details?id=com.matlop.service&pcampaignid=web_share", "_blank");
+    } else if (app === "google") {
+      window.open("https://play.google.com/store/apps/details?id=com.matlop.service&pcampaignid=web_share", "_blank");
+    }
+  }
 }

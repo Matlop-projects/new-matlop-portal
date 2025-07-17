@@ -8,6 +8,7 @@ import {
 } from "../../../components/background-image-with-text/background-image-with-text.component";
 import { TranslatePipe } from "@ngx-translate/core";
 import { LanguageService } from "../../../services/language.service";
+import { environment } from "../../../../environments/environment";
 
 @Component({
   selector: "app-emergency-order-list",
@@ -24,7 +25,7 @@ import { LanguageService } from "../../../services/language.service";
 })
 export class EmergencyOrderListComponent implements OnInit {
   languageService = inject(LanguageService);
-
+  baseImgUrl = environment.baseImageUrl;
   bkg_text_options: IBackGroundImageWithText = {
     imageUrl: "assets/img/order-slider.svg",
     header: this.languageService.translate("ORDER_TRACKING.BANNER_HEADER"),

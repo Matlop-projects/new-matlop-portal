@@ -1,10 +1,15 @@
 {
+  "from": "From",
+  "to": "To",
+  "amount": "Amount",
   "rsa": "SAR",
   "ryal": "SAR",
   "rs": "SAR",
   "cancel": "Cancel",
+  "total": "Total",
   "no_data_found": "No data found",
   "Pending": "Pending",
+  "AssignedToProvider":"Assigned to Provider",
   "actions": {
     "send": "Send",
     "send_sms": "Send a  message",
@@ -324,6 +329,8 @@
     "NO_ORDERS": "No orders at the moment"
   },
   "order_details": {
+    "copone":"Copone",
+    "visitTime": "Visit Time",
     "orders": "Orders",
     "details": "Order Details",
     "pkg_details": "Package Details",
@@ -333,8 +340,8 @@
     "visitor_count": "Number of Technicians",
     "tech": "Technician",
     "info": "Order Information",
-    "date": "Order Date",
-    "time": "Order Time",
+    "date": "Order Creation Date",
+    "time": "Order Creation Time",
     "status": "Order Status",
     "paymentWay": "Payment Method",
     "orderAdded": "Additional Orders",
