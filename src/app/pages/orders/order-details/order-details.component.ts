@@ -29,6 +29,7 @@ import { LanguageService } from "../../../services/language.service";
 })
 export class OrderDetailsComponent implements OnInit {
   orderDetails: any;
+  orderSchedule: any[]=[];
   visibleCancelOrder: boolean = false;
   visibleAdditionalItem: boolean = false;
   visiblePaymentWay: boolean = false;
@@ -66,8 +67,8 @@ export class OrderDetailsComponent implements OnInit {
       .get(`Order/GetOrderSchedule/${this.orderId}`)
       .subscribe((res: any) => {
         if (res.data) {
-          this.orderDetails.orderSchedule = res.data;
-          this.checkdateVisited(this.orderDetails.orderSchedule);
+          this.orderSchedule = res.data;
+          this.checkdateVisited(this.orderSchedule);
         }
       });
   }
