@@ -452,5 +452,12 @@
     "birthDate": "Date of Birth",
     "edit": "Edit",
     "cancel": "Cancel"
+  },
+  "cancel_order": {
+    "title": "Please select a reason for cancellation",
+    "subtitle": "Choose a reason to help us improve our service",
+    "reason_placeholder": "Select a reason",
+    "textarea_placeholder": "Enter the reason for cancellation",
+    "confirm_btn": "Confirm"
   }
 }

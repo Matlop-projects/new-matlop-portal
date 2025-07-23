@@ -452,5 +452,12 @@
     "birthDate": "تاريخ الميلاد",
     "edit": "تعديل",
     "cancel": "إلغاء"
+  },
+  "cancel_order": {
+    "title": "من فضلك اختر سبب الالغاء",
+    "subtitle": "اختر سبب الالغاء لتحسين الخدمة",
+    "reason_placeholder": "اختر سبب الإلغاء",
+    "textarea_placeholder": "أدخل سبب الالغاء",
+    "confirm_btn": "تأكيد"
   }
 }
