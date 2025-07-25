@@ -10,6 +10,7 @@
   "no_data_found": "لا توجد بيانات حاليا",
   "Pending": "تحت الطلب",
   "AssignedToProvider":"مُعَين لمقدم الخدمة",
+  "have_account": "لديك حساب بالفعل ؟",
   "actions": {
     "send": "إرسال",
     "send_sms": "إرسال رسالة",

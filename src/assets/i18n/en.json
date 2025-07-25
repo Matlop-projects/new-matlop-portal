@@ -10,6 +10,7 @@
   "no_data_found": "No data found",
   "Pending": "Pending",
   "AssignedToProvider":"Assigned to Provider",
+  "have_account": "Already have an account?",
   "actions": {
     "send": "Send",
     "send_sms": "Send a  message",
