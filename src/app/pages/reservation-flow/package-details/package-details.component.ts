@@ -281,7 +281,7 @@ export class PackageDetailsComponent {
           "<p>Payment using the wallet balance in the application</p>",
         arDescription: "<p>الدفع بواسطة رصيد المحفظة في التطبيق </p>",
         finalPayment: `wallet - محفظة `,
-        disabled: this.walletBalance < this.packageDetails.price, // Disable if wallet balance is 0 or less
+        disabled: this.walletBalance < this.packageDetails.price|| this.walletBalance < this.packageDetails.virtualPrice, // Disable if wallet balance is 0 or less
       }
     );
   }
@@ -593,6 +593,7 @@ export class PackageDetailsComponent {
     this.packageDetails.equipmentsPrice = equipmentsPrice;
     console.log(this.packageDetails);
     // console.log(this.orderObject);
+    this.getpaymentList();
   }
 
   onPromoCodeCheck() {
@@ -647,6 +648,7 @@ export class PackageDetailsComponent {
       this.packageDetails.couponDiscount = 0;
       this.toaster.errorToaster(this.languageService.translate("PACKAGE_DETAILS.PLEASE_ADD_COUPON"));
     }
+    this.getpaymentList();
   }
 
   calculateSalePrice(originalPrice: number, discountPercentage: number): number {
