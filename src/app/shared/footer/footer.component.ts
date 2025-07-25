@@ -54,10 +54,10 @@ export class FooterComponent {
   }
   onClickSocial(routing: string) {
           console.log("🚀 ~ FooterComponent ~ onClickSocial ~ routing:", routing);
-
-    if (routing) {
-
-      window.open(routing, "_blank");
+ if (!/^https?:\/\//i.test(routing)) {
+      routing = 'https://' + routing;
     }
+
+    window.open(routing, "_blank");
   }
 }
