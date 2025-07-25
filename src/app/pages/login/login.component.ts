@@ -12,6 +12,7 @@ import { ModalComponent } from '../../components/modal/modal.component';
 import { OtpModalComponent } from '../../components/otp-modal/otp-modal.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { LoginSignalUserDataService } from '../../services/login-signal-user-data.service';
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -99,7 +100,7 @@ export class LoginComponent {
         this.toaster.errorToaster(data.message)
       } else {
         let dataUser: any = {
-          img: data.data.imgSrc,
+          img: environment.baseImageUrl+data.data.imgSrc,
           id: data.data.userId,
           gender: data.data.gender,
           token: data.data.token
@@ -109,6 +110,7 @@ export class LoginComponent {
         localStorage.setItem('userData', JSON.stringify(dataUser));
         localStorage.setItem('userId', JSON.stringify(dataUser.id))
         localStorage.setItem('token', data.data.accessToken);
+        localStorage.setItem('img', environment.baseImageUrl+dataUser.img);
         this.router.navigate(['/home']);
       }
     })

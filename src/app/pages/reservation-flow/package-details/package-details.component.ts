@@ -220,7 +220,7 @@ export class PackageDetailsComponent {
       (res: any) => {
         if (res.data) {
           this.locations = res.data?.map((item: any) => ({
-            name: item.name,
+            name:`${item.countryName} - ${item.cityName}  ${item.districtName?' - '+item.districtName:''}  ${item.blockNo?' - '+item.blockNo:''}`,
             code: item.locationId,
           }));
         }
