@@ -44,7 +44,7 @@ export class SpecialOrderListComponent implements OnInit {
     pageSize: 8,
     sortingExpression: "",
     sortingDirection: 0,
-    clientId: 1,
+    clientId: 0,
     specialOrderId: 0,
     amount: 0,
     media: "string",
@@ -60,7 +60,7 @@ export class SpecialOrderListComponent implements OnInit {
     if (storedData !== null) {
       const parsed = JSON.parse(storedData);
       const id: number = Number(parsed.id);
-      this.searchObject.clientId = 1;
+      this.searchObject.clientId = id;
       this.getOrdersCount(id);
     }
     this.getAllOrders();
@@ -97,7 +97,7 @@ export class SpecialOrderListComponent implements OnInit {
   }
   getOrdersCount(clientId: number) {
     this.apiService
-      .get(`SpecialOrder/GetSpecialOrderCountsByClientId`, { clientId: 1 ,specialOrderEnum:2})
+      .get(`SpecialOrder/GetSpecialOrderCountsByClientId`, { clientId: clientId ,specialOrderEnum:2})
       .subscribe((res: any) => {
         if (res.data) {
           this.ordersCount = res.data;
