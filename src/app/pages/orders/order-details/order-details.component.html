@@ -233,10 +233,10 @@
           <span>{{ "order_details.copone" | translate }}</span>
           <span>
             {{ orderDetails.copones?.amount }}
-            <span *ngIf="orderDetails.copones?.coponeType == 1">{{
+            <span *ngIf="orderDetails.copones?.coponeType == 2">{{
               "rs" | translate
             }}</span>
-            <span *ngIf="orderDetails.copones?.coponeType == 2">%</span>
+            <span *ngIf="orderDetails.copones?.coponeType == 1">%</span>
           </span>
         </div>
 
