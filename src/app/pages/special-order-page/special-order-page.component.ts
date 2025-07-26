@@ -207,7 +207,7 @@ displayDatepickerConfig(lang:string) {
     this.api.get('Location/GetByUserId/' + userId).subscribe((res: any) => {
       if (res.data) {
         this.locations = res.data.map((item: any) => ({
-          name: item.countryName,
+            name:`${item.countryName} - ${item.cityName}  ${item.districtName?' - '+item.districtName:''}  ${item.blockNo?' - '+item.blockNo:''}`,
           code: item.locationId
         }));
       }
