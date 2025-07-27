@@ -1,4 +1,4 @@
-import { NgFor, NgIf, TitleCasePipe } from "@angular/common";
+import { DatePipe, NgFor, NgIf, TitleCasePipe } from "@angular/common";
 import { Component, inject, OnInit } from "@angular/core";
 import { ApiService } from "../../../services/api.service";
 import { Router } from "@angular/router";
@@ -9,6 +9,7 @@ import {
 import { TranslatePipe } from "@ngx-translate/core";
 import { LanguageService } from "../../../services/language.service";
 import { environment } from "../../../../environments/environment";
+import { PaginationComponent } from "../../../components/pagination/pagination.component";
 
 @Component({
   selector: "app-special-order-list",
@@ -19,6 +20,8 @@ import { environment } from "../../../../environments/environment";
     TitleCasePipe,
     BackgroundImageWithTextComponent,
     TranslatePipe,
+    DatePipe,
+    PaginationComponent
   ],
   templateUrl: "./special-order-list.component.html",
   styleUrl: "./special-order-list.component.scss",
@@ -38,6 +41,7 @@ export class SpecialOrderListComponent implements OnInit {
   orders: any = [];
   activeStatus = "pending";
   ordersCount: any;
+  totalCount=0;
 
   searchObject = {
     pageNumber: 0,
@@ -86,12 +90,20 @@ export class SpecialOrderListComponent implements OnInit {
     }
     this.getAllOrders();
   }
+    onPageChange(page:any){
+    this.searchObject.pageNumber=page
+    console.log("🚀 ~ OrdersListComponent ~ onPageChange ~ page:", page)
+        this.getAllOrders();
+
+  }
   getAllOrders() {
     this.apiService
       .post("SpecialOrder/GetAllWitPagination", this.searchObject)
       .subscribe((res) => {
         if (res.data.dataList) {
           this.orders = res.data.dataList;
+          this.totalCount=res.data.totalCount
+
         }
       });
   }
@@ -101,6 +113,7 @@ export class SpecialOrderListComponent implements OnInit {
       .subscribe((res: any) => {
         if (res.data) {
           this.ordersCount = res.data;
+
         }
       });
   }

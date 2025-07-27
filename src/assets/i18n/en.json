@@ -201,6 +201,7 @@
     "PROVIDER": "Technicians"
   },
   "PACKAGE_DETAILS": {
+    "specialOrderDate":"Special Order Date",
     "wallet": "Current Wallet Ballance",
     "add_wallet": "Wallet Transactions",
     "wallet_amount": "Wallet Amount",

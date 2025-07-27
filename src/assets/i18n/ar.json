@@ -201,6 +201,7 @@
     "PROVIDER": "فني"
   },
   "PACKAGE_DETAILS": {
+    "specialOrderDate":"تاريخ الطلب الخاص",
     "wallet": "رصيد المحفظة الحالي",
     "add_wallet": "معاملات المحفظة",
     "wallet_amount": "مبلغ المحفظة",

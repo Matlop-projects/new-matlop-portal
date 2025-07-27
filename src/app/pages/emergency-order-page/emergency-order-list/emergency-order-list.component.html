@@ -57,7 +57,11 @@
             </div>
             <div class="tax">{{ "ORDERS.VAT_INCLUDED" | translate }}</div>
           </div> -->
-           <div class="mt-5 d-flex justify-content-between">
+            <div class="mt-5 d-flex justify-content-between">
+            <span class="bold">{{'PACKAGE_DETAILS.specialOrderDate'|translate}}</span>
+            <span>{{item.specialOrderDate | date:'YYYY-MM-dd (HH:mm a)'}} </span>
+          </div>
+           <div class="mt-3 d-flex justify-content-between">
             <span class="bold">{{'PACKAGE_DETAILS.PRICE'|translate}}</span>
             <span>{{item.price??0}} {{'ORDERS.SAR' | translate}}</span>
           </div>
@@ -139,3 +143,5 @@
     </div>
   </ng-template>
 </div>
+<app-pagination  [totalCount]="totalCount" (onPageChange)="onPageChange($event)"></app-pagination>
+
