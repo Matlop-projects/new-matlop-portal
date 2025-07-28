@@ -433,5 +433,16 @@
     "success": "Your order has been created successfully and we will contact you soon.",
     "failure": "Unfortunately, your payment was not successful. Please try again or contact our support.",
     "home": "Home"
+  },
+    "profile": {
+    "title": "Profile",
+    "personalData": "Personal Information",
+    "name": "Name",
+    "email": "Email",
+    "gender": "Gender",
+    "birthDate": "Date of Birth",
+    "edit": "Edit",
+    "cancel": "Cancel"
   }
+  
 }

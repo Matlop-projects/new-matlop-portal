@@ -1,5 +1,5 @@
 <div class="container">
-  <span class="fz-36 bold block">{{ "الملف الشخصي" | translate }}</span>
+  <span class="fz-36 bold block">{{ "profile.title" | translate }}</span>
   <div class="card mt-3 mb-5">
     <div class="d-flex justify-content-start flex-wrap">
       <div class="profile-image-container">
@@ -34,7 +34,7 @@
   </div>
   <div class="card mt-5 mb-5">
     <div class="d-flex justify-content-between">
-      <span class="fz-36 bold block">{{ "البيانات الشخصية" | translate }}</span>
+      <span class="fz-36 bold block">{{ "profile.personalData" | translate }}</span>
       <img
         *ngIf="!showBtn"
         class="pointer"
@@ -56,7 +56,7 @@
               [class.disabled-input]="!showBtn"
               [formControlName]="'firstName'"
             />
-            <label for="in_label">{{ "الاسم" }}</label>
+            <label for="in_label">{{ "profile.name" | translate }}</label>
           </p-floatlabel>
         </div>
         <div class="w-48 mb-2 flex-grow-1">
@@ -70,7 +70,7 @@
               [disabled]="!showBtn"
               [formControlName]="'email'"
             />
-            <label for="in_label">{{ "البريد الالكتروني" }}</label>
+            <label for="in_label">{{ "profile.email" | translate }}</label>
           </p-floatlabel>
         </div>
         <div class="w-48 flex-grow-1">
@@ -85,7 +85,7 @@
               optionValue="code"
               class="w-full"
             />
-            <label for="in_label">{{ "النوع" }}</label>
+            <label for="in_label">{{ "profile.gender" | translate }}</label>
           </p-floatlabel>
         </div>
         <div class="w-48 mb-2 flex-grow-1">
@@ -100,9 +100,7 @@
               [readonlyInput]="!showBtn"
               [disabled]="!showBtn"
             />
-     
-          
-            <label for="in_label">{{ "ناريخ الميلاد" }}</label>
+            <label for="in_label">{{ "profile.birthDate" | translate }}</label>
           </p-floatlabel>
         </div>
       </div>
@@ -115,10 +113,10 @@
         (click)="onUpdate()"
         [disabled]="!form.valid"
       >
-        {{ "تعديل" }}
+        {{ "profile.edit" | translate }}
       </button>
       <button class="btn btn-cancel flex-grow-1" (click)="onCancel()">
-        {{ "إلغاء" }}
+        {{ "profile.cancel" | translate }}
       </button>
     </div>
   </div>
