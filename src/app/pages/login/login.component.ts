@@ -100,7 +100,7 @@ export class LoginComponent {
         this.toaster.errorToaster(data.message)
       } else {
         let dataUser: any = {
-          img: environment.baseImageUrl+data.data.imgSrc,
+          img: environment.baseImageUrl+data.data.mobileImgSrc,
           id: data.data.userId,
           gender: data.data.gender,
           token: data.data.token
