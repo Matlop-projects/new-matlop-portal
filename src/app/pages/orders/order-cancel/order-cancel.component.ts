@@ -4,10 +4,11 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { ApiService } from '../../../services/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-order-cancel',
   standalone: true,
-  imports: [RadioButtonModule, FormsModule],
+  imports: [RadioButtonModule, FormsModule,TranslatePipe],
   providers: [DynamicDialogRef],
   templateUrl: './order-cancel.component.html',
   styleUrl: './order-cancel.component.scss'

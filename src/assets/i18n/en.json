@@ -9,7 +9,7 @@
   "total": "Total",
   "no_data_found": "No data found",
   "Pending": "Pending",
-  "AssignedToProvider":"Assigned to Provider",
+  "AssignedToProvider": "Assigned to Provider",
   "have_account": "Already have an account?",
   "actions": {
     "send": "Send",
@@ -201,7 +201,7 @@
     "PROVIDER": "Technicians"
   },
   "PACKAGE_DETAILS": {
-    "specialOrderDate":"Special Order Date",
+    "specialOrderDate": "Special Order Date",
     "wallet": "Current Wallet Ballance",
     "add_wallet": "Wallet Transactions",
     "wallet_amount": "Wallet Amount",
@@ -328,10 +328,19 @@
     "HOURS": "Hour Count",
     "HOURS_UNIT": "Hours",
     "SHOW_DETAILS": "Show Details",
-    "NO_ORDERS": "No orders at the moment"
+    "NO_ORDERS": "No orders at the moment",
+    "cancel": {
+      "title": "Please select a reason for cancellation",
+      "hint": "Choose a cancellation reason to help improve the service",
+      "reason_1": "Not at home",
+      "reason_2": "The issue was resolved in another way",
+      "reason_3": "The technician is late",
+      "reason_4": "The technician is not answering the phone",
+      "place_holder_reason": "Enter the reason for cancellation"
+    }
   },
   "order_details": {
-    "copone":"Copone",
+    "copone": "Copone",
     "visitTime": "Visit Time",
     "orders": "Orders",
     "details": "Order Details",
@@ -434,7 +443,7 @@
     "failure": "Unfortunately, your payment was not successful. Please try again or contact our support.",
     "home": "Home"
   },
-    "profile": {
+  "profile": {
     "title": "Profile",
     "personalData": "Personal Information",
     "name": "Name",
@@ -444,5 +453,4 @@
     "edit": "Edit",
     "cancel": "Cancel"
   }
-  
 }

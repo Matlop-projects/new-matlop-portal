@@ -6,10 +6,10 @@
   "rsa": "ريال سعودي",
   "rs": "ر.س",
   "cancel": "إلغاء",
-  "total":"اجمالي",
+  "total": "اجمالي",
   "no_data_found": "لا توجد بيانات حاليا",
   "Pending": "تحت الطلب",
-  "AssignedToProvider":"مُعَين لمقدم الخدمة",
+  "AssignedToProvider": "مُعَين لمقدم الخدمة",
   "have_account": "لديك حساب بالفعل ؟",
   "actions": {
     "send": "إرسال",
@@ -201,7 +201,7 @@
     "PROVIDER": "فني"
   },
   "PACKAGE_DETAILS": {
-    "specialOrderDate":"تاريخ الطلب الخاص",
+    "specialOrderDate": "تاريخ الطلب الخاص",
     "wallet": "رصيد المحفظة الحالي",
     "add_wallet": "معاملات المحفظة",
     "wallet_amount": "مبلغ المحفظة",
@@ -250,7 +250,7 @@
     "promo_code": "رمز الخصم",
     "promo_code_find": "رمز الخصم (إن وُجد)",
     "promo_code_info": "عندك كود خصم؟ دخّله هنا قبل تأكيد الطلب للاستفادة من العرض.",
-    "hasMasAmount":"بحد اقصي",
+    "hasMasAmount": "بحد اقصي",
     "EQUIPMETNS_MAX_AMOUNT_HINT": "المعدات لا تحسب مع الخصم",
     "VALIDATION": {
       "LOCATION": "يرجى اختيار الموقع",
@@ -328,7 +328,16 @@
     "HOURS": "عدد الساعات",
     "HOURS_UNIT": "ساعات",
     "SHOW_DETAILS": "عرض التفاصيل",
-    "NO_ORDERS": "لا توجد طلبات حاليا"
+    "NO_ORDERS": "لا توجد طلبات حاليا",
+    "cancel": {
+      "title": "من فضلك اختر سبب الالغاء",
+      "hint": "اختر سبب الالغاء لتحسين الخدمة",
+      "reason_1": "غير متواجد بالمنزل",
+      "reason_2": "تم حل المشكلة بطريقة اخرى",
+      "reason_3": "الفني متأخر عن موعده",
+      "reason_4": "الفني لا يرد علي الجوال",
+      "place_holder_reason": "أدخل سبب الالغاء"
+    }
   },
   "order_details": {
     "visitTime": "وقت الزيارة",
@@ -445,5 +454,3 @@
     "cancel": "إلغاء"
   }
 }
-
-
