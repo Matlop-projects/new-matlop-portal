@@ -4,7 +4,7 @@
       class="count-number"
       (click)="op.toggle($event); onClickNotification()"
     >
-      {{ totalUnSeen }}
+      {{ totalUnSeen<=99?totalUnSeen:99}}
     </div>
     <span
       class="pi pi-bell"
