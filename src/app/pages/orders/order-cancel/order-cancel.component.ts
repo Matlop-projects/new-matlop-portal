@@ -26,7 +26,7 @@ export class OrderCancelComponent {
   private dialogRef = inject(DynamicDialogRef);
   private translateService = inject(TranslateService);
   selectedReasonId: any;
-
+  userTypeId=localStorage.getItem('userType')
 
 ngOnInit(): void {
   this.translateService.onLangChange.subscribe(() => {
@@ -38,7 +38,7 @@ ngOnInit(): void {
 getCancelReasons() {
   const currentLang = this.translateService.currentLang || 'ar'; // default to Arabic
 
-  this.apiServices.get('CancelReason/GetAll').subscribe((res: any) => {
+  this.apiServices.get('CancelReason/GetAll',{UserTypeId:this.userTypeId}).subscribe((res: any) => {
     if (res?.data) {
       this.cancelReasonsList = res.data
         .map((item: any) => ({

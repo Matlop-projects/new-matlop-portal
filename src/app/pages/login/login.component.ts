@@ -103,7 +103,8 @@ export class LoginComponent {
           img: environment.baseImageUrl+data.data.mobileImgSrc,
           id: data.data.userId,
           gender: data.data.gender,
-          token: data.data.token
+          token: data.data.token,
+          userType:data.data.userTypeId
         }
         this.userDataSignals.setUser(dataUser);
 
@@ -111,6 +112,7 @@ export class LoginComponent {
         localStorage.setItem('userId', JSON.stringify(dataUser.id))
         localStorage.setItem('token', data.data.accessToken);
         localStorage.setItem('img',dataUser.img);
+        localStorage.setItem('userType',dataUser.userType)
         this.router.navigate(['/home']);
       }
     })
