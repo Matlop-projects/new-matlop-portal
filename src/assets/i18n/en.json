@@ -328,16 +328,7 @@
     "HOURS": "Hour Count",
     "HOURS_UNIT": "Hours",
     "SHOW_DETAILS": "Show Details",
-    "NO_ORDERS": "No orders at the moment",
-    "cancel": {
-      "title": "Please select a reason for cancellation",
-      "hint": "Choose a cancellation reason to help improve the service",
-      "reason_1": "Not at home",
-      "reason_2": "The issue was resolved in another way",
-      "reason_3": "The technician is late",
-      "reason_4": "The technician is not answering the phone",
-      "place_holder_reason": "Enter the reason for cancellation"
-    }
+    "NO_ORDERS": "No orders at the moment"
   },
   "order_details": {
     "copone": "Copone",
