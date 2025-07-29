@@ -2,7 +2,7 @@ import { Component, EventEmitter, inject, OnInit, Output, output } from '@angula
 import { FormsModule } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { ApiService } from '../../../services/api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TranslatePipe } from '@ngx-translate/core';
 @Component({
@@ -19,6 +19,7 @@ export class OrderCancelComponent {
   orderCancelationNotes = '';
   private apiServices = inject(ApiService);
   private route = inject(ActivatedRoute);
+  private router =inject(Router)
   private dialogRef = inject(DynamicDialogRef);
 
   onConfirm() {
@@ -29,7 +30,11 @@ export class OrderCancelComponent {
         orderCancelationNotes: this.orderCancelationNotes,
       })
       .subscribe((res) => {
-        if (res) this.confirmOrder.emit('success');
+        if (res) {
+          this.confirmOrder.emit('success');
+          this.router.navigateByUrl("orders");
+
+        }
       });
   }
 }

@@ -121,6 +121,7 @@ export class OrderDetailsComponent implements OnInit {
 
   onCancelOrder() {
     this.visibleCancelOrder = true;
+    
   }
   onCloseDialogWhenConfirm(value: string) {
     this.visibleCancelOrder = false;
