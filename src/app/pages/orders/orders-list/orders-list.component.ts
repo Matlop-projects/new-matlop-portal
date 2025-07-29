@@ -74,6 +74,8 @@ export class OrdersListComponent implements OnInit {
 
   }
   onSelectStatus(value: string) {
+    this.searchObject.pageNumber=0,
+    this.searchObject.pageSize= 8,
     this.activeStatus = value;
     if (value == "pending") {
       this.searchObject.orderStatus = null;
