@@ -155,6 +155,7 @@ export class PackageDetailsComponent {
   locations: any;
   promoCodeValue: any;
   priceAfterDiscountPrecentage: any;
+  originalPckagePrice: any;
 
   ngOnInit(): void {
     this.packageId = this.route.snapshot.params["packageId"];
@@ -204,7 +205,8 @@ export class PackageDetailsComponent {
         this.packageDetails.couponPrice = 0;
         this.packageDetails.couponDiscount = 0;
         this.packageDetails.orderSubTotal = 0;
-        this.packageDetails.orderTotal = 0;
+        this.originalPckagePrice = item.data.price
+        this.packageDetails.orderTotal = item.data.price;
         this.orderObject.orderSubTotal = item.data.price;
         this.orderObject.orderTotal = item.data.price;
         this.packageDetails.virtualPrice = item.data.price
@@ -220,7 +222,7 @@ export class PackageDetailsComponent {
       (res: any) => {
         if (res.data) {
           this.locations = res.data?.map((item: any) => ({
-            name:`${item.countryName} - ${item.cityName}  ${item.districtName?' - '+item.districtName:''}  ${item.blockNo?' - '+item.blockNo:''}`,
+            name: `${item.countryName} - ${item.cityName}  ${item.districtName ? ' - ' + item.districtName : ''}  ${item.blockNo ? ' - ' + item.blockNo : ''}`,
             code: item.locationId,
           }));
         }
@@ -281,7 +283,7 @@ export class PackageDetailsComponent {
           "<p>Payment using the wallet balance in the application</p>",
         arDescription: "<p>الدفع بواسطة رصيد المحفظة في التطبيق </p>",
         finalPayment: `wallet - محفظة `,
-        disabled: this.walletBalance < this.packageDetails.price|| this.walletBalance < this.packageDetails.virtualPrice, // Disable if wallet balance is 0 or less
+        disabled: this.walletBalance < this.packageDetails.price || this.walletBalance < this.packageDetails.virtualPrice, // Disable if wallet balance is 0 or less
       }
     );
   }
@@ -555,9 +557,17 @@ export class PackageDetailsComponent {
 
 
   toggleStatus(equipment: any) {
+    // Toggle the equipment status
     equipment.status = !equipment.status;
 
-    // Filter selected equipments
+    // Add or subtract the price from orderTotal based on status
+    if (equipment.status) {
+      this.packageDetails.orderTotal += equipment.price;
+    } else {
+      this.packageDetails.orderTotal -= equipment.price;
+    }
+
+    // Update selectedEquipments list
     this.selectedEquipments = this.equipments
       .filter((item: any) => item.status)
       .map((item: any) => ({
@@ -569,35 +579,26 @@ export class PackageDetailsComponent {
         nameEn: item.enName
       }));
 
-    // Calculate total price of selected equipments
-    const equipmentsPrice = (this.selectedEquipments as any[]).reduce(
-      (total, item) => total + item.price,
-      0
-    );
-
-    // Update the object
-    this.orderObject.orderEquipments = this.selectedEquipments;
-
-    // Recalculate the full total: base price + equipments
-    console.log(this.orderObject.orderSubTotal);
-    const basePrice = this.orderObject.orderSubTotal || 0; // or whatever base price
-    this.orderObject.equipmentsPrice = equipmentsPrice;
-    if (this.ifPromoCode) {
-      this.packageDetails.virtualPrice = this.packageDetails.couponPrice + equipmentsPrice;
+    if (this.promoCodeValue && this.validCoupon) {
+      this.orderObject.orderTotal = this.originalPckagePrice;
+      this.orderObject.equipmentsPrice = this.selectedEquipments.reduce((total, item: any) => total + item.price, 0);
+      this.orderObject.orderEquipments = this.selectedEquipments;
+      this.packageDetails.equipmentsPrice = this.orderObject.equipmentsPrice;
+      this.orderObject.orderTotal = this.originalPckagePrice + this.packageDetails.equipmentsPrice;
+      this.onPromoCodeCheck('e'); //equipments
     } else {
-      this.packageDetails.virtualPrice = basePrice + equipmentsPrice;
+      this.orderObject.equipmentsPrice = this.selectedEquipments.reduce((total, item: any) => total + item.price, 0);
+      this.orderObject.orderEquipments = this.selectedEquipments;
+      this.packageDetails.equipmentsPrice = this.orderObject.equipmentsPrice;
+      this.orderObject.orderTotal = this.packageDetails.orderTotal;
     }
-    this.orderObject.orderTotal = basePrice + equipmentsPrice;
-    this.packageDetails.orderTotal = basePrice + equipmentsPrice;
-    // Also reflect the price in packageDetails if needed
-    this.packageDetails.equipmentsPrice = equipmentsPrice;
-    console.log(this.packageDetails);
-    // console.log(this.orderObject);
     this.getpaymentList();
   }
 
-  onPromoCodeCheck() {
-    this.packageDetails.virtualPrice = this.orderObject.orderTotal;
+
+
+  onPromoCodeCheck(callingTYpe: string) {
+    this.packageDetails.orderTotal = this.orderObject.orderTotal;
     this.ifPromoCode = false;
     console.log(this.promoCodeValue);
     if (this.promoCodeValue) {
@@ -605,7 +606,9 @@ export class PackageDetailsComponent {
         this.invalidCoupn = false;
         this.validCoupon = true;
         this.orderObject.coponeId = loc.data.couponId;
-        this.toaster.successToaster(this.languageService.translate("PACKAGE_DETAILS.COUPON_ADDED_SUCCESS"));
+        if (callingTYpe == 'p') {
+          this.toaster.successToaster(this.languageService.translate("PACKAGE_DETAILS.COUPON_ADDED_SUCCESS"));
+        }
         this.discountType = loc.data.coponeType;
         this.packageDetails.couponPrice = 0;
         this.packageDetails.couponDiscount = 0;
@@ -614,21 +617,19 @@ export class PackageDetailsComponent {
         this.packageDetails.maxAmount = loc.data.maxAmount;
         if (loc.data.coponeType == 1) {
           this.packageDetails.couponDiscount = loc.data.amount;
-          this.priceAfterDiscountPrecentage = this.packageDetails.price - this.calculateSalePrice(this.packageDetails.price, loc.data.amount);
+          this.priceAfterDiscountPrecentage = this.packageDetails.orderTotal - this.calculateSalePrice(this.packageDetails.orderTotal, loc.data.amount);
           if (loc.data.hasMaxAmount && this.priceAfterDiscountPrecentage >= loc.data.maxAmount) {
-            this.packageDetails.virtualPrice = this.packageDetails.virtualPrice - loc.data.maxAmount;
-            this.packageDetails.couponPrice = this.packageDetails.virtualPrice;
+            this.packageDetails.orderTotal = this.packageDetails.orderTotal - loc.data.maxAmount;
+            this.packageDetails.couponPrice = this.packageDetails.orderTotal;
           } else {
             this.packageDetails.couponDiscount = loc.data.amount;
-            // this.packageDetails.couponPrice =
-            // this.packageDetails.price - this.packageDetails.couponDiscount;
-            this.packageDetails.virtualPrice = this.packageDetails.virtualPrice - this.priceAfterDiscountPrecentage;
-            this.packageDetails.couponPrice = this.packageDetails.virtualPrice;
+            this.packageDetails.orderTotal = this.packageDetails.orderTotal - this.priceAfterDiscountPrecentage;
+            this.packageDetails.couponPrice = this.packageDetails.orderTotal;
           }
         } else {
           this.packageDetails.couponDiscount = loc.data.amount;
-          this.packageDetails.virtualPrice = this.packageDetails.virtualPrice - loc.data.amount;
-          this.packageDetails.couponPrice = this.packageDetails.virtualPrice;
+          this.packageDetails.orderTotal = this.packageDetails.orderTotal - loc.data.amount;
+          this.packageDetails.couponPrice = this.packageDetails.orderTotal;
         }
         console.log(this.packageDetails);
         console.log(this.orderObject);
@@ -642,6 +643,7 @@ export class PackageDetailsComponent {
       }
       )
     } else {
+      this.validCoupon = false;
       this.ifPromoCode = false;
       this.packageDetails.hasMaxAmount = false;
       this.packageDetails.couponPrice = 0;

@@ -31,7 +31,7 @@
           <div class="input-wrapper">
             <input id="saudiNumber" [(ngModel)]="promoCodeValue" type="text"
               placeholder="{{ 'PACKAGE_DETAILS.PROMO_CODE_PLACEHOLDER' | translate }}" />
-            <button class="input-btn" (click)="onPromoCodeCheck()">{{ "PACKAGE_DETAILS.CONFIRM_BUTTON" | translate
+            <button class="input-btn" (click)="onPromoCodeCheck('p')">{{ "PACKAGE_DETAILS.CONFIRM_BUTTON" | translate
               }}</button>
           </div>
         </div>
@@ -137,9 +137,9 @@
                   <div class="collection">
                     <div class="desc">
                       <p>{{ "PACKAGE_DETAILS.EQUIPMENT_PRICE" | translate }}</p>
-                      <p class="hint" *ngIf="packageDetails.couponType == 1">
+                      <!-- <p class="hint" *ngIf="packageDetails.couponType == 1">
                         {{'PACKAGE_DETAILS.EQUIPMETNS_MAX_AMOUNT_HINT' | translate}}
-                      </p>
+                      </p> -->
                     </div>
                     <div class="value">
                       <p>
@@ -176,7 +176,7 @@
                     <div class="total-price-value">
                       <p>
                         <img src="assets/images/icons-svg/Saudi_Riyal.svg" alt="">
-                        {{packageDetails.virtualPrice}}
+                        {{packageDetails.orderTotal}}
                       </p>
                     </div>
                   </div>
