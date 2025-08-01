@@ -56,11 +56,11 @@ user:any;
 userId=localStorage.getItem('userId')
 showBtn=false
 genderList:any[]=[
-  {name:"ذكر", code:1},
-  {name:"أنثى", code:2}
+ 
 ]
 private apiService = inject(ApiService);
 private Router = inject(Router)
+private langService=inject(LanguageService)
 primengConfig=inject(PrimeNG)
 
  form = new FormGroup({
@@ -90,13 +90,22 @@ primengConfig=inject(PrimeNG)
   selectedLang: any;
 
   ngOnInit(): void {
-   this.getUserById();
     this.selectedLang = this.languageService.translationService.currentLang;
+    this.setGenderList();
+    this.getUserById();
     this.displayDatepickerConfig(this.selectedLang)
     this.languageService.translationService.onLangChange.subscribe(() => {
       this.selectedLang = this.languageService.translationService.currentLang;
+      this.setGenderList();
       this.displayDatepickerConfig(this.selectedLang)
     });
+  }
+
+  setGenderList(){
+     this.genderList=[
+       {name:this.selectedLang=='en'?'Male':"ذكر", code:1},
+       {name:this.selectedLang=='en'?'Female':"أنثى", code:2}
+    ]
   }
   onFileSelected(event: Event) {
   const input = event.target as HTMLInputElement;
