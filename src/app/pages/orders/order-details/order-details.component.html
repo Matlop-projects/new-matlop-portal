@@ -9,7 +9,7 @@
 
   <div
     *ngIf="orderDetails"
-    class="order-details d-flex justify-content-between flex-wrap"
+    class="order-details d-flex justify-content-between flex-wrap mb-4"
   >
     <div class="details-info flex-grow-1">
       <div class="card pkg-details">
@@ -169,8 +169,9 @@
           <span> {{ "rs" | translate }}</span>
         </div>
       </div>
+       <!-- *ngIf="orderDetails.orderStatusName == 'Pending'" -->
       <div
-        *ngIf="orderDetails.orderStatusName == 'Pending'"
+        *ngIf="checkFirstVisit(orderDetails.firstVistTime)"
         class="buttons text-start"
       >
         <button *ngIf="orderDetails.paymentWayId!=1" class="btn pay" (click)="visiblePaymentWay = true">

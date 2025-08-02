@@ -115,6 +115,13 @@ export class OrderDetailsComponent implements OnInit {
     });
   }
 
+  checkFirstVisit(dateString: string): boolean {
+  const targetDate = new Date(dateString);
+  const now = new Date();
+
+  return targetDate.getTime() > now.getTime();
+}
+
   goToOrders() {
     this.router.navigateByUrl("orders");
   }
