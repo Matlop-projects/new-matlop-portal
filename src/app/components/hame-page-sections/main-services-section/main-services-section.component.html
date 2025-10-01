@@ -29,66 +29,60 @@
 
         <div class="grid-section mt-4" *ngIf="services?.length >= 4">
             <!-- Card 1 -->
-            <div class="card left" [ngStyle]="{ 'background-image': 'url(' + services[0].image + ')' }"
+            <div class="card left" 
                 (click)="goContractList(services[0].serviceId)">
                 <div class="overlay"></div>
-                <div class="top-left-label">
-                    <p>{{ 'SERVICES.ADD_REQUEST' | translate }}</p>
-                    <img width="35" src="assets/images/icons-svg/arrow.svg" alt="" />
+                <div class="card-content">
+                    <div class="title">
+                        {{ selectedLang === 'ar' ? services[0].nameAr : services[0].nameEn }}
+                    </div>
+                    <button class="action-btn">
+                        {{ 'SERVICES.ADD_REQUEST' | translate }}
+                    </button>
                 </div>
-                <div class="content">
-                    {{ selectedLang === 'ar' ? services[0].nameAr : services[0].nameEn }}
-                </div>
-                <div class="description"
-                    [innerHTML]="selectedLang === 'ar' ? services[0].descriptionAr : services[0].descriptionEn"></div>
             </div>
 
             <!-- Center Cards -->
             <div class="center-wrapper">
-                <div class="card center top" [ngStyle]="{ 'background-image': 'url(' + services[1].image + ')' }"
+                <div class="card center top" 
                     (click)="goContractList(services[1].serviceId)">
                     <div class="overlay"></div>
-                    <div class="top-left-label">
-                        <p>{{ 'SERVICES.ADD_REQUEST' | translate }}</p>
-                        <img width="35" src="assets/images/icons-svg/arrow.svg" alt="" />
-                    </div>
-                    <div class="content">
-                        {{ selectedLang === 'ar' ? services[1].nameAr : services[1].nameEn }}
-                    </div>
-                    <div class="description"
-                        [innerHTML]="selectedLang === 'ar' ? services[1].descriptionAr : services[1].descriptionEn">
+                    <div class="card-content">
+                        <div class="title">
+                            {{ selectedLang === 'ar' ? services[1].nameAr : services[1].nameEn }}
+                        </div>
+                        <button class="action-btn">
+                            {{ 'SERVICES.ADD_REQUEST' | translate }}
+                        </button>
                     </div>
                 </div>
 
-                <div class="card center bottom" [ngStyle]="{ 'background-image': 'url(' + services[2].image + ')' }"
+                <div class="card center bottom" 
                     (click)="goContractList(services[2].serviceId)">
                     <div class="overlay"></div>
-                    <div class="top-left-label">
-                        <p>{{ 'SERVICES.ADD_REQUEST' | translate }}</p>
-                        <img width="35" src="assets/images/icons-svg/arrow.svg" alt="" />
-                    </div>
-                    <div class="content">
-                        {{ selectedLang === 'ar' ? services[2].nameAr : services[2].nameEn }}
-                    </div>
-                    <div class="description"
-                        [innerHTML]="selectedLang === 'ar' ? services[2].descriptionAr : services[2].descriptionEn">
+                    <div class="card-content">
+                        <div class="title">
+                            {{ selectedLang === 'ar' ? services[2].nameAr : services[2].nameEn }}
+                        </div>
+                        <button class="action-btn">
+                            {{ 'SERVICES.ADD_REQUEST' | translate }}
+                        </button>
                     </div>
                 </div>
             </div>
 
             <!-- Card 4 -->
-            <div class="card right" [ngStyle]="{ 'background-image': 'url(' + services[3].image + ')' }"
+            <div class="card right" 
                 (click)="goContractList(services[3].serviceId)">
                 <div class="overlay"></div>
-                <div class="top-left-label">
-                    <p>{{ 'SERVICES.ADD_REQUEST' | translate }}</p>
-                    <img width="35" src="assets/images/icons-svg/arrow.svg" alt="" />
+                <div class="card-content">
+                    <div class="title">
+                        {{ selectedLang === 'ar' ? services[3].nameAr : services[3].nameEn }}
+                    </div>
+                    <button class="action-btn">
+                        {{ 'SERVICES.ADD_REQUEST' | translate }}
+                    </button>
                 </div>
-                <div class="content">
-                    {{ selectedLang === 'ar' ? services[3].nameAr : services[3].nameEn }}
-                </div>
-                <div class="description"
-                    [innerHTML]="selectedLang === 'ar' ? services[3].descriptionAr : services[3].descriptionEn"></div>
             </div>
         </div>
     </div>

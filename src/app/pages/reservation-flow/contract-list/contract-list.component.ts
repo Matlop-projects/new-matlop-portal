@@ -4,11 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
 import { NgIf, NgFor } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
+import { BackgroundImageWithTextComponent, IBackGroundImageWithText } from "../../../components/background-image-with-text/background-image-with-text.component";
 
 @Component({
   selector: 'app-contract-list',
   standalone: true,
-  imports: [NgIf, NgFor , TranslatePipe],
+  imports: [NgIf, NgFor, TranslatePipe, BackgroundImageWithTextComponent],
   templateUrl: './contract-list.component.html',
   styleUrl: './contract-list.component.scss'
 })
@@ -30,6 +31,14 @@ export class ContractListComponent {
     });
   }
 
+     bkg_text_options: IBackGroundImageWithText = {
+      imageUrl: 'assets/img/slider.svg',
+      header: this.languageService.translate('ABOUT_US_CONTACT.BANNER_HEADER'),
+      description: this.languageService.translate('ABOUT_US_CONTACT.BANNER_DESC'),
+      style: {
+        padding: "70px 0 0 0"
+      }
+    };
   getContractListBiServiceId(serviceId: string) {
     this.ApiService.get(`ContractType/GetByServiceId/${serviceId}`).subscribe((item: any) => {
       this.contractList = item.data;

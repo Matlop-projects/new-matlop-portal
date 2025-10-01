@@ -38,98 +38,64 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 1rem;
-  
-        .card {
-          position: relative;
-          overflow: hidden;
-          border-radius: 24px;
-          cursor: pointer;
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;
-          width: 384px;
-          height: 261px;
-          background-color: #F0F4F5;
-  
-          .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            // background-color: rgba(0, 0, 0, 0.4);
-            background: #00000066;
 
-            border-radius: inherit;
-            z-index: 1;
-          }
-  
-          .top-left-label {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            padding: 0.4rem 0.8rem;
-            font-size: 13px;
-            font-weight: 600;
-            border-radius: 8px;
-            z-index: 10;
-            pointer-events: none;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            display: flex;
-            gap: 3px;
-            align-items: center;
-            color: white;
-          }
-          
-          &:hover .top-left-label {
-            opacity: 1;
-            transform: translateY(0);
-          }
-  
-          .content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 1rem;
-            color: white;
-            font-size: 20px;
-            z-index: 2;
-            transition: transform 0.3s ease;
-          }
-  
-          .description {
-            position: absolute;
-            bottom: -100%;
-            left: 0;
-            width: 100%;
-            padding: 1rem;
-            color: white;
-            z-index: 3;
-            font-size: 14px;
-            transition: bottom 0.3s ease;
-          }
-  
-          &:hover .content {
-            transform: translateY(-80%);
-          }
-  
-          &:hover .description {
-            bottom: 0;
-          }
-        }
-  
+        .card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 24px;
+        cursor: pointer;
+        width: 384px;
+        height: 261px;
+        background: #F0F4F5;
+        border: 2px solid #E5E5E5;
+
+        .card-content {
+           position: relative;
+           z-index: 2;
+           padding: 1.5rem;
+           height: 100%;
+           display: flex;
+           flex-direction: column;
+           justify-content: space-between;
+           align-items: flex-end;
+           text-align: right;
+
+           .title {
+             font-size: 22px;
+             font-weight: 700;
+             color: #1A1A1A;
+             line-height: 1.3;
+             align-self: flex-end;
+           }
+
+           .action-btn {
+             border: none;
+             padding: 0.5rem 1rem;
+             border-radius: 25px;
+             font-weight: 600;
+             cursor: pointer;
+             opacity: 1;
+             background: linear-gradient(to right, #BFFD2B, #05BCE8);
+             color: #fff;
+             font-weight: bolder;
+             align-self: flex-end;
+           }
+         }
+      }
+
         .center-wrapper {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-  
-          .center {
-            height: 261px;
-          }
-        }
+           display: flex;
+           flex-direction: column;
+           gap: 1rem;
+
+           .center {
+             height: 261px;
+           }
+         }
+
+         .left, .right {
+           height: 261px;
+         }
       }
   
       /* Mobile view */
@@ -149,17 +115,16 @@
         }
   
         .card {
-          height: 400px !important;
+          height: 261px !important;
         }
   
         .center-wrapper {
           display: contents;
   
           .center {
-            height: 400px !important;
+            height: 261px !important;
           }
         }
       }
     }
   }
-  
