@@ -1,9 +1,9 @@
-<div class="slider-section-container">
+<div class="slider-section-container" [style.background-image]="'url(' + getCurrentImage() + ')'">
     <div class="overlay">
       <div class="text-content">
         <p class="mini-title">{{ 'SLIDER.TITLE' | translate }}</p>
-        <h1>{{ 'SLIDER.HEADING' | translate }}</h1>
-        <p>{{ 'SLIDER.DESCRIPTION' | translate }}</p>
+        <h1>{{ getCurrentTitle() || ('SLIDER.HEADING' | translate) }}</h1>
+        <!-- <p>{{ 'SLIDER.DESCRIPTION' | translate }}</p> -->
       </div>
   
       <div>
@@ -17,6 +17,31 @@
           <img class="pointer" (click)="onClickDownload('google')" src="assets/images/global/google.svg" alt="play-store" />
         </div>
       </div>
+    </div>
+    
+    <!-- Navigation arrows -->
+    <div class="slider-navigation" *ngIf="sliders.length > 1">
+      <button class="nav-btn prev-btn" (click)="prevSlide()" aria-label="Previous slide">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="nav-btn next-btn" (click)="nextSlide()" aria-label="Next slide">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Dots indicator -->
+    <div class="slider-dots" *ngIf="sliders.length > 1">
+      <button 
+        *ngFor="let slider of sliders; let i = index" 
+        class="dot" 
+        [class.active]="i === currentSlideIndex"
+        (click)="goToSlide(i)"
+        [attr.aria-label]="'Go to slide ' + (i + 1)">
+      </button>
     </div>
   </div>
   

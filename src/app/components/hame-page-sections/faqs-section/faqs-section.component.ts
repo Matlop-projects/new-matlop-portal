@@ -16,6 +16,11 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class FaqsSectionComponent {
 @Output() value =new EventEmitter()
   faqsList: any[] = [];
+  paginatedFaqsList: any[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalPages: number = 0;
+  Math = Math; // Make Math available in template
   api = inject(ApiService);
   toaster = inject(ToasterService);
   languageService = inject(LanguageService);
@@ -33,8 +38,45 @@ export class FaqsSectionComponent {
     this.api.get('FAQs/GetAll').subscribe((res: any) => {
       console.log(res);
       this.faqsList = res.data;
+      this.totalPages = Math.ceil(this.faqsList.length / this.itemsPerPage);
+      this.updatePaginatedList();
       this.value.emit(this.faqsList)
     })
+  }
+
+  updatePaginatedList() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedFaqsList = this.faqsList.slice(startIndex, endIndex);
+  }
+
+  goToPage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.updatePaginatedList();
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePaginatedList();
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaginatedList();
+    }
+  }
+
+  getPageNumbers(): number[] {
+    const pages: number[] = [];
+    for (let i = 1; i <= this.totalPages; i++) {
+      pages.push(i);
+    }
+    return pages;
   }
 
 }

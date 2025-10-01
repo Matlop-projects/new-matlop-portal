@@ -70,7 +70,7 @@
     "HOME": "الرئيسية",
     "ABOUT_US": "من نحن",
     "SERVICES": "خدماتنا",
-    "ORDERS": "الطلبات",
+    "ORDERS": "طلباتك",
     "SIGNUP": "إنشاء حساب جديد",
     "LOGIN": "تسجيل الدخول",
     "ENGLISH": "الإنجليزية",
@@ -95,6 +95,9 @@
     "confirm_pass": "تأكيد كلمة المرور",
     "confirm_required": "تأكيد كلمة المرور مطلوب",
     "not_matched": "كلمتا المرور غير متطابقتين"
+  },
+  "otp": {
+    "enter_degits": "يرجى إدخال رمز التحقق المرسل إلى"
   },
   "DESCRIPTION": {
     "CARD_1": {
@@ -163,7 +166,8 @@
       "ABOUT": "من نحن",
       "ORDERS": "الطلبات",
       "PRIVACY_POLICY": "سياسة الخصوصية",
-      "CONTACT": "تواصل معنا"
+      "CONTACT": "تواصل معنا",
+      "FAQs": "الأسئلة الشائعة"
     },
     "SERVICES_TITLE": "خدماتنا",
     "SERVICES": {
@@ -176,7 +180,7 @@
     },
     "FOLLOW_US": "تابعنا",
     "TERMS": "الشروط والأحكام",
-    "COPYRIGHT": "جميع الحقوق محفوظة ل"
+    "COPYRIGHT": "جميع الحقوق محفوظة لشركة مطلوب للتجارة."
   },
   "SERVICE_LIST": {
     "ORDER_NOW": "أطلب خدمة الآن"
@@ -425,7 +429,8 @@
     "city_name": "اسم المدينة",
     "sector_name": "اسم القطاع",
     "block_name": "اسم البلوك",
-    "add_location": "اضف موقع"
+    "add_location": "اضف موقع",
+    "select_location_on_map": "اختر الموقع على الخريطة"
   },
   "thank_you": {
     "title": "شكرًا لك!",
@@ -450,5 +455,10 @@
     "reason_placeholder": "اختر سبب الإلغاء",
     "textarea_placeholder": "أدخل سبب الالغاء",
     "confirm_btn": "تأكيد"
+  },
+  "CLIENTS": {
+    "OUR_CLIENTS": "عملاؤنا",
+    "NO_CLIENTS": "لا يوجد عملاء متاحون في الوقت الحالي",
+    "DESCRIPTION": "نحن فخورون بالعمل مع الشركات والمؤسسات الرائدة التي تثق بنا لتقديم خدمات استثنائية"
   }
 }

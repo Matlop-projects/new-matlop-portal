@@ -46,7 +46,11 @@ export class OtpModalComponent {
     if (!mobileNumber || mobileNumber.length < 3) {
       return mobileNumber;
     }
-    return `**${mobileNumber.slice(2)}`;
+    // Show stars for all digits except the last two
+    const starsCount = mobileNumber.length - 2;
+    const stars = '*'.repeat(starsCount);
+    const lastTwoDigits = mobileNumber.slice(-2);
+    return `${stars}${lastTwoDigits}`;
   }
 
   startTimer(): void {

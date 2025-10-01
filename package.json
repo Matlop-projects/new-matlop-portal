@@ -17,6 +17,7 @@
     "@angular/compiler": "^18.2.0",
     "@angular/core": "^18.2.0",
     "@angular/forms": "^18.2.0",
+    "@angular/google-maps": "^20.2.5",
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
@@ -24,8 +25,10 @@
     "@ngx-translate/core": "^16.0.3",
     "@ngx-translate/http-loader": "^16.0.0",
     "@primeng/themes": "^18.0.0-rc.1",
+    "@types/leaflet": "^1.9.16",
     "bootstrap": "^5.3.3",
     "date-fns": "^4.1.0",
+    "leaflet": "^1.9.4",
     "ng-otp-input": "^1.9.3",
     "ngx-editor": "^17.5.4",
     "ngx-owl-carousel-o": "^18.0.0",
@@ -36,9 +39,7 @@
     "quill": "^2.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.10",
-    "@types/leaflet": "^1.9.16",
-    "leaflet": "^1.9.4"
+    "zone.js": "~0.14.10"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.11",

@@ -2,26 +2,27 @@
     <app-slider-section></app-slider-section>
 </div>
 
-<div class="description-section">
-    <app-description-section></app-description-section>
-</div>
-
-<div class="main-services-section">
-    <app-main-services-section></app-main-services-section>
-</div>
-
 <div class="special-services-section">
     <app-special-services-section></app-special-services-section>
 </div>
+<div class="main-services-section">
+    <app-main-services-section></app-main-services-section>
+</div>
+<div class="description-section"  style="margin-top: 20px;">
+    <app-description-section></app-description-section>
+</div>
 
+<div class="clients-section">
+    <app-clients-section></app-clients-section>
+</div>
 
-<div class="who-we-are-section" style="margin-top: 4rem;">
+<!-- <div class="who-we-are-section" style="margin-top: 4rem;">
     <app-who-are-we-section></app-who-are-we-section>
-</div>
+</div> -->
 
-<div class="how-we-work-section" style="margin-top: 3rem;">
+<!-- <div class="how-we-work-section" style="margin-top: 3rem;">
     <app-how-we-work-section></app-how-we-work-section>
-</div>
+</div> -->
 
 <div class="faqs-section" style="margin-top: 3rem;" *ngIf="faqsList.length>0">
     <app-faqs-section (value)="onFaqsData($event)"></app-faqs-section>

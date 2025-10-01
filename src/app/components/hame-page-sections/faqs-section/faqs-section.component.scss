@@ -19,11 +19,131 @@
         color: #737373;
       }
     }
+
+    // Pagination Styles
+    .pagination-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+
+      .pagination-controls {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 10px;
+
+        .pagination-btn {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 16px;
+          border: 1px solid #ddd;
+          background-color: #fff;
+          color: #333;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: 500;
+          transition: all 0.3s ease;
+
+          &:hover:not(:disabled) {
+            background-color: #f8f9fa;
+            border-color: #007bff;
+            color: #007bff;
+          }
+
+          &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #f8f9fa;
+          }
+
+          i {
+            font-size: 12px;
+          }
+        }
+
+        .page-numbers {
+          display: flex;
+          gap: 5px;
+
+          .page-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            color: #333;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+
+            &:hover {
+              background-color: #f8f9fa;
+              border-color: #007bff;
+              color: #007bff;
+            }
+
+            &.active {
+              background-color: #007bff;
+              border-color: #007bff;
+              color: #fff;
+
+              &:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+              }
+            }
+          }
+        }
+      }
+
+      .pagination-info {
+        text-align: center;
+        
+        p {
+          font-size: 14px;
+          color: #666;
+          margin: 0;
+        }
+      }
+    }
   }
 }
+
 .no-data {
   margin-top: 250px;
   h1{
     margin: 190px 0px;
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .faqs-section-container {
+    .content {
+      .pagination-container {
+        .pagination-controls {
+          flex-direction: column;
+          gap: 10px;
+
+          .pagination-btn {
+            width: 100%;
+            justify-content: center;
+          }
+
+          .page-numbers {
+            order: -1;
+            flex-wrap: wrap;
+            justify-content: center;
+          }
+        }
+      }
+    }
   }
 }

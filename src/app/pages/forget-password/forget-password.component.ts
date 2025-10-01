@@ -114,4 +114,13 @@ languageService = inject(LanguageService);
     this.onSubmit();
   }
 
+  toggleLanguage() {
+    this.selectedLang = this.selectedLang === 'en' ? 'ar' : 'en';
+    this.currentLang = this.selectedLang;
+    this.languageService.change(this.selectedLang);
+    localStorage.setItem('lang', this.selectedLang);
+    document.body.setAttribute('dir', this.selectedLang === 'ar' ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', this.selectedLang);
+  }
+
 }

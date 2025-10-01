@@ -9,13 +9,14 @@ import { Toast, ToastModule } from 'primeng/toast';
 import { PrimeNG } from 'primeng/config';
 import { ConfirmMsgService } from './services/confirm-msg.service';
 import { LanguageService } from './services/language.service';
+import { WhatsappFloatComponent } from './shared/whatsapp-float/whatsapp-float.component';
 
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgxSpinnerModule, FormsModule, TranslateModule, ToastModule, Toast],
+  imports: [RouterOutlet, NgxSpinnerModule, FormsModule, TranslateModule, ToastModule, Toast, WhatsappFloatComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: [ToasterService, PrimeNG, ConfirmMsgService, ConfirmationService],

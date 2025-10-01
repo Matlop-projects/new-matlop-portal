@@ -1,4 +1,5 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output, OnInit, AfterViewInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   FormControl,
   FormGroup,
@@ -15,21 +16,24 @@ import {
 import { Select } from 'primeng/select';
 import { LanguageService } from '../../services/language.service';
 import { ApiService } from '../../services/api.service';
+import { MapComponent } from '../map/map.component';
 
 @Component({
   selector: 'app-add-location',
   standalone: true,
   imports: [
+        CommonModule,
         ReactiveFormsModule,
         TranslatePipe,
         InputTextModule,
         FloatLabelModule,
         Select,
+        MapComponent,
   ],
   templateUrl: './add-location.component.html',
   styleUrl: './add-location.component.scss'
 })
-export class AddLocationComponent {
+export class AddLocationComponent implements OnInit, AfterViewInit {
   @Output()value:any =new EventEmitter()
  private apiService = inject(ApiService);
   private router = inject(Router);
@@ -39,6 +43,7 @@ export class AddLocationComponent {
   countryList: any[] = [];
   cityList: any[] = [];
   districtList: any[] = [];
+  
   form = new FormGroup({
     userId: new FormControl(0),
     blockNo: new FormControl('', {
@@ -56,7 +61,19 @@ export class AddLocationComponent {
 
   ngOnInit() {
     this.getAllCountry();
-    
+  }
+
+  ngAfterViewInit() {
+    // Ensure the component is fully rendered before any map initialization
+    // This is especially important when used in popups or dynamic components
+  }
+
+  onLocationChange(location: { lat: number, lng: number }) {
+    // Update form controls when map location changes
+    this.form.patchValue({
+      latitude: location.lat.toFixed(6),
+      longitude: location.lng.toFixed(6)
+    });
   }
 
   getAllCity(countryId: number) {
@@ -140,9 +157,9 @@ export class AddLocationComponent {
   onSubmit() {
     let payload = {
       ...this.form.value,
-      latitude: '123',
+      latitude: this.form.value.latitude || '24.7136',
       locationId: 0,
-      longitude: '123',
+      longitude: this.form.value.longitude || '46.6753',
       name: 'asd',
       userId: localStorage.getItem('userId'),
     };

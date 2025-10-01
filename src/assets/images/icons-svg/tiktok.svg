@@ -1,0 +1,21 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M19.321 5.562a5.124 5.124 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-.849-1.302-1.982-1.302-3.338h-3.517v14.8c0 1.404-1.14 2.544-2.544 2.544s-2.544-1.14-2.544-2.544 1.14-2.544 2.544-2.544c.264 0 .519.04.758.115V9.854a6.067 6.067 0 0 0-.758-.048c-3.35 0-6.061 2.711-6.061 6.061s2.711 6.061 6.061 6.061 6.061-2.711 6.061-6.061V8.424a9.65 9.65 0 0 0 5.382 1.634V6.541a5.124 5.124 0 0 1-2.5-.979z" fill="url(#paint0_linear_tiktok)"/>
+<defs>
+<linearGradient id="paint0_linear_tiktok" x1="0" y1="12" x2="24" y2="12" gradientUnits="userSpaceOnUse">
+<stop stop-color="#BFFD2B"/>
+<stop offset="0.07" stop-color="#B9FC30"/>
+<stop offset="0.16" stop-color="#AAF83D"/>
+<stop offset="0.26" stop-color="#90F253"/>
+<stop offset="0.37" stop-color="#6BEA72"/>
+<stop offset="0.43" stop-color="#62E77A"/>
+<stop offset="0.5" stop-color="#5AE582"/>
+<stop offset="0.57" stop-color="#52E28A"/>
+<stop offset="0.64" stop-color="#4ADF92"/>
+<stop offset="0.71" stop-color="#42DC9A"/>
+<stop offset="0.78" stop-color="#3AD9A2"/>
+<stop offset="0.85" stop-color="#32D6AA"/>
+<stop offset="0.92" stop-color="#2AD3B2"/>
+<stop offset="1" stop-color="#40AEC2"/>
+</linearGradient>
+</defs>
+</svg>

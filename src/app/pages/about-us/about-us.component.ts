@@ -99,6 +99,8 @@ export class AboutUsComponent {
 
   onContactUs() {
     this.apiService.post("ContactUs/Create", this.form.value).subscribe((res) => {
+      // Reset the form after successful submission
+      this.form.reset();
     });
   }
 }

@@ -96,6 +96,9 @@
     "confirm_required": "Confirm password is required",
     "not_matched": "Passwords do not match"
   },
+  "otp": {
+    "enter_degits": "Please enter the verification code sent to"
+  },
   "DESCRIPTION": {
     "CARD_1": {
       "TITLE": "Fast and Safe Service",
@@ -163,7 +166,8 @@
       "ABOUT": "About Us",
       "ORDERS": "Orders",
       "PRIVACY_POLICY": "Privacy and Policy",
-      "CONTACT": "Contact Us"
+      "CONTACT": "Contact Us",
+      "FAQs": "FAQs"
     },
     "SERVICES_TITLE": "Our Services",
     "SERVICES": {
@@ -425,7 +429,8 @@
     "city_name": "City Name",
     "sector_name": "Sector Name",
     "block_name": "Block name",
-    "add_location": "Add location"
+    "add_location": "Add location",
+    "select_location_on_map": "Select location on map"
   },
   "thank_you": {
     "title": "Thank You!",
@@ -450,5 +455,10 @@
     "reason_placeholder": "Select a reason",
     "textarea_placeholder": "Enter the reason for cancellation",
     "confirm_btn": "Confirm"
+  },
+  "CLIENTS": {
+    "OUR_CLIENTS": "Our Clients",
+    "NO_CLIENTS": "No clients available at the moment",
+    "DESCRIPTION": "We are proud to work with leading companies and organizations that trust us to deliver exceptional services"
   }
 }

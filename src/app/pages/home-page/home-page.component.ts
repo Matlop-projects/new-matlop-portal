@@ -7,12 +7,13 @@ import { SliderSectionComponent } from '../../components/hame-page-sections/slid
 import { SpecialServicesSectionComponent } from '../../components/hame-page-sections/special-services-section/special-services-section.component';
 import { WhoAreWeSectionComponent } from '../../components/hame-page-sections/who-are-we-section/who-are-we-section.component';
 import { FaqsSectionComponent } from "../../components/hame-page-sections/faqs-section/faqs-section.component";
+import { ClientsSectionComponent } from '../../components/hame-page-sections/clients-section/clients-section.component';
 import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [DescriptionSectionComponent,NgIf, HowWeWorkSectionComponent, MainServicesSectionComponent, OrderNowSectionComponent, SliderSectionComponent, SpecialServicesSectionComponent, WhoAreWeSectionComponent, FaqsSectionComponent],
+  imports: [DescriptionSectionComponent,NgIf, HowWeWorkSectionComponent, MainServicesSectionComponent, OrderNowSectionComponent, SliderSectionComponent, SpecialServicesSectionComponent, WhoAreWeSectionComponent, FaqsSectionComponent, ClientsSectionComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })

@@ -36,18 +36,14 @@ export class FooterComponent {
             icon: "instgram.svg",
             routing: res.data.instagramLink || "",
           },
-          // {
-          //   icon: "whatsapp.svg",
-          //   routing: res.data.whatsappLink || "",
-          // },
-          // {
-          //   icon: "youtube.svg",
-          //   routing: res.data.youtubeLink || "",
-          // },
-          // {
-          //   icon: "tiktok.svg",
-          //   routing: res.data.tiktokLink || "",
-          // },
+          {
+            icon: "tiktok.svg",
+            routing: res.data.tikTokLink || "",
+          },
+          {
+            icon: "snapchat.svg",
+            routing: res.data.snapchatLink || "",
+          },
         ];
       }
     });

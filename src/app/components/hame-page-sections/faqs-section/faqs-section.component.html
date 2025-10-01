@@ -1,6 +1,6 @@
 <div class="faqs-section-container container">
   <div class="content">
-    <ng-container *ngIf="faqsList">
+    <ng-container *ngIf="faqsList && faqsList.length > 0">
       <div class="title">
       <p>{{ 'FAQ.TITLE' | translate }}</p>
     </div>
@@ -8,7 +8,7 @@
       <p>{{ 'FAQ.DESCRIPTION' | translate }}</p>
     </div>
 
-    <ng-container *ngFor="let faq of faqsList; let i = index">
+    <ng-container *ngFor="let faq of paginatedFaqsList; let i = index">
       <div class="mt-4">
         <p-panel 
           [header]="selectedLang == 'ar' ? faq.arTitle : faq.enTitle" 
@@ -18,8 +18,42 @@
         </p-panel>
       </div>
     </ng-container>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-container mt-4" *ngIf="totalPages > 1">
+      <div class="pagination-controls">
+        <button 
+          class="pagination-btn prev-btn" 
+          [disabled]="currentPage === 1" 
+          (click)="previousPage()">
+          <i class="pi pi-chevron-left"></i>
+        </button>
+        
+        <div class="page-numbers">
+          <button 
+            *ngFor="let page of getPageNumbers()" 
+            class="page-btn" 
+            [class.active]="page === currentPage"
+            (click)="goToPage(page)">
+            {{ page }}
+          </button>
+        </div>
+        
+        <button 
+          class="pagination-btn next-btn" 
+          [disabled]="currentPage === totalPages" 
+          (click)="nextPage()">
+          <i class="pi pi-chevron-right"></i>
+        </button>
+      </div>
+      
+      <!-- <div class="pagination-info mt-2">
+        <p>{{ 'PAGINATION.SHOWING' | translate }} {{ (currentPage - 1) * itemsPerPage + 1 }} - {{ Math.min(currentPage * itemsPerPage, faqsList.length) }} {{ 'PAGINATION.OF' | translate }} {{ faqsList.length }} {{ 'PAGINATION.ITEMS' | translate }}</p>
+      </div> -->
+    </div>
     </ng-container>
-    <div *ngIf="!faqsList">
+    
+    <div *ngIf="!faqsList || faqsList.length === 0">
         <div class="no-data text-center">
           <h1>{{'no_data_found'|translate}}</h1>
         </div>
