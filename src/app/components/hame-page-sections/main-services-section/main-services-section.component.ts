@@ -3,13 +3,13 @@ import { ApiService } from '../../../services/api.service';
 import { Router, RouterModule } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
 import { environment } from '../../../../environments/environment';
-import { NgIf, NgStyle } from '@angular/common';
+import { CommonModule, NgIf, NgStyle } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-main-services-section',
   standalone: true,
-  imports: [NgIf, NgStyle, RouterModule, TranslatePipe],
+  imports: [NgIf, NgStyle, RouterModule, TranslatePipe,CommonModule],
   templateUrl: './main-services-section.component.html',
   styleUrl: './main-services-section.component.scss'
 })

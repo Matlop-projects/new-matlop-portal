@@ -41,55 +41,86 @@
       gap: 1rem;
 
       .card {
-        position: relative;
-        overflow: hidden;
-        border-radius: 16px;
-        cursor: pointer;
-        width: 282px;
-        height: 203px;
-        background: #FFFFFF;
-        border: 2px solid #E5E5E5;
+          width: 282px;
+          height: 203px;
+          background: #FFFFFF;
+          border-radius: 16px;
+          position: relative;
+          overflow: hidden;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          border: 2px solid #E5E5E5;
+          display: flex;
+          flex-direction: column;
+          padding: 16px;
 
-        .card-content {
-    position: absolute;
-    top: 85px; /* Position title below the centered image */
-    right: 16px;
-    left: 16px;
-    bottom: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    z-index: 2;
+          .card-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            gap: 12px;
 
-    .title {
-      font-size: 16px;
-      font-weight: 600;
-      color: #333;
-      text-align: center; /* Center the title text */
-      margin: 0;
-    }
+            .image-row {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 65px;
 
-    .action-section {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 8px;
-      margin-top: auto;
+              .card-image-corner {
+                width: 64px;
+                height: 65px;
+                border-radius: 0;
+                opacity: 1;
+              }
+            }
 
-      .arrow-icon {
-        width: 35px;
-        height: 35px;
-        flex-shrink: 0;
-      }
+            .title-row {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex: 1;
 
-      .action-text {
-        font-size: 14px;
-        color: #333;
-        white-space: nowrap;
-      }
-    }
-  }
-      }
+              .title {
+                font-size: 16px;
+                font-weight: 600;
+                color: #333;
+                text-align: center;
+                margin: 0;
+              }
+            }
+
+            .action-row {
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              gap: 8px;
+              margin-top: auto;
+
+              &.rtl {
+                justify-content: flex-start;
+                direction: ltr; // Keep LTR for proper flex ordering
+              }
+
+              .action-section {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                .action-text {
+                  font-size: 14px;
+                  color: #333;
+                  white-space: nowrap;
+                }
+
+                .arrow-icon {
+                  width: 35px;
+                  height: 35px;
+                  flex-shrink: 0;
+                }
+              }
+            }
+          }
+        }
 
       .center-wrapper {
         display: flex;
