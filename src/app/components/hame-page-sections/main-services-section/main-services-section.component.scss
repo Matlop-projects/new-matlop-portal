@@ -42,11 +42,14 @@
         .card {
           position: relative;
           overflow: hidden;
-          border-radius: 32px;
+          border-radius: 24px;
           cursor: pointer;
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
+          width: 384px;
+          height: 261px;
+          background-color: #F0F4F5;
   
           .overlay {
             position: absolute;
@@ -124,7 +127,7 @@
           gap: 1rem;
   
           .center {
-            height: 192px;
+            height: 261px;
           }
         }
       }
