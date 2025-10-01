@@ -42,7 +42,7 @@ export class FooterComponent {
           },
           {
             icon: "snapchat.svg",
-            routing: res.data.snapchatLink || "",
+            routing: res.data.snapChatLink || "",
           },
         ];
       }

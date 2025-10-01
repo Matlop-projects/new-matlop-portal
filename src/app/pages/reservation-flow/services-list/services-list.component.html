@@ -1,24 +1,29 @@
 <app-background-image-with-text [options]="bkg_text_options"></app-background-image-with-text>
 
 <div class="all-services-container container my-5">
-    <div class="row g-4" *ngIf="services?.length">
-        <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let service of services">
-            <div class="card service-card" [ngStyle]="{ 'background-image': 'url(' + service.image + ')' }">
-                <div class="overlay"></div>
+  <div class="row g-4" *ngIf="services?.length">
+    <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let service of services">
+      <div class="card service-card">
+        <div class="overlay"></div>
 
-                <div class="card-content">
-                    <div class="title">
-                        {{ selectedLang === 'ar' ? service.nameAr : service.nameEn }}
-                    </div>
+        <div class="card-content">
+          <div class="title">
+            {{ selectedLang === 'ar' ? service.nameAr : service.nameEn }}
+          </div>
 
-                    <div class="desc"
-                        [innerHTML]="selectedLang === 'ar' ? service.descriptionAr : service.descriptionEn"></div>
+          <div class="desc"
+            [innerHTML]="selectedLang === 'ar' ? service.descriptionAr : service.descriptionEn">
+          </div>
 
-                    <button class="action-btn" (click)="goContractList(service.serviceId)">
-                        {{'SERVICE_LIST.ORDER_NOW' | translate}}
-                    </button>
-                </div>
-            </div>
+          <!-- أيكون الصورة -->
+          <img class="card-image-corner" [src]="service.image" alt="service icon" />
+
+          <!-- زرار تحت يمين -->
+          <button class="action-btn" (click)="goContractList(service.serviceId)">
+            {{ 'SERVICE_LIST.ORDER_NOW' | translate }}
+          </button>
         </div>
+      </div>
     </div>
+  </div>
 </div>

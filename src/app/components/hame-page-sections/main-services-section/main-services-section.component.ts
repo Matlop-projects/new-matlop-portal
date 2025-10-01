@@ -47,7 +47,7 @@ export class MainServicesSectionComponent {
         }));
 
         // Keep only the first 4
-        this.services = fullList.slice(0, 4);
+        this.services = fullList.slice(0, 8);
       }
     });
   }

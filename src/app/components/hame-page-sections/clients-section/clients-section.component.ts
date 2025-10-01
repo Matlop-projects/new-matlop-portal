@@ -68,11 +68,7 @@ export class ClientsSectionComponent implements OnInit {
   private getClientImage(client: any): string {
     const imagePath = this.selectedLang === 'ar' ? client.imageAr : client.imageEn;
     if (imagePath) {
-      // The API returns paths like "/Images/OurClients/filename.png"
-      // We need to create "https://backend.matlop.com/Images/OurClients/filename.png"
-      // Remove leading slash and combine with base URL
-      const cleanPath = imagePath.startsWith('/') ? imagePath.substring(1) : imagePath;
-      return `${this.imageUrl}/${cleanPath}`;
+      return `${this.imageUrl}${imagePath}`;
     }
     return 'assets/img/placeholder-logo.svg';
   }

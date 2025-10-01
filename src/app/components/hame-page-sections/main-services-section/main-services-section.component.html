@@ -1,89 +1,288 @@
 <div class="main-services-container container">
-    <div class="content">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="main-title">
-                    <p>{{ 'SERVICES.TITLE' | translate }}</p>
-                </div>
-                <div class="main-desc">
-                    <div class="title">
-                        <p>{{ 'SERVICES.SUBTITLE' | translate }}</p>
-                    </div>
-                    <div class="desc">
-                        {{ 'SERVICES.DESCRIPTION' | translate }}
-                    </div>
-                </div>
-            </div>
+  <div class="content">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="main-title">
+          <p>{{ 'SERVICES.TITLE' | translate }}</p>
         </div>
-
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="routing">
-                    <a routerLink="/services-list">
-                        <p>{{ 'SERVICES.VIEW_ALL' | translate }}</p>
-                        <img width="35" src="assets/images/icons-svg/arrow-black.svg" alt="" />
-                    </a>
-                </div>
-            </div>
+        <div class="main-desc">
+          <div class="title">
+            <p>{{ 'SERVICES.SUBTITLE' | translate }}</p>
+          </div>
+          <div class="desc">
+            {{ 'SERVICES.DESCRIPTION' | translate }}
+          </div>
         </div>
-
-        <div class="grid-section mt-4" *ngIf="services?.length >= 4">
-            <!-- Card 1 -->
-            <div class="card left" 
-                (click)="goContractList(services[0].serviceId)">
-                <div class="overlay"></div>
-                <div class="card-content">
-                    <div class="title">
-                        {{ selectedLang === 'ar' ? services[0].nameAr : services[0].nameEn }}
-                    </div>
-                    <button class="action-btn">
-                        {{ 'SERVICES.ADD_REQUEST' | translate }}
-                    </button>
-                </div>
-            </div>
-
-            <!-- Center Cards -->
-            <div class="center-wrapper">
-                <div class="card center top" 
-                    (click)="goContractList(services[1].serviceId)">
-                    <div class="overlay"></div>
-                    <div class="card-content">
-                        <div class="title">
-                            {{ selectedLang === 'ar' ? services[1].nameAr : services[1].nameEn }}
-                        </div>
-                        <button class="action-btn">
-                            {{ 'SERVICES.ADD_REQUEST' | translate }}
-                        </button>
-                    </div>
-                </div>
-
-                <div class="card center bottom" 
-                    (click)="goContractList(services[2].serviceId)">
-                    <div class="overlay"></div>
-                    <div class="card-content">
-                        <div class="title">
-                            {{ selectedLang === 'ar' ? services[2].nameAr : services[2].nameEn }}
-                        </div>
-                        <button class="action-btn">
-                            {{ 'SERVICES.ADD_REQUEST' | translate }}
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="card right" 
-                (click)="goContractList(services[3].serviceId)">
-                <div class="overlay"></div>
-                <div class="card-content">
-                    <div class="title">
-                        {{ selectedLang === 'ar' ? services[3].nameAr : services[3].nameEn }}
-                    </div>
-                    <button class="action-btn">
-                        {{ 'SERVICES.ADD_REQUEST' | translate }}
-                    </button>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="routing">
+          <a routerLink="/services-list">
+            <p>{{ 'SERVICES.VIEW_ALL' | translate }}</p>
+            <img width="35" src="assets/images/icons-svg/arrow-black.svg" alt="" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-section mt-4" *ngIf="services?.length >= 8">
+      <!-- Card 1 -->
+      <div class="card" (click)="goContractList(services[0].serviceId)">
+        <div class="overlay"></div>
+        <div class="card-content">
+          <img class="card-image-corner" [src]="services[0].image" alt="">
+          <div class="title">
+            {{ selectedLang === 'ar' ? services[0].nameAr : services[0].nameEn }}
+          </div>
+          <div class="action-section">
+            <svg class="arrow-icon" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="17.5" cy="17.5" r="17.5" fill="url(#gradient)" />
+              <path d="M12 17.5L23 17.5M23 17.5L18 12.5M23 17.5L18 22.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0.01%" stop-color="#BFFD2B"/>
+                  <stop offset="7.01%" stop-color="#B9FC30"/>
+                  <stop offset="16%" stop-color="#AAF83D"/>
+                  <stop offset="26%" stop-color="#90F253"/>
+                  <stop offset="37%" stop-color="#6BEA72"/>
+                  <stop offset="43%" stop-color="#62E77A"/>
+                  <stop offset="53%" stop-color="#4ADE91"/>
+                  <stop offset="65%" stop-color="#24D0B5"/>
+                  <stop offset="70%" stop-color="#13CAC5"/>
+                  <stop offset="100%" stop-color="#05BCE8"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card" (click)="goContractList(services[1].serviceId)">
+        <div class="overlay"></div>
+        <div class="card-content">
+          <img class="card-image-corner" [src]="services[1].image" alt="">
+          <div class="title">
+            {{ selectedLang === 'ar' ? services[1].nameAr : services[1].nameEn }}
+          </div>
+          <div class="action-section">
+            <svg class="arrow-icon" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="17.5" cy="17.5" r="17.5" fill="url(#gradient2)" />
+              <path d="M12 17.5L23 17.5M23 17.5L18 12.5M23 17.5L18 22.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0.01%" stop-color="#BFFD2B"/>
+                  <stop offset="7.01%" stop-color="#B9FC30"/>
+                  <stop offset="16%" stop-color="#AAF83D"/>
+                  <stop offset="26%" stop-color="#90F253"/>
+                  <stop offset="37%" stop-color="#6BEA72"/>
+                  <stop offset="43%" stop-color="#62E77A"/>
+                  <stop offset="53%" stop-color="#4ADE91"/>
+                  <stop offset="65%" stop-color="#24D0B5"/>
+                  <stop offset="70%" stop-color="#13CAC5"/>
+                  <stop offset="100%" stop-color="#05BCE8"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card" (click)="goContractList(services[2].serviceId)">
+        <div class="overlay"></div>
+        <div class="card-content">
+          <img class="card-image-corner" [src]="services[2].image" alt="">
+          <div class="title">
+            {{ selectedLang === 'ar' ? services[2].nameAr : services[2].nameEn }}
+          </div>
+          <div class="action-section">
+            <svg class="arrow-icon" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="17.5" cy="17.5" r="17.5" fill="url(#gradient3)" />
+              <path d="M12 17.5L23 17.5M23 17.5L18 12.5M23 17.5L18 22.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0.01%" stop-color="#BFFD2B"/>
+                  <stop offset="7.01%" stop-color="#B9FC30"/>
+                  <stop offset="16%" stop-color="#AAF83D"/>
+                  <stop offset="26%" stop-color="#90F253"/>
+                  <stop offset="37%" stop-color="#6BEA72"/>
+                  <stop offset="43%" stop-color="#62E77A"/>
+                  <stop offset="53%" stop-color="#4ADE91"/>
+                  <stop offset="65%" stop-color="#24D0B5"/>
+                  <stop offset="70%" stop-color="#13CAC5"/>
+                  <stop offset="100%" stop-color="#05BCE8"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card" (click)="goContractList(services[3].serviceId)">
+        <div class="overlay"></div>
+        <div class="card-content">
+          <img class="card-image-corner" [src]="services[3].image" alt="">
+          <div class="title">
+            {{ selectedLang === 'ar' ? services[3].nameAr : services[3].nameEn }}
+          </div>
+          <div class="action-section">
+            <svg class="arrow-icon" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="17.5" cy="17.5" r="17.5" fill="url(#gradient4)" />
+              <path d="M12 17.5L23 17.5M23 17.5L18 12.5M23 17.5L18 22.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="gradient4" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0.01%" stop-color="#BFFD2B"/>
+                  <stop offset="7.01%" stop-color="#B9FC30"/>
+                  <stop offset="16%" stop-color="#AAF83D"/>
+                  <stop offset="26%" stop-color="#90F253"/>
+                  <stop offset="37%" stop-color="#6BEA72"/>
+                  <stop offset="43%" stop-color="#62E77A"/>
+                  <stop offset="53%" stop-color="#4ADE91"/>
+                  <stop offset="65%" stop-color="#24D0B5"/>
+                  <stop offset="70%" stop-color="#13CAC5"/>
+                  <stop offset="100%" stop-color="#05BCE8"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card" (click)="goContractList(services[4].serviceId)">
+        <div class="overlay"></div>
+        <div class="card-content">
+          <img class="card-image-corner" [src]="services[4].image" alt="">
+          <div class="title">
+            {{ selectedLang === 'ar' ? services[4].nameAr : services[4].nameEn }}
+          </div>
+          <div class="action-section">
+            <svg class="arrow-icon" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="17.5" cy="17.5" r="17.5" fill="url(#gradient5)" />
+              <path d="M12 17.5L23 17.5M23 17.5L18 12.5M23 17.5L18 22.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="gradient5" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0.01%" stop-color="#BFFD2B"/>
+                  <stop offset="7.01%" stop-color="#B9FC30"/>
+                  <stop offset="16%" stop-color="#AAF83D"/>
+                  <stop offset="26%" stop-color="#90F253"/>
+                  <stop offset="37%" stop-color="#6BEA72"/>
+                  <stop offset="43%" stop-color="#62E77A"/>
+                  <stop offset="53%" stop-color="#4ADE91"/>
+                  <stop offset="65%" stop-color="#24D0B5"/>
+                  <stop offset="70%" stop-color="#13CAC5"/>
+                  <stop offset="100%" stop-color="#05BCE8"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="card" (click)="goContractList(services[5].serviceId)">
+        <div class="overlay"></div>
+        <div class="card-content">
+          <img class="card-image-corner" [src]="services[5].image" alt="">
+          <div class="title">
+            {{ selectedLang === 'ar' ? services[5].nameAr : services[5].nameEn }}
+          </div>
+          <div class="action-section">
+            <svg class="arrow-icon" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="17.5" cy="17.5" r="17.5" fill="url(#gradient6)" />
+              <path d="M12 17.5L23 17.5M23 17.5L18 12.5M23 17.5L18 22.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="gradient6" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0.01%" stop-color="#BFFD2B"/>
+                  <stop offset="7.01%" stop-color="#B9FC30"/>
+                  <stop offset="16%" stop-color="#AAF83D"/>
+                  <stop offset="26%" stop-color="#90F253"/>
+                  <stop offset="37%" stop-color="#6BEA72"/>
+                  <stop offset="43%" stop-color="#62E77A"/>
+                  <stop offset="53%" stop-color="#4ADE91"/>
+                  <stop offset="65%" stop-color="#24D0B5"/>
+                  <stop offset="70%" stop-color="#13CAC5"/>
+                  <stop offset="100%" stop-color="#05BCE8"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="card" (click)="goContractList(services[6].serviceId)">
+        <div class="overlay"></div>
+        <img class="card-image-corner" [src]="services[6].image" alt="">
+        <div class="card-content">
+          <div class="title">
+            {{ selectedLang === 'ar' ? services[6].nameAr : services[6].nameEn }}
+          </div>
+          <div class="action-section">
+            <svg class="arrow-icon" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="17.5" cy="17.5" r="17.5" fill="url(#gradient7)" />
+              <path d="M12 17.5L23 17.5M23 17.5L18 12.5M23 17.5L18 22.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="gradient7" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0.01%" stop-color="#BFFD2B"/>
+                  <stop offset="7.01%" stop-color="#B9FC30"/>
+                  <stop offset="16%" stop-color="#AAF83D"/>
+                  <stop offset="26%" stop-color="#90F253"/>
+                  <stop offset="37%" stop-color="#6BEA72"/>
+                  <stop offset="43%" stop-color="#62E77A"/>
+                  <stop offset="53%" stop-color="#4ADE91"/>
+                  <stop offset="65%" stop-color="#24D0B5"/>
+                  <stop offset="70%" stop-color="#13CAC5"/>
+                  <stop offset="100%" stop-color="#05BCE8"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="card" (click)="goContractList(services[7].serviceId)">
+        <div class="overlay"></div>
+        <img class="card-image-corner" [src]="services[7].image" alt="">
+        <div class="card-content">
+          <div class="title">
+            {{ selectedLang === 'ar' ? services[7].nameAr : services[7].nameEn }}
+          </div>
+          <div class="action-section">
+            <svg class="arrow-icon" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="17.5" cy="17.5" r="17.5" fill="url(#gradient8)" />
+              <path d="M12 17.5L23 17.5M23 17.5L18 12.5M23 17.5L18 22.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="gradient8" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0.01%" stop-color="#BFFD2B"/>
+                  <stop offset="7.01%" stop-color="#B9FC30"/>
+                  <stop offset="16%" stop-color="#AAF83D"/>
+                  <stop offset="26%" stop-color="#90F253"/>
+                  <stop offset="37%" stop-color="#6BEA72"/>
+                  <stop offset="43%" stop-color="#62E77A"/>
+                  <stop offset="53%" stop-color="#4ADE91"/>
+                  <stop offset="65%" stop-color="#24D0B5"/>
+                  <stop offset="70%" stop-color="#13CAC5"/>
+                  <stop offset="100%" stop-color="#05BCE8"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
