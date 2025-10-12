@@ -95,6 +95,19 @@
     background: linear-gradient(to right, #BFFD2B, #40AEC2);
     padding: 10px 0px;
 
+    .contact-phone {
+        .phone-number {
+            font-size: 14px;
+            font-weight: bold;
+            color: #0597B6;
+            margin: 0;
+            padding: 5px 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+            text-align: center;
+        }
+    }
+
     .social-media {
         display: flex;
         align-items: center;
