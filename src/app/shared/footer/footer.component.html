@@ -23,12 +23,12 @@
             <p>{{ 'FOOTER.SERVICES_TITLE' | translate }}</p>
           </div>
           <div class="services">
-            <span class="block">{{ 'FOOTER.SERVICES.PLUMBING' | translate }}</span>
-            <span class="block">{{ 'FOOTER.SERVICES.AC' | translate }}</span>
-            <span class="block">{{ 'FOOTER.SERVICES.PAINTING' | translate }}</span>
-            <span class="block">{{ 'FOOTER.SERVICES.ELECTRICITY' | translate }}</span>
-            <span class="block">{{ 'FOOTER.SERVICES.CLEANING_FEMALE' | translate }}</span>
-            <span class="block">{{ 'FOOTER.SERVICES.CLEANING_MALE' | translate }}</span>
+            <a 
+              *ngFor="let service of services" 
+              [routerLink]="['/contract-list', service.serviceId]" 
+              class="service-link">
+              {{ selectedLang === 'ar' ? service.nameAr : service.nameEn }}
+            </a>
           </div>
         </div>
       </div>

@@ -9,15 +9,42 @@
             flex-wrap: wrap;
             gap: 40px;
             padding: 0 20px 38px;
-            ;
+            align-items: flex-start;
 
             .section-one {
                 width: 38rem;
+                flex-shrink: 0;
 
                 p {
                     font-size: 20px;
                     color: white;
                     margin-top: 100px;
+                }
+            }
+
+            // إضافة استعلامات الوسائط للشاشات الصغيرة
+            @media (max-width: 768px) {
+                flex-direction: column;
+                gap: 20px;
+
+                .section-one {
+                    width: 100%;
+                    
+                    p {
+                        margin-top: 20px;
+                        font-size: 18px;
+                    }
+                }
+
+                .section-two,
+                .section-three {
+                    .header {
+                        margin-top: 20px;
+                    }
+
+                    .services {
+                        max-width: 100%;
+                    }
                 }
             }
 
@@ -27,6 +54,8 @@
                 flex-direction: column;
                 gap: 10px;
                 color: white;
+                flex: 1;
+                min-width: 200px;
 
                 .header {
                     margin-top: 50px;
@@ -34,6 +63,26 @@
                     p {
                         font-size: 20px;
                         font-weight: 900;
+                    }
+                }
+
+                .services {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 8px 15px;
+                    max-width: 300px;
+
+                    a {
+                        display: block;
+                        padding: 5px 0;
+                        text-decoration: none;
+                        color: white;
+                        transition: color 0.3s ease;
+                        font-size: 14px;
+
+                        &:hover {
+                            color: #BFFD2B;
+                        }
                     }
                 }
             }

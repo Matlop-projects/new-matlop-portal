@@ -69,6 +69,7 @@
   "NAVBAR": {
     "HOME": "Home",
     "ABOUT_US": "About Us",
+    "CONTACT_US": "Contact Us",
     "SERVICES": "Our Services",
     "ORDERS": "Orders",
     "SIGNUP": "Create Account",
@@ -76,7 +77,8 @@
     "ENGLISH": "English",
     "ARABIC": "Arabic",
     "LOGOUT": "Logout",
-    "NOTIFICATIONS": "Notifications"
+    "NOTIFICATIONS": "Notifications",
+    "PROFILE": "Profile"
   },
   "SLIDER": {
     "TITLE": "Matloob",
@@ -116,7 +118,7 @@
   "SERVICES": {
     "TITLE": "Our Services",
     "SUBTITLE": "Trusted services with the quality you deserve",
-    "DESCRIPTION": "Whatever your maintenance or service needs, our team is ready to serve you with top-level professionalism. Just make a request and we’ll take care of the rest!",
+    "DESCRIPTION": "Whatever your maintenance or service needs, our team is ready to serve you with top-level professionalism. Just make a request and we'll take care of the rest!",
     "VIEW_ALL": "View All",
     "ADD_REQUEST": "Add Request"
   },

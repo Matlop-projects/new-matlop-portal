@@ -69,6 +69,7 @@
   "NAVBAR": {
     "HOME": "الرئيسية",
     "ABOUT_US": "من نحن",
+    "CONTACT_US": "تواصل معنا",
     "SERVICES": "خدماتنا",
     "ORDERS": "طلباتك",
     "SIGNUP": "إنشاء حساب جديد",
@@ -76,7 +77,8 @@
     "ENGLISH": "الإنجليزية",
     "ARABIC": "العربية",
     "LOGOUT": "تسجيل الخروج",
-    "NOTIFICATIONS": "الإشعارات"
+    "NOTIFICATIONS": "الإشعارات",
+    "PROFILE": "الملف الشخصي"
   },
   "SLIDER": {
     "TITLE": "مطلوب",

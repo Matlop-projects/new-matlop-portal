@@ -1,15 +1,4 @@
 import { Component, inject } from "@angular/core";
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from "@angular/forms";
-import { InputTextModule } from "primeng/inputtext";
-import { TextareaModule } from "primeng/textarea";
-import { ApiService } from "../../services/api.service";
-import { Validations } from "../../validations";
 import { GalleriaModule } from 'primeng/galleria';
 import { BackgroundImageWithTextComponent, IBackGroundImageWithText } from "../../components/background-image-with-text/background-image-with-text.component";
 import { TranslatePipe } from "@ngx-translate/core";
@@ -17,7 +6,7 @@ import { LanguageService } from "../../services/language.service";
 @Component({
   selector: "app-about-us",
   standalone: true,
-  imports: [ReactiveFormsModule, BackgroundImageWithTextComponent, TranslatePipe, InputTextModule, TextareaModule, GalleriaModule, FormsModule, BackgroundImageWithTextComponent],
+  imports: [BackgroundImageWithTextComponent, TranslatePipe, GalleriaModule],
   templateUrl: "./about-us.component.html",
   styleUrl: "./about-us.component.scss",
 })
@@ -61,46 +50,11 @@ export class AboutUsComponent {
       title: 'Title 1'
     },
   ]
-  private apiService = inject(ApiService);
-
-  form = new FormGroup({
-    name: new FormControl("", {
-      validators: [
-        Validators.required
-      ]
-    }),
-    email: new FormControl("", {
-      validators: [
-        Validators.required,
-        Validations.emailValidator()
-      ]
-    }),
-    mobile: new FormControl("", {
-      validators: [
-        Validators.required,
-        Validators.pattern(/^05\d{8}$/),
-        Validators.minLength(10),
-        Validators.maxLength(10)
-      ]
-    }),
-    message: new FormControl("", {
-      validators: [
-        Validators.required
-      ]
-    }),
-  });
-
+  
   ngOnInit(): void {
     this.languageService.translationService.onLangChange.subscribe(() => {
       this.bkg_text_options.header = this.languageService.translate('ABOUT_US_CONTACT.BANNER_HEADER');
       this.bkg_text_options.description = this.languageService.translate('ABOUT_US_CONTACT.BANNER_DESC');
-    });
-  }
-
-  onContactUs() {
-    this.apiService.post("ContactUs/Create", this.form.value).subscribe((res) => {
-      // Reset the form after successful submission
-      this.form.reset();
     });
   }
 }

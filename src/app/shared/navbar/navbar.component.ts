@@ -1,4 +1,4 @@
-import { Component, computed, Inject, inject, OnInit } from "@angular/core";
+import { Component, computed, Inject, inject, OnInit, HostListener } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Router, RouterModule, NavigationEnd } from "@angular/router";
 import { TranslateModule, TranslatePipe } from "@ngx-translate/core";
@@ -46,6 +46,7 @@ export class NavbarComponent implements OnInit {
   // hasPermission: boolean = false;
   profileImg = "assets/img/profile-circle.svg";
   localStorage = localStorage.getItem("token");
+  isDropdownOpen = false;
   langOptions = [
     { name: "English", code: "en", icon: "assets/images/icons/en-lang.png" },
     { name: "العربية", code: "ar", icon: "assets/images/icons/ar-lang.png" },
@@ -167,5 +168,56 @@ export class NavbarComponent implements OnInit {
       this.router.navigateByUrl("/home");
       window.location.reload();
     });
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+    
+    // Ensure dropdown positioning is correct after opening
+    if (this.isDropdownOpen) {
+      setTimeout(() => {
+        this.adjustDropdownPosition();
+      }, 10);
+    }
+  }
+
+  closeDropdown() {
+    this.isDropdownOpen = false;
+  }
+
+  navigateToProfile() {
+    this.router.navigate(['/profile']);
+    this.closeDropdown();
+  }
+
+  private adjustDropdownPosition() {
+    const dropdown = document.querySelector('.profile-dropdown-menu') as HTMLElement;
+    if (dropdown) {
+      const rect = dropdown.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      
+      // Check if dropdown goes beyond right edge
+      if (rect.right > viewportWidth) {
+        dropdown.style.right = '0px';
+        dropdown.style.left = 'auto';
+        dropdown.style.transform = `translateX(${rect.right - viewportWidth + 10}px)`;
+      }
+      
+      // For RTL layout, check left edge
+      if (document.documentElement.dir === 'rtl' && rect.left < 0) {
+        dropdown.style.left = '0px';
+        dropdown.style.right = 'auto';
+        dropdown.style.transform = `translateX(${Math.abs(rect.left) + 10}px)`;
+      }
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event) {
+    const target = event.target as HTMLElement;
+    const dropdown = target.closest('.profile-dropdown-container');
+    if (!dropdown && this.isDropdownOpen) {
+      this.closeDropdown();
+    }
   }
 }

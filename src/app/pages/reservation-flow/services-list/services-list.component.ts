@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ApiService } from '../../../services/api.service';
 import { Router } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
@@ -14,7 +14,7 @@ import { BackgroundImageWithTextComponent, IBackGroundImageWithText } from '../.
   templateUrl: './services-list.component.html',
   styleUrl: './services-list.component.scss'
 })
-export class ServicesListComponent {
+export class ServicesListComponent implements OnInit {
   api = inject(ApiService);
   services: any;
   private imageUrl = environment.baseImageUrl;

@@ -1,0 +1,31 @@
+<app-background-image-with-text [options]="bkg_text_options"></app-background-image-with-text>
+
+<div class="container">
+  <div class="mt-1 form-contact-us p-4">
+    <div>
+      <span class="block bold fz-14">{{ 'ABOUT_US_CONTACT.CONTACT_US' | translate }}</span>
+      <p class="bold fz-40">{{ 'ABOUT_US_CONTACT.CONTACT_HEADER' | translate }}</p>
+      <p class="text-gray-light fz-20">
+        {{ 'ABOUT_US_CONTACT.CONTACT_DESC_1' | translate }}
+        {{ 'ABOUT_US_CONTACT.CONTACT_DESC_2' | translate }}
+      </p>
+    </div>
+    <form [formGroup]="form" class="form mt-5">
+      <div class="d-flex justify-contnet-start flex-wrap">
+        <div class="w-50 flex-grow-1">
+          <input class="block w-95 mb-2" type="text" [placeholder]="'ABOUT_US_CONTACT.FORM.NAME' | translate" pInputText [formControlName]="'name'" />
+          <input class="block w-95 mb-2" type="text" [placeholder]="'ABOUT_US_CONTACT.FORM.EMAIL' | translate" pInputText [formControlName]="'email'" />
+          <input class="block w-95 mb-2" type="text" [placeholder]="'ABOUT_US_CONTACT.FORM.MOBILE' | translate" pInputText [formControlName]="'mobile'" />
+        </div>
+        <div class="w-50 text-area flex-grow-1">
+          <textarea rows="5" [placeholder]="'ABOUT_US_CONTACT.FORM.MESSAGE' | translate" pTextarea [formControlName]="'message'"></textarea>
+        </div>
+      </div>
+      <div class="button text-start p-2 mt-3">
+        <button class="btn btn-contact-us" (click)="onContactUs()" [disabled]="!form.valid">
+          {{ 'ABOUT_US_CONTACT.CONTACT_US' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -3,6 +3,19 @@ import { Component, inject } from "@angular/core";
 import { TranslatePipe } from "@ngx-translate/core";
 import { ApiService } from "../../services/api.service";
 import { RouterLink } from "@angular/router";
+import { LanguageService } from "../../services/language.service";
+
+interface Service {
+  serviceId: number;
+  nameEn: string;
+  nameAr: string;
+  descriptionEn: string;
+  descriptionAr: string;
+  image: string;
+  priorityView: string;
+  isActive: boolean;
+  numOfTechnicals: number;
+}
 
 @Component({
   selector: "app-footer",
@@ -13,12 +26,22 @@ import { RouterLink } from "@angular/router";
 })
 export class FooterComponent {
   socailMedia:any[] = [];
+  services: Service[] = [];
+  selectedLang: string = 'ar';
 
   year = new Date().getFullYear();
 
   api = inject(ApiService);
+  languageService = inject(LanguageService);
+  
   ngOnInit(): void {
+    this.selectedLang = this.languageService.translationService.currentLang || 'ar';
     this.getAlllinks();
+    this.getAllServices();
+    
+    this.languageService.translationService.onLangChange.subscribe((lang: any) => {
+      this.selectedLang = lang.lang;
+    });
   }
   getAlllinks() {
     this.api.get("settings/getAll").subscribe((res: any) => {
@@ -45,6 +68,13 @@ export class FooterComponent {
             routing: res.data.snapChatLink || "",
           },
         ];
+      }
+    });
+  }
+  getAllServices() {
+    this.api.get("Service/GetAll").subscribe((res: any) => {
+      if (res.data && Array.isArray(res.data)) {
+        this.services = res.data.filter((service: Service) => service.isActive);
       }
     });
   }

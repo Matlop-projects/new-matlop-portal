@@ -1,0 +1,19 @@
+.form-contact-us{
+    border-radius: 32px;
+    background-color: #FBFBFB;
+    margin-bottom: -90px;
+    position: relative;
+    z-index: 999;
+    
+    .btn-contact-us{
+        background-color: #0EC5D2;
+        color: #fff;
+        border-radius:16px ;
+        padding: 10px 20px;
+    }
+    
+    .text-area{
+        min-width: 300px;
+        max-width: 95%;
+    }
+}

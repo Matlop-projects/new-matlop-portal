@@ -9,6 +9,7 @@ import { ServicesListComponent } from "./pages/reservation-flow/services-list/se
 import { ContractListComponent } from "./pages/reservation-flow/contract-list/contract-list.component";
 import { PackagesListComponent } from "./pages/reservation-flow/packages-list/packages-list.component";
 import { AboutUsComponent } from "./pages/about-us/about-us.component";
+import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
 import { SpecialOrderPageComponent } from "./pages/special-order-page/special-order-page.component";
 import { EmergencyOrderPageComponent } from "./pages/emergency-order-page/emergency-order-page.component";
 import { LoginComponent } from "./pages/login/login.component";
@@ -52,6 +53,7 @@ export const routes: Routes = [
       { path: "home", component: HomePageComponent },
       { path: "orders", component: OrdersListComponent },
       { path: "about-us", component: AboutUsComponent },
+      { path: "contact-us", component: ContactUsComponent },
       {
         path: "order-details/:id",
         component: OrderDetailsComponent,
