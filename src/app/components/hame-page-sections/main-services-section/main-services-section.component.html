@@ -27,40 +27,50 @@
       </div>
     </div>
 
-    <div class="grid-section mt-4" *ngIf="services?.length >= 8">
-      <div class="card" *ngFor="let service of services; let i = index" (click)="goContractList(service.serviceId)">
-        <div class="overlay"></div>
-        <div class="card-content">
-          <!-- Image Row -->
-          <div class="image-row">
-            <img class="card-image-corner" [src]="service.image" [alt]="service.title">
-          </div>
-          
-          <!-- Title Row -->
-          <div class="title-row">
-            <div class="title">
-              {{ selectedLang === 'ar' ? service.nameAr : service.nameEn }}
+    <div class="slider-wrapper mt-4" *ngIf="services?.length">
+      <button class="slider-btn slider-btn-left" (click)="slideLeft()" [class.rtl]="selectedLang === 'ar'">
+        <img src="assets/images/icons-svg/arrow-black.svg" alt="previous" />
+      </button>
+      
+      <div class="slider-container" #sliderContainer>
+        <div class="card" *ngFor="let service of services; let i = index" (click)="goContractList(service.serviceId)">
+          <div class="overlay"></div>
+          <div class="card-content">
+            <!-- Image Row -->
+            <div class="image-row">
+              <img class="card-image-corner" [src]="service.image" [alt]="service.title">
+            </div>
+            
+            <!-- Title Row -->
+            <div class="title-row">
+              <div class="title">
+                {{ selectedLang === 'ar' ? service.nameAr : service.nameEn }}
+              </div>
+            </div>
+            
+            <!-- Action Row -->
+            <div class="action-row" [class.rtl]="selectedLang === 'ar'">
+              <div class="action-section">
+                <!-- For Arabic: Arrow on left, then text -->
+                <ng-container *ngIf="selectedLang === 'ar'">
+                  <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
+                  <img class="arrow-icon" width="35" height="35" src="assets/img/Vector.svg" alt="arrow">
+                </ng-container>
+                
+                <!-- For English: Text on left, then arrow to its right -->
+                <ng-container *ngIf="selectedLang !== 'ar'">
+                  <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
+                  <img class="arrow-icon" width="35" height="35" src="assets/img/Vector.svg" alt="arrow">
+                </ng-container>
+              </div>
             </div>
           </div>
-          
-          <!-- Action Row -->
-           <div class="action-row" [class.rtl]="selectedLang === 'ar'">
-             <div class="action-section">
-               <!-- For Arabic: Arrow on left, then text -->
-               <ng-container *ngIf="selectedLang === 'ar'">
-                 <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
-                 <img class="arrow-icon" width="35" height="35" src="assets/img/Vector.svg" alt="arrow">
-               </ng-container>
-               
-               <!-- For English: Text on left, then arrow to its right -->
-               <ng-container *ngIf="selectedLang !== 'ar'">
-                 <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
-                 <img class="arrow-icon" width="35" height="35" src="assets/img/Vector.svg" alt="arrow">
-               </ng-container>
-             </div>
-           </div>
         </div>
       </div>
+
+      <button class="slider-btn slider-btn-right" (click)="slideRight()" [class.rtl]="selectedLang === 'ar'">
+        <img src="assets/images/icons-svg/arrow-black.svg" alt="next" />
+      </button>
     </div>
   </div>
 </div>

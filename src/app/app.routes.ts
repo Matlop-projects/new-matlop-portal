@@ -23,6 +23,7 @@ import { FaqsSectionComponent } from "./components/hame-page-sections/faqs-secti
 import { ForgetPasswordComponentimplements } from "./pages/forget-password/forget-password.component";
 import { SpecialOrderListComponent } from "./pages/special-order-page/special-order-list/special-order-list.component";
 import { EmergencyOrderListComponent } from "./pages/emergency-order-page/emergency-order-list/emergency-order-list.component";
+import { AddressesComponent } from "./shared/addresses/addresses.component";
 
 export const routes: Routes = [
   {
@@ -98,6 +99,7 @@ export const routes: Routes = [
       { path: "privacy-policy", component: PrivacyPolicyComponent },
       { path: "terms-conditions", component: TermsConditionsComponent },
       { path: "profile", component: ProfileComponent },
+      { path: "addresses", component: AddressesComponent, canActivate: [authGuard] },
       { path: "thank-you", component: ThankYouComponent },
       { path: "faqs-section", component: FaqsSectionComponent },
 

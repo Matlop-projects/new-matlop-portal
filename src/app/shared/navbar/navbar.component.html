@@ -58,6 +58,12 @@
                   <span>{{ 'NAVBAR.PROFILE' | translate }}</span>
                 </div>
                 
+                <!-- Addresses Option -->
+                <div class="dropdown-item" (click)="navigateToAddresses()">
+                  <i class="pi pi-map-marker"></i>
+                  <span>{{ 'NAVBAR.MY_ADDRESSES' | translate }}</span>
+                </div>
+                
                 <!-- Language Toggle -->
                 <div class="dropdown-item" (click)="toggleLanguage()">
                   <i class="pi pi-globe"></i>

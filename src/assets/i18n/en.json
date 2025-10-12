@@ -37,7 +37,7 @@
     "passwordPattern": "Password must be at least 6 characters, with letters and numbers"
   },
   "login": {
-    "welcome": "Welcome back to Matloob",
+    "welcome": "Welcome back to Matlop",
     "welcome_message": "We’re glad to have you back! Enjoy a simple and secure experience to access everything you need quickly.",
     "userName": "Username or Email",
     "userName_required": "Username is required",
@@ -46,6 +46,7 @@
     "remember_me": "Remember me",
     "forget_password": "Forgot your password?",
     "submit": "Login",
+    "guest_login": "Login as Guest",
     "signup": "Sign Up"
   },
   "signup": {
@@ -78,10 +79,11 @@
     "ARABIC": "Arabic",
     "LOGOUT": "Logout",
     "NOTIFICATIONS": "Notifications",
-    "PROFILE": "Profile"
+    "PROFILE": "Profile",
+    "MY_ADDRESSES": "My Addresses"
   },
   "SLIDER": {
-    "TITLE": "Matloob",
+    "TITLE": "Matlop",
     "HEADING": "All Maintenance Services at Your Fingertips",
     "DESCRIPTION": "From plumbing and electricity to air conditioning and carpentry, we provide comprehensive solutions with high professionalism and prompt execution tailored to your needs.",
     "ORDER_NOW": "Request Service Now",
@@ -378,36 +380,36 @@
   },
   "TERMS": {
     "TITLE": "Terms and Conditions",
-    "INTRO_1": "These terms and conditions govern the legal relationship between you and this website operated by the Matloob platform. Please read them carefully before using our website.",
+    "INTRO_1": "These terms and conditions govern the legal relationship between you and this website operated by the Matlop platform. Please read them carefully before using our website.",
     "INTRO_2": "Accessing and using our services constitutes your full acceptance of these terms. These terms apply to all visitors, users, and any entity accessing the site or requesting services.",
-    "INTRO_3": "By accessing Matloob and requesting services, you acknowledge and agree to be fully bound by these terms. If you disagree with any part of them, you are not permitted to use our services.",
+    "INTRO_3": "By accessing Matlop and requesting services, you acknowledge and agree to be fully bound by these terms. If you disagree with any part of them, you are not permitted to use our services.",
     "PURCHASES": "Purchases",
-    "PURCHASES_DETAILS": "When purchasing services on Matloob, you may be required to provide certain information, including but not limited to: payment card number, expiration date, billing address, and shipping information. By confirming the purchase, you agree to:",
+    "PURCHASES_DETAILS": "When purchasing services on Matlop, you may be required to provide certain information, including but not limited to: payment card number, expiration date, billing address, and shipping information. By confirming the purchase, you agree to:",
     "PURCHASES_LI_1": "You have the legal right to use the provided payment method.",
     "PURCHASES_LI_2": "All information you provide is accurate, complete, and current.",
     "PURCHASES_LI_3": "You allow us to share this information with trusted third parties solely for processing payments.",
-    "ORDER_CANCELLATION": "Matloob reserves the right to cancel any order at any time due to reasons including but not limited to: service unavailability, errors in order details, or unexpected situations.",
+    "ORDER_CANCELLATION": "Matlop reserves the right to cancel any order at any time due to reasons including but not limited to: service unavailability, errors in order details, or unexpected situations.",
     "PAYMENT_ACCEPTED": "We accept online payments using Visa and Mastercard (credit or debit).",
     "REFUND": "If eligible for a refund, it will be processed to the original payment method.",
     "AVAILABILITY": "Availability, Errors and Inaccuracies",
     "AVAILABILITY_DESC": "While we strive to update our services and offers regularly, errors in pricing, descriptions, or availability may occur. We do not guarantee complete accuracy of the displayed information.",
     "PROMOTIONS": "Contests and Promotions",
-    "PROMOTIONS_DESC": "Matloob may occasionally offer promotions like discounts or contests. These are subject to separate terms. If you participate, you agree to all specific rules and our privacy policy.",
+    "PROMOTIONS_DESC": "Matlop may occasionally offer promotions like discounts or contests. These are subject to separate terms. If you participate, you agree to all specific rules and our privacy policy.",
     "ACCOUNTS": "Accounts",
     "ACCOUNTS_DESC": "When creating an account, you agree to provide accurate and updated information. You're responsible for securing your password and account activity. Sharing your password is prohibited.",
     "INTELLECTUAL_PROPERTY": "Intellectual Property",
-    "INTELLECTUAL_PROPERTY_DESC": "All services, content, features, and functionality are the exclusive property of Matloob or its licensors. They are protected by copyright and trademark laws. You may not use our trademarks for marketing without written consent.",
+    "INTELLECTUAL_PROPERTY_DESC": "All services, content, features, and functionality are the exclusive property of Matlop or its licensors. They are protected by copyright and trademark laws. You may not use our trademarks for marketing without written consent.",
     "EXTERNAL_LINKS": "Third-Party Links",
-    "EXTERNAL_LINKS_DESC": "Matloob is not responsible for the content, policies, or practices of third-party websites. You are advised to review their terms before interacting or sharing your data.",
+    "EXTERNAL_LINKS_DESC": "Matlop is not responsible for the content, policies, or practices of third-party websites. You are advised to review their terms before interacting or sharing your data.",
     "BANNER_HEADER": "Terms and Conditions",
-    "BANNER_DESC": "These terms and conditions explain and govern the relationship between you and this website operated by the Matloob platform"
+    "BANNER_DESC": "These terms and conditions explain and govern the relationship between you and this website operated by the Matlop platform"
   },
   "PRIVACY": {
-    "HEADER": "At Matloob, your privacy is our responsibility",
+    "HEADER": "At Matlop, your privacy is our responsibility",
     "PERSONAL_INFO_TITLE": "Collection of Personal Identifying Information",
-    "PERSONAL_INFO_DESC": "Some visitors to the Matloob platform may choose to interact in ways that require collecting personal information...",
+    "PERSONAL_INFO_DESC": "Some visitors to the Matlop platform may choose to interact in ways that require collecting personal information...",
     "SECURITY_TITLE": "Security",
-    "SECURITY_DESC": "At Matloob, we take your data privacy seriously and use best practices...",
+    "SECURITY_DESC": "At Matlop, we take your data privacy seriously and use best practices...",
     "VISITORS_TITLE": "Site Visitors",
     "VISITORS_DESC": "Like most online service providers, we collect non-personal information sent by browsers...",
     "ADS_TITLE": "Advertisements",
@@ -424,7 +426,7 @@
     "EXPOSE4": "We strive to minimize the number of emails sent.",
     "EXPOSE5": "We may publish your inquiry to help others understand or solve similar issues.",
     "BANNER_HEADER": "Privacy Policy",
-    "BANNER_DESC": "This privacy policy explains how personal information is collected, used, and protected when you use this website operated by the Matloob platform"
+    "BANNER_DESC": "This privacy policy explains how personal information is collected, used, and protected when you use this website operated by the Matlop platform"
   },
   "location": {
     "country_name": "Country name",
@@ -462,5 +464,28 @@
     "OUR_CLIENTS": "Our Clients",
     "NO_CLIENTS": "No clients available at the moment",
     "DESCRIPTION": "We are proud to work with leading companies and organizations that trust us to deliver exceptional services"
+  },
+  "ADDRESSES": {
+    "TITLE": "Address Management",
+    "ADD_NEW": "Add New Address",
+    "EDIT_ADDRESS": "Edit Address",
+    "CREATE_ADDRESS": "Create New Address",
+    "NO_ADDRESSES": "No saved addresses",
+    "NO_ADDRESSES_DESC": "You can add your favorite addresses for easy access",
+    "LOADING": "Loading...",
+    "NAME": "Address Name",
+    "COUNTRY": "Country",
+    "CITY": "City",
+    "DISTRICT": "District",
+    "BLOCK_NUMBER": "Block Number",
+    "LATITUDE": "Latitude",
+    "LONGITUDE": "Longitude",
+    "SAVE": "Save",
+    "CANCEL": "Cancel",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "DELETE_CONFIRM": "Are you sure you want to delete this address?",
+    "REQUIRED_FIELD": "This field is required",
+    "MIN_LENGTH": "Must contain at least 2 characters"
   }
 }

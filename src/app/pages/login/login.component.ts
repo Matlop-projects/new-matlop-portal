@@ -122,6 +122,11 @@ export class LoginComponent {
     this.onSubmit();
   }
 
+  loginAsGuest() {
+    // Navigate directly to home page as guest
+    this.router.navigate(['/home']);
+  }
+
 }
 
 

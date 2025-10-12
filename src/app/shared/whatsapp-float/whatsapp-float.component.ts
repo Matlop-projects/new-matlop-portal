@@ -27,13 +27,13 @@ export class WhatsappFloatComponent implements OnInit {
         } else {
           console.log('No whatsappLink found in response');
           // For testing purposes, set a default WhatsApp link
-          this.whatsappLink = 'https://wa.me/920021622';
+          this.whatsappLink = 'https://wa.me/966510021622';
         }
       },
       error: (error) => {
         console.error('Error fetching WhatsApp settings:', error);
         // For testing purposes, set a default WhatsApp link
-        this.whatsappLink = 'https://wa.me/920021622';
+        this.whatsappLink = 'https://wa.me/966510021622';
       }
     });
   }

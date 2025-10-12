@@ -75,14 +75,14 @@ export class SliderSectionComponent implements OnInit, OnDestroy {
   
   getCurrentImage(): string {
     const currentSlider = this.getCurrentSlider();
-    if (!currentSlider) return '/assets/images/backgrounds/test.jpg';
+    // if (!currentSlider) return '/assets/images/backgrounds/test.jpg';
     
     const currentLang = this.translateService.currentLang || 'en';
     const baseUrl = 'https://backend.matlop.com';
     
     return currentLang === 'ar' 
-      ? baseUrl + currentSlider.imageAr 
-      : baseUrl + currentSlider.imageEn;
+      ? baseUrl + currentSlider?.imageAr 
+      : baseUrl + currentSlider?.imageEn;
   }
   
   getCurrentTitle(): string {

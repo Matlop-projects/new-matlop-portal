@@ -15,6 +15,7 @@ import { filter } from "rxjs/operators";
 import { LoginSignalUserDataService } from "../../services/login-signal-user-data.service";
 import { ApiService } from "../../services/api.service";
 import { NotificationComponent } from "../../pages/notification/notification.component";
+import { AddressesComponent } from "../addresses/addresses.component";
 
 interface User {
   username: string;
@@ -29,6 +30,7 @@ interface User {
     TranslateModule,
     NgIf,
     NotificationComponent,
+    AddressesComponent,
     TranslatePipe,
     RouterModule,
     MenubarModule,
@@ -187,6 +189,11 @@ export class NavbarComponent implements OnInit {
 
   navigateToProfile() {
     this.router.navigate(['/profile']);
+    this.closeDropdown();
+  }
+
+  navigateToAddresses() {
+    this.router.navigate(['/addresses']);
     this.closeDropdown();
   }
 

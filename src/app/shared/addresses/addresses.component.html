@@ -1,0 +1,179 @@
+<app-background-image-with-text [options]="bkg_text_options"></app-background-image-with-text>
+
+<div class="addresses-page">
+  <!-- Header -->
+  <div class="page-header">
+    <!-- <h1 class="page-title">{{ 'ADDRESSES.TITLE' | translate }}</h1> -->
+    <button class="add-btn" (click)="openCreateModal()">
+      <i class="pi pi-plus"></i>
+      {{ 'ADDRESSES.ADD_NEW' | translate }}
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p>{{ 'ADDRESSES.LOADING' | translate }}</p>
+  </div>
+
+  <!-- Addresses Grid -->
+  <div *ngIf="!isLoading && addresses.length > 0" class="addresses-grid">
+    <div *ngFor="let address of addresses" class="address-card">
+      <div class="address-info">
+        <h3 class="address-name">{{ address.name }}</h3>
+        <div class="address-details">
+          <p><strong>{{ 'ADDRESSES.COUNTRY' | translate }}:</strong> {{ address.countryName }}</p>
+          <p><strong>{{ 'ADDRESSES.CITY' | translate }}:</strong> {{ address.cityName }}</p>
+          <p><strong>{{ 'ADDRESSES.DISTRICT' | translate }}:</strong> {{ address.districtName }}</p>
+          <p><strong>{{ 'ADDRESSES.BLOCK_NUMBER' | translate }}:</strong> {{ address.blockNo }}</p>
+        </div>
+      </div>
+      <div class="address-actions">
+        <button class="edit-btn" (click)="openEditModal(address)">
+          <i class="pi pi-pencil"></i>
+          {{ 'ADDRESSES.EDIT' | translate }}
+        </button>
+        <button class="delete-btn" (click)="deleteAddress(address.locationId)">
+          <i class="pi pi-trash"></i>
+          {{ 'ADDRESSES.DELETE' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Addresses State -->
+  <div *ngIf="!isLoading && addresses.length === 0" class="no-addresses">
+    <div class="no-addresses-icon">
+      <i class="pi pi-map-marker"></i>
+    </div>
+    <h3>{{ 'ADDRESSES.NO_ADDRESSES' | translate }}</h3>
+    <p>{{ 'ADDRESSES.NO_ADDRESSES_DESC' | translate }}</p>
+    <button class="add-first-btn" (click)="openCreateModal()">
+      {{ 'ADDRESSES.ADD_NEW' | translate }}
+    </button>
+  </div>
+
+  <!-- Modal -->
+  <div *ngIf="showModal" class="modal-overlay" (click)="onOverlayClick($event)">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>{{ isEditMode ? ('ADDRESSES.EDIT_ADDRESS' | translate) : ('ADDRESSES.CREATE_ADDRESS' | translate) }}</h2>
+        <button class="close-btn" (click)="closeModal()">
+          <i class="pi pi-times"></i>
+        </button>
+      </div>
+
+      <form [formGroup]="addressForm" (ngSubmit)="saveAddress()" class="address-form">
+        <div class="form-group">
+          <label for="name">{{ 'ADDRESSES.NAME' | translate }} *</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            class="form-control"
+            [class.error]="addressForm.get('name')?.invalid && addressForm.get('name')?.touched"
+          />
+          <div *ngIf="addressForm.get('name')?.invalid && addressForm.get('name')?.touched" class="error-message">
+            <span *ngIf="addressForm.get('name')?.errors?.['required']">{{ 'ADDRESSES.REQUIRED_FIELD' | translate }}</span>
+            <span *ngIf="addressForm.get('name')?.errors?.['minlength']">{{ 'ADDRESSES.MIN_LENGTH' | translate }}</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <p-floatlabel variant="on">
+            <p-select
+              class="w-100"
+              (onChange)="onCountrySelect($event.value)"
+              [options]="countryList"
+              formControlName="countryId"
+              optionValue="code"
+              optionLabel="name"
+              [class.error]="addressForm.get('countryId')?.invalid && addressForm.get('countryId')?.touched"
+            />
+            <label for="countryId">{{ 'ADDRESSES.COUNTRY' | translate }} *</label>
+          </p-floatlabel>
+          <div *ngIf="addressForm.get('countryId')?.invalid && addressForm.get('countryId')?.touched" class="error-message">
+            <span *ngIf="addressForm.get('countryId')?.errors?.['required']">{{ 'ADDRESSES.REQUIRED_FIELD' | translate }}</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <p-floatlabel variant="on">
+            <p-select
+              class="w-100"
+              (onChange)="onCitySelect($event.value)"
+              [options]="cityList"
+              formControlName="cityId"
+              optionValue="code"
+              optionLabel="name"
+              [class.error]="addressForm.get('cityId')?.invalid && addressForm.get('cityId')?.touched"
+            />
+            <label for="cityId">{{ 'ADDRESSES.CITY' | translate }} *</label>
+          </p-floatlabel>
+          <div *ngIf="addressForm.get('cityId')?.invalid && addressForm.get('cityId')?.touched" class="error-message">
+            <span *ngIf="addressForm.get('cityId')?.errors?.['required']">{{ 'ADDRESSES.REQUIRED_FIELD' | translate }}</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <p-floatlabel variant="on">
+            <p-select
+              class="w-100"
+              [options]="districtList"
+              formControlName="districtId"
+              optionValue="code"
+              optionLabel="name"
+              [class.error]="addressForm.get('districtId')?.invalid && addressForm.get('districtId')?.touched"
+            />
+            <label for="districtId">{{ 'ADDRESSES.DISTRICT' | translate }} *</label>
+          </p-floatlabel>
+          <div *ngIf="addressForm.get('districtId')?.invalid && addressForm.get('districtId')?.touched" class="error-message">
+            <span *ngIf="addressForm.get('districtId')?.errors?.['required']">{{ 'ADDRESSES.REQUIRED_FIELD' | translate }}</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="blockNo">{{ 'ADDRESSES.BLOCK_NUMBER' | translate }} *</label>
+          <input
+            type="text"
+            id="blockNo"
+            formControlName="blockNo"
+            class="form-control"
+            [class.error]="addressForm.get('blockNo')?.invalid && addressForm.get('blockNo')?.touched"
+          />
+          <div *ngIf="addressForm.get('blockNo')?.invalid && addressForm.get('blockNo')?.touched" class="error-message">
+            <span *ngIf="addressForm.get('blockNo')?.errors?.['required']">{{ 'ADDRESSES.REQUIRED_FIELD' | translate }}</span>
+          </div>
+        </div>
+
+        <!-- Map Component Section -->
+        <div class="map-container">
+          <h5 class="map-title">{{ 'ADDRESSES.SELECT_LOCATION_ON_MAP' | translate }}</h5>
+          <div class="map-wrapper">
+            <app-map 
+              [lat]="addressForm.get('latitude')?.value || 0" 
+              [lng]="addressForm.get('longitude')?.value || 0"
+              (location)="onLocationChange($event)">
+            </app-map>
+          </div>
+          <div class="coordinates-display" *ngIf="addressForm.get('latitude')?.value && addressForm.get('longitude')?.value">
+            <small class="text-muted">
+              {{ 'ADDRESSES.COORDINATES' | translate }}: 
+              {{ addressForm.get('latitude')?.value | number:'1.6-6' }}, 
+              {{ addressForm.get('longitude')?.value | number:'1.6-6' }}
+            </small>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="cancel-btn" (click)="closeModal()">
+            {{ 'ADDRESSES.CANCEL' | translate }}
+          </button>
+          <button type="submit" class="save-btn" [disabled]="addressForm.invalid">
+            {{ 'ADDRESSES.SAVE' | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

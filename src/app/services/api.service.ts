@@ -36,9 +36,9 @@ export class ApiService {
     return this.http.post(`${baseUrl}${APIName}`, body).pipe(
       take(1),
       tap((res: any) => {
-        if (res?.message) {
-          this.toaster.successToaster(res.message);
-        }
+        // if (res?.message) {
+        //   this.toaster.successToaster(res.message);
+        // }
       }),
       catchError((error) => {
         // this.toaster.errorToaster(error?.error?.message);
@@ -134,6 +134,47 @@ export class ApiService {
       }),
       catchError((error) => {
         this.toaster.errorToaster(error?.error?.message || 'shared.errors.delete_request')
+        return throwError(() => error);
+      })
+    );
+  }
+
+  // Get addresses by user ID
+  getAddressesByUserId(userId: number): Observable<any> {
+    return this.http.get(`${baseUrl}Location/GetByUserId/${userId}`).pipe(
+      take(1),
+      catchError((error) => {
+        console.error('Error fetching addresses:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
+  createAddress(addressData: any): Observable<any> {
+    return this.http.post(`${baseUrl}Location/Create`, addressData).pipe(
+      take(1),
+      catchError((error) => {
+        console.error('Error creating address:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
+  updateAddress(addressData: any): Observable<any> {
+    return this.http.post(`${baseUrl}Location/Update`, addressData).pipe(
+      take(1),
+      catchError((error) => {
+        console.error('Error updating address:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
+  deleteAddress(locationId: number): Observable<any> {
+    return this.http.delete(`${baseUrl}Location/Delete?requestId=${locationId}`).pipe(
+      take(1),
+      catchError((error) => {
+        console.error('Error deleting address:', error);
         return throwError(() => error);
       })
     );

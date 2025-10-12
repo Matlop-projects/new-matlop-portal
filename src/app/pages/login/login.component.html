@@ -25,7 +25,7 @@
             class="w-100"
             pInputText
             id="userName"
-            placeholder="0555555555"
+            placeholder=""
             formControlName="userName"
           />
           <!-- <small *ngIf="loginForm.get('userName')?.hasError('required') && loginForm.get('userName')?.touched">
@@ -95,6 +95,13 @@
             [disabled]="!loginForm.valid"
           >
             {{ "login.submit" | translate }}
+          </button>
+          <button
+            class="btn btn-guest w-100 mt-2"
+            type="button"
+            (click)="loginAsGuest()"
+          >
+            {{ "login.guest_login" | translate }}
           </button>
           <a class="forget_password signup" routerLink="/auth/signup">{{
             "login.signup" | translate
