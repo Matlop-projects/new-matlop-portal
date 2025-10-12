@@ -46,40 +46,16 @@
           <!-- Action Row -->
            <div class="action-row" [class.rtl]="selectedLang === 'ar'">
              <div class="action-section">
-               <!-- For Arabic: Arrow first, then text -->
+               <!-- For Arabic: Arrow on left, text on right -->
                <ng-container *ngIf="selectedLang === 'ar'">
-                 <svg class="arrow-icon" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                   <circle cx="17.5" cy="17.5" r="17.5" [attr.fill]="'url(#arrowGradient' + i + ')'"/>
-                   <path d="M15 17.5L21 11.5L19.6 10.1L12.2 17.5L19.6 24.9L21 23.5L15 17.5Z" fill="white"/>
-                   <defs>
-                     <linearGradient [attr.id]="'arrowGradient' + i" x1="0%" y1="0%" x2="100%" y2="100%">
-                       <stop offset="0%" style="stop-color:#BFFD2B;stop-opacity:1" />
-                       <stop offset="25%" style="stop-color:#8FE85A;stop-opacity:1" />
-                       <stop offset="50%" style="stop-color:#5FD389;stop-opacity:1" />
-                       <stop offset="75%" style="stop-color:#2FBEB8;stop-opacity:1" />
-                       <stop offset="100%" style="stop-color:#05BCE8;stop-opacity:1" />
-                     </linearGradient>
-                   </defs>
-                 </svg>
+                 <img class="arrow-icon" width="35" height="35" src="assets/img/Vector.svg" alt="arrow">
                  <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
                </ng-container>
                
-               <!-- For English: Text first, then arrow -->
+               <!-- For English: Text on left, arrow on right -->
                <ng-container *ngIf="selectedLang !== 'ar'">
                  <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
-                 <svg class="arrow-icon" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                   <circle cx="17.5" cy="17.5" r="17.5" [attr.fill]="'url(#arrowGradient' + i + ')'"/>
-                   <path d="M20 17.5L14 11.5L15.4 10.1L22.8 17.5L15.4 24.9L14 23.5L20 17.5Z" fill="white"/>
-                   <defs>
-                     <linearGradient [attr.id]="'arrowGradient' + i" x1="0%" y1="0%" x2="100%" y2="100%">
-                       <stop offset="0%" style="stop-color:#BFFD2B;stop-opacity:1" />
-                       <stop offset="25%" style="stop-color:#8FE85A;stop-opacity:1" />
-                       <stop offset="50%" style="stop-color:#5FD389;stop-opacity:1" />
-                       <stop offset="75%" style="stop-color:#2FBEB8;stop-opacity:1" />
-                       <stop offset="100%" style="stop-color:#05BCE8;stop-opacity:1" />
-                     </linearGradient>
-                   </defs>
-                 </svg>
+                 <img class="arrow-icon" width="35" height="35" src="assets/img/Vector.svg" alt="arrow">
                </ng-container>
              </div>
            </div>
