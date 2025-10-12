@@ -96,13 +96,12 @@
 
             .action-row {
               display: flex;
-              justify-content: center;
               align-items: center;
               gap: 8px;
               margin-top: auto;
 
               &.rtl {
-                justify-content: flex-start;
+                justify-content: flex-end;
                 direction: rtl;
               }
 
@@ -128,6 +127,11 @@
                   width: 35px;
                   height: 35px;
                   flex-shrink: 0;
+                }
+                
+                // Rotate arrow to point right for English (when not in RTL mode)
+                .action-row:not(.rtl) .arrow-icon {
+                  transform: rotate(180deg);
                 }
               }
             }

@@ -48,11 +48,11 @@
              <div class="action-section">
                <!-- For Arabic: Arrow on left, then text -->
                <ng-container *ngIf="selectedLang === 'ar'">
-                 <img class="arrow-icon" width="35" height="35" src="assets/img/Vector.svg" alt="arrow">
                  <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
+                 <img class="arrow-icon" width="35" height="35" src="assets/img/Vector.svg" alt="arrow">
                </ng-container>
                
-               <!-- For English: Text on right, then arrow to its right -->
+               <!-- For English: Text on left, then arrow to its right -->
                <ng-container *ngIf="selectedLang !== 'ar'">
                  <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
                  <img class="arrow-icon" width="35" height="35" src="assets/img/Vector.svg" alt="arrow">
