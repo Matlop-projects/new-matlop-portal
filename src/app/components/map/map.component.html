@@ -7,6 +7,17 @@
     </div>
   </div>
   
+  <!-- Get Current Location Button -->
+  <button 
+    class="current-location-btn" 
+    (click)="getCurrentLocation($event)"
+    [disabled]="isGettingLocation"
+    title="الحصول على موقعي الحالي">
+    <i class="location-icon" [class.spinning]="isGettingLocation">📍</i>
+    <span *ngIf="!isGettingLocation">موقعي الحالي</span>
+    <span *ngIf="isGettingLocation">جاري التحديد...</span>
+  </button>
+  
   <!-- Map container -->
   <div #mapContainer style="height: 100%; width: 100%; opacity: 1;" [style.opacity]="isLoading ? 0.3 : 1"></div>
 </div>

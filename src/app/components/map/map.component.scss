@@ -21,6 +21,55 @@
     }
   }
   
+  // Current Location Button Styles
+  .current-location-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    background: #fff;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+    color: #007bff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    
+    &:hover:not(:disabled) {
+      background: #007bff;
+      color: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    }
+    
+    &:disabled {
+      background: #f8f9fa;
+      color: #6c757d;
+      border-color: #dee2e6;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    
+    .location-icon {
+      font-size: 16px;
+      transition: transform 0.3s ease;
+      
+      &.spinning {
+        animation: spin 1s linear infinite;
+      }
+    }
+    
+    span {
+      white-space: nowrap;
+    }
+  }
+  
   // Optimize leaflet map container
   .leaflet-container {
     background: #f8f9fa !important; // Light gray instead of white for better loading appearance

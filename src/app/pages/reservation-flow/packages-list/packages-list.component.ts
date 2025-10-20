@@ -94,10 +94,22 @@ export class PackagesListComponent {
   onPackagesDropdownSearch(data: any) {
     if(data.value.cityId) {
       debugger;
-      this.ApiService.get(`Package/GetPackageByCityId/${data.value.cityId}/${this.contractId}/${this.serviceId}`).subscribe((res: any) => {
+      this.ApiService.get(`Package/GetPackageByCityId/${this.contractId}/${data.value.cityId}/${this.serviceId}`).subscribe((res: any) => {
         console.log(res);
-        this.packageList = res.data;
-        localStorage.setItem('contractDetails', JSON.stringify(this.packageList));
+        // Check if response data exists and is not empty
+        if (res && res.data && res.data.length > 0) {
+          this.packageList = res.data;
+          localStorage.setItem('contractDetails', JSON.stringify(this.packageList));
+        } else {
+          // Clear the list when no data is found
+          this.packageList = [];
+          localStorage.removeItem('contractDetails');
+        }
+      }, (error) => {
+        // Handle API errors by clearing the list
+        console.error('Error fetching packages:', error);
+        this.packageList = [];
+        localStorage.removeItem('contractDetails');
       })
     } else {
       this.getPackagesListBiContractId(this.contractId, this.serviceId);

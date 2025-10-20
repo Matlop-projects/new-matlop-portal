@@ -62,8 +62,8 @@ export class AddressesComponent implements OnInit {
     this.addressForm = this.fb.group({
       countryId: ['', Validators.required],
       cityId: ['', Validators.required],
-      districtId: ['', Validators.required],
-      blockNo: ['', Validators.required],
+      districtId: [null],
+      blockNo: [null],
       latitude: [''],
       longitude: [''],
       name: ['']
@@ -131,7 +131,8 @@ export class AddressesComponent implements OnInit {
     // Reset city and district when country changes
     this.addressForm.patchValue({
       cityId: '',
-      districtId: ''
+      districtId: null,
+      blockNo: null
     });
     this.cityList = [];
     this.districtList = [];
@@ -142,7 +143,8 @@ export class AddressesComponent implements OnInit {
     this.getAllDistrict(payload);
     // Reset district when city changes
     this.addressForm.patchValue({
-      districtId: ''
+      districtId: null,
+      blockNo: null
     });
     this.districtList = [];
   }

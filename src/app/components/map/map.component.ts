@@ -23,6 +23,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges
   // Add loading state
   public isLoading: boolean = true;
   
+  // Add loading state for current location button
+  public isGettingLocation: boolean = false;
+  
   // Generate unique ID for each map instance
   public mapId: string = 'map-' + Math.random().toString(36).substr(2, 9);
 
@@ -288,5 +291,70 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges
     if (this.map) {
       this.map.remove();
     }
+  }
+
+  // Public method to get current location (called by button click)
+  public getCurrentLocation(event?: Event): void {
+    // Prevent event bubbling to avoid closing any parent modals/popups
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    if (!navigator.geolocation) {
+      console.error('Geolocation is not supported by this browser.');
+      return;
+    }
+
+    this.isGettingLocation = true;
+    console.log('Getting current location...');
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.log('Current location found:', position.coords.latitude, position.coords.longitude);
+        
+        // Update coordinates
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
+        
+        // Update map and marker if they exist
+        if (this.map && this.marker) {
+          const newLatLng = L.latLng(this.lat, this.lng);
+          this.map.setView(newLatLng, 15); // Zoom in a bit more for current location
+          this.marker.setLatLng(newLatLng);
+        }
+        
+        // Emit the location change
+        this.location.emit({ lat: this.lat, lng: this.lng });
+        
+        this.isGettingLocation = false;
+      },
+      (error) => {
+        console.error('Error getting current location:', error);
+        this.isGettingLocation = false;
+        
+        // Handle different error types
+        let errorMessage = 'حدث خطأ في الحصول على الموقع';
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage = 'تم رفض الإذن للوصول إلى الموقع';
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorMessage = 'الموقع غير متاح';
+            break;
+          case error.TIMEOUT:
+            errorMessage = 'انتهت مهلة الحصول على الموقع';
+            break;
+        }
+        
+        // You can add a toast notification here if needed
+        console.error(errorMessage);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 60000 // Cache for 1 minute
+      }
+    );
   }
 }
