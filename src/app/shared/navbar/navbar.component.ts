@@ -199,23 +199,70 @@ export class NavbarComponent implements OnInit {
 
   private adjustDropdownPosition() {
     const dropdown = document.querySelector('.profile-dropdown-menu') as HTMLElement;
-    if (dropdown) {
-      const rect = dropdown.getBoundingClientRect();
+    const container = document.querySelector('.profile-dropdown-container') as HTMLElement;
+    const layoutContainer = document.querySelector('.layout-container') as HTMLElement;
+    
+    if (dropdown && container) {
+      // Reset classes first
+      dropdown.classList.remove('position-left', 'position-right', 'mobile-adjust-left', 'mobile-adjust-right');
+      
+      // Get viewport and element dimensions
       const viewportWidth = window.innerWidth;
+      const containerRect = container.getBoundingClientRect();
+      const dropdownWidth = dropdown.offsetWidth;
       
-      // Check if dropdown goes beyond right edge
-      if (rect.right > viewportWidth) {
-        dropdown.style.right = '0px';
-        dropdown.style.left = 'auto';
-        dropdown.style.transform = `translateX(${rect.right - viewportWidth + 10}px)`;
+      // Get layout container bounds if available
+      const layoutRect = layoutContainer ? layoutContainer.getBoundingClientRect() : null;
+      const layoutRightBound = layoutRect ? layoutRect.right : viewportWidth;
+      const layoutLeftBound = layoutRect ? layoutRect.left : 0;
+      
+      // Check if we're on mobile
+      const isMobile = window.innerWidth <= 768;
+      
+      // Calculate available space within layout container
+      const spaceOnRight = layoutRightBound - containerRect.right;
+      const spaceOnLeft = containerRect.left - layoutLeftBound;
+      
+      // Determine positioning based on available space within layout container
+      if (document.documentElement.dir === 'rtl') {
+        // For RTL (Arabic), prefer left positioning but adjust if needed
+        if (spaceOnLeft >= dropdownWidth) {
+          dropdown.classList.add('position-left');
+        } else if (spaceOnRight >= dropdownWidth) {
+          dropdown.classList.add('position-right');
+        } else {
+          // Not enough space on either side, position to fit best within layout
+          dropdown.classList.add(spaceOnLeft > spaceOnRight ? 'position-left' : 'position-right');
+          if (isMobile) {
+            dropdown.classList.add(spaceOnLeft > spaceOnRight ? 'mobile-adjust-left' : 'mobile-adjust-right');
+          }
+        }
+      } else {
+        // For LTR (English), prefer right positioning but adjust if needed
+        if (spaceOnRight >= dropdownWidth) {
+          dropdown.classList.add('position-right');
+        } else if (spaceOnLeft >= dropdownWidth) {
+          dropdown.classList.add('position-left');
+        } else {
+          // Not enough space on either side, position to fit best within layout
+          dropdown.classList.add(spaceOnRight > spaceOnLeft ? 'position-right' : 'position-left');
+          if (isMobile) {
+            dropdown.classList.add(spaceOnRight > spaceOnLeft ? 'mobile-adjust-right' : 'mobile-adjust-left');
+          }
+        }
       }
       
-      // For RTL layout, check left edge
-      if (document.documentElement.dir === 'rtl' && rect.left < 0) {
-        dropdown.style.left = '0px';
-        dropdown.style.right = 'auto';
-        dropdown.style.transform = `translateX(${Math.abs(rect.left) + 10}px)`;
-      }
+      // Additional check to ensure dropdown doesn't exceed layout bounds
+      setTimeout(() => {
+        const updatedRect = dropdown.getBoundingClientRect();
+        if (layoutRect) {
+          if (updatedRect.right > layoutRect.right) {
+            dropdown.style.transform = `translateX(-${updatedRect.right - layoutRect.right + 10}px)`;
+          } else if (updatedRect.left < layoutRect.left) {
+            dropdown.style.transform = `translateX(${layoutRect.left - updatedRect.left + 10}px)`;
+          }
+        }
+      }, 50);
     }
   }
 

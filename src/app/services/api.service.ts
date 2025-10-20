@@ -36,9 +36,9 @@ export class ApiService {
     return this.http.post(`${baseUrl}${APIName}`, body).pipe(
       take(1),
       tap((res: any) => {
-        // if (res?.message) {
-        //   this.toaster.successToaster(res.message);
-        // }
+        if (res?.message != 'No data found' && res?.message != null) {
+          this.toaster.successToaster(res.message);
+        }
       }),
       catchError((error) => {
         // this.toaster.errorToaster(error?.error?.message);
@@ -161,7 +161,7 @@ export class ApiService {
   }
 
   updateAddress(addressData: any): Observable<any> {
-    return this.http.post(`${baseUrl}Location/Update`, addressData).pipe(
+    return this.http.put(`${baseUrl}Location/Update`, addressData).pipe(
       take(1),
       catchError((error) => {
         console.error('Error updating address:', error);

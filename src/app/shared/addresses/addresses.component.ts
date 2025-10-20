@@ -212,9 +212,10 @@ export class AddressesComponent implements OnInit {
   saveAddress() {
     if (this.addressForm.valid) {
       const formData = this.addressForm.value;
+      const userId = localStorage.getItem('userId');
       
       if (this.isEditMode && this.selectedAddress) {
-        this.updateAddress({ ...formData, locationId: this.selectedAddress.locationId });
+        this.updateAddress({ ...formData, locationId: this.selectedAddress.locationId,userId: parseInt(userId || '0') });
       } else {
         this.createAddress(formData);
       }
@@ -243,6 +244,7 @@ export class AddressesComponent implements OnInit {
   updateAddress(addressData: any) {
     this.apiService.updateAddress(addressData).subscribe({
       next: (response) => {
+        debugger;
         console.log('Address updated successfully:', response);
         this.loadAddresses();
         this.closeModal();

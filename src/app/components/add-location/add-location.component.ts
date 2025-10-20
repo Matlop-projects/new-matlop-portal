@@ -49,8 +49,8 @@ export class AddLocationComponent implements OnInit, AfterViewInit {
     blockNo: new FormControl('', {
       validators: [Validators.required],
     }),
-    latitude: new FormControl(''),
-    longitude: new FormControl(''),
+    latitude: new FormControl(''), // Keep empty like addresses
+    longitude: new FormControl(''), // Keep empty like addresses
     name: new FormControl(''),
     locationId: new FormControl(''),
     cityId: new FormControl<any>('',Validators.required),

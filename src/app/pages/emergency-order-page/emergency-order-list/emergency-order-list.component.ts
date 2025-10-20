@@ -53,7 +53,7 @@ export class EmergencyOrderListComponent implements OnInit {
     amount: 0,
     media: "string",
     specialOrderEnum: 1,
-    specialOrderStatusEnum: 1,
+    specialOrderStatusEnum: 0,
   };
   private apiService = inject(ApiService);
   currentlang = "en";

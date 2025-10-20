@@ -93,7 +93,8 @@ export class PackagesListComponent {
 
   onPackagesDropdownSearch(data: any) {
     if(data.value.cityId) {
-      this.ApiService.get(`Package/GetPackageByCityId/${data.value.cityId}/${this.contractId}`).subscribe((res: any) => {
+      debugger;
+      this.ApiService.get(`Package/GetPackageByCityId/${data.value.cityId}/${this.contractId}/${this.serviceId}`).subscribe((res: any) => {
         console.log(res);
         this.packageList = res.data;
         localStorage.setItem('contractDetails', JSON.stringify(this.packageList));

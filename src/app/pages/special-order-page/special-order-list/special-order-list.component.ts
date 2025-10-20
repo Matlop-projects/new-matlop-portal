@@ -53,7 +53,7 @@ export class SpecialOrderListComponent implements OnInit {
     amount: 0,
     media: "string",
     specialOrderEnum: 2,
-    specialOrderStatusEnum: 1,
+    specialOrderStatusEnum: 0,
   };
   private apiService = inject(ApiService);
   currentlang = "en";

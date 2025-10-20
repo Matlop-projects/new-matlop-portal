@@ -480,6 +480,8 @@
     "BLOCK_NUMBER": "رقم البلوك",
     "LATITUDE": "خط العرض",
     "LONGITUDE": "خط الطول",
+    "SELECT_LOCATION_ON_MAP": "اختر الموقع على الخريطة",
+    "COORDINATES": "الإحداثيات",
     "SAVE": "حفظ",
     "CANCEL": "إلغاء",
     "EDIT": "تعديل",

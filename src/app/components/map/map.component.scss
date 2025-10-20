@@ -5,14 +5,51 @@
 
 .map-wrapper {
   position: relative;
+  // Add hardware acceleration for better performance
+  transform: translateZ(0);
+  will-change: transform;
   
   .map-loading {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(2px);
     
     .spinner {
       animation: spin 1s linear infinite;
     }
+  }
+  
+  // Optimize leaflet map container
+  .leaflet-container {
+    background: #f8f9fa !important; // Light gray instead of white for better loading appearance
+    
+    // Optimize tile loading
+    .leaflet-tile {
+      transition: opacity 0.2s ease-in-out;
+    }
+    
+    // Ensure markers are visible
+    .leaflet-marker-icon {
+      z-index: 1000 !important;
+    }
+    
+    // Optimize controls
+    .leaflet-control-zoom {
+      box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+    }
+  }
+  
+  // Preload optimization
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #f8f9fa;
+    z-index: -1;
   }
 }

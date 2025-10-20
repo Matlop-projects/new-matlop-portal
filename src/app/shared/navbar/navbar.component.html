@@ -20,6 +20,11 @@
             {{ 'NAVBAR.ABOUT_US' | translate }}
           </a>
         </li>
+           <li class="nav-item">
+          <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/addresses']">
+           {{ 'NAVBAR.MY_ADDRESSES' | translate }}
+          </a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/contact-us']">
             {{ 'NAVBAR.CONTACT_US' | translate }}
@@ -40,11 +45,6 @@
       <ul class="list-lang-profile navbar-nav padding-20 pointer" *ngIf="user(); else noUser">
         <li class="d-flex">
           <div class="action-section-login margin-20">
-            <span class="margin-10 notification">
-              <app-notification></app-notification>
-            </span>
-
-            <!-- Profile Dropdown -->
             <div class="profile-dropdown-container" (click)="toggleDropdown()">
               <img [src]="profileImg" width="35px" height="30px" class="rounded-img profile-trigger" alt="Profile" />
               
@@ -59,10 +59,10 @@
                 </div>
                 
                 <!-- Addresses Option -->
-                <div class="dropdown-item" (click)="navigateToAddresses()">
+                <!-- <div class="dropdown-item" (click)="navigateToAddresses()">
                   <i class="pi pi-map-marker"></i>
                   <span>{{ 'NAVBAR.MY_ADDRESSES' | translate }}</span>
-                </div>
+                </div> -->
                 
                 <!-- Language Toggle -->
                 <div class="dropdown-item" (click)="toggleLanguage()">
@@ -82,6 +82,11 @@
                 </div>
               </div>
             </div>
+            <span class="margin-10 notification">
+              <app-notification></app-notification>
+            </span>
+
+            <!-- Profile Dropdown -->
           </div>
         </li>
       </ul>

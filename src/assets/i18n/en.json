@@ -480,6 +480,8 @@
     "BLOCK_NUMBER": "Block Number",
     "LATITUDE": "Latitude",
     "LONGITUDE": "Longitude",
+    "SELECT_LOCATION_ON_MAP": "Select Location on Map",
+    "COORDINATES": "Coordinates",
     "SAVE": "Save",
     "CANCEL": "Cancel",
     "EDIT": "Edit",
