@@ -46,7 +46,7 @@ interface User {
 })
 export class NavbarComponent implements OnInit {
   // hasPermission: boolean = false;
-  profileImg = "assets/img/profile-circle.svg";
+  profileImg = "assets/img/saudi-avatar.svg";
   localStorage = localStorage.getItem("token");
   isDropdownOpen = false;
   langOptions = [
@@ -73,8 +73,7 @@ export class NavbarComponent implements OnInit {
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: any) => {
         this.activeRoute = event.url;
-        this.profileImg =
-          localStorage.getItem("img") ?? "assets/img/profile-circle.svg";
+        this.profileImg = this.getProfileImage();
       });
   }
 
@@ -91,13 +90,20 @@ export class NavbarComponent implements OnInit {
     this.updateMenuItems();
   }
 
+  getProfileImage(): string {
+    debugger;
+    const userImg = localStorage.getItem("img");
+    if (userImg && userImg.trim() !== '' && userImg !== 'null' && userImg !== 'undefined' && userImg !== "https://backend.matlop.comnull") {
+      return userImg;
+    }
+    return "assets/img/saudi-avatar.svg";
+  }
+
   get languageToggleText(): string {
     return this.selectedLang.toUpperCase() === "AR"
       ? "NAVBAR.ENGLISH"
       : "NAVBAR.ARABIC";
   }
-
-  // checkPermission() {
   //   this.api.post('Authentication/validateUserToken', { tokenToValidate: localStorage.getItem('token')??null }).subscribe((res: any) => {
   //     this.hasPermission = res?.data;
   //   })

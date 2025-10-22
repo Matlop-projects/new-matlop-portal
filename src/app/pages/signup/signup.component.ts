@@ -80,17 +80,22 @@ export class SignupComponent {
           },
         ],
         email: ["", [Validators.required, Validators.email]],
+        country: ["SA", Validators.required],
         mobileNumber: [
           "",
           [
             Validators.required,
-            Validators.maxLength(10),
-            Validators.pattern(/^05\d{8}$/),
+            this.mobileValidator.bind(this)
           ],
         ],
         genderId: [1, Validators.required],
       },
     );
+
+    // Subscribe to country changes to update mobile validation
+    this.signupForm.get('country')?.valueChanges.subscribe(() => {
+      this.signupForm.get('mobileNumber')?.updateValueAndValidity();
+    });
 
     this.translate.setDefaultLang("en");
     this.translate.use("en"); // You can change this dynamically
@@ -101,7 +106,12 @@ export class SignupComponent {
   }
   onSubmit() {
     if (this.signupForm.valid) {
-      const formValue = this.signupForm.value;
+      const formValue = { ...this.signupForm.value };
+      
+      // Ensure mobile number starts with 0
+      if (formValue.mobileNumber && !formValue.mobileNumber.startsWith('0')) {
+        formValue.mobileNumber = '0' + formValue.mobileNumber;
+      }
 
       const signupPayload = {
         userId: 0,
@@ -178,6 +188,56 @@ export class SignupComponent {
 
   resendOtp(e: any) {
     this.onSubmit();
+  }
+
+  // Custom mobile validator
+  mobileValidator(control: FormControl) {
+    const country = this.signupForm?.get('country')?.value;
+    const mobileNumber = control.value;
+
+    if (!mobileNumber) {
+      return null; // Let required validator handle empty values
+    }
+
+    if (country === 'SA') {
+      // Saudi mobile: 9 digits starting with 5
+      const saudiPattern = /^5\d{8}$/;
+      return saudiPattern.test(mobileNumber) ? null : { mobileValidator: true };
+    } else if (country === 'OM') {
+      // Omani mobile: 8 digits starting with 7, 9, or 2
+      const omaniPattern = /^[792]\d{7}$/;
+      return omaniPattern.test(mobileNumber) ? null : { mobileValidator: true };
+    }
+
+    return { mobileValidator: true };
+  }
+
+  // Get country code for display
+  getCountryCode(): string {
+    const country = this.signupForm?.get('country')?.value;
+    return country === 'SA' ? '+966' : '+968';
+  }
+
+  // Get mobile placeholder based on country
+  getMobilePlaceholder(): string {
+    const country = this.signupForm?.get('country')?.value;
+    if (country === 'SA') {
+      return '5xxxxxxxx';
+    } else if (country === 'OM') {
+      return '7xxxxxxx / 9xxxxxxx / 2xxxxxxx';
+    }
+    return '';
+  }
+
+  // Get mobile error message based on country
+  getMobileErrorMessage(): string {
+    const country = this.signupForm?.get('country')?.value;
+    if (country === 'SA') {
+      return this.translate.instant('errors.saudiMobile');
+    } else if (country === 'OM') {
+      return this.translate.instant('errors.omaniMobile');
+    }
+    return this.translate.instant('errors.mobileNumber');
   }
 }
 

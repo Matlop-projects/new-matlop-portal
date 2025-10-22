@@ -7,6 +7,7 @@ import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { BackgroundImageWithTextComponent, IBackGroundImageWithText } from '../../../components/background-image-with-text/background-image-with-text.component';
+import { LoginSignalUserDataService } from '../../../services/login-signal-user-data.service';
 @Component({
   selector: 'app-packages-list',
   standalone: true,
@@ -19,6 +20,7 @@ export class PackagesListComponent {
  private ApiService = inject(ApiService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private userDataService = inject(LoginSignalUserDataService);
   selectedLang: any;
   languageService = inject(LanguageService);
   serviceId: any;
@@ -51,18 +53,33 @@ export class PackagesListComponent {
   }
 
   getPackagesListBiContractId(contractId: string, serviceId: any) {
+    // Get the country ID from user data service
+    const countryId = this.userDataService.getCountryId();
+    
     this.ApiService.get(`Package/GetPackageByContractIdAndServiceId/${contractId}/${serviceId}`).subscribe((item: any) => {
-      console.log(item.data);
-      this.packageList = item.data;
-
+      console.log('All packages:', item.data);
+      
+      // Filter packages by countryId
+      if (item.data && Array.isArray(item.data)) {
+        this.packageList = item.data.filter((pkg: any) => pkg.countryId === countryId);
+        console.log('Filtered packages by country:', this.packageList);
+      } else {
+        this.packageList = [];
+      }
     });
   }
 
   getAllCites() {
+    // Get the country ID from user data service
+    const countryId = this.userDataService.getCountryId();
+    
     this.ApiService.get('City/GetAll').subscribe((res: any) => {
-      console.log(res);
+      console.log('All cities:', res);
 
-      const citiesFromApi = res.data.map((data: any) => ({
+      // Filter cities by countryId
+      const filteredCities = res.data ? res.data.filter((city: any) => city.countryId === countryId) : [];
+      
+      const citiesFromApi = filteredCities.map((data: any) => ({
         ...data,
         fullName: `${data.enName} - ${data.arName}`
       }));
@@ -72,12 +89,12 @@ export class PackagesListComponent {
           cityId: 0,
           enName: "All",
           arName: "الكل",
-          fullName: "All Cites - كل المدن"
+          fullName: "All Cities - كل المدن"
         },
         ...citiesFromApi
       ];
 
-      console.log(this.cities);
+      console.log('Filtered cities by country:', this.cities);
     });
   }
 
@@ -92,13 +109,17 @@ export class PackagesListComponent {
   }
 
   onPackagesDropdownSearch(data: any) {
+    // Get the country ID from user data service
+    const countryId = this.userDataService.getCountryId();
+    
     if(data.value.cityId) {
       debugger;
-      this.ApiService.get(`Package/GetPackageByCityId/${this.contractId}/${data.value.cityId}/${this.serviceId}`).subscribe((res: any) => {
-        console.log(res);
+      this.ApiService.get(`Package/GetPackageByCityId/${data.value.cityId}/${this.contractId}/${this.serviceId}`).subscribe((res: any) => {
+        console.log('Packages by city:', res);
         // Check if response data exists and is not empty
         if (res && res.data && res.data.length > 0) {
-          this.packageList = res.data;
+          // Filter packages by countryId
+          this.packageList = res.data.filter((pkg: any) => pkg.countryId === countryId);
           localStorage.setItem('contractDetails', JSON.stringify(this.packageList));
         } else {
           // Clear the list when no data is found
@@ -114,7 +135,6 @@ export class PackagesListComponent {
     } else {
       this.getPackagesListBiContractId(this.contractId, this.serviceId);
     }
-
   }
 }
 

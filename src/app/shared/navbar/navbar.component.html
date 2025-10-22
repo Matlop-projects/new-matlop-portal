@@ -46,7 +46,7 @@
         <li class="d-flex">
           <div class="action-section-login margin-20">
             <div class="profile-dropdown-container" (click)="toggleDropdown()">
-              <img [src]="profileImg" width="35px" height="30px" class="rounded-img profile-trigger" alt="Profile" />
+              <img [src]="getProfileImage()" width="35px" height="30px" class="rounded-img profile-trigger" alt="Profile" />
               
               <!-- Dropdown Menu -->
               <div class="profile-dropdown-menu" [class.show]="isDropdownOpen" (click)="$event.stopPropagation()">

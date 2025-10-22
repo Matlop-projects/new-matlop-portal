@@ -1,0 +1,29 @@
+<svg width="35" height="30" viewBox="0 0 35 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="17.5" cy="15" r="15" fill="#006C35"/>
+  
+  <!-- Face -->
+  <circle cx="17.5" cy="12" r="6" fill="#D4A574"/>
+  
+  <!-- Traditional Saudi headwear (Ghutra) -->
+  <path d="M11.5 6 C11.5 4, 13 2, 17.5 2 C22 2, 23.5 4, 23.5 6 L23.5 10 C23.5 8, 22 7, 17.5 7 C13 7, 11.5 8, 11.5 10 Z" fill="#FFFFFF"/>
+  
+  <!-- Headband (Iqal) -->
+  <ellipse cx="17.5" cy="7" rx="6" ry="1" fill="#2C2C2C"/>
+  
+  <!-- Eyes -->
+  <circle cx="15.5" cy="11" r="0.8" fill="#2C2C2C"/>
+  <circle cx="19.5" cy="11" r="0.8" fill="#2C2C2C"/>
+  
+  <!-- Nose -->
+  <path d="M17.5 12.5 L17.2 13.5 L17.8 13.5 Z" fill="#C4956A"/>
+  
+  <!-- Mouth -->
+  <path d="M16.5 14.5 Q17.5 15.2 18.5 14.5" stroke="#2C2C2C" stroke-width="0.5" fill="none"/>
+  
+  <!-- Traditional thobe collar -->
+  <path d="M11.5 18 C11.5 20, 13 22, 17.5 22 C22 22, 23.5 20, 23.5 18 L23.5 30 L11.5 30 Z" fill="#FFFFFF"/>
+  
+  <!-- Collar detail -->
+  <line x1="17.5" y1="18" x2="17.5" y2="22" stroke="#E0E0E0" stroke-width="0.5"/>
+</svg>

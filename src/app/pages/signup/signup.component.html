@@ -144,12 +144,23 @@
         <!-- Mobile Number -->
         <div class="d-flex flex-col gap-2">
           <label for="mobileNumber">{{ "signup.mobile" | translate }}</label>
-          <input
-            class="w-100"
-            pInputText
-            id="mobileNumber"
-            formControlName="mobileNumber"
-          />
+          <div class="phone-input-container">
+            <select 
+              class="country-dropdown"
+              formControlName="country"
+              id="country"
+            >
+              <option value="SA">🇸🇦 +966</option>
+              <option value="OM">🇴🇲 +968</option>
+            </select>
+            <input
+              class="mobile-number-input"
+              pInputText
+              id="mobileNumber"
+              placeholder="{{ getMobilePlaceholder() }}"
+              formControlName="mobileNumber"
+            />
+          </div>
           <div
             *ngIf="
               signupForm.get('mobileNumber')?.touched ||
@@ -163,10 +174,10 @@
               {{ "errors.required" | translate }}
             </div>
             <div
-              *ngIf="signupForm.get('mobileNumber')?.errors?.['pattern']||signupForm.get('mobileNumber')?.errors?.['maxLength']"
+              *ngIf="signupForm.get('mobileNumber')?.errors?.['mobileValidator']"
               class="text-danger"
             >
-              {{ "errors.mobileNumber" | translate }}
+              {{ getMobileErrorMessage() }}
             </div>
           </div>
         </div>

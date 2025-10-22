@@ -20,17 +20,24 @@
         </div>
 
         <div class="d-flex flex-col gap-2 mt-3">
-          <label for="email">{{ "signup.mobile" | translate }}</label>
-          <input
-            class="w-100"
-            pInputText
-            id="userName"
-            placeholder=""
-            formControlName="userName"
-          />
-          <!-- <small *ngIf="loginForm.get('userName')?.hasError('required') && loginForm.get('userName')?.touched">
-            {{ "login.userName_required" | translate }}
-          </small> -->
+          <label for="userName">{{ "signup.mobile" | translate }}</label>
+          <div class="phone-input-container">
+            <select 
+              class="country-dropdown"
+              formControlName="country"
+              id="country"
+            >
+              <option value="SA">🇸🇦 +966</option>
+              <option value="OM">🇴🇲 +968</option>
+            </select>
+            <input
+              class="mobile-number-input"
+              pInputText
+              id="userName"
+              placeholder="{{ getMobilePlaceholder() }}"
+              formControlName="userName"
+            />
+          </div>
           <div
             *ngIf="
               loginForm.get('userName')?.touched ||
@@ -44,10 +51,10 @@
               {{ "errors.required" | translate }}
             </div>
             <div
-              *ngIf="loginForm.get('userName')?.errors?.['pattern']||loginForm.get('userName')?.errors?.['maxLength']"
+              *ngIf="loginForm.get('userName')?.errors?.['pattern']||loginForm.get('userName')?.errors?.['maxLength']||loginForm.get('userName')?.errors?.['minLength']"
               class="text-danger"
             >
-              {{ "errors.mobileNumber" | translate }}
+              {{ getMobileErrorMessage() }}
             </div>
           </div>
         </div>

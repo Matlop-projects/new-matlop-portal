@@ -35,12 +35,17 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder,@Inject(DOCUMENT) private document: Document, private api: ApiService, private translate: TranslateService, private router: Router ,private userDataSignals: LoginSignalUserDataService) {
     this.loginForm = this.fb.group({
-      userName: ['0555555555',  [
+      country: ['SA'], // Default to Saudi Arabia
+      userName: ['',  [
             Validators.required,
-            Validators.maxLength(10),
-            Validators.pattern(/^05\d{8}$/),
+            this.mobileValidator.bind(this)
           ],],
       loginMethod: [1]
+    });
+
+    // Listen to country changes to update validation
+    this.loginForm.get('country')?.valueChanges.subscribe(() => {
+      this.loginForm.get('userName')?.updateValueAndValidity();
     });
 
     this.translate.setDefaultLang('en');
@@ -53,7 +58,19 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      this.onLogin(this.loginForm.value);
+      const formValue = { ...this.loginForm.value };
+      debugger;
+      
+      // Store selected country in user data service
+      this.userDataSignals.setSelectedCountry(formValue.country);
+      
+      // Ensure mobile number starts with 0
+      if (formValue.userName && !formValue.userName.startsWith('0')) {
+        debugger;
+        formValue.userName = '0' + formValue.userName;
+      }
+      
+      this.onLogin(formValue);
     } else {
       this.toaster.errorToaster('Please Complete All Feilds');
     }
@@ -125,6 +142,59 @@ export class LoginComponent {
   loginAsGuest() {
     // Navigate directly to home page as guest
     this.router.navigate(['/home']);
+  }
+
+  // Custom mobile validator for Saudi and Omani numbers
+  mobileValidator(control: any) {
+    const country = this.loginForm?.get('country')?.value;
+    const mobile = control.value;
+    
+    if (!mobile) {
+      return null; // Let required validator handle empty values
+    }
+
+    if (country === 'SA') {
+      // Saudi mobile: 9 digits starting with 5 (without country code)
+      const saudiPattern = /^5\d{8}$/;
+      if (!saudiPattern.test(mobile)) {
+        return { pattern: true };
+      }
+    } else if (country === 'OM') {
+      // Omani mobile: 8 digits starting with 7, 9, or 2 (without country code)
+      const omaniPattern = /^[792]\d{7}$/;
+      if (!omaniPattern.test(mobile)) {
+        return { pattern: true };
+      }
+    }
+
+    return null;
+  }
+
+  // Get country code for display
+  getCountryCode(): string {
+    const country = this.loginForm?.get('country')?.value;
+    return country === 'SA' ? '+966' : '+968';
+  }
+
+  // Get mobile placeholder based on country
+  getMobilePlaceholder(): string {
+    const country = this.loginForm.get('country')?.value;
+    if (country === 'SA') {
+      return '5xxxxxxxx';
+    } else if (country === 'OM') {
+      return '7xxxxxxx / 9xxxxxxx / 2xxxxxxx';
+    }
+    return '';
+  }
+
+  // Get mobile error message based on country
+  getMobileErrorMessage(): string {
+    const country = this.loginForm?.get('country')?.value;
+    if (country === 'SA') {
+      return this.translate.instant('errors.saudiMobile');
+    } else {
+      return this.translate.instant('errors.omaniMobile');
+    }
   }
 
 }
