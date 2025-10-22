@@ -18,9 +18,9 @@ const primengTranslations = {
     dayNamesShort: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
     dayNamesMin: ['ح', 'ن', 'ث', 'ر', 'خ', 'ج', 'س'],
     monthNames: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
-                 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
-    monthNamesShort:  ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
-                 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+      'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+    monthNamesShort: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+      'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
     today: 'اليوم',
     clear: 'مسح',
     dateFormat: 'dd/mm/yy',
@@ -32,9 +32,9 @@ const primengTranslations = {
     dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
     monthNames: ['January', 'February', 'March', 'April', 'May', 'June',
-                 'July', 'August', 'September', 'October', 'November', 'December'],
+      'July', 'August', 'September', 'October', 'November', 'December'],
     monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     today: 'Today',
     clear: 'Clear',
     dateFormat: 'dd/mm/yy',
@@ -45,46 +45,46 @@ const primengTranslations = {
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [TranslatePipe,NgIf,FloatLabelModule,ReactiveFormsModule,DatePickerModule,InputTextModule,SelectModule],
+  imports: [TranslatePipe, NgIf, FloatLabelModule, ReactiveFormsModule, DatePickerModule, InputTextModule, SelectModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
-export class ProfileComponent implements OnInit{
-  baseImageUrl=environment.baseImageUrl
-  defaultImg:any="assets/img/profile-circle.svg"
-user:any;
-userId=localStorage.getItem('userId')
-showBtn=false
-genderList:any[]=[
- 
-]
-private apiService = inject(ApiService);
-private Router = inject(Router)
-private langService=inject(LanguageService)
-primengConfig=inject(PrimeNG)
+export class ProfileComponent implements OnInit {
+  baseImageUrl = environment.baseImageUrl
+  defaultImg: any = "assets/img/arabian-man.png"
+  user: any;
+  userId = localStorage.getItem('userId')
+  showBtn = false
+  genderList: any[] = [
 
- form = new FormGroup({
-    firstName: new FormControl("",{
-      validators:[
+  ]
+  private apiService = inject(ApiService);
+  private Router = inject(Router)
+  private langService = inject(LanguageService)
+  primengConfig = inject(PrimeNG)
+
+  form = new FormGroup({
+    firstName: new FormControl("", {
+      validators: [
         Validators.required
       ]
     }),
-    email:  new FormControl("",{
-      validators:[
+    email: new FormControl("", {
+      validators: [
         Validators.required,
         Validations.emailValidator()
       ]
     }),
-     gender:  new FormControl("",{
-      validators:[
+    gender: new FormControl("", {
+      validators: [
         Validators.required,
         Validations.onlyNumberValidator()
       ]
     }),
-   dateOfBirth: new FormControl<any>('', {
-  validators: [Validators.required],
-}),
-      imgSrc:  new FormControl<any>("",),
+    dateOfBirth: new FormControl<any>('', {
+      validators: [Validators.required],
+    }),
+    imgSrc: new FormControl<any>("",),
   });
   languageService = inject(LanguageService);
   selectedLang: any;
@@ -101,74 +101,74 @@ primengConfig=inject(PrimeNG)
     });
   }
 
-  setGenderList(){
-     this.genderList=[
-       {name:this.selectedLang=='en'?'Male':"ذكر", code:1},
-       {name:this.selectedLang=='en'?'Female':"أنثى", code:2}
+  setGenderList() {
+    this.genderList = [
+      { name: this.selectedLang == 'en' ? 'Male' : "ذكر", code: 1 },
+      { name: this.selectedLang == 'en' ? 'Female' : "أنثى", code: 2 }
     ]
   }
   onFileSelected(event: Event) {
-  const input = event.target as HTMLInputElement;
-  if (!input.files || input.files.length === 0) return;
+    const input = event.target as HTMLInputElement;
+    if (!input.files || input.files.length === 0) return;
 
-  const file = input.files[0];
-  const reader = new FileReader();
+    const file = input.files[0];
+    const reader = new FileReader();
 
-  reader.onload = () => {
-    const base64 = reader.result as string;
-    this.form.patchValue({ imgSrc: base64 });
-    this.user.imgSrc = base64; // for api 
-    this.defaultImg=base64 // for immediate preview
-  };
+    reader.onload = () => {
+      const base64 = reader.result as string;
+      this.form.patchValue({ imgSrc: base64 });
+      this.user.imgSrc = base64; // for api 
+      this.defaultImg = base64 // for immediate preview
+    };
 
-  reader.readAsDataURL(file);
-}
-displayDatepickerConfig(lang:string) {
-    this.primengConfig.setTranslation(primengTranslations[lang=='en'?'en':'ar']);
+    reader.readAsDataURL(file);
   }
-  onEditMode(){
-    this.showBtn=true
+  displayDatepickerConfig(lang: string) {
+    this.primengConfig.setTranslation(primengTranslations[lang == 'en' ? 'en' : 'ar']);
   }
-  getUserById(){
-     this.apiService.get(`client/getById/${this.userId}`).subscribe((res:any)=>{
+  onEditMode() {
+    this.showBtn = true
+  }
+  getUserById() {
+    this.apiService.get(`client/getById/${this.userId}`).subscribe((res: any) => {
       this.user = res.data;
       this.form.patchValue({
         firstName: this.user?.firstName,
         email: this.user?.email,
         gender: this.user?.gender,
         dateOfBirth: new Date(this.user.dateOfBirth),
-        imgSrc:this.baseImageUrl+this.user?.imgSrc
+        imgSrc: this.baseImageUrl + this.user?.imgSrc
       })
-            
-this.defaultImg=this.form.value.imgSrc
+debugger;
+      this.defaultImg == "https://backend.matlop.comnull"  ? "assets/img/arabian-man.png" : this.form.value.imgSrc
     })
 
   }
   formatDateToYYYYMMDD(date: Date): string {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // months are 0-based
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}
-onUpdate(){
-console.log(this.user);
-let payload={
-  ...this.user,
-  ...this.form.value,
-  dateOfBirth: this.formatDateToYYYYMMDD(this.form.value.dateOfBirth),
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // months are 0-based
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+  onUpdate() {
+    console.log(this.user);
+    let payload = {
+      ...this.user,
+      ...this.form.value,
+      dateOfBirth: this.formatDateToYYYYMMDD(this.form.value.dateOfBirth),
 
-}
-this.apiService.put('client/update',payload).subscribe(res=>{
-  if(res){
-    this.getUserById()
-    this.showBtn=false;
-    localStorage.setItem('img',this.form.value.imgSrc);
+    }
+    this.apiService.put('client/update', payload).subscribe(res => {
+      if (res) {
+        this.getUserById()
+        this.showBtn = false;
+        localStorage.setItem('img', this.form.value.imgSrc);
+        this.Router.navigateByUrl('home')
+      }
+    })
+
+  }
+  onCancel() {
     this.Router.navigateByUrl('home')
   }
-})
-
-}
-onCancel(){
-   this.Router.navigateByUrl('home')
-}
 }

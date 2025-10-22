@@ -96,7 +96,7 @@ export class NavbarComponent implements OnInit {
     if (userImg && userImg.trim() !== '' && userImg !== 'null' && userImg !== 'undefined' && userImg !== "https://backend.matlop.comnull") {
       return userImg;
     }
-    return "assets/img/saudi-avatar.svg";
+    return "assets/img/arabian-man.png";
   }
 
   get languageToggleText(): string {
