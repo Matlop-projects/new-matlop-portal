@@ -108,22 +108,22 @@ export class AddressesComponent implements OnInit {
       });
   }
 
-  getAllDistrict(cityId: number) {
-    this.apiService
-      .get('district/GetByCityId', { CityId: cityId })
-      .subscribe((res: any) => {
-        if (res.data) {
-          this.districtList = [];
-          res.data.map((item: any) => {
-            this.districtList.push({
-              name: this.currentLang == 'en' ? item.enName : item.arName,
-              code: item.districtId,
-              selected: false,
-            });
-          });
-        }
-      });
-  }
+  // getAllDistrict(cityId: number) {
+  //   this.apiService
+  //     .get('district/GetByCityId', { CityId: cityId })
+  //     .subscribe((res: any) => {
+  //       if (res.data) {
+  //         this.districtList = [];
+  //         res.data.map((item: any) => {
+  //           this.districtList.push({
+  //             name: this.currentLang == 'en' ? item.enName : item.arName,
+  //             code: item.districtId,
+  //             selected: false,
+  //           });
+  //         });
+  //       }
+  //     });
+  // }
 
   onCountrySelect(item: any) {
     const payload = item.code ?? item;
@@ -140,7 +140,7 @@ export class AddressesComponent implements OnInit {
 
   onCitySelect(item: any) {
     const payload = item.code ?? item;
-    this.getAllDistrict(payload);
+    //this.getAllDistrict(payload);
     // Reset district when city changes
     this.addressForm.patchValue({
       districtId: null,
@@ -188,7 +188,7 @@ export class AddressesComponent implements OnInit {
     if (address.countryId && address.cityId) {
       // Wait a bit for cities to load, then load districts
       setTimeout(() => {
-        this.getAllDistrict(address.cityId);
+        //this.getAllDistrict(address.cityId);
       }, 500);
     }
     
@@ -246,7 +246,7 @@ export class AddressesComponent implements OnInit {
   updateAddress(addressData: any) {
     this.apiService.updateAddress(addressData).subscribe({
       next: (response) => {
-        debugger;
+        ;
         console.log('Address updated successfully:', response);
         this.loadAddresses();
         this.closeModal();

@@ -91,7 +91,7 @@ export class NavbarComponent implements OnInit {
   }
 
   getProfileImage(): string {
-    debugger;
+    ;
     const userImg = localStorage.getItem("img");
     if (userImg && userImg.trim() !== '' && userImg !== 'null' && userImg !== 'undefined' && userImg !== "https://backend.matlop.comnull") {
       return userImg;

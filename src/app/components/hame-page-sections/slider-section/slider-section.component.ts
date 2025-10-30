@@ -19,12 +19,20 @@ export class SliderSectionComponent implements OnInit, OnDestroy {
   
   sliders: SliderItem[] = [];
   currentSlideIndex = 0;
+  selectedLang: string = 'en';
+  isLoading = false;
   private autoSlideSubscription?: Subscription;
   private dataSubscription?: Subscription;
   
   ngOnInit() {
+    this.selectedLang = this.translateService.currentLang || 'en';
     this.loadSliders();
     this.startAutoSlide();
+    
+    // Subscribe to language changes
+    this.translateService.onLangChange.subscribe(() => {
+      this.selectedLang = this.translateService.currentLang || 'en';
+    });
   }
   
   ngOnDestroy() {
@@ -33,14 +41,46 @@ export class SliderSectionComponent implements OnInit, OnDestroy {
   }
   
   loadSliders() {
-    this.dataSubscription = this.sliderService.getSliders().subscribe({
-      next: (response) => {
+    // First, check if we have cached data and use it immediately
+    const cachedSliders = this.sliderService.getCachedSliders();
+    if (cachedSliders.length > 0) {
+      this.sliders = cachedSliders;
+      this.isLoading = false; // Don't show loader if we have cached data
+    } else {
+      // Only show loading if we don't have any cached data
+      this.isLoading = true;
+    }
+
+    // Subscribe to loading state
+    this.dataSubscription = this.sliderService.loading$
+      .subscribe(loading => {
+        // Only update loading state if we don't already have cached data displayed
+        if (this.sliders.length === 0 || loading === false) {
+          this.isLoading = loading;
+        }
+      });
+
+    // Subscribe to slider updates (this will get both cached and fresh data)
+    this.sliderService.sliders$
+      .subscribe(response => {
+        if (response && response.data) {
+          this.sliders = response.data.sort((a: any, b: any) => a.displayOrder - b.displayOrder);
+          this.isLoading = false; // Ensure loading is false when data is received
+        }
+      });
+
+    // Use the optimized method that handles cache intelligently
+    this.sliderService.getSlidersOptimized().subscribe({
+      next: (response: any) => {
         if (response.code === 0 && response.data) {
-          this.sliders = response.data.sort((a, b) => a.displayOrder - b.displayOrder);
+          this.sliders = response.data.sort((a: any, b: any) => a.displayOrder - b.displayOrder);
+          this.isLoading = false;
         }
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error loading sliders:', error);
+        this.isLoading = false;
+        // Keep existing cached data if available
       }
     });
   }
@@ -103,5 +143,19 @@ export class SliderSectionComponent implements OnInit, OnDestroy {
     } else if (app === "google") {
       window.open("https://play.google.com/store/apps/details?id=com.matlop.service&pcampaignid=web_share", "_blank");
     }
+  }
+
+  // Method to manually refresh sliders
+  refreshSliders(): void {
+    this.sliderService.refreshSliders().subscribe({
+      next: (response) => {
+        if (response && response.data) {
+          this.sliders = response.data.sort((a, b) => a.displayOrder - b.displayOrder);
+        }
+      },
+      error: (error) => {
+        console.error('Error refreshing sliders:', error);
+      }
+    });
   }
 }

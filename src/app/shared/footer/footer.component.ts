@@ -64,7 +64,7 @@ export class FooterComponent {
             routing: res.data.tikTokLink || "",
           },
           {
-            icon: "snapchat.svg",
+            icon: "snapchat.png",
             routing: res.data.snapChatLink || "",
           },
         ];

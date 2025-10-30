@@ -479,7 +479,7 @@
     "COUNTRY": "Country",
     "CITY": "City",
     "DISTRICT": "District",
-    "BLOCK_NUMBER": "Block Number",
+    "BLOCK_NUMBER": "Building Number",
     "LATITUDE": "Latitude",
     "LONGITUDE": "Longitude",
     "SELECT_LOCATION_ON_MAP": "Select Location on Map",

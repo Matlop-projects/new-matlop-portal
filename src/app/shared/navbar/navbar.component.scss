@@ -2,19 +2,110 @@
   border-radius: 100px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   margin: 20px;
+  
   .logo-image {
     margin: 0 10px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.1) rotate(5deg);
+      filter: brightness(1.1);
+    }
   }
+  
   .rounded-img{
     border-radius: 50%;
   }
+  
   .navbar-toggler {
     margin: 0px 20px;
-  }
-  ul {
-    a {
-      color: #000 !important;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.05);
+      background-color: rgba(40, 167, 69, 0.1); // أخضر فاتح
     }
+  }
+  
+  ul {
+    .nav-item {
+      position: relative;
+      
+      .nav-link {
+        color: #000 !important;
+        position: relative;
+        padding: 8px 16px !important;
+        border-radius: 25px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+        
+        // إضافة تأثير الخط السفلي المتحرك بالأخضر
+        &::before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          width: 0;
+          height: 2px;
+          background: linear-gradient(90deg, #28a745, #20c997); // تدرج أخضر
+          transition: all 0.3s ease;
+          transform: translateX(-50%);
+        }
+        
+        // تأثير الخلفية المتدرجة عند hover بالأخضر
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(40, 167, 69, 0.1), transparent);
+          transition: left 0.5s ease;
+          z-index: -1;
+        }
+        
+        &:hover {
+          color: #28a745 !important; // أخضر
+          background: linear-gradient(135deg, rgba(40, 167, 69, 0.1), rgba(40, 167, 69, 0.05));
+          transform: translateY(-2px);
+          box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2); // ظل أخضر
+          
+          &::before {
+            width: 80%;
+          }
+          
+          &::after {
+            left: 100%;
+          }
+        }
+        
+        // تأثير النقر
+        &:active {
+          transform: translateY(0);
+          box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+        }
+      }
+      
+      // تأثير إضافي للعنصر النشط بالأخضر
+      .nav-link.active {
+        background: linear-gradient(135deg, #28a745, #20c997); // تدرج أخضر
+        color: white !important;
+        font-weight: bold;
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        
+        &::before {
+          width: 0;
+        }
+        
+        &:hover {
+          background: linear-gradient(135deg, #20c997, #17a2b8); // تدرج أخضر داكن
+          transform: translateY(-2px) scale(1.02);
+          box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+      }
+    }
+    
     .notification {
       position: relative;
       span.number {
@@ -26,11 +117,26 @@
         position: absolute;
         top: -13px;
         left: 10px;
+        animation: pulse 2s infinite;
       }
     }
+    
     .sign-out {
-              margin-top: 5px;
-            }
+      margin: 0px 20px;
+    }
+  }
+}
+
+// إضافة animation للإشعارات
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
@@ -68,8 +174,31 @@
   .navbar {
     border-radius: unset;
     margin: unset;
+    
+    .logo-image {
+      &:hover {
+        transform: scale(1.05) rotate(2deg); // تقليل التأثير على الموبايل
+      }
+    }
+    
     .main-list {
       padding: 15px;
+      
+      .nav-item {
+        .nav-link {
+          padding: 12px 20px !important; // زيادة المساحة للمس على الموبايل
+          margin: 5px 0;
+          
+          &:hover {
+            transform: translateY(-1px); // تقليل الحركة على الموبايل
+            box-shadow: 0 2px 10px rgba(40, 167, 69, 0.15); // ظل أخضر
+          }
+          
+          &.active:hover {
+            transform: translateY(-1px) scale(1.01);
+          }
+        }
+      }
     }
 
     .list-lang-profile {
@@ -83,7 +212,82 @@
           padding:0px 20px
         }
       }
-       
+    }
+  }
+}
+
+/* تحسينات إضافية للشاشات الصغيرة */
+@media (max-width: 576px) {
+  .navbar {
+    .main-list {
+      .nav-item {
+        .nav-link {
+          font-size: 14px;
+          padding: 10px 16px !important;
+          
+          &::before {
+            height: 1px; // خط أرفع على الشاشات الصغيرة
+          }
+        }
+      }
+    }
+  }
+}
+
+/* تحسينات للشاشات الكبيرة */
+@media (min-width: 1200px) {
+  .navbar {
+    .main-list {
+      .nav-item {
+        .nav-link {
+          &:hover {
+            transform: translateY(-3px); // حركة أكبر على الشاشات الكبيرة
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.25); // ظل أخضر
+          }
+        }
+      }
+    }
+  }
+}
+
+/* تحسين للوضع الداكن إذا كان متاحاً */
+@media (prefers-color-scheme: dark) {
+  .navbar {
+    ul {
+      .nav-item {
+        .nav-link {
+          &:hover {
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.2), rgba(40, 167, 69, 0.1)); // خلفية خضراء
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3); // ظل أخضر
+          }
+        }
+      }
+    }
+  }
+}
+
+/* تحسين للحركة المخفضة للمستخدمين الذين يفضلون ذلك */
+@media (prefers-reduced-motion: reduce) {
+  .navbar {
+    .logo-image,
+    .navbar-toggler,
+    ul .nav-item .nav-link {
+      transition: none;
+      
+      &:hover {
+        transform: none;
+      }
+      
+      &::before,
+      &::after {
+        transition: none;
+      }
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
     }
   }
 }

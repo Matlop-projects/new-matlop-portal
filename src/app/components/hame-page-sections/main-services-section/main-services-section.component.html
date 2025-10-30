@@ -28,8 +28,14 @@
     </div>
 
     <div class="slider-wrapper mt-4" *ngIf="services?.length">
-      <button class="slider-btn slider-btn-left" (click)="slideLeft()" [class.rtl]="selectedLang === 'ar'">
-        <img src="assets/images/icons-svg/arrow-black.svg" alt="previous" />
+      <button 
+        class="slider-btn slider-btn-left" 
+        (click)="slideLeft()" 
+        [class.rtl]="selectedLang === 'ar'"
+        [class.disabled]="!canScrollLeft()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </button>
       
       <div class="slider-container" #sliderContainer>
@@ -69,7 +75,9 @@
       </div>
 
       <button class="slider-btn slider-btn-right" (click)="slideRight()" [class.rtl]="selectedLang === 'ar'">
-        <img src="assets/images/icons-svg/arrow-black.svg" alt="next" />
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </button>
     </div>
   </div>

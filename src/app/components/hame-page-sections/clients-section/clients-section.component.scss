@@ -72,6 +72,104 @@
     }
   }
 
+  // Slider styles
+  .slider-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .slider-btn {
+      position: relative;
+      z-index: 2;
+      width: 50px;
+      height: 50px;
+      border: none;
+      border-radius: 50%;
+      background: #FFFFFF;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #2C3E50;
+
+      &:hover {
+        background: #F8F9FA;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        transform: scale(1.05);
+      }
+
+      &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      &.rtl {
+        svg {
+          transform: scaleX(-1);
+        }
+      }
+    }
+
+    .clients-slider {
+      flex: 1;
+      overflow-x: hidden; /* إخفاء السكرول لعرض 5 لوجوهات فقط */
+      overflow-y: hidden;
+      display: flex;
+      gap: 20px;
+      padding: 10px 0;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .client-logo-container {
+        flex: 0 0 200px;
+        width: 200px;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #FFFFFF;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        padding: 20px;
+        transition: all 0.3s ease;
+        border: 1px solid #F5F5F5;
+
+        &:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+          border-color: #E0E0E0;
+        }
+
+        .client-logo {
+          max-width: 100%;
+          max-height: 100%;
+          width: auto;
+          height: auto;
+          object-fit: contain;
+          transition: all 0.3s ease;
+        }
+
+        &:hover .client-logo {
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+
   .loading-state {
     text-align: center;
     padding: 60px 0;
@@ -135,6 +233,31 @@
         padding: 16px;
       }
     }
+
+    .slider-wrapper {
+      gap: 15px;
+
+      .slider-btn {
+        width: 45px;
+        height: 45px;
+
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      .clients-slider {
+        gap: 15px;
+
+        .client-logo-container {
+          flex: 0 0 180px;
+          width: 180px;
+          height: 100px;
+          padding: 16px;
+        }
+      }
+    }
   }
 
   // Mobile responsive (below 768px)
@@ -168,6 +291,32 @@
       }
     }
 
+    .slider-wrapper {
+      gap: 10px;
+
+      .slider-btn {
+        width: 40px;
+        height: 40px;
+
+        svg {
+          width: 18px;
+          height: 18px;
+        }
+      }
+
+      .clients-slider {
+        gap: 12px;
+        overflow-x: auto; /* في الموبايل نسمح بالسكرول اليدوي */
+
+        .client-logo-container {
+          flex: 0 0 150px;
+          width: 150px;
+          height: 80px;
+          padding: 12px;
+        }
+      }
+    }
+
     .loading-state,
     .empty-state {
       padding: 40px 0;
@@ -183,6 +332,17 @@
       .client-logo-container {
         max-width: 280px;
         height: 100px;
+      }
+    }
+
+    .slider-wrapper {
+      .clients-slider {
+        .client-logo-container {
+          flex: 0 0 120px;
+          width: 120px;
+          height: 70px;
+          padding: 10px;
+        }
       }
     }
   }

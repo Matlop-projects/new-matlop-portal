@@ -5,16 +5,38 @@
       <p class="section-description">{{ 'CLIENTS.DESCRIPTION' | translate }}</p>
     </div>
     
-    <div class="clients-grid" *ngIf="clients && clients.length > 0">
-      <div class="client-logo-container" *ngFor="let client of clients; trackBy: trackByClientId">
-        <img 
-          [src]="client.displayImage" 
-          [alt]="client.displayName"
-          class="client-logo"
-          (error)="onImageError($event)"
-          loading="lazy"
-        />
+    <div class="slider-wrapper" *ngIf="clients && clients.length > 0">
+      <button 
+        class="slider-btn slider-btn-left" 
+        (click)="slideLeft()" 
+        [class.rtl]="selectedLang === 'ar'"
+        [class.disabled]="!canScrollLeft()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      
+      <div class="clients-slider" #sliderContainer>
+        <div class="client-logo-container" *ngFor="let client of clients; trackBy: trackByClientId">
+          <img 
+            [src]="client.displayImage" 
+            [alt]="client.displayName"
+            class="client-logo"
+            (error)="onImageError($event)"
+            loading="lazy"
+          />
+        </div>
       </div>
+
+      <button 
+        class="slider-btn slider-btn-right" 
+        (click)="slideRight()" 
+        [class.rtl]="selectedLang === 'ar'"
+        [class.disabled]="!canScrollRight()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
     
     <div class="loading-state" *ngIf="isLoading">

@@ -127,6 +127,7 @@ export class ProfileComponent implements OnInit {
     this.primengConfig.setTranslation(primengTranslations[lang == 'en' ? 'en' : 'ar']);
   }
   onEditMode() {
+    ;
     this.showBtn = true
   }
   getUserById() {
@@ -139,10 +140,16 @@ export class ProfileComponent implements OnInit {
         dateOfBirth: new Date(this.user.dateOfBirth),
         imgSrc: this.baseImageUrl + this.user?.imgSrc
       })
-debugger;
-      this.defaultImg == "https://backend.matlop.comnull"  ? "assets/img/arabian-man.png" : this.form.value.imgSrc
+      
+      // إصلاح منطق عرض الصورة
+      if (this.user?.imgSrc && this.user.imgSrc !== 'null' && this.user.imgSrc !== null) {
+        this.defaultImg = this.baseImageUrl + this.user.imgSrc;
+      } else {
+        this.defaultImg = "assets/img/arabian-man.png";
+      }
+      
+      console.log('User image:', this.defaultImg);
     })
-
   }
   formatDateToYYYYMMDD(date: Date): string {
     const year = date.getFullYear();
@@ -169,6 +176,7 @@ debugger;
 
   }
   onCancel() {
-    this.Router.navigateByUrl('home')
+    this.showBtn = false;
+    this.getUserById(); // إعادة تحميل البيانات الأصلية
   }
 }

@@ -113,7 +113,7 @@ export class PackagesListComponent {
     const countryId = this.userDataService.getCountryId();
     
     if(data.value.cityId) {
-      debugger;
+      ;
       this.ApiService.get(`Package/GetPackageByCityId/${data.value.cityId}/${this.contractId}/${this.serviceId}`).subscribe((res: any) => {
         console.log('Packages by city:', res);
         // Check if response data exists and is not empty

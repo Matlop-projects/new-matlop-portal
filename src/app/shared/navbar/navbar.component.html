@@ -20,16 +20,7 @@
             {{ 'NAVBAR.ABOUT_US' | translate }}
           </a>
         </li>
-           <li class="nav-item">
-          <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/addresses']">
-           {{ 'NAVBAR.MY_ADDRESSES' | translate }}
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/contact-us']">
-            {{ 'NAVBAR.CONTACT_US' | translate }}
-          </a>
-        </li>
+       
         <li class="nav-item">
           <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/services-list']">
             {{ 'NAVBAR.SERVICES' | translate }}
@@ -38,6 +29,16 @@
         <li class="nav-item" *ngIf="localStorage">
           <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/orders']">
             {{ 'NAVBAR.ORDERS' | translate }}
+          </a>
+        </li>
+            <li class="nav-item">
+          <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/addresses']">
+           {{ 'NAVBAR.MY_ADDRESSES' | translate }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLinkActive]="'active'" [routerLink]="['/contact-us']">
+            {{ 'NAVBAR.CONTACT_US' | translate }}
           </a>
         </li>
 

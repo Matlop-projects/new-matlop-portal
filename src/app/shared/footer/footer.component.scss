@@ -44,6 +44,14 @@
 
                     .services {
                         max-width: 100%;
+                        grid-template-columns: 1fr;
+                    }
+                    
+                    .contact-phone-section {
+                        .phone-item {
+                            justify-content: center;
+                            text-align: center;
+                        }
                     }
                 }
             }
@@ -85,6 +93,43 @@
                         }
                     }
                 }
+
+                .contact-phone-section {
+                    margin-top: 20px;
+                    
+                    .phone-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        padding: 10px 15px;
+                        background-color: rgba(255, 255, 255, 0.1);
+                        border-radius: 8px;
+                        border: 1px solid rgba(255, 255, 255, 0.2);
+                        transition: all 0.3s ease;
+                        
+                        &:hover {
+                            background-color: rgba(255, 255, 255, 0.2);
+                            transform: translateY(-2px);
+                        }
+                        
+                        .phone-icon {
+                            color: #25D366;
+                            flex-shrink: 0;
+                        }
+                        
+                        .phone-number {
+                            color: white;
+                            text-decoration: none;
+                            font-size: 14px;
+                            font-weight: 500;
+                            margin: 0;
+                            
+                            &:hover {
+                                color: #BFFD2B;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -122,6 +167,12 @@
             justify-content: center;
             border-radius: 50%;
             background-color: #FFFFFF;
+
+            img {
+                width: 20px;
+                height: 20px;
+                object-fit: contain;
+            }
 
             &:hover {
                 background-color: #e9e8e9;

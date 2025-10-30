@@ -24,8 +24,8 @@
         <div class="address-details">
           <p><strong>{{ 'ADDRESSES.COUNTRY' | translate }}:</strong> {{ address.countryName }}</p>
           <p><strong>{{ 'ADDRESSES.CITY' | translate }}:</strong> {{ address.cityName }}</p>
-          <p><strong>{{ 'ADDRESSES.DISTRICT' | translate }}:</strong> {{ address.districtName }}</p>
-          <p><strong>{{ 'ADDRESSES.BLOCK_NUMBER' | translate }}:</strong> {{ address.blockNo }}</p>
+          <!-- <p><strong>{{ 'ADDRESSES.DISTRICT' | translate }}:</strong> {{ address.districtName }}</p> -->
+        <p><strong>{{ 'ADDRESSES.BLOCK_NUMBER' | translate }}:</strong> {{ address.blockNo }}</p>
         </div>
       </div>
       <div class="address-actions">
@@ -115,7 +115,7 @@
           </div>
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <p-floatlabel variant="on">
             <p-select
               class="w-100"
@@ -130,7 +130,7 @@
           <div *ngIf="addressForm.get('districtId')?.invalid && addressForm.get('districtId')?.touched" class="error-message">
             <span *ngIf="addressForm.get('districtId')?.errors?.['required']">{{ 'ADDRESSES.REQUIRED_FIELD' | translate }}</span>
           </div>
-        </div>
+        </div> -->
 
         <div class="form-group">
           <label for="blockNo">{{ 'ADDRESSES.BLOCK_NUMBER' | translate }}</label>

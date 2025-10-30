@@ -59,14 +59,14 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       const formValue = { ...this.loginForm.value };
-      debugger;
+      ;
       
       // Store selected country in user data service
       this.userDataSignals.setSelectedCountry(formValue.country);
       
       // Ensure mobile number starts with 0
       if (formValue.userName && !formValue.userName.startsWith('0')) {
-        debugger;
+        ;
         formValue.userName = '0' + formValue.userName;
       }
       

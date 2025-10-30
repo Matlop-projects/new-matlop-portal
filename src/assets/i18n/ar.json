@@ -479,7 +479,7 @@
     "COUNTRY": "الدولة",
     "CITY": "المدينة",
     "DISTRICT": "الحي",
-    "BLOCK_NUMBER": "رقم البلوك",
+    "BLOCK_NUMBER": "رقم المبنى",
     "LATITUDE": "خط العرض",
     "LONGITUDE": "خط الطول",
     "SELECT_LOCATION_ON_MAP": "اختر الموقع على الخريطة",
