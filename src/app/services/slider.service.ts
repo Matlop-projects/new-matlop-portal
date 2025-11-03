@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { tap, catchError, shareReplay } from 'rxjs/operators';
+import { LoginSignalUserDataService } from './login-signal-user-data.service';
 
 export interface SliderItem {
   sliderId: number;
@@ -28,7 +29,7 @@ interface CacheEntry {
   providedIn: 'root'
 })
 export class SliderService {
-  private apiUrl = 'https://backend.matlop.com/api/Slider/GetAll';
+  private baseApiUrl = 'https://backend.matlop.com/api/Slider';
   private cache: CacheEntry | null = null;
   private readonly CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
   
@@ -38,6 +39,8 @@ export class SliderService {
   
   private loadingSubject = new BehaviorSubject<boolean>(false);
   public loading$ = this.loadingSubject.asObservable();
+  
+  private userDataService = inject(LoginSignalUserDataService);
 
   constructor(private http: HttpClient) {
     this.loadFromLocalStorage();
@@ -51,49 +54,40 @@ export class SliderService {
   private currentRequest: Observable<SliderResponse> | null = null;
 
   getSliders(forceRefresh: boolean = false): Observable<SliderResponse> {
-    // If we have valid cache and not forcing refresh, return cached data immediately
     if (!forceRefresh && this.isValidCache()) {
-      // Ensure the BehaviorSubject has the latest cached data
       if (this.slidersSubject.value !== this.cache!.data) {
         this.slidersSubject.next(this.cache!.data);
       }
-      // Don't show loading for valid cached data
       this.loadingSubject.next(false);
       return of(this.cache!.data);
     }
 
-    // If there's already a request in progress, return it to avoid duplicate calls
     if (this.currentRequest && !forceRefresh) {
       return this.currentRequest;
     }
 
-    // If we have cached data (even if expired), emit it first for immediate display
     if (this.cache && !forceRefresh) {
       this.slidersSubject.next(this.cache.data);
     }
 
-    // Set loading state only when actually making a network request
     this.loadingSubject.next(true);
 
-    // Create and store the request
-    this.currentRequest = this.http.get<SliderResponse>(this.apiUrl).pipe(
+    const countryId = this.userDataService.getCountryId();
+    const apiUrl = `${this.baseApiUrl}/GetByCountryId/${countryId}`;
+
+    this.currentRequest = this.http.get<SliderResponse>(apiUrl).pipe(
       tap(response => {
-        // Cache the response
         this.cache = {
           data: response,
           timestamp: Date.now()
         };
         
-        // Save to localStorage
         this.saveToLocalStorage();
         
-        // Emit the fresh data
         this.slidersSubject.next(response);
         
-        // Set loading to false
         this.loadingSubject.next(false);
         
-        // Clear the current request
         this.currentRequest = null;
       }),
       catchError(error => {
@@ -115,27 +109,20 @@ export class SliderService {
     return this.currentRequest;
   }
 
-  // Get sliders with immediate cache return and background refresh if needed
   getSlidersOptimized(): Observable<SliderResponse> {
-    // If we have valid cache, return it immediately without showing loader
     if (this.isValidCache()) {
-      // Ensure the BehaviorSubject has the latest cached data
       if (this.slidersSubject.value !== this.cache!.data) {
         this.slidersSubject.next(this.cache!.data);
       }
-      // Don't show loading for cached data
       this.loadingSubject.next(false);
       return of(this.cache!.data);
     }
 
-    // If we have expired cache, return it first then fetch fresh data in background
     if (this.cache) {
       this.slidersSubject.next(this.cache.data);
       
-      // Show loading only when fetching fresh data
       this.loadingSubject.next(true);
       
-      // Fetch fresh data in background without blocking
       this.getSliders(true).subscribe({
         next: () => {
           this.loadingSubject.next(false);

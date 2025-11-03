@@ -61,8 +61,26 @@ export class LoginComponent {
       const formValue = { ...this.loginForm.value };
       ;
       
-      // Store selected country in user data service
-      this.userDataSignals.setSelectedCountry(formValue.country);
+      // Detect country based on mobile number pattern
+      let detectedCountry = formValue.country; // Default to selected country
+      if (formValue.userName) {
+        const mobile = formValue.userName.replace(/^0/, ''); // Remove leading 0 if exists
+        
+        // Saudi mobile: starts with 5 and has 9 digits total
+        if (/^5\d{8}$/.test(mobile)) {
+          detectedCountry = 'SA';
+        }
+        // Omani mobile: starts with 7, 9, or 2 and has 8 digits total
+        else if (/^[792]\d{7}$/.test(mobile)) {
+          detectedCountry = 'OM';
+        }
+      }
+      
+      // Store detected country in user data service
+      this.userDataSignals.setSelectedCountry(detectedCountry);
+      
+      // Update form country to match detected country
+      formValue.country = detectedCountry;
       
       // Ensure mobile number starts with 0
       if (formValue.userName && !formValue.userName.startsWith('0')) {
@@ -140,6 +158,8 @@ export class LoginComponent {
   }
 
   loginAsGuest() {
+    // Set default country to Saudi Arabia for guest users
+    this.userDataSignals.setSelectedCountry('SA');
     // Navigate directly to home page as guest
     this.router.navigate(['/home']);
   }

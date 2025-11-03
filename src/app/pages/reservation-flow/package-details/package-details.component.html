@@ -7,7 +7,7 @@
           <span class="bold ">{{ "PACKAGE_DETAILS.wallet" | translate }} :</span>
           <span class="bold">
             <p>
-              <img src="assets/images/icons-svg/Saudi_Riyal.svg" alt="">
+              <img [src]="getCurrencyIcon()" alt="">
               {{ walletBalance }}
             </p>
           </span>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="amount">
                   <p>
-                    <img src="assets/images/icons-svg/Saudi_Riyal.svg" alt="">
+                    <img [src]="getCurrencyIcon()" alt="">
 
                     {{ packageDetails.price }}
                   </p>
@@ -129,7 +129,7 @@
                     </div>
                     <div class="value">
                       <p>
-                        <img src="assets/images/icons-svg/Saudi_Riyal.svg" alt="">
+                        <img [src]="getCurrencyIcon()" alt="">
                         {{ packageDetails.price }}
                       </p>
                     </div>
@@ -143,7 +143,7 @@
                     </div>
                     <div class="value">
                       <p>
-                        <img src="assets/images/icons-svg/Saudi_Riyal.svg" alt="">
+                        <img [src]="getCurrencyIcon()" alt="">
                         {{packageDetails.equipmentsPrice ? packageDetails.equipmentsPrice: 0}}
                       </p>
                     </div>
@@ -155,14 +155,14 @@
                         class="d-flex coupon-discount" style="gap:5px">
                         <span class="max-amount-text">{{ "PACKAGE_DETAILS.hasMasAmount" | translate }}</span>
                         <span class="suadi-max-ryal-img">
-                          <img src="assets/images/icons-svg/Saudi_Riyal.svg" width="12">
+                          <img [src]="getCurrencyIcon()" width="12">
                         </span>
                         <span class="max-amount-text">{{packageDetails.maxAmount}}</span>
                       </p>
                     </div>
                     <div class="value">
                       <p>
-                        <img *ngIf="packageDetails.couponType == 2" src="assets/images/icons-svg/Saudi_Riyal.svg"
+                        <img *ngIf="packageDetails.couponType == 2" [src]="getCurrencyIcon()"
                           alt="">
                         {{packageDetails.couponDiscount ? packageDetails.couponDiscount : 0}}
                         <span *ngIf="packageDetails.couponType == 1">%</span>
@@ -175,7 +175,7 @@
                     </div>
                     <div class="total-price-value">
                       <p>
-                        <img src="assets/images/icons-svg/Saudi_Riyal.svg" alt="">
+                        <img [src]="getCurrencyIcon()" alt="">
                         {{packageDetails.orderTotal}}
                       </p>
                     </div>
@@ -242,7 +242,7 @@
                       }}
                     </p>
                     <p>
-                      <img src="assets/images/icons-svg/Saudi_Riyal.svg" alt="">
+                      <img [src]="getCurrencyIcon()" alt="">
                       {{equipment.price}}
                     </p>
                   </div>

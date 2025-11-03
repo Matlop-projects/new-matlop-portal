@@ -5,6 +5,7 @@ import { ToasterService } from '../../../services/toaster.service';
 import { PanelModule } from 'primeng/panel';
 import { LanguageService } from '../../../services/language.service';
 import { TranslatePipe } from '@ngx-translate/core';
+import { LoginSignalUserDataService } from '../../../services/login-signal-user-data.service';
 
 @Component({
   selector: 'app-faqs-section',
@@ -24,6 +25,7 @@ export class FaqsSectionComponent {
   api = inject(ApiService);
   toaster = inject(ToasterService);
   languageService = inject(LanguageService);
+  userDataService = inject(LoginSignalUserDataService);
   selectedLang = this.languageService.translationService.currentLang;
 
 
@@ -35,7 +37,8 @@ export class FaqsSectionComponent {
   }
 
   getFaqsList() {
-    this.api.get('FAQs/GetAll').subscribe((res: any) => {
+    const countryId = this.userDataService.getCountryId();
+    this.api.get(`FAQs/GetByCountryId/${countryId}`).subscribe((res: any) => {
       console.log(res);
       this.faqsList = res.data;
       this.totalPages = Math.ceil(this.faqsList.length / this.itemsPerPage);

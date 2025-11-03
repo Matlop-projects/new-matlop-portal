@@ -16,3 +16,15 @@ div{
         margin-top: 5px;
     }
 }
+
+.no-data-message {
+    font-size: 24px;
+    color: #666;
+    font-weight: 500;
+    padding: 40px 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    margin: 20px auto;
+    max-width: 600px;
+}

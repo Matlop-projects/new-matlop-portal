@@ -20,6 +20,7 @@ import {
 import { InputTextModule } from "primeng/inputtext";
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { PrimeNG } from "primeng/config";
+import { LoginSignalUserDataService } from "../../../services/login-signal-user-data.service";
 const primengTranslations = {
   ar: {
     dayNames: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
@@ -78,6 +79,7 @@ export class PackageDetailsComponent {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private sanitizer = inject(DomSanitizer);
+  private userDataService = inject(LoginSignalUserDataService);
   primengConfig = inject(PrimeNG)
   selectedLang: any;
   walletBalance = 0;
@@ -698,5 +700,16 @@ export class PackageDetailsComponent {
 
   calculate15Percent(value: number): number {
     return parseFloat((value * 0.15).toFixed(2));
+  }
+
+  /**
+   * Get currency icon based on selected country
+   * @returns string path to currency icon
+   */
+  getCurrencyIcon(): string {
+    const selectedCountry = this.userDataService.getCountryId();
+    return selectedCountry === 2 
+      ? 'assets/images/icons-svg/Omani_Rial.svg' 
+      : 'assets/images/icons-svg/Saudi_Riyal.svg';
   }
 }

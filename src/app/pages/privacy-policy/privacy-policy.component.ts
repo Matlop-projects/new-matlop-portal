@@ -4,6 +4,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageService } from '../../services/language.service';
 import { NgFor, NgIf } from '@angular/common';
 import { ApiService } from '../../services/api.service';
+import { LoginSignalUserDataService } from '../../services/login-signal-user-data.service';
 
 interface PrivacyPolicyData {
   termId: number;
@@ -24,6 +25,7 @@ export class PrivacyPolicyComponent {
 
   languageService = inject(LanguageService)
   apiService = inject(ApiService)
+  userDataService = inject(LoginSignalUserDataService)
   
   privacyPolicyData: PrivacyPolicyData[] = []
   isLoading = true
@@ -51,7 +53,8 @@ export class PrivacyPolicyComponent {
 
   getPrivacyPolicyData(): void {
     this.isLoading = true;
-    this.apiService.get('PrivacyPolicy/GetAll').subscribe({
+    const countryId = this.userDataService.getCountryId();
+    this.apiService.get(`PrivacyPolicy/GetByCountryId/${countryId}`).subscribe({
       next: (res: any) => {
         if (res?.data) {
           this.privacyPolicyData = res.data;

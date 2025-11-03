@@ -136,5 +136,16 @@ export class PackagesListComponent {
       this.getPackagesListBiContractId(this.contractId, this.serviceId);
     }
   }
+
+  /**
+   * Get currency icon based on selected country
+   * @returns string path to currency icon
+   */
+  getCurrencyIcon(): string {
+    const selectedCountry = this.userDataService.getCountryId();
+    return selectedCountry === 2 
+      ? 'assets/images/icons-svg/Omani_Rial.svg' 
+      : 'assets/images/icons-svg/Saudi_Riyal.svg';
+  }
 }
 

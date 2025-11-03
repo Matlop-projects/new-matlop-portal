@@ -24,8 +24,12 @@
   </div>
 
   <!-- Fallback content when no API data -->
-  <div *ngIf="!isLoading && termsConditionsData.length === 0">
-    <p>{{ "TERMS.INTRO_1" | translate }}</p>
+  <div *ngIf="!isLoading && termsConditionsData.length === 0" class="text-center mt-5 mb-5">
+    <div class="no-data-message">
+      لا يوجد بيانات شروط التسوق متاحة حالياً.
+    </div>
+  </div>
+    <!-- <p>{{ "TERMS.INTRO_1" | translate }}</p>
     <p>{{ "TERMS.INTRO_2" | translate }}</p>
     <p>{{ "TERMS.INTRO_3" | translate }}</p>
 
@@ -111,5 +115,5 @@
       <div><img src="assets/img/attach-gray.svg" width="30" alt="" /></div>
       <p>{{ "TERMS.EXTERNAL_LINKS_DESC" | translate }}</p>
     </div>
-  </div>
+  </div> -->
 </div>

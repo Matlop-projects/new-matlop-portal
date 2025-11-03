@@ -1,9 +1,9 @@
 <app-background-image-with-text [options]="bkg_text_options"></app-background-image-with-text>
 
 <div class="container">
-  <div class="text-center mb-5">
+  <!-- <div class="text-center mb-5">
     <span class="title">{{ 'PRIVACY.HEADER' | translate }}</span>
-  </div>
+  </div> -->
 
   <!-- Loading state -->
   <div *ngIf="isLoading" class="text-center">
@@ -22,7 +22,13 @@
   </div>
 
   <!-- Fallback content when no API data -->
-  <div *ngIf="!isLoading && privacyPolicyData.length === 0">
+  <div *ngIf="!isLoading && privacyPolicyData.length === 0" class="text-center mt-5 mb-5">
+    <div class="no-data-message">
+      لا يوجد بيانات سياسة الخصوصية متاحة حالياً.
+    </div>
+  </div>
+  <!-- Fallback content when no API data -->
+  <!-- <div *ngIf="!isLoading && privacyPolicyData.length === 0">
     <div class="d-flex justify-content-start flex-wrap">
       <div class="w-50 width-card flex-grow-1">
         <div class="d-flex justify-content-start">
@@ -90,4 +96,4 @@
       <p>{{ ('PRIVACY.' + key) | translate }}</p>
     </div>
   </div>
-</div>
+</div> -->

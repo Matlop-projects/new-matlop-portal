@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ApiService } from '../../../services/api.service';
 import { LanguageService } from '../../../services/language.service';
+import { LoginSignalUserDataService } from '../../../services/login-signal-user-data.service';
 import { environment } from '../../../../environments/environment';
 import { Subscription, interval } from 'rxjs';
 
@@ -33,6 +34,7 @@ export class ClientsSectionComponent implements OnInit, OnDestroy, AfterViewInit
 
   private apiService = inject(ApiService);
   private languageService = inject(LanguageService);
+  private userDataService = inject(LoginSignalUserDataService);
   
   // Auto-slide properties
   private autoSlideSubscription?: Subscription;
@@ -171,7 +173,8 @@ export class ClientsSectionComponent implements OnInit, OnDestroy, AfterViewInit
 
   getAllClients(): void {
     this.isLoading = true;
-    this.apiService.get('OurClients/GetAllOurClient').subscribe({
+    const countryId = this.userDataService.getCountryId();
+    this.apiService.get(`OurClients/GetByCountryId/${countryId}`).subscribe({
       next: (res: any) => {
         if (res?.data) {
           this.clients = res.data.map((client: any) => ({

@@ -4,6 +4,7 @@ import { LanguageService } from '../../services/language.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { NgFor, NgIf } from '@angular/common';
 import { ApiService } from '../../services/api.service';
+import { LoginSignalUserDataService } from '../../services/login-signal-user-data.service';
 
 interface TermsConditionsData {
   termId: number;
@@ -23,6 +24,7 @@ interface TermsConditionsData {
 export class TermsConditionsComponent {
   languageService = inject(LanguageService)
   apiService = inject(ApiService)
+  userDataService = inject(LoginSignalUserDataService)
   
   termsConditionsData: TermsConditionsData[] = []
   isLoading = true
@@ -50,7 +52,8 @@ export class TermsConditionsComponent {
 
   getTermsConditionsData(): void {
     this.isLoading = true;
-    this.apiService.get('TermsAndConditions/GetAll').subscribe({
+    const countryId = this.userDataService.getCountryId();
+    this.apiService.get(`TermsAndConditions/GetByCountryId/${countryId}`).subscribe({
       next: (res: any) => {
         if (res?.data) {
           this.termsConditionsData = res.data;
