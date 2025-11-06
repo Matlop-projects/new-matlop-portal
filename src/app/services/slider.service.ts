@@ -142,6 +142,7 @@ debugger;
 
     // No cache available, show loader and fetch fresh data
     this.loadingSubject.next(true);
+    this.slidersSubject.next(null);
     return this.getSliders(false);
   }
 
@@ -205,6 +206,7 @@ debugger;
         } else {
           // Remove expired or mismatched country cache
           localStorage.removeItem('sliders_cache');
+          this.slidersSubject.next(null);
         }
       }
     } catch (error) {
