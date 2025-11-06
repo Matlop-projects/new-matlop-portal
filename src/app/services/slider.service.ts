@@ -23,6 +23,7 @@ export interface SliderResponse {
 interface CacheEntry {
   data: SliderResponse;
   timestamp: number;
+  countryId: number;
 }
 
 @Injectable({
@@ -71,7 +72,7 @@ export class SliderService {
     }
 
     this.loadingSubject.next(true);
-
+debugger;
     const countryId = this.userDataService.getCountryId();
     const apiUrl = `${this.baseApiUrl}/GetByCountryId/${countryId}`;
 
@@ -79,7 +80,8 @@ export class SliderService {
       tap(response => {
         this.cache = {
           data: response,
-          timestamp: Date.now()
+          timestamp: Date.now(),
+          countryId: countryId
         };
         
         this.saveToLocalStorage();
@@ -110,7 +112,9 @@ export class SliderService {
   }
 
   getSlidersOptimized(): Observable<SliderResponse> {
+    debugger;
     if (this.isValidCache()) {
+      debugger;
       if (this.slidersSubject.value !== this.cache!.data) {
         this.slidersSubject.next(this.cache!.data);
       }
@@ -155,7 +159,8 @@ export class SliderService {
   private isValidCache(): boolean {
     if (!this.cache) return false;
     const now = Date.now();
-    return (now - this.cache.timestamp) < this.CACHE_DURATION;
+    const currentCountryId = this.userDataService.getCountryId();
+    return (now - this.cache.timestamp) < this.CACHE_DURATION && this.cache.countryId === currentCountryId;
   }
 
   // Clear cache
@@ -192,12 +197,13 @@ export class SliderService {
         // Check if the cached data is not too old (extend to 24 hours for localStorage)
         const now = Date.now();
         const maxAge = 24 * 60 * 60 * 1000; // 24 hours
+        const currentCountryId = this.userDataService.getCountryId();
         
-        if ((now - parsedCache.timestamp) < maxAge) {
+        if ((now - parsedCache.timestamp) < maxAge && parsedCache.countryId === currentCountryId) {
           this.cache = parsedCache;
           this.slidersSubject.next(parsedCache.data);
         } else {
-          // Remove expired cache
+          // Remove expired or mismatched country cache
           localStorage.removeItem('sliders_cache');
         }
       }

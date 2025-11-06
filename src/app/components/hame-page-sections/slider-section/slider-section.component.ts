@@ -73,6 +73,7 @@ export class SliderSectionComponent implements OnInit, OnDestroy {
     this.sliderService.getSlidersOptimized().subscribe({
       next: (response: any) => {
         if (response.code === 0 && response.data) {
+          debugger;
           this.sliders = response.data.sort((a: any, b: any) => a.displayOrder - b.displayOrder);
           this.isLoading = false;
         }

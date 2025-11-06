@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 // interface User {
 //   username: string;
@@ -39,8 +40,12 @@ export class LoginSignalUserDataService {
   logout() {
     this.user.set(null);
     this.selectedCountry.set('SA'); // Reset to default
+    this.cache = null;
+    this.currentRequest = null;
     localStorage.removeItem('user'); // ✅ Remove from localStorage on logout
     localStorage.removeItem('selectedCountry');
+    localStorage.removeItem('sliders_cache');
+    this.slidersSubject.next(null);
   }
 
   // ✅ Load user from localStorage (helper function)
@@ -53,4 +58,8 @@ export class LoginSignalUserDataService {
   private loadCountryFromStorage(): string {
     return localStorage.getItem('selectedCountry') || 'SA';
   }
+  
+  cache: any = null;
+  currentRequest: any = null;
+  slidersSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 }
