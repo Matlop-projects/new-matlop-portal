@@ -57,7 +57,7 @@ export class PrivacyPolicyComponent {
     this.apiService.get(`PrivacyPolicy/GetByCountryId/${countryId}`).subscribe({
       next: (res: any) => {
         if (res?.data) {
-          this.privacyPolicyData = res.data;
+          this.privacyPolicyData = res.data.filter((policy: any) => policy.userType === 5);
         }
         this.isLoading = false;
       },

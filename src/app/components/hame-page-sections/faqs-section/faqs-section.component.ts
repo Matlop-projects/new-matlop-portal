@@ -40,7 +40,7 @@ export class FaqsSectionComponent {
     const countryId = this.userDataService.getCountryId();
     this.api.get(`FAQs/GetByCountryId/${countryId}`).subscribe((res: any) => {
       console.log(res);
-      this.faqsList = res.data;
+      this.faqsList = res.data.filter((faq: any) => faq.userType === 5);
       this.totalPages = Math.ceil(this.faqsList.length / this.itemsPerPage);
       this.updatePaginatedList();
       this.value.emit(this.faqsList)

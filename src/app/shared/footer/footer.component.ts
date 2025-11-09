@@ -4,6 +4,7 @@ import { TranslatePipe } from "@ngx-translate/core";
 import { ApiService } from "../../services/api.service";
 import { RouterLink } from "@angular/router";
 import { LanguageService } from "../../services/language.service";
+import { LoginSignalUserDataService } from "../../services/login-signal-user-data.service";
 
 interface Service {
   serviceId: number;
@@ -33,6 +34,7 @@ export class FooterComponent {
 
   api = inject(ApiService);
   languageService = inject(LanguageService);
+    private userDataService = inject(LoginSignalUserDataService);
   
   ngOnInit(): void {
     this.selectedLang = this.languageService.translationService.currentLang || 'ar';
@@ -44,7 +46,8 @@ export class FooterComponent {
     });
   }
   getAlllinks() {
-    this.api.get("settings/getAll").subscribe((res: any) => {
+      const countryId = this.userDataService.getCountryId();
+    this.api.get(`settings/getAll/${countryId}`).subscribe((res: any) => {
       if (res.data) {
         this.socailMedia = [
           {

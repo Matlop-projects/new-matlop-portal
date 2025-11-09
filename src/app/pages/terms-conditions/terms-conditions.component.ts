@@ -56,7 +56,7 @@ export class TermsConditionsComponent {
     this.apiService.get(`TermsAndConditions/GetByCountryId/${countryId}`).subscribe({
       next: (res: any) => {
         if (res?.data) {
-          this.termsConditionsData = res.data;
+          this.termsConditionsData = res.data.filter((term: any) => term.userType === 5);
         }
         this.isLoading = false;
       },

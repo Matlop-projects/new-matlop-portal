@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { ApiService } from '../../services/api.service';
+import { LoginSignalUserDataService } from '../../services/login-signal-user-data.service';
 
 @Component({
   selector: 'app-whatsapp-float',
@@ -12,13 +13,15 @@ import { ApiService } from '../../services/api.service';
 export class WhatsappFloatComponent implements OnInit {
   whatsappLink: string = '';
   api = inject(ApiService);
+      private userDataService = inject(LoginSignalUserDataService);
 
   ngOnInit(): void {
     this.getWhatsAppLink();
   }
 
   getWhatsAppLink() {
-    this.api.get("settings/getAll").subscribe({
+      const countryId = this.userDataService.getCountryId();
+    this.api.get(`settings/getAll/${countryId}`).subscribe({
       next: (res: any) => {
         console.log('WhatsApp API Response:', res);
         if (res.data && res.data.whatsappLink) {
