@@ -16,6 +16,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges
   private map?: L.Map;
   private marker?: L.Marker;
   private mutationObserver?: MutationObserver;
+  private resizeObserver?: ResizeObserver;
   
   @Input()lat: any = 0;
   @Input()lng: any = 0;
@@ -28,6 +29,16 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges
   
   // Generate unique ID for each map instance
   public mapId: string = 'map-' + Math.random().toString(36).substr(2, 9);
+  
+  // Public method to refresh map size (useful when map is in a modal/dialog)
+  public refreshMapSize(): void {
+    if (this.map) {
+      setTimeout(() => {
+        this.map?.invalidateSize();
+        console.log('Map size refreshed');
+      }, 100);
+    }
+  }
 
 
   ngAfterViewInit(): void {
@@ -273,9 +284,35 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges
 
       console.log('Map initialized successfully');
       
+      // Add ResizeObserver to handle dynamic size changes (important for modals/dialogs)
+      this.setupResizeObserver();
+      
     } catch (error: any) {
       console.error('Error initializing map:', error);
       this.isLoading = false;
+    }
+  }
+
+  private setupResizeObserver(): void {
+    if (this.mapContainer && this.mapContainer.nativeElement && this.map) {
+      this.resizeObserver = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          if (entry.target === this.mapContainer.nativeElement) {
+            // Check if the container has actual size
+            const rect = entry.contentRect;
+            if (rect.width > 0 && rect.height > 0) {
+              console.log('Map container resized:', rect.width, 'x', rect.height);
+              // Invalidate map size after resize
+              setTimeout(() => {
+                this.map?.invalidateSize();
+              }, 50);
+            }
+          }
+        }
+      });
+      
+      this.resizeObserver.observe(this.mapContainer.nativeElement);
+      console.log('ResizeObserver setup for map container');
     }
   }
 
@@ -285,6 +322,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges
     // Clean up MutationObserver
     if (this.mutationObserver) {
       this.mutationObserver.disconnect();
+    }
+    
+    // Clean up ResizeObserver
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
     }
     
     // Clean up map resources when component is destroyed

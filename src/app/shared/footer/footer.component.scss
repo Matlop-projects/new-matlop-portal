@@ -20,6 +20,37 @@
                     color: white;
                     margin-top: 100px;
                 }
+
+                .app-download-section {
+                    margin-top: 30px;
+                    
+                    .download-title {
+                        font-size: 18px;
+                        color: white;
+                        margin-top: 0;
+                        margin-bottom: 15px;
+                        font-weight: 600;
+                    }
+
+                    .app-icons {
+                        display: flex;
+                        gap: 15px;
+                        align-items: center;
+                        
+                        img {
+                            width: 140px;
+                            height: auto;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                            border-radius: 8px;
+                            
+                            &:hover {
+                                transform: translateY(-5px) scale(1.05);
+                                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                            }
+                        }
+                    }
+                }
             }
 
             // إضافة استعلامات الوسائط للشاشات الصغيرة
@@ -33,6 +64,20 @@
                     p {
                         margin-top: 20px;
                         font-size: 18px;
+                    }
+
+                    .app-download-section {
+                        margin-top: 20px;
+                        text-align: center;
+                        
+                        .app-icons {
+                            justify-content: center;
+                            flex-wrap: wrap;
+                            
+                            img {
+                                width: 120px;
+                            }
+                        }
                     }
                 }
 

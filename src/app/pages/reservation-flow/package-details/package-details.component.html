@@ -309,8 +309,8 @@
     </div>
   </div>
   <p-dialog header="{{ 'PACKAGE_DETAILS.ADD_LOCATION_MODAL_TITLE' | translate }}" [modal]="true"
-    [(visible)]="showAddLocationDialog" [style]="{ width: '50rem' }">
-    <app-add-location (value)="onAddLocation($event)"></app-add-location>
+    [(visible)]="showAddLocationDialog" [style]="{ width: '50rem' }" (onShow)="onDialogShow()">
+    <app-add-location #addLocationComponent (value)="onAddLocation($event)"></app-add-location>
   </p-dialog>
   <div class="wallet-card-container">
     <p-dialog header="{{ 'PACKAGE_DETAILS.add_wallet' | translate }}" [modal]="true"

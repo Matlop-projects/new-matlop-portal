@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output, OnInit, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, inject, Output, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -35,6 +35,8 @@ import { MapComponent } from '../map/map.component';
 })
 export class AddLocationComponent implements OnInit, AfterViewInit {
   @Output()value:any =new EventEmitter()
+  @ViewChild(MapComponent) mapComponent?: MapComponent;
+  
  private apiService = inject(ApiService);
   private router = inject(Router);
   private lang = inject(LanguageService);
@@ -49,8 +51,8 @@ export class AddLocationComponent implements OnInit, AfterViewInit {
     blockNo: new FormControl('', {
       validators: [Validators.required],
     }),
-    latitude: new FormControl(''), // Keep empty like addresses
-    longitude: new FormControl(''), // Keep empty like addresses
+    latitude: new FormControl(24.7136), // Default Riyadh coordinates
+    longitude: new FormControl(46.6753), // Default Riyadh coordinates
     name: new FormControl(''),
     locationId: new FormControl(''),
     cityId: new FormControl<any>('',Validators.required),
@@ -66,13 +68,27 @@ export class AddLocationComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     // Ensure the component is fully rendered before any map initialization
     // This is especially important when used in popups or dynamic components
+    // Add a small delay to ensure the dialog is fully opened and sized
+    setTimeout(() => {
+      this.refreshMap();
+    }, 300);
+  }
+
+  // Public method to refresh map - can be called from parent when dialog opens
+  refreshMap() {
+    if (this.mapComponent) {
+      setTimeout(() => {
+        this.mapComponent?.refreshMapSize();
+        console.log('Map size invalidated and refreshed');
+      }, 100);
+    }
   }
 
   onLocationChange(location: { lat: number, lng: number }) {
     // Update form controls when map location changes
     this.form.patchValue({
-      latitude: location.lat.toFixed(6),
-      longitude: location.lng.toFixed(6)
+      latitude: parseFloat(location.lat.toFixed(6)),
+      longitude: parseFloat(location.lng.toFixed(6))
     });
   }
 
@@ -157,9 +173,9 @@ export class AddLocationComponent implements OnInit, AfterViewInit {
   onSubmit() {
     let payload = {
       ...this.form.value,
-      latitude: this.form.value.latitude || '24.7136',
+      latitude: this.form.value.latitude?.toString() || '24.7136',
       locationId: 0,
-      longitude: this.form.value.longitude || '46.6753',
+      longitude: this.form.value.longitude?.toString() || '46.6753',
       name: 'asd',
       userId: localStorage.getItem('userId'),
     };

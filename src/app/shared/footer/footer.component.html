@@ -4,6 +4,13 @@
       <div class="details">
         <div class="section-one">
           <p>{{ 'FOOTER.DESCRIPTION' | translate }}</p>
+          <div class="app-download-section">
+            <p>{{ 'SLIDER.DOWNLOAD_APP' | translate }}</p>
+            <div class="app-icons">
+              <img class="pointer" (click)="onClickDownload('apple')" src="assets/images/global/apple.svg" alt="app-store" />
+              <img class="pointer" (click)="onClickDownload('google')" src="assets/images/global/google.svg" alt="play-store" />
+            </div>
+          </div>
         </div>
         <div class="section-two">
           <div class="header">

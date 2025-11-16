@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, ViewChild } from "@angular/core";
 import { ApiService } from "../../../services/api.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { LanguageService } from "../../../services/language.service";
@@ -75,6 +75,8 @@ const primengTranslations = {
   styleUrl: "./package-details.component.scss",
 })
 export class PackageDetailsComponent {
+  @ViewChild('addLocationComponent') addLocationComponent?: AddLocationComponent;
+  
   private ApiService = inject(ApiService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
@@ -252,6 +254,13 @@ export class PackageDetailsComponent {
   onAddLocation(formValue: any) {
     this.API_addLocation(formValue);
     this.showAddLocationDialog = false;
+  }
+
+  onDialogShow() {
+    // Refresh the map when dialog opens
+    setTimeout(() => {
+      this.addLocationComponent?.refreshMap();
+    }, 100);
   }
 
   getpaymentList() {

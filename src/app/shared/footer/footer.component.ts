@@ -89,4 +89,14 @@ export class FooterComponent {
 
     window.open(routing, "_blank");
   }
+
+  onClickDownload(platform: 'apple' | 'google') {
+    // يمكنك تغيير الروابط حسب روابط تطبيقاتك الفعلية
+    const links = {
+      apple: 'https://apps.apple.com/app/your-app-ihttps://apps.apple.com/eg/app/matlop-%D9%85%D8%B7%D9%84%D9%88%D8%A8/id6747580868',
+      google: 'https://play.google.com/store/apps/details?id=your.app.id'
+    };
+    
+    window.open(links[platform], '_blank');
+  }
 }

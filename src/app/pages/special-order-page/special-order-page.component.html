@@ -116,6 +116,7 @@
   [modal]="true"
   [(visible)]="showAddLocationDialog"
   [style]="{ width: '25rem' }"
+  (onShow)="onDialogShow()"
 >
-  <app-add-location (value)="onAddLocation($event)"></app-add-location>
+  <app-add-location #addLocationComponent (value)="onAddLocation($event)"></app-add-location>
 </p-dialog>

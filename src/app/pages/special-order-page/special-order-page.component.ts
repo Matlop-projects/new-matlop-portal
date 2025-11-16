@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { LanguageService } from '../../services/language.service';
@@ -70,6 +70,7 @@ const primengTranslations = {
   styleUrl: './special-order-page.component.scss'
 })
 export class SpecialOrderPageComponent {
+  @ViewChild('addLocationComponent') addLocationComponent?: AddLocationComponent;
 
   api = inject(ApiService);
   languageService = inject(LanguageService);
@@ -236,6 +237,13 @@ displayDatepickerConfig(lang:string) {
   onAddLocation(formValue: any) {
     this.API_addLocation(formValue)
     this.showAddLocationDialog = false
+  }
+
+  onDialogShow() {
+    // Refresh the map when dialog opens
+    setTimeout(() => {
+      this.addLocationComponent?.refreshMap();
+    }, 100);
   }
 
   removeMedia(index: number) {

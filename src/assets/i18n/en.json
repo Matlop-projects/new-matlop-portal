@@ -165,7 +165,8 @@
     "BUTTON": "Request a Service Now"
   },
   "FOOTER": {
-    "DESCRIPTION": "No matter what your maintenance or service needs are, our team is ready to serve you with the highest level of professionalism. Just place your request and we’ll take care of the rest!",
+    "DESCRIPTION": "No matter what your maintenance or service needs are, our team is ready to serve you with the highest level of professionalism. Just place your request and we'll take care of the rest!",
+    "DOWNLOAD_APP": "Download App",
     "QUICK_LINKS": "Quick Links",
     "LINKS": {
       "SERVICES": "Our Services",

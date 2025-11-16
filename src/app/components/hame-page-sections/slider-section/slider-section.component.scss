@@ -66,19 +66,31 @@
         }
 
         .app-section {
-            align-self: flex-start;
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
             text-align: right;
-            padding: 0 2rem;
           
             p {
               font-size: 1rem;
               color: white;
+              margin-bottom: 0.5rem;
             }
           
             .applecations {
               display: flex;
-              gap: 5px;
-              justify-content: flex-start;
+              gap: 10px;
+              justify-content: flex-end;
+              
+              img {
+                width: 150px;
+                height: auto;
+                transition: transform 0.3s ease;
+                
+                &:hover {
+                  transform: scale(1.05);
+                }
+              }
             }
           }
           
@@ -194,7 +206,14 @@
 
         .overlay {
             .app-section {
-                padding: 0 1rem;
+                bottom: 1rem;
+                right: 1rem;
+                
+                .applecations {
+                    img {
+                        width: 100px;
+                    }
+                }
             }
         }
     }

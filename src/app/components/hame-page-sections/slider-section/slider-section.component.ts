@@ -140,7 +140,7 @@ export class SliderSectionComponent implements OnInit, OnDestroy {
   
   onClickDownload(app: string) {
     if (app === "apple") {
-      window.open("https://play.google.com/store/apps/details?id=com.matlop.service&pcampaignid=web_share", "_blank");
+      window.open("https://apps.apple.com/eg/app/matlop-%D9%85%D8%B7%D9%84%D9%88%D8%A8/id6747580868", "_blank");
     } else if (app === "google") {
       window.open("https://play.google.com/store/apps/details?id=com.matlop.service&pcampaignid=web_share", "_blank");
     }
