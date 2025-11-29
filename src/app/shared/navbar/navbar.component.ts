@@ -54,6 +54,14 @@ export class NavbarComponent implements OnInit {
     { name: "العربية", code: "ar", icon: "assets/images/icons/ar-lang.png" },
   ];
 
+  getLogoImage(): string {
+    if (this.selectedLang === "ar") {
+      return "assets/img/matlop_logo.svg";
+    }else { 
+      return "assets/img/MatlopLogo.png";
+    }
+  }
+
   selectedLang: string = localStorage.getItem("lang") || "ar";
   languageService = inject(LanguageService);
   toaster = inject(ToasterService);

@@ -57,7 +57,7 @@ export class AddLocationComponent implements OnInit, AfterViewInit {
     locationId: new FormControl(''),
     cityId: new FormControl<any>('',Validators.required),
     countryId: new FormControl<any>('',Validators.required),
-    districtId: new FormControl<any>('',Validators.required),
+    districtId: new FormControl<any>(null),
   });
 
 
@@ -134,7 +134,7 @@ export class AddLocationComponent implements OnInit, AfterViewInit {
 
   onCitySelect(item: any) {
     const payload=item.code??item
-    this.getAllDistrict(payload);
+    //this.getAllDistrict(payload);
   }
 
   getAllCountry() {

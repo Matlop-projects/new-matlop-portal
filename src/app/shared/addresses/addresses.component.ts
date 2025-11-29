@@ -15,6 +15,8 @@ interface Address {
   cityId: number;
   countryName: string;
   cityName: string;
+  countryNameEn?: string;
+  cityNameEn?: string;
   districtName: string;
   districtId: number;
   blockNo: string;
@@ -73,6 +75,12 @@ export class AddressesComponent implements OnInit {
   ngOnInit() {
     this.loadAddresses();
     this.getAllCountry();
+    
+    // Update currentLang when language changes
+    this.languageService.translationService.onLangChange.subscribe(() => {
+      this.currentLang = this.languageService.translationService.currentLang;
+      this.getAllCountry(); // Reload country list with new language
+    });
   }
 
   // Dropdown methods

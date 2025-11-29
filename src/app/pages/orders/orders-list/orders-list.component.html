@@ -38,16 +38,14 @@
               currentlang == "en" ? item.serviceNameEn : item.serviceNameAr
             }}</span>
             <span [class]="activeStatus" class="all-status">
-              {{ item.orderStatusName  | translate }}
+              {{ getOrderStatusText(item.orderStatusEnum) }}
               <span class="pi pi-circle-on"></span>
             </span>
           </div>
           <div class="d-flex justify-content-start">
             <div>
               <span class="bold"> {{ item.totalWithAdditional }} </span>
-              <span class="text-gray-light">{{
-                "ORDERS.SAR" | translate
-              }}</span>
+              <span class="text-gray-light">{{ currencyCode }}</span>
             </div>
             <div class="tax">{{ "ORDERS.VAT_INCLUDED" | translate }}</div>
           </div>

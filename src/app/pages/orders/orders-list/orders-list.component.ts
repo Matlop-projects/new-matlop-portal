@@ -1,4 +1,4 @@
-import { NgFor, NgIf, TitleCasePipe } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, inject, OnInit } from "@angular/core";
 import { ApiService } from "../../../services/api.service";
 import { Router } from "@angular/router";
@@ -6,33 +6,35 @@ import { BackgroundImageWithTextComponent, IBackGroundImageWithText } from '../.
 import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageService } from '../../../services/language.service';
 import { PaginationComponent } from '../../../components/pagination/pagination.component';
+import { LoginSignalUserDataService } from '../../../services/login-signal-user-data.service';
 
 @Component({
   selector: "app-orders-list",
   standalone: true,
-  imports: [NgFor, NgIf, TitleCasePipe,PaginationComponent, BackgroundImageWithTextComponent , TranslatePipe],
+  imports: [NgFor, NgIf, PaginationComponent, BackgroundImageWithTextComponent, TranslatePipe],
   templateUrl: "./orders-list.component.html",
   styleUrl: "./orders-list.component.scss",
 })
 export class OrdersListComponent implements OnInit {
 
-    languageService = inject(LanguageService)
-  
-    bkg_text_options: IBackGroundImageWithText = {
-      imageUrl: 'assets/img/order-slider.svg',
-      header: this.languageService.translate('ORDER_TRACKING.BANNER_HEADER'),
-      description: this.languageService.translate('ORDER_TRACKING.BANNER_DESC'),
-      style: {
-        padding: "70px 0 0 0"
-      }
-    };
+  languageService = inject(LanguageService)
+  userDataService = inject(LoginSignalUserDataService)
+
+  bkg_text_options: IBackGroundImageWithText = {
+    imageUrl: 'assets/img/order-slider.svg',
+    header: this.languageService.translate('ORDER_TRACKING.BANNER_HEADER'),
+    description: this.languageService.translate('ORDER_TRACKING.BANNER_DESC'),
+    style: {
+      padding: "70px 0 0 0"
+    }
+  };
   private router = inject(Router);
   orders: any = [];
   activeStatus = "pending";
   ordersCount: any
-  totalCount=0;
+  totalCount = 0;
 
-  searchObject:any = {
+  searchObject: any = {
     pageNumber: 0,
     pageSize: 8,
     sortingExpression: "",
@@ -48,10 +50,10 @@ export class OrdersListComponent implements OnInit {
     locationId: 0,
   };
   private apiService = inject(ApiService);
-  currentlang='en'
+  currentlang = 'en'
   ngOnInit(): void {
     const storedData = localStorage.getItem("userData");
-      this.currentlang=this.languageService.translationService.currentLang
+    this.currentlang = this.languageService.translationService.currentLang
 
     if (storedData !== null) {
       const parsed = JSON.parse(storedData);
@@ -62,21 +64,21 @@ export class OrdersListComponent implements OnInit {
     this.getAllOrders();
 
     this.languageService.translationService.onLangChange.subscribe(() => {
-      this.currentlang=this.languageService.translationService.currentLang
+      this.currentlang = this.languageService.translationService.currentLang
       this.bkg_text_options.header = this.languageService.translate('ORDER_TRACKING.BANNER_HEADER');
-    this.bkg_text_options.description = this.languageService.translate('ORDER_TRACKING.BANNER_DESC');
+      this.bkg_text_options.description = this.languageService.translate('ORDER_TRACKING.BANNER_DESC');
     });
   }
-  onPageChange(page:any){
-    this.searchObject.pageNumber=page
+  onPageChange(page: any) {
+    this.searchObject.pageNumber = page
     console.log("🚀 ~ OrdersListComponent ~ onPageChange ~ page:", page)
-        this.getAllOrders();
+    this.getAllOrders();
 
   }
   onSelectStatus(value: string) {
-    this.searchObject.pageNumber=0,
-    this.searchObject.pageSize= 8,
-    this.activeStatus = value;
+    this.searchObject.pageNumber = 0,
+      this.searchObject.pageSize = 8,
+      this.activeStatus = value;
     if (value == "pending") {
       this.searchObject.orderStatus = null;
     } else if (value == "complete") {
@@ -92,7 +94,7 @@ export class OrdersListComponent implements OnInit {
       .subscribe((res) => {
         if (res.data.dataList) {
           this.orders = res.data.dataList;
-          this.totalCount=res.data.totalCount
+          this.totalCount = res.data.totalCount
         }
       });
   }
@@ -108,18 +110,21 @@ export class OrdersListComponent implements OnInit {
   }
 
   formatDateTime(dateTime: any, type: string) {
-    const cleanedIso = dateTime.split(".")[0]; // "2025-05-10T00:52:55"
+    const cleanedIso = dateTime.split(".")[0];
 
-    // Convert to Date object
     const date = new Date(cleanedIso);
-    const formattedDate = date.toLocaleDateString("en-GB", {
+
+    // Use ar-EG with Gregorian calendar for Arabic, en-GB for English
+    const locale = this.currentlang === 'ar' ? 'ar-EG' : 'en-GB';
+
+    const formattedDate = date.toLocaleDateString(locale, {
       day: "2-digit",
       month: "long",
       year: "numeric",
-    }); // "10 May 2025"
+      calendar: "gregory"
+    });
 
-    // Format time in 24-hour format
-    const formattedTime = date.toLocaleTimeString("en-GB", {
+    const formattedTime = date.toLocaleTimeString(locale, {
       hour: "2-digit",
       minute: "2-digit",
       hour12: false,
@@ -129,5 +134,38 @@ export class OrdersListComponent implements OnInit {
       return formattedDate
     else
       return formattedTime
+  }
+
+  get currencyCode(): string {
+    return this.userDataService.getCurrencyCode();
+  }
+
+  getOrderStatusText(orderStatusEnum: number): string {
+    const isArabic = this.currentlang === 'ar';
+
+    switch (orderStatusEnum) {
+      case 0:
+        return isArabic ? 'قيد الانتظار' : 'Pending';
+      case 1:
+        return isArabic ? 'مدفوع' : 'Paid';
+      case 2:
+        return isArabic ? 'مخصص للمزود' : 'AssignedToProvider';
+      case 3:
+        return isArabic ? 'فى الطريق' : 'InTheWay';
+      case 4:
+        return isArabic ? 'محاولة حل المشكلة' : 'TryingSolveProblem';
+      case 5:
+        return isArabic ? 'محلول' : 'Solved';
+      case 7:
+        return isArabic ? 'مكتمل' : 'Completed';
+      case 6:
+        return isArabic ? 'تم التأكيد من قبل العميل' : 'ClientConfirmation';
+      case 8:
+        return isArabic ? 'ملغي' : 'Cancelled';
+      case 9:
+        return isArabic ? 'لم يتم الحضور' : 'Not Attendance';
+      default:
+        return isArabic ? 'ملغي' : 'Cancelled';
+    }
   }
 }

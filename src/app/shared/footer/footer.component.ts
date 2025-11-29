@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from "@angular/common";
-import { Component, inject } from "@angular/core";
+import { Component, inject, effect } from "@angular/core";
 import { TranslatePipe } from "@ngx-translate/core";
 import { ApiService } from "../../services/api.service";
 import { RouterLink } from "@angular/router";
@@ -34,11 +34,20 @@ export class FooterComponent {
 
   api = inject(ApiService);
   languageService = inject(LanguageService);
-    private userDataService = inject(LoginSignalUserDataService);
+  private userDataService = inject(LoginSignalUserDataService);
+  
+  constructor() {
+    // استخدام effect عشان نتابع تغييرات البلد
+    effect(() => {
+      const country = this.userDataService.selectedCountry();
+      console.log('Country changed in Footer:', country);
+      // جلب الروابط للبلد الجديد
+      this.getAlllinks();
+    });
+  }
   
   ngOnInit(): void {
     this.selectedLang = this.languageService.translationService.currentLang || 'ar';
-    this.getAlllinks();
     this.getAllServices();
     
     this.languageService.translationService.onLangChange.subscribe((lang: any) => {
@@ -90,13 +99,11 @@ export class FooterComponent {
     window.open(routing, "_blank");
   }
 
-  onClickDownload(platform: 'apple' | 'google') {
-    // يمكنك تغيير الروابط حسب روابط تطبيقاتك الفعلية
-    const links = {
-      apple: 'https://apps.apple.com/app/your-app-ihttps://apps.apple.com/eg/app/matlop-%D9%85%D8%B7%D9%84%D9%88%D8%A8/id6747580868',
-      google: 'https://play.google.com/store/apps/details?id=your.app.id'
-    };
-    
-    window.open(links[platform], '_blank');
+  onClickDownload(app: string) {
+    if (app === "apple") {
+      window.open("https://apps.apple.com/eg/app/matlop-%D9%85%D8%B7%D9%84%D9%88%D8%A8/id6747580868", "_blank");
+    } else if (app === "google") {
+      window.open("https://play.google.com/store/apps/details?id=com.matlop.service&pcampaignid=web_share", "_blank");
+    }
   }
 }

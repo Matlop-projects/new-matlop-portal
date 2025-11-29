@@ -13,12 +13,51 @@
     <form [formGroup]="form" class="form mt-5">
       <div class="d-flex justify-contnet-start flex-wrap">
         <div class="w-50 flex-grow-1">
-          <input class="block w-95 mb-2" type="text" [placeholder]="'ABOUT_US_CONTACT.FORM.NAME' | translate" pInputText [formControlName]="'name'" />
-          <input class="block w-95 mb-2" type="text" [placeholder]="'ABOUT_US_CONTACT.FORM.EMAIL' | translate" pInputText [formControlName]="'email'" />
-          <input class="block w-95 mb-2" type="text" [placeholder]="'ABOUT_US_CONTACT.FORM.MOBILE' | translate" pInputText [formControlName]="'mobile'" />
+          <input 
+            class="block w-95 mb-2" 
+            type="text" 
+            [placeholder]="'ABOUT_US_CONTACT.FORM.NAME' | translate" 
+            pInputText 
+            [formControlName]="'name'"
+            [class.ng-invalid]="form.get('name')?.invalid && form.get('name')?.touched" />
+          <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="error-message text-danger mb-2">
+            <small *ngIf="form.get('name')?.errors?.['required']">{{ 'ABOUT_US_CONTACT.ERRORS.NAME_REQUIRED' | translate }}</small>
+          </div>
+
+          <input 
+            class="block w-95 mb-2" 
+            type="text" 
+            [placeholder]="'ABOUT_US_CONTACT.FORM.EMAIL' | translate" 
+            pInputText 
+            [formControlName]="'email'"
+            [class.ng-invalid]="form.get('email')?.invalid && form.get('email')?.touched" />
+          <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="error-message text-danger mb-2">
+            <small *ngIf="form.get('email')?.errors?.['required']">{{ 'ABOUT_US_CONTACT.ERRORS.EMAIL_REQUIRED' | translate }}</small>
+            <small *ngIf="form.get('email')?.errors?.['email']">{{ 'ABOUT_US_CONTACT.ERRORS.EMAIL_INVALID' | translate }}</small>
+          </div>
+
+          <input 
+            class="block w-95 mb-2" 
+            type="text" 
+            [placeholder]="'ABOUT_US_CONTACT.FORM.MOBILE' | translate" 
+            pInputText 
+            [formControlName]="'mobile'"
+            [class.ng-invalid]="form.get('mobile')?.invalid && form.get('mobile')?.touched" />
+          <div *ngIf="form.get('mobile')?.invalid && form.get('mobile')?.touched" class="error-message text-danger mb-2">
+            <small *ngIf="form.get('mobile')?.errors?.['required']">{{ 'ABOUT_US_CONTACT.ERRORS.MOBILE_REQUIRED' | translate }}</small>
+            <small *ngIf="form.get('mobile')?.errors?.['minlength'] || form.get('mobile')?.errors?.['maxlength']">{{ 'ABOUT_US_CONTACT.ERRORS.MOBILE_LENGTH' | translate }}</small>
+          </div>
         </div>
         <div class="w-50 text-area flex-grow-1">
-          <textarea rows="5" [placeholder]="'ABOUT_US_CONTACT.FORM.MESSAGE' | translate" pTextarea [formControlName]="'message'"></textarea>
+          <textarea 
+            rows="5" 
+            [placeholder]="'ABOUT_US_CONTACT.FORM.MESSAGE' | translate" 
+            pTextarea 
+            [formControlName]="'message'"
+            [class.ng-invalid]="form.get('message')?.invalid && form.get('message')?.touched"></textarea>
+          <div *ngIf="form.get('message')?.invalid && form.get('message')?.touched" class="error-message text-danger mb-2">
+            <small *ngIf="form.get('message')?.errors?.['required']">{{ 'ABOUT_US_CONTACT.ERRORS.MESSAGE_REQUIRED' | translate }}</small>
+          </div>
         </div>
       </div>
       <div class="button text-start p-2 mt-3">

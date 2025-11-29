@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="d-flex justify-content-end mb-3">
+  <div class="d-flex justify-content-center mb-3">
     <button class="btn btn-default w-250" (click)="onRequest()">
       {{ "actions.request" | translate }}
     </button>
@@ -43,8 +43,8 @@
               }}
               <span> - #{{ item.specialOrderId }}</span>
             </span>
-            <span [class]="activeStatus" class="all-status">
-              {{ activeStatus | titlecase | translate }}
+            <span [class]="getStatusClass(item.specialOrderStatus)" class="all-status">
+              {{ getOrderStatusText(item.specialOrderStatus) }}
               <span class="pi pi-circle-on"></span>
             </span>
           </div>
@@ -57,18 +57,18 @@
             </div>
             <div class="tax">{{ "ORDERS.VAT_INCLUDED" | translate }}</div>
           </div> -->
-            <div class="mt-5 d-flex justify-content-between">
+            <!-- <div class="mt-5 d-flex justify-content-between">
             <span class="bold">{{'PACKAGE_DETAILS.specialOrderDate'|translate}}</span>
             <span>{{item.specialOrderDate | date:'YYYY-MM-dd (HH:mm a)'}} </span>
-          </div>
+          </div> -->
           <div class="mt-3 d-flex justify-content-between">
             <span class="bold">{{'PACKAGE_DETAILS.PRICE'|translate}}</span>
             <span>{{item.price??0}} {{'ORDERS.SAR' | translate}}</span>
           </div>
-              <div class="mt-3 d-flex justify-content-between">
+              <!-- <div class="mt-3 d-flex justify-content-between">
             <span class="bold">{{'amount'|translate}}</span>
             <span>{{item.amount??0}}</span>
-          </div>
+          </div> -->
           <div class="mt-3">
             <span class="bold block">{{ "PACKAGE_DETAILS.MEDIA" | translate }} </span>
            

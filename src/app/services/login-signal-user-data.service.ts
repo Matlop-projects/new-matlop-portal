@@ -1,5 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { LanguageService } from './language.service';
 
 // interface User {
 //   username: string;
@@ -12,6 +13,9 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class LoginSignalUserDataService {
+  // ✅ Inject LanguageService
+  private languageService = inject(LanguageService);
+  
   // ✅ Load user from localStorage or set it to null
   user = signal<any | null>(this.loadUserFromStorage());
   
@@ -35,6 +39,17 @@ export class LoginSignalUserDataService {
   getCountryId(): number {
     const country = this.selectedCountry();
     return country === 'SA' ? 1 : country === 'OM' ? 2 : 1; // Default to Saudi Arabia
+  }
+
+  getCurrencyCode(): string {
+    const country = this.selectedCountry();
+    const currentLang = this.languageService.translationService.currentLang || 'ar';
+    
+    if (currentLang === 'ar') {
+      return country === 'OM' ? 'ریال عماني' : 'ریال سعودي';
+    } else {
+      return country === 'OM' ? 'OMR' : 'SAR';
+    }
   }
 
   logout() {

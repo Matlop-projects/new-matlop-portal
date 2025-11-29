@@ -10,6 +10,7 @@ import { SelectModule } from "primeng/select";
 import { FloatLabelModule } from "primeng/floatlabel";
 import { TranslateModule } from "@ngx-translate/core";
 import { LanguageService } from "../../../services/language.service";
+import { LoginSignalUserDataService } from "../../../services/login-signal-user-data.service";
 @Component({
   selector: "app-order-details",
   standalone: true,
@@ -44,12 +45,18 @@ export class OrderDetailsComponent implements OnInit {
   private apiService = inject(ApiService);
   selectedLang: any;
   languageService = inject(LanguageService);
+  userDataService = inject(LoginSignalUserDataService);
+  
   get orderId() {
     return this.route.snapshot.paramMap.get("id");
   }
   get totalEquipmentPrice(): number {
   return this.orderDetails.orderEquipmentResponse?.reduce((sum:number, item:any) => sum + item.price, 0) || 0;
 }
+
+  get currencyCode(): string {
+    return this.userDataService.getCurrencyCode();
+  }
 
   ngOnInit(): void {
     this.getOrderDetails();

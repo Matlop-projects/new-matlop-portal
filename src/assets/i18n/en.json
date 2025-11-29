@@ -1,4 +1,9 @@
 {
+  "notifications": "Notifications",
+  "no_notifications": "No notifications",
+  "notifications.id": "Notification ID",
+  "notifications.message": "Message",
+  "notifications.created": "Created At",
   "from": "From",
   "to": "To",
   "amount": "Amount",
@@ -187,7 +192,7 @@
     },
     "FOLLOW_US": "Follow Us",
     "TERMS": "Terms & Conditions",
-    "COPYRIGHT": "All rights reserved for"
+    "COPYRIGHT": "All rights reserved for Matlop Trading Company."
   },
   "SERVICE_LIST": {
     "ORDER_NOW": "Order Now"
@@ -324,6 +329,14 @@
       "EMAIL": "Email",
       "MOBILE": "Mobile Number",
       "MESSAGE": "Message"
+    },
+    "ERRORS": {
+      "NAME_REQUIRED": "Name is required",
+      "EMAIL_REQUIRED": "Email is required",
+      "EMAIL_INVALID": "Invalid email format",
+      "MOBILE_REQUIRED": "Mobile number is required",
+      "MOBILE_LENGTH": "Mobile number must be 10 digits",
+      "MESSAGE_REQUIRED": "Message is required"
     },
     "BANNER_HEADER": "Trusted Experience, Reliable Quality",
     "BANNER_DESC": "We provide reliable maintenance services with high professionalism and easy ordering. Our goal is to deliver a smooth and fast experience that meets your expectations through an expert team and attentive service."

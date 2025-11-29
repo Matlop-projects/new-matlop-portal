@@ -69,23 +69,23 @@
 
 <p-dialog
   [(visible)]="showDialog"
-  [header]="'Text Notification Details'"
+  [header]="selectedLang == 'en' ? 'Text Notification Details' : 'تفاصيل الإشعار'"
   [modal]="true"
   [style]="{ width: '30vw' }"
 >
   <div class="dialog-content" *ngIf="selectedNotification">
-    <h3>{{ selectedNotification?.title }}</h3>
+    <h3>{{ selectedLang == 'en' ? selectedNotification?.titleEn : selectedNotification?.titleAr }}</h3>
     <p>
       <strong>{{ "notifications.id" | translate }}:</strong>
       {{ selectedNotification.notificationId }}
     </p>
     <p>
       <strong>{{ "notifications.message" | translate }}:</strong>
-      {{ selectedNotification.body }}
+      {{ selectedLang == 'en' ? selectedNotification?.bodyEn : selectedNotification?.bodyAr }}
     </p>
     <p>
       <strong>{{ "notifications.created" | translate }}:</strong>
-      {{ selectedNotification.creationTime | date : "medium" }}
+      {{ formatDateTime(selectedNotification.creationTime) }}
     </p>
   </div>
 </p-dialog>

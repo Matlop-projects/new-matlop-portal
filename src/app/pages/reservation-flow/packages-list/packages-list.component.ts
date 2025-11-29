@@ -144,7 +144,7 @@ export class PackagesListComponent {
   getCurrencyIcon(): string {
     const selectedCountry = this.userDataService.getCountryId();
     return selectedCountry === 2 
-      ? 'assets/images/icons-svg/Omani_Rial.svg' 
+      ? 'assets/images/icons-svg/riyal.png' 
       : 'assets/images/icons-svg/Saudi_Riyal.svg';
   }
 }

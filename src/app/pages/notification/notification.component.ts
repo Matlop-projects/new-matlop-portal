@@ -53,6 +53,9 @@ export class NotificationComponent {
       once: true,
     });
 
+    // Set initial language
+    this.selectedLang = this.languageService.translationService.currentLang || 'ar';
+
     this.getNotifications();
 
     this.languageService.translationService.onLangChange.subscribe(() => {
@@ -66,38 +69,79 @@ export class NotificationComponent {
   }
 
   getNotifications() {
+    console.log("getNotifications - START");
     const expirationTime = this.getTokenExpirationFromJWT();
 
+    console.log("Token expiration time:", expirationTime);
+    console.log("Current time:", Date.now());
+    console.log("Is expired?", expirationTime ? this.isTokenExpired(expirationTime) : "No expiration time");
+
     if (!expirationTime || this.isTokenExpired(expirationTime)) {
-      console.log("⛔ Token is missing or expired");
+      console.log("⛔ Token is missing or expired - API call SKIPPED");
       return;
     }
 
-    this.ApiService.get("Notification/GetNotifications").subscribe((noti: any) => {
-      this.notificationsList = noti.data.data;
-      this.totlaCount = noti.data.totalCount;
-      this.totalUnSeen = noti.data.totalUnSeenCount;
+    console.log("✅ Token is valid - Making API call");
+    this.ApiService.get("Notification/GetNotifications").subscribe({
+      next: (noti: any) => {
+        console.log("✅ API Response received:", noti);
+        this.notificationsList = noti.data.data;
+        this.totlaCount = noti.data.totalCount;
+        this.totalUnSeen = noti.data.totalUnSeenCount;
 
-      const newCount = noti.data.totalUnSeenCount;
-      const oldCount = this.totalUnSeenCount$.value;
+        const newCount = noti.data.totalUnSeenCount;
+        const oldCount = this.totalUnSeenCount$.value;
 
-      if (oldCount !== null && newCount > oldCount && this.isUserInteracted) {
-        this.playSound();
+        if (oldCount !== null && newCount > oldCount && this.isUserInteracted) {
+          this.playSound();
+        }
+
+        this.totalUnSeenCount$.next(newCount);
+      },
+      error: (error) => {
+        console.error("❌ API Error:", error);
       }
-
-      this.totalUnSeenCount$.next(newCount);
     });
   }
 
   getTokenExpirationFromJWT(): number | null {
     const token = localStorage.getItem("token");
-    if (!token) return null;
+    
+    if (!token) {
+      console.warn("⚠️ No token found in localStorage");
+      return null;
+    }
+
+    // Check if token has 3 parts (header.payload.signature)
+    const parts = token.split(".");
+    if (parts.length !== 3) {
+      console.error("❌ Invalid JWT format - token should have 3 parts, found:", parts.length);
+      console.error("Token value:", token.substring(0, 50) + "...");
+      return null;
+    }
 
     try {
-      const payload = JSON.parse(atob(token.split(".")[1]));
-      return payload.exp ? payload.exp * 1000 : null; // convert seconds → ms
+      // Decode base64url with UTF-8 support (handles Arabic and other Unicode characters)
+      const base64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      );
+      
+      const payload = JSON.parse(jsonPayload);
+      
+      if (!payload.exp) {
+        console.warn("⚠️ Token has no expiration (exp) claim");
+        return null;
+      }
+      
+      console.log("✅ Token decoded successfully. Expires at:", new Date(payload.exp * 1000));
+      return payload.exp * 1000;
     } catch (error) {
       console.error("❌ Failed to decode token:", error);
+      console.error("Token payload part:", parts[1].substring(0, 50) + "...");
       return null;
     }
   }
@@ -189,5 +233,19 @@ export class NotificationComponent {
       else if (hours < 24) return `since ${hours} hour${hours !== 1 ? "s" : ""}`;
       else return `since ${days} day${days !== 1 ? "s" : ""}`;
     }
+  }
+
+  formatDateTime(dateTime: string): string {
+    const date = new Date(dateTime);
+    const locale = this.selectedLang === 'ar' ? 'ar-SA' : 'en-GB';
+    
+    return date.toLocaleString(locale, {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    });
   }
 }

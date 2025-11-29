@@ -95,6 +95,24 @@
           }
           
 
+          .order-btn-container {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            text-align: left;
+          
+            .order-btn {
+              background: linear-gradient(to right, #BFFD2B, #05BCE8);
+              color: #fff;
+              font-weight: bolder;
+              padding: 15px 50px;
+              border-radius: 32px;
+              width: 100%;
+              max-width: 300px;
+              border: none;
+            }
+          }
+
 
     }
 

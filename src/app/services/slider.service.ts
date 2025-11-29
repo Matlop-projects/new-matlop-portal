@@ -72,7 +72,6 @@ export class SliderService {
     }
 
     this.loadingSubject.next(true);
-debugger;
     const countryId = this.userDataService.getCountryId();
     const apiUrl = `${this.baseApiUrl}/GetByCountryId/${countryId}`;
 
@@ -112,9 +111,7 @@ debugger;
   }
 
   getSlidersOptimized(): Observable<SliderResponse> {
-    debugger;
     if (this.isValidCache()) {
-      debugger;
       if (this.slidersSubject.value !== this.cache!.data) {
         this.slidersSubject.next(this.cache!.data);
       }

@@ -22,8 +22,8 @@
       <div class="address-info">
         <h3 class="address-name">{{ address.name }}</h3>
         <div class="address-details">
-          <p><strong>{{ 'ADDRESSES.COUNTRY' | translate }}:</strong> {{ address.countryName }}</p>
-          <p><strong>{{ 'ADDRESSES.CITY' | translate }}:</strong> {{ address.cityName }}</p>
+          <p><strong>{{ 'ADDRESSES.COUNTRY' | translate }}:</strong> {{ currentLang == 'en' ? address.countryNameEn : address.countryName }}</p>
+          <p><strong>{{ 'ADDRESSES.CITY' | translate }}:</strong> {{ currentLang == 'en' ? address.cityNameEn : address.cityName }}</p>
           <!-- <p><strong>{{ 'ADDRESSES.DISTRICT' | translate }}:</strong> {{ address.districtName }}</p> -->
         <p><strong>{{ 'ADDRESSES.BLOCK_NUMBER' | translate }}:</strong> {{ address.blockNo }}</p>
         </div>

@@ -7,7 +7,7 @@
           <span class="bold ">{{ "PACKAGE_DETAILS.wallet" | translate }} :</span>
           <span class="bold">
             <p>
-              <img [src]="getCurrencyIcon()" alt="">
+              <img [src]="getCurrencyIcon()" alt="" width="20" height="20">
               {{ walletBalance }}
             </p>
           </span>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="amount">
                   <p>
-                    <img [src]="getCurrencyIcon()" alt="">
+                    <img [src]="getCurrencyIcon()" alt="" width="24" height="24">
 
                     {{ packageDetails.price }}
                   </p>
@@ -129,7 +129,7 @@
                     </div>
                     <div class="value">
                       <p>
-                        <img [src]="getCurrencyIcon()" alt="">
+                        <img [src]="getCurrencyIcon()" alt="" width="18" height="18">
                         {{ packageDetails.price }}
                       </p>
                     </div>
@@ -143,7 +143,7 @@
                     </div>
                     <div class="value">
                       <p>
-                        <img [src]="getCurrencyIcon()" alt="">
+                        <img [src]="getCurrencyIcon()" alt="" width="18" height="18">
                         {{packageDetails.equipmentsPrice ? packageDetails.equipmentsPrice: 0}}
                       </p>
                     </div>
@@ -155,7 +155,7 @@
                         class="d-flex coupon-discount" style="gap:5px">
                         <span class="max-amount-text">{{ "PACKAGE_DETAILS.hasMasAmount" | translate }}</span>
                         <span class="suadi-max-ryal-img">
-                          <img [src]="getCurrencyIcon()" width="12">
+                          <img [src]="getCurrencyIcon()" width="12" height="12">
                         </span>
                         <span class="max-amount-text">{{packageDetails.maxAmount}}</span>
                       </p>
@@ -163,7 +163,7 @@
                     <div class="value">
                       <p>
                         <img *ngIf="packageDetails.couponType == 2" [src]="getCurrencyIcon()"
-                          alt="">
+                          alt="" width="18" height="18">
                         {{packageDetails.couponDiscount ? packageDetails.couponDiscount : 0}}
                         <span *ngIf="packageDetails.couponType == 1">%</span>
                       </p>
@@ -175,7 +175,7 @@
                     </div>
                     <div class="total-price-value">
                       <p>
-                        <img [src]="getCurrencyIcon()" alt="">
+                        <img [src]="getCurrencyIcon()" alt="" width="20" height="20">
                         {{packageDetails.orderTotal}}
                       </p>
                     </div>
@@ -242,7 +242,7 @@
                       }}
                     </p>
                     <p>
-                      <img [src]="getCurrencyIcon()" alt="">
+                      <img [src]="getCurrencyIcon()" alt="" width="18" height="18">
                       {{equipment.price}}
                     </p>
                   </div>

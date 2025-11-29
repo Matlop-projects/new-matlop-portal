@@ -175,6 +175,7 @@ export class PackageDetailsComponent {
     this.languageService.translationService.onLangChange.subscribe(() => {
       this.selectedLang = this.languageService.translationService.currentLang;
       this.displayDatepickerConfig(this.selectedLang)
+      this.getLocation(); // Refresh locations when language changes
       this.bkg_text_options.header = this.languageService.translate(
         "ABOUT_US_CONTACT.BANNER_HEADER"
       );
@@ -221,12 +222,15 @@ export class PackageDetailsComponent {
   }
 
   getLocation() {
+    debugger;
     const userId = localStorage.getItem("userId");
     this.ApiService.get(`Location/GetByUserId/${userId}`).subscribe(
       (res: any) => {
         if (res.data) {
+          debugger;
+          console.log("dsdsds",this.selectedLang); 
           this.locations = res.data?.map((item: any) => ({
-            name: `${item.countryName} - ${item.cityName}  ${item.districtName ? ' - ' + item.districtName : ''}  ${item.blockNo ? ' - ' + item.blockNo : ''}`,
+            name: this.selectedLang == 'en' ? `${item.countryNameEn} - ${item.cityNameEn}  ${item.districtName ? ' - ' + item.districtName : ''}  ${item.blockNo ? ' - ' + item.blockNo : ''}` : `${item.countryName} - ${item.cityName}  ${item.districtName ? ' - ' + item.districtName : ''}  ${item.blockNo ? ' - ' + item.blockNo : ''}`,
             code: item.locationId,
           }));
         }
@@ -718,7 +722,7 @@ export class PackageDetailsComponent {
   getCurrencyIcon(): string {
     const selectedCountry = this.userDataService.getCountryId();
     return selectedCountry === 2 
-      ? 'assets/images/icons-svg/Omani_Rial.svg' 
+      ? 'assets/images/icons-svg/riyal.png' 
       : 'assets/images/icons-svg/Saudi_Riyal.svg';
   }
 }

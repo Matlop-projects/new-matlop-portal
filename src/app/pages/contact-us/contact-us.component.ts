@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
+import { NgIf } from "@angular/common";
 import { InputTextModule } from "primeng/inputtext";
 import { TextareaModule } from "primeng/textarea";
 import { ApiService } from "../../services/api.service";
@@ -17,7 +18,7 @@ import { LanguageService } from "../../services/language.service";
 @Component({
   selector: 'app-contact-us',
   standalone: true,
-  imports: [ReactiveFormsModule, BackgroundImageWithTextComponent, TranslatePipe, InputTextModule, TextareaModule, FormsModule],
+  imports: [ReactiveFormsModule, BackgroundImageWithTextComponent, TranslatePipe, InputTextModule, TextareaModule, FormsModule, NgIf],
   templateUrl: './contact-us.component.html',
   styleUrl: './contact-us.component.scss'
 })
@@ -49,8 +50,6 @@ export class ContactUsComponent implements OnInit {
     mobile: new FormControl("", {
       validators: [
         Validators.required,
-        Validators.pattern(/^05\d{8}$/),
-        Validators.minLength(10),
         Validators.maxLength(10)
       ]
     }),
@@ -69,6 +68,14 @@ export class ContactUsComponent implements OnInit {
   }
 
   onContactUs() {
+    // Mark all fields as touched to show validation errors
+    if (this.form.invalid) {
+      Object.keys(this.form.controls).forEach(key => {
+        this.form.get(key)?.markAsTouched();
+      });
+      return;
+    }
+
     this.apiService.post("ContactUs/Create", this.form.value).subscribe((res) => {
       // Reset the form after successful submission
       this.form.reset();
