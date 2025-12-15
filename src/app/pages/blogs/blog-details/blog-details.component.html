@@ -1,0 +1,87 @@
+<app-background-image-with-text
+  [options]="bkg_text_options"
+></app-background-image-with-text>
+
+<div class="container mt-5">
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="isLoading">
+    <i class="pi pi-spin pi-spinner"></i>
+    <p>{{ "BLOG_DETAILS.LOADING" | translate }}</p>
+  </div>
+
+  <!-- Blog Content -->
+  <div class="blog-details-wrapper" *ngIf="!isLoading && blog">
+    <!-- Back Button -->
+    <button class="back-btn" (click)="goBack()">
+      <i class="pi pi-arrow-right" *ngIf="currentLang === 'ar'"></i>
+      <i class="pi pi-arrow-left" *ngIf="currentLang !== 'ar'"></i>
+      {{ "BLOG_DETAILS.BACK_TO_BLOGS" | translate }}
+    </button>
+
+    <!-- Blog Header -->
+    <!-- <div class="blog-header">
+      <div class="blog-meta">
+        <span class="blog-date" *ngIf="blog.creationTime">
+          <i class="pi pi-calendar"></i>
+          {{ blog.creationTime | date : "dd MMMM yyyy" }}
+        </span>
+      </div>
+      <h1 class="blog-title">{{ getBlogName() }}</h1>
+    </div> -->
+
+    <!-- Blog Cover Image -->
+    <!-- <div class="blog-cover">
+      <img [src]="getBlogCover()" [alt]="getBlogName()" />
+    </div> -->
+
+    <!-- Blog Content -->
+    <div class="blog-content" [innerHTML]="getBlogDescription()"></div>
+
+    <!-- Related Blogs Section -->
+    <div class="related-blogs-section" *ngIf="relatedBlogs.length > 0">
+      <h2 class="related-blogs-title">{{ "BLOG_DETAILS.RELATED_BLOGS" | translate }}</h2>
+      
+      <div class="related-blogs-grid">
+        <div class="related-blog-card" *ngFor="let relatedBlog of relatedBlogs" (click)="onRelatedBlogClick(relatedBlog.blogId)">
+          <div class="related-blog-image">
+            <img [src]="getRelatedBlogCover(relatedBlog)" [alt]="getRelatedBlogName(relatedBlog)" />
+          </div>
+          <div class="related-blog-content">
+            <h3 class="related-blog-title">{{ getRelatedBlogName(relatedBlog) }}</h3>
+            <div class="related-blog-footer">
+              <span class="related-blog-date">
+                <i class="pi pi-calendar"></i>
+                {{ relatedBlog.creationTime | date : "dd MMMM yyyy" : "" : currentLang === 'ar' ? 'ar-SA' : 'en-US' }}
+              </span>
+              <button class="read-more-btn">
+                {{ "BLOGS.READ_MORE" | translate }}
+                <i class="pi pi-arrow-left" *ngIf="currentLang === 'ar'"></i>
+                <i class="pi pi-arrow-right" *ngIf="currentLang !== 'ar'"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Show More Button -->
+      <div class="show-more-container" *ngIf="hasMoreRelatedBlogs">
+        <button class="show-more-btn" (click)="loadMoreRelatedBlogs()" [disabled]="isLoadingMore">
+          <span *ngIf="!isLoadingMore">{{ "BLOG_DETAILS.SHOW_MORE" | translate }}</span>
+          <span *ngIf="isLoadingMore">
+            <i class="pi pi-spin pi-spinner"></i>
+            {{ "BLOG_DETAILS.LOADING" | translate }}
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!isLoading && !blog">
+    <i class="pi pi-exclamation-circle"></i>
+    <p>{{ "BLOG_DETAILS.NOT_FOUND" | translate }}</p>
+    <button class="back-btn-centered" (click)="goBack()">
+      {{ "BLOG_DETAILS.BACK_TO_BLOGS" | translate }}
+    </button>
+  </div>
+</div>

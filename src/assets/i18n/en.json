@@ -80,6 +80,7 @@
     "CONTACT_US": "Contact Us",
     "SERVICES": "Our Services",
     "ORDERS": "Orders",
+    "BLOGS": "Blogs",
     "SIGNUP": "Create Account",
     "LOGIN": "Login",
     "ENGLISH": "English",
@@ -480,6 +481,21 @@
     "OUR_CLIENTS": "Our Clients",
     "NO_CLIENTS": "No clients available at the moment",
     "DESCRIPTION": "We are proud to work with leading companies and organizations that trust us to deliver exceptional services"
+  },
+  "BLOGS": {
+    "BANNER_HEADER": "Articles and Tips for You",
+    "BANNER_DESC": "Discover the latest articles and tips on maintenance and home services",
+    "FEATURED_BLOGS": "Featured Articles",
+    "ALL": "All",
+    "READ_MORE": "Read Article",
+    "NO_BLOGS": "No articles available at the moment"
+  },
+  "BLOG_DETAILS": {
+    "LOADING": "Loading...",
+    "BACK_TO_BLOGS": "Back to Articles",
+    "NOT_FOUND": "Article not found",
+    "RELATED_BLOGS": "Related Articles",
+    "SHOW_MORE": "Show More"
   },
   "ADDRESSES": {
     "TITLE": "Address Management",

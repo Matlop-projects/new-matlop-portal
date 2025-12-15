@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
   FormsModule
 } from '@angular/forms';
-import { CommonModule, NgIf, NgClass, NgFor } from '@angular/common';
+import { CommonModule, NgIf, NgFor } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Dialog } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
@@ -26,7 +26,6 @@ import { TooltipModule } from 'primeng/tooltip';
     ReactiveFormsModule,
     FormsModule,
     NgIf,
-    NgClass,
     NgFor,
     Dialog,
     TranslatePipe,
@@ -53,6 +52,7 @@ export class EmergencyOrderPageComponent {
   showAddSpecialOrder = false;
   locations: any[] = [];
   isDragging = false;
+  isSubmitting: boolean = false; // To prevent multiple clicks
 
   showAddLocationDialog: boolean = false
 
@@ -134,6 +134,11 @@ export class EmergencyOrderPageComponent {
   }
 
   submitForm() {
+    // Prevent multiple submissions
+    if (this.isSubmitting) {
+      return;
+    }
+
     if (this.form.valid) {
       this.form.patchValue({
         specialOrderDate: new Date().toISOString()
@@ -146,15 +151,27 @@ export class EmergencyOrderPageComponent {
   }
 
   createEmergencyOrder(payload: any) {
-    this.api.post('SpecialOrder/Create', payload).subscribe(res => {
-      this.toaster.successToaster('تم انشاء الطلب بنجاح');
-      setTimeout(() => {
-        this.router.navigate(['/home'])
-      }, 1000);
-    },
-      err => {
-        this.toaster.errorToaster('حدث خطاء')
-      });
+    // Disable button
+    this.isSubmitting = true;
+
+    this.api.post('SpecialOrder/Create', payload).subscribe({
+      next: (res) => {
+        this.toaster.successToaster(
+          this.languageService.translate('EMERGENCY_ORDER.SUCCESS') || 'تم انشاء الطلب بنجاح'
+        );
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 1000);
+      },
+      error: (err) => {
+        // Re-enable button on error
+        this.isSubmitting = false;
+        console.error('Emergency order creation failed:', err);
+        this.toaster.errorToaster(
+          this.languageService.translate('EMERGENCY_ORDER.ERROR') || 'حدث خطأ أثناء إنشاء الطلب'
+        );
+      }
+    });
   }
 
   getLocation() {

@@ -92,6 +92,7 @@ export class PackageDetailsComponent {
   toaster = inject(ToasterService);
   selectedEquipments: { equipmentId: number }[] = []; // declare at top of your TS file
   usedNumber: any;
+  isSubmitting: boolean = false; // To prevent multiple clicks
   bkg_text_options: IBackGroundImageWithText = {
     imageUrl: "assets/img/slider.svg",
     header: this.languageService.translate("ABOUT_US_CONTACT.BANNER_HEADER"),
@@ -524,6 +525,11 @@ export class PackageDetailsComponent {
   }
 
   createOrder() {
+    // Prevent multiple submissions
+    if (this.isSubmitting) {
+      return;
+    }
+
     if (this.orderObject.locationId == null) {
       this.toaster.errorToaster(
         this.languageService.translate("PACKAGE_DETAILS.VALIDATION.LOCATION")
@@ -542,8 +548,12 @@ export class PackageDetailsComponent {
       );
     } else {
       console.log(this.orderObject);
-      this.ApiService.post("Order/Create", this.orderObject).subscribe(
-        (res: any) => {
+      
+      // Disable button
+      this.isSubmitting = true;
+      
+      this.ApiService.post("Order/Create", this.orderObject).subscribe({
+        next: (res: any) => {
           // console.log(res);
           // this.toaster.successToaster("تم اضافة الطلب بنجاح");
           const orderId = res.data.orderId;
@@ -565,8 +575,16 @@ export class PackageDetailsComponent {
               })
             )}`;
           }
+        },
+        error: (error) => {
+          // Re-enable button on error
+          this.isSubmitting = false;
+          console.error('Order creation failed:', error);
+          this.toaster.errorToaster(
+            this.languageService.translate("PACKAGE_DETAILS.ORDER_ERROR") || "An error occurred while creating the order"
+          );
         }
-      );
+      });
     }
   }
 

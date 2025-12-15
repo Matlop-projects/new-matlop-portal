@@ -10,6 +10,9 @@ import { TranslatePipe } from "@ngx-translate/core";
 import { LanguageService } from "../../../services/language.service";
 import { environment } from "../../../../environments/environment";
 import { PaginationComponent } from "../../../components/pagination/pagination.component";
+import { LoginSignalUserDataService } from "../../../services/login-signal-user-data.service";
+import { Dialog } from "primeng/dialog";
+import { ToasterService } from "../../../services/toaster.service";
 
 @Component({
   selector: "app-emergency-order-list",
@@ -21,7 +24,8 @@ import { PaginationComponent } from "../../../components/pagination/pagination.c
     BackgroundImageWithTextComponent,
     TranslatePipe,
     DatePipe,
-    PaginationComponent
+    PaginationComponent,
+    Dialog
   ],
   templateUrl: "./emergency-order-list.component.html",
   styleUrl: "./emergency-order-list.component.scss",
@@ -29,6 +33,14 @@ import { PaginationComponent } from "../../../components/pagination/pagination.c
 export class EmergencyOrderListComponent implements OnInit {
   languageService = inject(LanguageService);
   baseImgUrl = environment.baseImageUrl;
+  userDataService = inject(LoginSignalUserDataService);
+  toaster = inject(ToasterService);
+  
+  // Offers Dialog
+  showOffersDialog: boolean = false;
+  offers: any[] = [];
+  selectedOrder: any = null;
+  isAcceptingOffer: { [key: number]: boolean } = {};
   bkg_text_options: IBackGroundImageWithText = {
     imageUrl: "assets/img/order-slider.svg",
     header: this.languageService.translate("ORDER_TRACKING.BANNER_HEADER"),
@@ -49,7 +61,7 @@ export class EmergencyOrderListComponent implements OnInit {
     sortingExpression: "",
     sortingDirection: 0,
     clientId: 0,
-    specialOrderId: 0,
+    specialOrderId: null as number | null,
     amount: 0,
     media: "string",
     specialOrderEnum: 1,
@@ -84,11 +96,11 @@ export class EmergencyOrderListComponent implements OnInit {
     this.searchObject.pageSize= 8,
     this.activeStatus = value;
     if (value == "pending") {
-      this.searchObject.specialOrderStatusEnum = 1;
+      this.searchObject.specialOrderStatusEnum = 0;
     } else if (value == "complete") {
-      this.searchObject.specialOrderStatusEnum = 2;
+      this.searchObject.specialOrderStatusEnum = 7;
     } else {
-      this.searchObject.specialOrderStatusEnum = 3;
+      this.searchObject.specialOrderStatusEnum = 8;
     }
     this.getAllOrders();
   }
@@ -121,24 +133,36 @@ export class EmergencyOrderListComponent implements OnInit {
   onOrderDetails(orderId: number) {
     this.router.navigateByUrl(`order-details/${orderId}`);
   }
-
   formatDateTime(dateTime: any, type: string) {
     const cleanedIso = dateTime.split(".")[0]; // "2025-05-10T00:52:55"
 
     // Convert to Date object
     const date = new Date(cleanedIso);
-    const formattedDate = date.toLocaleDateString("en-GB", {
+    
+    // Use ar-EG with Gregorian calendar for Arabic, en-GB for English
+    const locale = this.currentlang === 'ar' ? 'ar-EG' : 'en-GB';
+    
+    const formattedDate = date.toLocaleDateString(locale, {
       day: "2-digit",
       month: "long",
       year: "numeric",
+      calendar: "gregory"
     }); // "10 May 2025"
+    console.log(
+      "🚀 ~ SpecialOrderListComponent ~ formatDateTime ~ formattedDate:",
+      formattedDate
+    );
 
     // Format time in 24-hour format
-    const formattedTime = date.toLocaleTimeString("en-GB", {
+    const formattedTime = date.toLocaleTimeString(locale, {
       hour: "2-digit",
       minute: "2-digit",
       hour12: false,
     }); //
+    console.log(
+      "🚀 ~ SpecialOrderListComponent ~ formatDateTime ~ formattedTime:",
+      formattedTime
+    );
 
     if (type == "date") return formattedDate;
     else return formattedTime;
@@ -146,5 +170,117 @@ export class EmergencyOrderListComponent implements OnInit {
 
   onRequest() {
     this.router.navigateByUrl("create-emergency-order");
+  }
+
+  getOrderStatusText(orderStatusEnum: number): string {
+    debugger;
+    const isArabic = this.currentlang === 'ar';
+
+    switch (orderStatusEnum) {
+      case 0:
+        return isArabic ? 'قيد الانتظار' : 'Pending';
+      case 1:
+        return isArabic ? 'مدفوع' : 'Paid';
+      case 2:
+        return isArabic ? 'مخصص للمزود' : 'AssignedToProvider';
+      case 3:
+        return isArabic ? 'فى الطريق' : 'InTheWay';
+      case 4:
+        return isArabic ? 'محاولة حل المشكلة' : 'TryingSolveProblem';
+      case 5:
+        return isArabic ? 'محلول' : 'Solved';
+      case 7:
+        return isArabic ? 'مكتمل' : 'Completed';
+      case 6:
+        return isArabic ? 'تم التأكيد من قبل العميل' : 'ClientConfirmation';
+      case 8:
+        return isArabic ? 'ملغي' : 'Cancelled';
+      case 9:
+        return isArabic ? 'لم يتم الحضور' : 'Not Attendance';
+      default:
+        return isArabic ? 'ملغي' : 'Cancelled';
+    }
+  }
+
+  
+  getCurrencyCode(): string {
+    return this.userDataService.getCurrencyCode();
+  }
+  getStatusClass(statusEnum: number): string {
+    switch (statusEnum) {
+      case 1:
+        return 'pending';
+      case 2:
+        return 'complete';
+      case 3:
+        return 'cancel';
+      default:
+        return 'pending';
+    }
+  }
+
+  // Get offers for special order
+  getOffers(specialOrderId: number) {
+    this.selectedOrder = this.orders.find((o: any) => o.specialOrderId === specialOrderId);
+    this.apiService
+      .get(`SpecialOrderOffer/GetBySpecialOrderId/${specialOrderId}`)
+      .subscribe({
+        next: (res: any) => {
+          if (res.data) {
+            this.offers = res.data;
+            this.showOffersDialog = true;
+          } else {
+            this.offers = [];
+            this.showOffersDialog = true;
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching offers:', err);
+          this.toaster.errorToaster(
+            this.currentlang === 'ar' ? 'خطأ في جلب العروض' : 'Error fetching offers'
+          );
+        }
+      });
+  }
+
+  // Accept offer
+  acceptOffer(offer: any) {
+    // Prevent multiple clicks
+    if (this.isAcceptingOffer[offer.specialOrderOfferId]) {
+      return;
+    }
+
+    this.isAcceptingOffer[offer.specialOrderOfferId] = true;
+
+    const payload = {
+      technicalId: offer.technicalId,
+      specialOrderOfferId: offer.specialOrderOfferId
+    };
+
+    this.apiService
+      .post('SpecialOrderOffer/SubmitSpecialOrder', payload)
+      .subscribe({
+        next: (res: any) => {
+          this.toaster.successToaster(
+            this.currentlang === 'ar' ? 'تم قبول العرض بنجاح' : 'Offer accepted successfully'
+          );
+          this.showOffersDialog = false;
+          this.getAllOrders(); // Refresh orders list
+          this.isAcceptingOffer[offer.specialOrderOfferId] = false;
+        },
+        error: (err) => {
+          console.error('Error accepting offer:', err);
+          this.toaster.errorToaster(
+            this.currentlang === 'ar' ? 'خطأ في قبول العرض' : 'Error accepting offer'
+          );
+          this.isAcceptingOffer[offer.specialOrderOfferId] = false;
+        }
+      });
+  }
+
+  closeOffersDialog() {
+    this.showOffersDialog = false;
+    this.offers = [];
+    this.selectedOrder = null;
   }
 }

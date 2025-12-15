@@ -100,8 +100,15 @@
             </div>
 
             <div class="submit-btn mt-4">
-              <button type="submit" [disabled]="form.invalid">
-                 {{'actions.send_request'|translate}}
+              <button 
+                type="submit" 
+                [disabled]="form.invalid || isSubmitting"
+                [class.submitting]="isSubmitting">
+                <span *ngIf="!isSubmitting">{{'actions.send_request'|translate}}</span>
+                <span *ngIf="isSubmitting" class="submitting-content">
+                  <span class="spinner"></span>
+                  {{ selectedLang === 'ar' ? 'جاري الإرسال...' : 'Submitting...' }}
+                </span>
               </button>
             </div>
           </form>

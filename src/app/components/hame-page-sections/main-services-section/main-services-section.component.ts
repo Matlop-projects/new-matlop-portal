@@ -3,14 +3,14 @@ import { ApiService } from '../../../services/api.service';
 import { Router, RouterModule } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
 import { environment } from '../../../../environments/environment';
-import { CommonModule, NgIf, NgStyle } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-main-services-section',
   standalone: true,
-  imports: [NgIf, NgStyle, RouterModule, TranslatePipe, CommonModule],
+  imports: [NgIf, RouterModule, TranslatePipe, CommonModule],
   templateUrl: './main-services-section.component.html',
   styleUrl: './main-services-section.component.scss'
 })
@@ -86,15 +86,17 @@ export class MainServicesSectionComponent implements OnInit, OnDestroy, AfterVie
         this.currentSlideIndex = 0;
         console.log('Resetting services slider to beginning');
         container.scrollTo({
-          left: this.selectedLang === 'ar' ? container.scrollWidth - container.clientWidth : 0,
+          left: 0,
           behavior: 'smooth'
         });
       } else {
         // الانتقال للمجموعة التالية (3 كروت)
         console.log(`Scrolling to group ${this.currentSlideIndex + 1} of ${totalGroups}`);
         const targetScroll = this.currentSlideIndex * scrollAmount;
+        // في RTL، نستخدم قيمة سالبة
+        const scrollValue = this.selectedLang === 'ar' ? -targetScroll : targetScroll;
         container.scrollTo({
-          left: this.selectedLang === 'ar' ? -(targetScroll) : targetScroll,
+          left: scrollValue,
           behavior: 'smooth'
         });
       }
@@ -148,8 +150,12 @@ export class MainServicesSectionComponent implements OnInit, OnDestroy, AfterVie
       // إيقاف التحرك التلقائي مؤقتاً عند الضغط اليدوي
       this.stopAutoSlide();
       
+      // في العربية (RTL)، الزر الأيسر يحرك لليمين (موجب)
+      // في الإنجليزية (LTR)، الزر الأيسر يحرك لليسار (سالب)
+      const scrollValue = this.selectedLang === 'ar' ? scrollAmount : -scrollAmount;
+      
       container.scrollBy({
-        left: this.selectedLang === 'ar' ? scrollAmount : -scrollAmount,
+        left: scrollValue,
         behavior: 'smooth'
       });
       
@@ -169,8 +175,12 @@ export class MainServicesSectionComponent implements OnInit, OnDestroy, AfterVie
       // إيقاف التحرك التلقائي مؤقتاً عند الضغط اليدوي
       this.stopAutoSlide();
       
+      // في العربية (RTL)، الزر الأيمن يحرك لليسار (سالب)
+      // في الإنجليزية (LTR)، الزر الأيمن يحرك لليمين (موجب)
+      const scrollValue = this.selectedLang === 'ar' ? -scrollAmount : scrollAmount;
+      
       container.scrollBy({
-        left: this.selectedLang === 'ar' ? -scrollAmount : scrollAmount,
+        left: scrollValue,
         behavior: 'smooth'
       });
       
@@ -184,16 +194,24 @@ export class MainServicesSectionComponent implements OnInit, OnDestroy, AfterVie
   canScrollLeft(): boolean {
     if (!this.sliderContainer) return false;
     const container = this.sliderContainer.nativeElement;
-    return this.selectedLang === 'ar' 
-      ? container.scrollLeft < (container.scrollWidth - container.clientWidth)
-      : container.scrollLeft > 0;
+    
+    // في RTL، نتحقق من إمكانية التحرك لليمين
+    if (this.selectedLang === 'ar') {
+      return Math.abs(container.scrollLeft) < (container.scrollWidth - container.clientWidth);
+    }
+    // في LTR، نتحقق من إمكانية التحرك لليسار
+    return container.scrollLeft > 0;
   }
 
   canScrollRight(): boolean {
     if (!this.sliderContainer) return false;
     const container = this.sliderContainer.nativeElement;
-    return this.selectedLang === 'ar'
-      ? container.scrollLeft > 0
-      : container.scrollLeft < (container.scrollWidth - container.clientWidth);
+    
+    // في RTL، نتحقق من إمكانية التحرك لليسار
+    if (this.selectedLang === 'ar') {
+      return container.scrollLeft < 0;
+    }
+    // في LTR، نتحقق من إمكانية التحرك لليمين
+    return container.scrollLeft < (container.scrollWidth - container.clientWidth);
   }
 }

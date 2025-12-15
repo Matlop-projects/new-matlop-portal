@@ -84,6 +84,7 @@ export class SpecialOrderPageComponent {
   showAddSpecialOrder = false;
   locations: any[] = [];
   isDragging = false;
+  isSubmitting: boolean = false; // To prevent multiple clicks
 
   showAddLocationDialog: boolean = false
   minDate: Date = (() => {
@@ -177,6 +178,11 @@ displayDatepickerConfig(lang:string) {
   }
 
   submitForm() {
+    // Prevent multiple submissions
+    if (this.isSubmitting) {
+      return;
+    }
+
     if (this.form.valid) {
 
       const localDate = new Date(this.form.value.specialOrderDate);
@@ -196,10 +202,26 @@ displayDatepickerConfig(lang:string) {
   }
 
   createEmergencyOrder(payload: any) {
-    this.api.post('SpecialOrder/Create', payload).subscribe(res => {
-      setTimeout(() => {
-        this.router.navigate(['/home'])
-      }, 1000);
+    // Disable button
+    this.isSubmitting = true;
+
+    this.api.post('SpecialOrder/Create', payload).subscribe({
+      next: (res) => {
+        this.toaster.successToaster(
+          this.languageService.translate('SPECIAL_ORDER.SUCCESS') || 'تم انشاء الطلب بنجاح'
+        );
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 1000);
+      },
+      error: (error) => {
+        // Re-enable button on error
+        this.isSubmitting = false;
+        console.error('Special order creation failed:', error);
+        this.toaster.errorToaster(
+          this.languageService.translate('SPECIAL_ORDER.ERROR') || 'حدث خطأ أثناء إنشاء الطلب'
+        );
+      }
     });
   }
 

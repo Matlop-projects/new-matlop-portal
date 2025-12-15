@@ -298,8 +298,16 @@
             "></p>
         </div> -->
         <div class="submit-btn-section">
-          <button class="submit-btn-form" (click)="createOrder()">
-            {{ "PACKAGE_DETAILS.SUBMIT" | translate }}
+          <button 
+            class="submit-btn-form" 
+            (click)="createOrder()" 
+            [disabled]="isSubmitting"
+            [class.submitting]="isSubmitting">
+            <span *ngIf="!isSubmitting">{{ "PACKAGE_DETAILS.SUBMIT" | translate }}</span>
+            <span *ngIf="isSubmitting" class="submitting-content">
+              <span class="spinner"></span>
+              {{ selectedLang === 'ar' ? 'جاري الإرسال...' : 'Submitting...' }}
+            </span>
           </button>
         </div>
       </div>

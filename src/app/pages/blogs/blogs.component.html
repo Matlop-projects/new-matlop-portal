@@ -1,0 +1,61 @@
+<app-background-image-with-text
+  [options]="bkg_text_options"
+></app-background-image-with-text>
+
+<div class="container mt-5">
+  <!-- Filter Section -->
+  <div class="filter-section d-flex justify-content-between align-items-center mb-4">
+    <h2 class="section-title">{{ "BLOGS.FEATURED_BLOGS" | translate }}</h2>
+    <div class="filter-dropdown">
+      <select
+        class="form-select"
+        [(ngModel)]="selectedServiceId"
+        (change)="onServiceFilterChange()"
+      >
+        <option [ngValue]="null">{{ "BLOGS.ALL" | translate }}</option>
+        <option *ngFor="let service of services" [ngValue]="service.serviceId">
+          {{ getServiceName(service) }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Blog Cards Grid -->
+  <div class="blogs-grid">
+    <ng-container *ngIf="blogs.length > 0; else emptyBlogs">
+      <div class="blog-card" *ngFor="let blog of blogs">
+        <div class="blog-image">
+          <img [src]="getBlogCover(blog)" [alt]="getBlogName(blog)" (error)="onImageError($event)" />
+        </div>
+        <div class="blog-content">
+          <h3 class="blog-title">{{ getBlogName(blog) }}</h3>
+          <p class="blog-description">{{ getBlogDescription(blog) }}</p>
+          <div class="blog-footer">
+            <span class="blog-date">
+              <i class="pi pi-calendar"></i>
+              {{ blog.creationTime | date : "dd MMMM yyyy" : "" : currentLang === 'ar' ? 'ar-SA' : 'en-US' }}
+            </span>
+            <button class="read-more-btn" (click)="onBlogDetails(blog.blogId)">
+              {{ "BLOGS.READ_MORE" | translate }}
+              <i class="pi pi-arrow-left" *ngIf="currentLang === 'ar'"></i>
+              <i class="pi pi-arrow-right" *ngIf="currentLang !== 'ar'"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #emptyBlogs>
+      <div class="empty-state text-center w-100">
+        <i class="pi pi-book" style="font-size: 4rem; color: #ccc"></i>
+        <p class="mt-3">{{ "BLOGS.NO_BLOGS" | translate }}</p>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<app-pagination
+  [totalCount]="totalCount"
+  [rows]="9"
+  (onPageChange)="onPageChange($event)"
+></app-pagination>

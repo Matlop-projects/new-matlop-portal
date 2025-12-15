@@ -1,4 +1,4 @@
-<div class="main-services-container container">
+<div class="main-services-container container" [attr.dir]="selectedLang === 'ar' ? 'rtl' : 'ltr'">
   <div class="content">
     <div class="row">
       <div class="col-lg-12">
@@ -31,7 +31,6 @@
       <button 
         class="slider-btn slider-btn-left" 
         (click)="slideLeft()" 
-        [class.rtl]="selectedLang === 'ar'"
         [class.disabled]="!canScrollLeft()">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -55,26 +54,17 @@
             </div>
             
             <!-- Action Row -->
-            <div class="action-row" [class.rtl]="selectedLang === 'ar'">
+            <div class="action-row">
               <div class="action-section">
-                <!-- For Arabic: Arrow on left, then text -->
-                <ng-container *ngIf="selectedLang === 'ar'">
-                  <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
-                  <img class="arrow-icon" width="35" height="35" src="assets/img/Vector.svg" alt="arrow">
-                </ng-container>
-                
-                <!-- For English: Text on left, then arrow to its right -->
-                <ng-container *ngIf="selectedLang !== 'ar'">
-                  <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
-                  <img class="arrow-icon" width="35" height="35" src="assets/img/Vector.svg" alt="arrow">
-                </ng-container>
+                <span class="action-text">{{ 'SERVICES.ADD_REQUEST' | translate }}</span>
+                <img class="arrow-icon" width="35" height="35" src="assets/img/Vector.svg" alt="arrow">
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <button class="slider-btn slider-btn-right" (click)="slideRight()" [class.rtl]="selectedLang === 'ar'">
+      <button class="slider-btn slider-btn-right" (click)="slideRight()">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>

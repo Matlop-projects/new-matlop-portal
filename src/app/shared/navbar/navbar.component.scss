@@ -5,6 +5,9 @@
   
   .logo-image {
     margin: 0 10px;
+    height: 30px;
+    width: auto;
+    object-fit: contain;
     transition: all 0.3s ease;
     
     &:hover {
@@ -176,6 +179,8 @@
     margin: unset;
     
     .logo-image {
+      height: 30px; // حجم أصغر للموبايل
+      
       &:hover {
         transform: scale(1.05) rotate(2deg); // تقليل التأثير على الموبايل
       }

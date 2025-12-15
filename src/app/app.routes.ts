@@ -24,6 +24,8 @@ import { ForgetPasswordComponentimplements } from "./pages/forget-password/forge
 import { SpecialOrderListComponent } from "./pages/special-order-page/special-order-list/special-order-list.component";
 import { EmergencyOrderListComponent } from "./pages/emergency-order-page/emergency-order-list/emergency-order-list.component";
 import { AddressesComponent } from "./shared/addresses/addresses.component";
+import { BlogsComponent } from "./pages/blogs/blogs.component";
+import { BlogDetailsComponent } from "./pages/blogs/blog-details/blog-details.component";
 
 export const routes: Routes = [
   {
@@ -102,6 +104,8 @@ export const routes: Routes = [
       { path: "addresses", component: AddressesComponent, canActivate: [authGuard] },
       { path: "thank-you", component: ThankYouComponent },
       { path: "faqs-section", component: FaqsSectionComponent },
+      { path: "blogs", component: BlogsComponent },
+      { path: "blog-details/:blogId", component: BlogDetailsComponent },
 
       // { path: 'product_details/:productId/:traderId', component: ProductDetailsComponent },
       // { path: 'wishlist', component: FavItemsComponent ,canActivate: [authGuard] },

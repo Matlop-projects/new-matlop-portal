@@ -1,6 +1,13 @@
 .main-services-container {
   margin-top: 7rem;
-  direction: rtl; /* RTL */
+
+  &[dir="rtl"] {
+    direction: rtl;
+  }
+
+  &[dir="ltr"] {
+    direction: ltr;
+  }
 
   .content {
     .main-title {
@@ -31,7 +38,15 @@
         align-items: center;
         text-decoration: none;
         color: black;
-        justify-content: flex-start; /* RTL => نص و سهم شمال */
+        justify-content: flex-start;
+        
+        img {
+          transition: transform 0.3s ease;
+        }
+      }
+      
+      [dir="ltr"] & a img {
+        transform: rotate(180deg);
       }
     }
 
@@ -127,16 +142,6 @@
               gap: 8px;
               margin-top: auto;
 
-              &.rtl {
-                justify-content: flex-end;
-                direction: rtl;
-              }
-
-              &:not(.rtl) {
-                justify-content: flex-end;
-                direction: ltr;
-              }
-
               .action-section {
                 display: flex;
                 align-items: center;
@@ -157,8 +162,9 @@
                 }
               }
             }
-
-            .action-row:not(.rtl) .arrow-icon {
+            
+            // في الإنجليزية، نديره 180 درجة
+            [dir="ltr"] & .action-row .arrow-icon {
               transform: rotate(180deg);
             }
           }
@@ -192,15 +198,6 @@
           width: 24px;
           height: 24px;
           stroke: #333;
-        }
-
-        // RTL arrow direction fixes
-        &.slider-btn-left.rtl svg {
-          transform: scaleX(-1);
-        }
-
-        &.slider-btn-right.rtl svg {
-          transform: scaleX(-1);
         }
 
         // Disabled state

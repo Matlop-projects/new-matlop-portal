@@ -6,6 +6,9 @@ import { TranslatePipe } from "@ngx-translate/core";
 import { LanguageService } from "../../../services/language.service";
 import { environment } from "../../../../environments/environment";
 import { PaginationComponent } from "../../../components/pagination/pagination.component";
+import { LoginSignalUserDataService } from "../../../services/login-signal-user-data.service";
+import { Dialog } from "primeng/dialog";
+import { ToasterService } from "../../../services/toaster.service";
 
 @Component({
   selector: "app-special-order-list",
@@ -14,7 +17,8 @@ import { PaginationComponent } from "../../../components/pagination/pagination.c
     NgFor,
     NgIf,
     TranslatePipe,
-    PaginationComponent
+    PaginationComponent,
+    Dialog
   ],
   templateUrl: "./special-order-list.component.html",
   styleUrl: "./special-order-list.component.scss",
@@ -23,10 +27,18 @@ export class SpecialOrderListComponent implements OnInit {
   languageService = inject(LanguageService);
   baseImgUrl=environment.baseImageUrl
   private router = inject(Router);
+  userDataService = inject(LoginSignalUserDataService);
+  toaster = inject(ToasterService);
   orders: any = [];
   activeStatus = "pending";
   ordersCount: any;
   totalCount=0;
+  
+  // Offers Dialog
+  showOffersDialog: boolean = false;
+  offers: any[] = [];
+  selectedOrder: any = null;
+  isAcceptingOffer: { [key: number]: boolean } = {};
 
   searchObject = {
     pageNumber: 0,
@@ -171,6 +183,9 @@ export class SpecialOrderListComponent implements OnInit {
     }
   }
 
+  getCurrencyCode(): string {
+    return this.userDataService.getCurrencyCode();
+  }
   getStatusClass(statusEnum: number): string {
     switch (statusEnum) {
       case 1:
@@ -182,5 +197,70 @@ export class SpecialOrderListComponent implements OnInit {
       default:
         return 'pending';
     }
+  }
+
+  // Get offers for special order
+  getOffers(specialOrderId: number) {
+    this.selectedOrder = this.orders.find((o: any) => o.specialOrderId === specialOrderId);
+    this.apiService
+      .get(`SpecialOrderOffer/GetBySpecialOrderId/${specialOrderId}`)
+      .subscribe({
+        next: (res: any) => {
+          if (res.data) {
+            this.offers = res.data;
+            this.showOffersDialog = true;
+          } else {
+            this.offers = [];
+            this.showOffersDialog = true;
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching offers:', err);
+          this.toaster.errorToaster(
+            this.currentlang === 'ar' ? 'خطأ في جلب العروض' : 'Error fetching offers'
+          );
+        }
+      });
+  }
+
+  // Accept offer
+  acceptOffer(offer: any) {
+    // Prevent multiple clicks
+    if (this.isAcceptingOffer[offer.specialOrderOfferId]) {
+      return;
+    }
+
+    this.isAcceptingOffer[offer.specialOrderOfferId] = true;
+
+    const payload = {
+      technicalId: offer.technicalId,
+      specialOrderOfferId: offer.specialOrderOfferId
+    };
+
+    this.apiService
+      .post('SpecialOrderOffer/SubmitSpecialOrder', payload)
+      .subscribe({
+        next: (res: any) => {
+          this.toaster.successToaster(
+            this.currentlang === 'ar' ? 'تم قبول العرض بنجاح' : 'Offer accepted successfully'
+          );
+          this.showOffersDialog = false;
+          this.getAllOrders(); // Refresh orders list
+          this.isAcceptingOffer[offer.specialOrderOfferId] = false;
+        },
+        error: (err) => {
+          console.error('Error accepting offer:', err);
+          this.toaster.errorToaster(
+            this.currentlang === 'ar' ? 'خطأ في قبول العرض' : 'Error accepting offer'
+          );
+          this.isAcceptingOffer[offer.specialOrderOfferId] = false;
+        }
+      });
+  }
+
+  closeOffersDialog() {
+    this.showOffersDialog = false;
+    this.offers = [];
+    this.selectedOrder = null;
   }
 }
