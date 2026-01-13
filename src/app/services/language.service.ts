@@ -1,41 +1,68 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LanguageService {
 
-  translationService = inject(TranslateService);
+  // Expose translationService for components that need direct access
+  public translationService = inject(TranslateService);
+  private document = inject(DOCUMENT);
 
-  public change(language: string) {
-    this.translationService.use(language);
-    localStorage.setItem('lang', language);
-    // location.reload();
+  private readonly STORAGE_KEY = 'lang';
+  private readonly DEFAULT_LANG = 'en';
+
+  constructor() {
+    this.initDirection();
   }
 
-  public use(language: string) {
+  private initDirection(): void {
+    const savedLang = localStorage.getItem(this.STORAGE_KEY) || this.DEFAULT_LANG;
+    this.changeAppDirection(savedLang);
+    this.changeHtmlLang(savedLang);
+  }
+
+  public change(language: string): void {
+    this.translationService.use(language);
+    localStorage.setItem(this.STORAGE_KEY, language);
+    this.changeAppDirection(language);
+    this.changeHtmlLang(language);
+  }
+
+  public use(language: string): void {
     this.translationService.use(language);
   }
 
   public translate(key: string): string {
-    return this.translationService.instant(key);
+    if (!key) return '';
+    const translation = this.translationService.instant(key);
+    return translation !== key ? translation : key;
+  }
+
+  public getCurrentLang(): string {
+    return this.translationService.currentLang || localStorage.getItem(this.STORAGE_KEY) || this.DEFAULT_LANG;
+  }
+
+  // Expose onLangChange observable for components
+  public get onLangChange() {
+    return this.translationService.onLangChange;
+  }
+
+  // Expose currentLang for components
+  public get currentLang(): string {
+    return this.translationService.currentLang;
   }
 
   public changeAppDirection(local: string): void {
-    document.body.dir = local === 'ar' ? 'rtl' : 'ltr';
-
-    return local === 'en'
-      ? document.getElementsByTagName('html')[0].setAttribute('dir', 'ltr')
-      : document.getElementsByTagName('html')[0].setAttribute('dir', 'rtl');
-
+    const dir = local === 'ar' ? 'rtl' : 'ltr';
+    this.document.documentElement.dir = dir;
+    this.document.body.dir = dir;
   }
 
   public changeHtmlLang(local: string): void {
-    document.body.dir = local === 'ar' ? 'rtl' : 'ltr';
-
-    return local === 'en'
-      ? document.getElementsByTagName('html')[0].setAttribute('lang', 'en')
-      : document.getElementsByTagName('html')[0].setAttribute('lang', 'ar');
+    const lang = local === 'ar' ? 'ar' : 'en';
+    this.document.documentElement.lang = lang;
   }
 }

@@ -3,7 +3,6 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable, take, catchError, throwError, tap } from 'rxjs';
 import { ToasterService } from './toaster.service';
-import { NgxToasterService } from './ngx-toaster.service';
 
 export interface IOptions {
   showAlert: boolean;
@@ -17,7 +16,6 @@ const baseUrl = environment.baseUrl;
 })
 export class ApiService {
   private toaster = inject(ToasterService);
-  private ngxToaster = inject(NgxToasterService);
 
   constructor(private http: HttpClient) { }
 
@@ -68,7 +66,7 @@ export class ApiService {
     return this.http.get(`${baseUrl}${APIName}${queryString}`).pipe(
       take(1),
       map((res: any) => {
-        if (res.message && options.showAlert) this.ngxToaster.success(res.message);
+        if (res.message && options.showAlert) this.toaster.successToaster(res.message);
         return res;
       }),
       catchError((error) => {

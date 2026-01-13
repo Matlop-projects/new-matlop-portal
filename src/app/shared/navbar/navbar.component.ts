@@ -58,7 +58,7 @@ export class NavbarComponent implements OnInit {
     if (this.selectedLang === "ar") {
       return "assets/img/matlop_logo.svg";
     }else { 
-      return "assets/img/Gemini_Image.png";
+      return "assets/img/matlopEn.png";
     }
   }
 

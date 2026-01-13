@@ -1,35 +1,44 @@
-import {  inject } from '@angular/core';
-import { HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ToasterService } from '../services/toaster.service';
 import { Router } from '@angular/router';
-import { NgZone } from '@angular/core';
+import { ToasterService } from '../services/toaster.service';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   const toaster = inject(ToasterService);
-  const ngZone = inject(NgZone); // Inject NgZone
-
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
-      console.log(error.status);
+      const message =
+        error?.error?.message ||
+        error?.error?.title ||
+        'shared.errors.general';
 
-      ngZone.run(() => {
-        if (error.status === 401) {
+      switch (error.status) {
+        case 401:
+          toaster.errorToaster(message || 'Unauthorized');
           router.navigate(['/auth/login']);
-          toaster.errorToaster(error.error.title || 'Unauthorized');
-        } else if (error.status === 400) {
-          toaster.errorToaster(error.error.message);
-        } else if (error.status === 403) {
-          toaster.errorToaster(error.error.message);
-        }
-      });
+          break;
+
+        case 403:
+          toaster.errorToaster(message || 'Forbidden');
+          break;
+
+        case 400:
+          toaster.errorToaster(message || 'Bad request');
+          break;
+
+        case 0:
+          toaster.errorToaster('shared.errors.network');
+          break;
+
+        default:
+          toaster.errorToaster('shared.errors.server');
+          break;
+      }
 
       return throwError(() => error);
     })
   );
 };
-
-

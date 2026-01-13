@@ -148,6 +148,8 @@ export class LoginComponent {
         localStorage.setItem('token', data.data.accessToken);
         localStorage.setItem('img',dataUser.img);
         localStorage.setItem('userType',dataUser.userType)
+        // Set countryId based on detected phone number (SA=1, OM=2)
+        localStorage.setItem('countryId', this.userDataSignals.getCountryId().toString());
         this.router.navigate(['/home']);
       }
     })
@@ -160,6 +162,8 @@ export class LoginComponent {
   loginAsGuest() {
     // Set default country to Saudi Arabia for guest users
     this.userDataSignals.setSelectedCountry('SA');
+    // Set countryId = 1 for Saudi Arabia
+    localStorage.setItem('countryId', '1');
     // Navigate directly to home page as guest
     this.router.navigate(['/home']);
   }

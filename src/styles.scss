@@ -1,10 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@import "bootstrap/dist/css/bootstrap.min.css";
-@import "primeicons/primeicons.css";
-@import "./assets/scss/fonts";
-@import "ngx-toastr/toastr";
-@import "ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
-@import "ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
+@use "bootstrap/dist/css/bootstrap.min.css";
+@use "primeicons/primeicons.css";
+@use "./assets/scss/fonts";
 
 :root {
   --main-text-color: redF2F3E;
