@@ -517,7 +517,10 @@ export class PackageDetailsComponent {
       );
     } else {
       console.log(this.walletAmount);
-      const url = `https://payment.matlop.com/Wallet/creditcard?userId=${this.orderObject.clientId}&amount=${+this.walletAmount}`;
+      const countryId = this.userDataService.getCountryId();
+      const url = countryId === 2
+        ? `https://payment.matlop.com/Thawani/Pay?userId=${this.orderObject.clientId}&amount=${+this.walletAmount}`
+        : `https://payment.matlop.com/Moyasar/Pay?userId=${this.orderObject.clientId}&amount=${+this.walletAmount}`;
       this.safeIframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
       this.openDepositelDialog = false;
       this.depositePaymentDialog = true;
@@ -558,7 +561,11 @@ export class PackageDetailsComponent {
           // this.toaster.successToaster("تم اضافة الطلب بنجاح");
           const orderId = res.data.orderId;
           if (this.paymentSelect.paymentId == 2) {
-            window.location.href = `https://payment.matlop.com/payment/creditcardweb?orderid=${orderId}`;
+            const countryId = this.userDataService.getCountryId();
+            const paymentUrl = countryId === 2
+              ? `https://payment.matlop.com/Thawani/Pay?orderid=${orderId}`
+              : `https://payment.matlop.com/Moyasar/Pay?orderid=${orderId}`;
+            window.location.href = paymentUrl;
           } else {
             console.log(this.orderObject.orderTotal);
             // window.location.href = `${window.location.origin}/thank-you?status=paid&id=${orderId}&amount=${this.orderObject.orderTotal}&message=success`;

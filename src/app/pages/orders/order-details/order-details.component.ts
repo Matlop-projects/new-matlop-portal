@@ -94,7 +94,11 @@ export class OrderDetailsComponent implements OnInit {
   confirmPaymentWay() {
     console.log('ffff', this.selectedPaymentValue);
     if (this.selectedPaymentValue[0].code == 2) {
-      window.open(`https://payment.matlop.com/payment/creditcardweb?orderid=${this.orderId}`, "_blank");
+      const countryId = this.userDataService.getCountryId();
+      const paymentUrl = countryId === 2 
+        ? `https://payment.matlop.com/Thawani/Pay?orderid=${this.orderId}`
+        : `https://payment.matlop.com/Moyasar/Pay?orderid=${this.orderId}`;
+      window.open(paymentUrl, "_blank");
     }
 
     // let body = {
