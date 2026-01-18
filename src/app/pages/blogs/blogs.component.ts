@@ -173,4 +173,9 @@ export class BlogsComponent implements OnInit {
     const imgElement = event.target as HTMLImageElement;
     imgElement.src = this.defaultImage;
   }
+
+  // getLocale(): string {
+  //   return this.currentLang === 'ar' ? 'ar' : 'en';
+  // }
+  
 }

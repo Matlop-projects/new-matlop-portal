@@ -33,7 +33,7 @@
           <div class="blog-footer">
             <span class="blog-date">
               <i class="pi pi-calendar"></i>
-              {{ blog.creationTime | date : "dd MMMM yyyy" : "" : currentLang === 'ar' ? 'ar-SA' : 'en-US' }}
+              {{ blog.creationTime | date : "dd MMMM yyyy" : "" }}
             </span>
             <button class="read-more-btn" (click)="onBlogDetails(blog.blogId)">
               {{ "BLOGS.READ_MORE" | translate }}
