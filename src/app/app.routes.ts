@@ -43,7 +43,7 @@ export const routes: Routes = [
         pathMatch: "full",
       },
       { path: "login", component: LoginComponent },
-      // { path: "signup", component: SignupComponent },
+      { path: "signup", redirectTo: "login", pathMatch: "full" }, // signup معطلة - هاش
       { path: "forget_password", component: ForgetPasswordComponentimplements },
       // { path: 'reset_password', component: ResetPasswordComponent },
     ],

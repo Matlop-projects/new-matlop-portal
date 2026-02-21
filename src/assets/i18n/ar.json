@@ -54,7 +54,10 @@
     "forget_password": "هل نسيت كلمة المرور؟",
     "submit": "تسجيل الدخول",
     "guest_login": "الدخول كزائر",
-    "signup": "إنشاء حساب"
+    "signup": "إنشاء حساب",
+    "guest_select_country": "اختر الدولة",
+    "guest_country_saudia": "المملكة العربية السعودية",
+    "guest_country_oman": "سلطنة عمان"
   },
   "signup": {
     "welcome": "مرحبًا بك في مطلوب",

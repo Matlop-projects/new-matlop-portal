@@ -204,7 +204,8 @@ export class PackageDetailsComponent {
   }
 
   getPackageDetailsById(packageId: string) {
-    this.ApiService.get(`Package/GetPackage/${packageId}`).subscribe(
+    const countryId = this.userDataService.getCountryId();
+    this.ApiService.get(`Package/GetPackage/${packageId}`, { countryId }).subscribe(
       (item: any) => {
         console.log(item.data);
         this.packageDetails = item.data;
@@ -532,7 +533,14 @@ export class PackageDetailsComponent {
     if (this.isSubmitting) {
       return;
     }
-
+    if (this.packageDetails?.isOrdersAvailable === false) {
+      this.toaster.errorToaster(
+        this.selectedLang === 'ar'
+          ? (this.packageDetails.unavailableMessageAr || 'الحجز غير متاح حالياً')
+          : (this.packageDetails.unavailableMessageEn || 'Orders are not available at the moment')
+      );
+      return;
+    }
     if (this.orderObject.locationId == null) {
       this.toaster.errorToaster(
         this.languageService.translate("PACKAGE_DETAILS.VALIDATION.LOCATION")

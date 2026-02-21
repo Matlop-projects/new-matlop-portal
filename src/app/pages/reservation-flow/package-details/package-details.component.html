@@ -1,7 +1,19 @@
+<!-- عندما الخدمة غير متاحة: عرض الرسالة فقط في منتصف الشاشة -->
+<ng-container *ngIf="packageDetails && packageDetails.isOrdersAvailable === false">
+  <app-background-image-with-text [options]="bkg_text_options"></app-background-image-with-text>
+  <div class="unavailable-fullscreen">
+    <p class="unavailable-message">
+      {{ (selectedLang === 'ar' ? packageDetails.unavailableMessageAr : packageDetails.unavailableMessageEn) || (selectedLang === 'ar' ? 'الخدمة غير متاحة' : 'Service is not available') }}
+    </p>
+  </div>
+</ng-container>
+
+<!-- المحتوى العادي عندما الخدمة متاحة -->
+<ng-container *ngIf="!packageDetails || packageDetails.isOrdersAvailable !== false">
 <app-background-image-with-text [options]="bkg_text_options"></app-background-image-with-text>
 <div class="package-details-container container">
   <div class="content">
-    <div class="wallet-container mt-3">
+    <div class="wallet-container mt-3" *ngIf="packageDetails">
       <div class="d-flex justify-content-between flex-wrap">
         <div class="collection">
           <span class="bold ">{{ "PACKAGE_DETAILS.wallet" | translate }} :</span>
@@ -312,11 +324,10 @@
           </button>
         </div>
       </div>
-
-
-
     </div>
   </div>
+</div>
+</ng-container>
   <p-dialog header="{{ 'PACKAGE_DETAILS.ADD_LOCATION_MODAL_TITLE' | translate }}" [modal]="true"
     [(visible)]="showAddLocationDialog" [style]="{ width: '50rem' }" (onShow)="onDialogShow()">
     <app-add-location #addLocationComponent (value)="onAddLocation($event)"></app-add-location>

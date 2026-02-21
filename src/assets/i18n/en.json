@@ -54,7 +54,10 @@
     "forget_password": "Forgot your password?",
     "submit": "Login",
     "guest_login": "Login as Guest",
-    "signup": "Sign Up"
+    "signup": "Sign Up",
+    "guest_select_country": "Select Country",
+    "guest_country_saudia": "Saudi Arabia",
+    "guest_country_oman": "Oman"
   },
   "signup": {
     "welcome": "Create Your Account",

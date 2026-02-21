@@ -129,3 +129,22 @@
   (otpValue)="getOtpValue($event)"
 >
 </app-otp-modal>
+
+<!-- نافذة اختيار الدولة للدخول كزائر -->
+<p-dialog
+  [header]="'login.guest_select_country' | translate"
+  [(visible)]="showGuestCountryDialog"
+  [modal]="true"
+  [style]="{ width: '22rem' }"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="closeGuestCountryDialog()">
+  <div class="guest-country-options">
+    <button type="button" class="btn btn-country w-100 mb-2" (click)="onGuestCountrySelected('SA')">
+      🇸🇦 {{ "login.guest_country_saudia" | translate }}
+    </button>
+    <button type="button" class="btn btn-country w-100" (click)="onGuestCountrySelected('OM')">
+      🇴🇲 {{ "login.guest_country_oman" | translate }}
+    </button>
+  </div>
+</p-dialog>

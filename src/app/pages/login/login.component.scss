@@ -225,6 +225,23 @@
 cursor: pointer;
 }
 
+.guest-country-options {
+  padding: 0.5rem 0;
+  .btn-country {
+    padding: 12px 16px;
+    border: 1px solid #0EC5D2;
+    background: transparent;
+    color: #0EC5D2;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+    &:hover {
+      background: #0EC5D2;
+      color: #fff;
+    }
+  }
+}
+
 
 
 

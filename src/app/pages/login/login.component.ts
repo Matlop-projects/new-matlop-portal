@@ -1,5 +1,5 @@
 import { Component, Inject, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
@@ -8,15 +8,15 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ToasterService } from '../../services/toaster.service';
 import { LanguageService } from '../../services/language.service';
 import { Router, RouterModule } from '@angular/router';
-import { ModalComponent } from '../../components/modal/modal.component';
 import { OtpModalComponent } from '../../components/otp-modal/otp-modal.component';
 import { CheckboxModule } from 'primeng/checkbox';
+import { Dialog } from 'primeng/dialog';
 import { LoginSignalUserDataService } from '../../services/login-signal-user-data.service';
 import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [NgIf,TranslatePipe,ReactiveFormsModule,CheckboxModule,RouterModule , PasswordModule,InputTextModule,OtpModalComponent],
+  imports: [NgIf, TranslatePipe, ReactiveFormsModule, CheckboxModule, RouterModule, PasswordModule, InputTextModule, OtpModalComponent, Dialog],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -159,13 +159,21 @@ export class LoginComponent {
     this.onSubmit();
   }
 
+  showGuestCountryDialog = false;
+
   loginAsGuest() {
-    // Set default country to Saudi Arabia for guest users
-    this.userDataSignals.setSelectedCountry('SA');
-    // Set countryId = 1 for Saudi Arabia
-    localStorage.setItem('countryId', '1');
-    // Navigate directly to home page as guest
+    this.showGuestCountryDialog = true;
+  }
+
+  onGuestCountrySelected(countryCode: 'SA' | 'OM') {
+    this.userDataSignals.setSelectedCountry(countryCode);
+    localStorage.setItem('countryId', countryCode === 'SA' ? '1' : '2');
+    this.showGuestCountryDialog = false;
     this.router.navigate(['/home']);
+  }
+
+  closeGuestCountryDialog() {
+    this.showGuestCountryDialog = false;
   }
 
   // Custom mobile validator for Saudi and Omani numbers

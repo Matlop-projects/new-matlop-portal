@@ -1,3 +1,18 @@
+/* رسالة الخدمة غير متاحة - منتصف الشاشة فقط */
+.unavailable-fullscreen {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.unavailable-message {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 0;
+}
+
 ::ng-deep {
   .home-content {
     background: white !important;
