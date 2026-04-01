@@ -28,6 +28,8 @@ export class PackagesListComponent {
   cities: any;
 
   packageList: any;
+  /** When user filters by city, passed to package-details so GetPackage applies city availability (e.g. Jeddah closed). */
+  selectedFilterCityId: number | null = null;
 
    bkg_text_options: IBackGroundImageWithText = {
       imageUrl: 'assets/img/slider.svg',
@@ -55,7 +57,7 @@ export class PackagesListComponent {
   getPackagesListBiContractId(contractId: string, serviceId: any) {
     // Get the country ID from user data service
     const countryId = this.userDataService.getCountryId();
-    
+
     this.ApiService.get(`Package/GetPackageByContractIdAndServiceId/${contractId}/${serviceId}`).subscribe((item: any) => {
       console.log('All packages:', item.data);
       
@@ -105,16 +107,22 @@ export class PackagesListComponent {
   }
 
   goPackageDetails(packageId: string) {
-    this.router.navigate(['/package-details' , packageId])
+    const qp: Record<string, number> = {};
+    if (this.selectedFilterCityId != null && this.selectedFilterCityId > 0) {
+      qp['cityId'] = this.selectedFilterCityId;
+    }
+    this.router.navigate(['/package-details', packageId], {
+      queryParams: Object.keys(qp).length ? qp : undefined,
+    });
   }
 
   onPackagesDropdownSearch(data: any) {
-    // Get the country ID from user data service
     const countryId = this.userDataService.getCountryId();
-    
-    if(data.value.cityId) {
-      ;
-      this.ApiService.get(`Package/GetPackageByCityId/${data.value.cityId}/${this.contractId}/${this.serviceId}`).subscribe((res: any) => {
+    const cid = data?.value?.cityId;
+    this.selectedFilterCityId = cid && cid > 0 ? cid : null;
+
+    if (this.selectedFilterCityId) {
+      this.ApiService.get(`Package/GetPackageByCityId/${this.selectedFilterCityId}/${this.contractId}/${this.serviceId}`).subscribe((res: any) => {
         console.log('Packages by city:', res);
         // Check if response data exists and is not empty
         if (res && res.data && res.data.length > 0) {

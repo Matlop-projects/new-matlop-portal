@@ -161,9 +161,16 @@ export class PackageDetailsComponent {
   promoCodeValue: any;
   priceAfterDiscountPrecentage: any;
   originalPckagePrice: any;
+  /** From query ?cityId= — used so GetPackage applies city-level availability (same as list filter). */
+  contextCityId: number | null = null;
 
   ngOnInit(): void {
     this.packageId = this.route.snapshot.params["packageId"];
+    const cityQ = this.route.snapshot.queryParamMap.get('cityId');
+    this.contextCityId = cityQ ? Number(cityQ) : null;
+    if (this.contextCityId != null && (Number.isNaN(this.contextCityId) || this.contextCityId <= 0)) {
+      this.contextCityId = null;
+    }
     this.orderObject.clientId = localStorage.getItem("userId");
     this.orderObject.packageId = this.packageId;
     this.getLocation();
@@ -205,7 +212,11 @@ export class PackageDetailsComponent {
 
   getPackageDetailsById(packageId: string) {
     const countryId = this.userDataService.getCountryId();
-    this.ApiService.get(`Package/GetPackage/${packageId}`, { countryId }).subscribe(
+    const params: Record<string, number> = { countryId };
+    if (this.contextCityId != null && this.contextCityId > 0) {
+      params['cityId'] = this.contextCityId;
+    }
+    this.ApiService.get(`Package/GetPackage/${packageId}`, params).subscribe(
       (item: any) => {
         console.log(item.data);
         this.packageDetails = item.data;
