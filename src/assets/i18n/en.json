@@ -218,6 +218,7 @@
     "HOUR": "hours",
     "DETAILS": "Package Details",
     "NO_PACKAGES": "No packages available",
+    "UNAVAILABLE_BADGE": "Currently unavailable",
     "PROVIDER": "Technicians"
   },
   "PACKAGE_DETAILS": {

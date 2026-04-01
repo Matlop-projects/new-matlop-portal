@@ -22,6 +22,22 @@
             cursor: pointer;
             margin-bottom: 30px;
 
+            &.package-unavailable .content {
+                opacity: 0.88;
+                border-color: #e0d0d0;
+            }
+
+            .unavailable-ribbon {
+                background: #c62828;
+                color: #fff;
+                font-size: 13px;
+                font-weight: 600;
+                padding: 6px 12px;
+                border-radius: 8px;
+                margin-bottom: 12px;
+                display: inline-block;
+            }
+
             &:hover {
                 transform: translateY(-10px); // Move card up
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); // Optional: add shadow

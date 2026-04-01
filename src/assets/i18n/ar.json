@@ -218,6 +218,7 @@
     "HOUR": "ساعات",
     "DETAILS": "تفاصيل الباقة",
     "NO_PACKAGES": "لا توجد باقات متاحة",
+    "UNAVAILABLE_BADGE": "غير متاح للحجز حالياً",
     "PROVIDER": "فني"
   },
   "PACKAGE_DETAILS": {
