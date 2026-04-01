@@ -47,7 +47,8 @@ export const appConfig: ApplicationConfig = {
         preset: Aura,
         options: {
           prefix: 'p',
-          darkModeSelector: 'system',
+          // Light UI by default — avoid OS dark mode turning Prime inputs/selects black
+          darkModeSelector: false,
           cssLayer: false
         },
       }

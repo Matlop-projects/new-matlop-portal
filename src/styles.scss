@@ -8,6 +8,34 @@
   --p-primary-color: #8174a0 !important;
 }
 
+html {
+  color-scheme: light;
+}
+
+/* PrimeNG form controls stay light (matches darkModeSelector: false in app.config) */
+.p-select,
+.p-multiselect,
+.p-inputtext,
+.p-textarea,
+.p-datepicker-input {
+  --p-select-background: #ffffff;
+  --p-select-border-color: #dee2e6;
+  --p-select-color: #212529;
+  --p-multiselect-background: #ffffff;
+  --p-multiselect-border-color: #dee2e6;
+  --p-multiselect-color: #212529;
+  --p-inputtext-background: #ffffff;
+  --p-inputtext-border-color: #dee2e6;
+  --p-inputtext-color: #212529;
+}
+
+.p-inputtext,
+input.p-inputtext,
+textarea.p-textarea {
+  background-color: #ffffff !important;
+  color: #212529 !important;
+}
+
 body {
   // tajwal
   // bahij
