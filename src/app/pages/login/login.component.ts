@@ -1,4 +1,4 @@
-import { Component, Inject, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { PasswordModule } from 'primeng/password';
@@ -13,6 +13,18 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { Dialog } from 'primeng/dialog';
 import { LoginSignalUserDataService } from '../../services/login-signal-user-data.service';
 import { environment } from '../../../environments/environment';
+
+/** Google reCAPTCHA v2 explicit render — use ?render=explicit + grecaptcha.ready() before render. */
+declare global {
+  interface Window {
+    grecaptcha?: {
+      ready: (callback: () => void) => void;
+      render: (container: HTMLElement, opts: Record<string, unknown>) => number;
+      reset: (widgetId: number) => void;
+    };
+  }
+}
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -20,7 +32,9 @@ import { environment } from '../../../environments/environment';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('recaptchaContainer') recaptchaContainer?: ElementRef<HTMLDivElement>;
 
   loginForm: FormGroup;
   toaster = inject(ToasterService);
@@ -30,6 +44,11 @@ export class LoginComponent {
   languageService = inject(LanguageService);
   currentLang = 'en';
   selectedLang: string = localStorage.getItem('lang') || 'en';
+
+  /** Google reCAPTCHA v2 site key (environment). */
+  readonly recaptchaSiteKey = environment.recaptchaSiteKey || '';
+  captchaToken = '';
+  private recaptchaWidgetId: number | null = null;
 
 
 
@@ -54,6 +73,69 @@ export class LoginComponent {
 
   ngOnInit(): void {
     this.initAppTranslation();
+  }
+
+  ngAfterViewInit(): void {
+    if (this.recaptchaSiteKey) {
+      this.loadRecaptchaScript();
+    }
+  }
+
+  private static readonly recaptchaScriptSrc =
+    'https://www.google.com/recaptcha/api.js?render=explicit';
+
+  private loadRecaptchaScript(): void {
+    if (document.querySelector(`script[src*="recaptcha/api.js"]`)) {
+      this.renderRecaptcha();
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = LoginComponent.recaptchaScriptSrc;
+    script.async = true;
+    script.defer = true;
+    script.onload = () => this.renderRecaptcha();
+    document.body.appendChild(script);
+  }
+
+  private renderRecaptcha(): void {
+    const el = this.recaptchaContainer?.nativeElement;
+    if (!el || !this.recaptchaSiteKey) {
+      return;
+    }
+
+    const runRender = () => {
+      const g = window.grecaptcha;
+      if (!g || typeof g.render !== 'function') {
+        return;
+      }
+      if (this.recaptchaWidgetId != null) {
+        return;
+      }
+      this.recaptchaWidgetId = g.render(el, {
+        sitekey: this.recaptchaSiteKey,
+        callback: (token: string) => {
+          this.captchaToken = token;
+        },
+        'expired-callback': () => {
+          this.captchaToken = '';
+        },
+      });
+    };
+
+    const g = window.grecaptcha;
+    if (g && typeof g.ready === 'function') {
+      g.ready(() => runRender());
+    } else {
+      runRender();
+    }
+  }
+
+  private resetRecaptcha(): void {
+    const g = window.grecaptcha;
+    if (g && this.recaptchaWidgetId != null && typeof g.reset === 'function') {
+      g.reset(this.recaptchaWidgetId);
+    }
+    this.captchaToken = '';
   }
 
   onSubmit() {
@@ -88,7 +170,13 @@ export class LoginComponent {
         formValue.userName = '0' + formValue.userName;
       }
       
-      this.onLogin(formValue);
+      if (this.recaptchaSiteKey && !this.captchaToken) {
+        this.toaster.errorToaster(this.translate.instant('login.captcha_required'));
+        return;
+      }
+
+      const payload = { ...formValue, captchaToken: this.captchaToken };
+      this.onLogin(payload);
     } else {
       this.toaster.errorToaster('Please Complete All Feilds');
     }
@@ -156,6 +244,7 @@ export class LoginComponent {
   }
 
   resendOtp(e: any) {
+    this.resetRecaptcha();
     this.onSubmit();
   }
 

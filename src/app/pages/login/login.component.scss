@@ -1,3 +1,9 @@
+.recaptcha-wrap {
+  display: flex;
+  justify-content: center;
+  min-height: 78px;
+}
+
 ::ng-deep {
   .login-container {
     height: 100vh;

@@ -57,7 +57,8 @@
     "signup": "إنشاء حساب",
     "guest_select_country": "اختر الدولة",
     "guest_country_saudia": "المملكة العربية السعودية",
-    "guest_country_oman": "سلطنة عمان"
+    "guest_country_oman": "سلطنة عمان",
+    "captcha_required": "يرجى إكمال التحقق الأمني قبل تسجيل الدخول."
   },
   "signup": {
     "welcome": "مرحبًا بك في مطلوب",

@@ -95,11 +95,15 @@
           </div> -->
         </div>
 
+        <div class="recaptcha-wrap mt-3" *ngIf="recaptchaSiteKey">
+          <div #recaptchaContainer class="recaptcha-container"></div>
+        </div>
+
         <div class="button text-center mt-4">
           <button
             class="btn btn-login w-100"
             type="submit"
-            [disabled]="!loginForm.valid"
+            [disabled]="!loginForm.valid || (recaptchaSiteKey && !captchaToken)"
           >
             {{ "login.submit" | translate }}
           </button>

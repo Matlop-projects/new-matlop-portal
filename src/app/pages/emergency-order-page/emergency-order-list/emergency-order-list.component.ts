@@ -173,7 +173,6 @@ export class EmergencyOrderListComponent implements OnInit {
   }
 
   getOrderStatusText(orderStatusEnum: number): string {
-    debugger;
     const isArabic = this.currentlang === 'ar';
 
     switch (orderStatusEnum) {

@@ -8,6 +8,7 @@ import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common
 import { authInterceptor } from './core/basic-auth.interceptor';
 import { errorInterceptor } from './core/error.interceptor';
 import { spinnerInterceptor } from './core/spinner.interceptor';
+import { encryptPostBodyInterceptor } from './core/encrypt-body.interceptor';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -36,6 +37,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(
       withInterceptors([
         spinnerInterceptor,
+        encryptPostBodyInterceptor,
         authInterceptor,
         errorInterceptor
       ])

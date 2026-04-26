@@ -57,7 +57,8 @@
     "signup": "Sign Up",
     "guest_select_country": "Select Country",
     "guest_country_saudia": "Saudi Arabia",
-    "guest_country_oman": "Oman"
+    "guest_country_oman": "Oman",
+    "captcha_required": "Please complete the security check before logging in."
   },
   "signup": {
     "welcome": "Create Your Account",

@@ -235,12 +235,10 @@ export class PackageDetailsComponent {
   }
 
   getLocation() {
-    debugger;
     const userId = localStorage.getItem("userId");
     this.ApiService.get(`Location/GetByUserId/${userId}`).subscribe(
       (res: any) => {
         if (res.data) {
-          debugger;
           console.log("dsdsds",this.selectedLang); 
           this.locations = res.data?.map((item: any) => ({
             name: this.selectedLang == 'en' ? `${item.countryNameEn} - ${item.cityNameEn}  ${item.districtName ? ' - ' + item.districtName : ''}  ${item.blockNo ? ' - ' + item.blockNo : ''}` : `${item.countryName} - ${item.cityName}  ${item.districtName ? ' - ' + item.districtName : ''}  ${item.blockNo ? ' - ' + item.blockNo : ''}`,
