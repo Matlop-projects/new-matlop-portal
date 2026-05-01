@@ -414,3 +414,10 @@
       </div>
     </div>
   </p-dialog>
+
+<app-otp-modal
+  *ngIf="openFirstOrderOtpModal"
+  [mobileNumber]="getFirstOrderOtpMobile()"
+  [allowResend]="false"
+  (otpValue)="onFirstOrderOtpSubmit($event)"
+></app-otp-modal>

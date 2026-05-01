@@ -14,7 +14,7 @@ import { SpecialOrderPageComponent } from "./pages/special-order-page/special-or
 import { EmergencyOrderPageComponent } from "./pages/emergency-order-page/emergency-order-page.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { PackageDetailsComponent } from "./pages/reservation-flow/package-details/package-details.component";
-// import { SignupComponent } from "./pages/signup/signup.component";
+import { SignupComponent } from "./pages/signup/signup.component";
 import { PrivacyPolicyComponent } from "./pages/privacy-policy/privacy-policy.component";
 import { TermsConditionsComponent } from "./pages/terms-conditions/terms-conditions.component";
 import { ProfileComponent } from "./pages/profile/profile.component";
@@ -43,7 +43,7 @@ export const routes: Routes = [
         pathMatch: "full",
       },
       { path: "login", component: LoginComponent },
-      { path: "signup", redirectTo: "login", pathMatch: "full" }, // signup معطلة - هاش
+      { path: "signup", component: SignupComponent },
       { path: "forget_password", component: ForgetPasswordComponentimplements },
       // { path: 'reset_password', component: ResetPasswordComponent },
     ],

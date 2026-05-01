@@ -2,8 +2,12 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { encryptClientPayload } from './client-payload-crypto';
 
-/** Match API `UnencryptedExceptionPathPrefixes` (case-insensitive). */
-const UNENCRYPTED_PATH_MARKERS = ['authentication/adminlogin'];
+/**
+ * Only these paths are decrypted by the API
+ * (`ClientEncryptedRequestBodyMiddleware.IsLegacyLoginOrOtpPath`).
+ * All other POSTs must remain JSON + `application/json` or ASP.NET returns 415.
+ */
+const ENCRYPTED_PATH_MARKERS = ['authentication/login', 'authentication/verfiyotp'];
 
 function shouldEncryptRequest(url: string, method: string): boolean {
   if (!environment.clientPayloadEncryptionEnabled || !environment.clientPayloadApiPassword) {
@@ -20,12 +24,11 @@ function shouldEncryptRequest(url: string, method: string): boolean {
     return false;
   }
   const rest = url.slice(b.length).toLowerCase();
-  return !UNENCRYPTED_PATH_MARKERS.some((m) => rest.includes(m));
+  return ENCRYPTED_PATH_MARKERS.some((m) => rest.includes(m));
 }
 
 /**
- * Wraps JSON POST bodies in AES-256-CBC (same as mobile), `ivB64:cipherB64` + `text/plain`
- * for `ClientEncryptedRequestBodyMiddleware` on the API.
+ * Wraps JSON POST bodies in AES-256-CBC for legacy login/OTP routes only.
  */
 export const encryptPostBodyInterceptor: HttpInterceptorFn = (req, next) => {
   if (!shouldEncryptRequest(req.url, req.method)) {

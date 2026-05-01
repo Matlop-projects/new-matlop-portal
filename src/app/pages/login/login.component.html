@@ -19,7 +19,7 @@
           </div>
         </div>
 
-        <div class="d-flex flex-col gap-2 mt-3">
+        <div class="d-flex flex-col gap-2 mt-2">
           <label for="userName">{{ "signup.mobile" | translate }}</label>
           <div class="phone-input-container">
             <select 
@@ -58,13 +58,14 @@
             </div>
           </div>
         </div>
-<!-- 
-        <div class="d-flex flex-col gap-2">
+        <div class="d-flex flex-col gap-2 mt-2">
           <label for="password">{{ "login.password" | translate }}</label>
           <p-password
             formControlName="password"
             [toggleMask]="true"
             [feedback]="false"
+            inputStyleClass="w-100"
+            styleClass="w-100"
           ></p-password>
           <div
             *ngIf="
@@ -78,8 +79,14 @@
             >
               {{ "errors.required" | translate }}
             </div>
+            <div
+              *ngIf="loginForm.get('password')?.errors?.['minlength']"
+              class="text-danger"
+            >
+              {{ "errors.minLength" | translate }}
+            </div>
           </div>
-        </div> -->
+        </div>
 
         <div class="d-flex justify-content-between flex-wrap">
           <div class="d-flex justify-contnet-start remember-me ckeck-box">
@@ -95,11 +102,11 @@
           </div> -->
         </div>
 
-        <div class="recaptcha-wrap mt-3" *ngIf="recaptchaSiteKey">
+        <div class="recaptcha-wrap mt-2" *ngIf="recaptchaSiteKey">
           <div #recaptchaContainer class="recaptcha-container"></div>
         </div>
 
-        <div class="button text-center mt-4">
+        <div class="button text-center mt-2">
           <button
             class="btn btn-login w-100"
             type="submit"
@@ -114,9 +121,9 @@
           >
             {{ "login.guest_login" | translate }}
           </button>
-          <!-- <a class="forget_password signup" routerLink="/auth/signup">{{
+          <a class="forget_password signup mt-2 d-inline-block" routerLink="/auth/signup">{{
             "login.signup" | translate
-          }}</a> -->
+          }}</a>
         </div>
       </form>
     </div>
@@ -126,15 +133,7 @@
   </div>
 </div>
 
-<app-otp-modal
-  *ngIf="openOtpModal"
-  [mobileNumber]="mobileNumber"
-  (resendOtp)="resendOtp($event)"
-  (otpValue)="getOtpValue($event)"
->
-</app-otp-modal>
-
-<!-- نافذة اختيار الدولة للدخول كزائر -->
+<!-- OTP after login removed: first-order OTP is handled when creating an order -->
 <p-dialog
   [header]="'login.guest_select_country' | translate"
   [(visible)]="showGuestCountryDialog"

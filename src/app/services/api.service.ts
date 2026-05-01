@@ -30,6 +30,16 @@ export class ApiService {
   }
 
 
+  clientLogin(object: any): Observable<any> {
+    return this.http.post(baseUrl + `Authentication/ClientLogin`, object).pipe(
+      take(1),
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+
   post(APIName: string, body: any): Observable<any> {
     return this.http.post(`${baseUrl}${APIName}`, body).pipe(
       take(1),

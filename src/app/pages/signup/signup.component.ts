@@ -1,243 +1,169 @@
-// import { Component, Inject, inject } from "@angular/core";
-// import {
-//   FormBuilder,
-//   FormControl,
-//   FormGroup,
-//   ReactiveFormsModule,
-//   Validators,
-// } from "@angular/forms";
-// import { ApiService } from "../../services/api.service";
-// import { PasswordModule } from "primeng/password";
-// import { InputTextModule } from "primeng/inputtext";
-// import { DOCUMENT, NgIf } from "@angular/common";
-// import { TranslatePipe, TranslateService } from "@ngx-translate/core";
-// import { ToasterService } from "../../services/toaster.service";
-// import { LanguageService } from "../../services/language.service";
-// import { Router, RouterModule } from "@angular/router";
-// import { ModalComponent } from "../../components/modal/modal.component";
-// import { OtpModalComponent } from "../../components/otp-modal/otp-modal.component";
-// import { CheckboxModule } from "primeng/checkbox";
-// import { CarouselModule } from "primeng/carousel";
+import { Component, Inject, OnInit, inject } from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
+import { ApiService } from '../../services/api.service';
+import { PasswordModule } from 'primeng/password';
+import { InputTextModule } from 'primeng/inputtext';
+import { DOCUMENT, NgIf } from '@angular/common';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { ToasterService } from '../../services/toaster.service';
+import { LanguageService } from '../../services/language.service';
+import { Router, RouterModule } from '@angular/router';
 
-// @Component({
-//   selector: "app-signup",
-//   standalone: true,
-//   imports: [
-//     NgIf,
-//     TranslatePipe,
-//     CarouselModule,
-//     ReactiveFormsModule,
-//     CheckboxModule,
-//     RouterModule,
-//     PasswordModule,
-//     InputTextModule,
-//     OtpModalComponent,
-//   ],
-//   templateUrl: "./signup.component.html",
-//   styleUrl: "./signup.component.scss",
-// })
-// export class SignupComponent {
-//   signupForm: FormGroup;
-//   toaster = inject(ToasterService);
-//   otpValue: string = "";
-//   mobileNumber: string = "";
-//   openOtpModal: boolean = false;
-//   languageService = inject(LanguageService);
-//   currentLang = "en";
-//   selectedLang: string = localStorage.getItem("lang") || "en";
+function passwordsMatch(group: AbstractControl): ValidationErrors | null {
+  const pass = group.get('password');
+  const confirm = group.get('confirmPassword');
+  if (!pass || !confirm) {
+    return null;
+  }
+  if (!confirm.value) {
+    return null;
+  }
+  return pass.value === confirm.value ? null : { passwordMismatch: true };
+}
 
-//   carouselImages: string[] = [
-//     "assets/images/backgrounds/register-slider1.svg",
-//     "assets/images/backgrounds/register-slider2.svg",
-//     "assets/images/backgrounds/register-slider3.svg",
-//   ];
+@Component({
+  selector: 'app-signup',
+  standalone: true,
+  imports: [
+    NgIf,
+    TranslatePipe,
+    ReactiveFormsModule,
+    RouterModule,
+    PasswordModule,
+    InputTextModule,
+  ],
+  templateUrl: './signup.component.html',
+  styleUrl: './signup.component.scss',
+})
+export class SignupComponent implements OnInit {
+  signupForm: FormGroup;
+  toaster = inject(ToasterService);
+  languageService = inject(LanguageService);
+  selectedLang: string = localStorage.getItem('lang') || 'en';
 
-//   constructor(
-//     private fb: FormBuilder,
-//     @Inject(DOCUMENT) private document: Document,
-//     private api: ApiService,
-//     private translate: TranslateService,
-//     private router: Router
-//   ) {
-//     this.signupForm = this.fb.group(
-//       {
-//         firstName: [
-//           "",
-//           {
-//             validators: [Validators.required, Validators.minLength(3)],
-//           },
-//         ],
-//         lastName: [
-//           "",
-//           {
-//             validators: [Validators.required, Validators.minLength(3)],
-//           },
-//         ],
-//         userName: [
-//           "",
-//           {
-//             validators: [Validators.required, Validators.minLength(3)],
-//           },
-//         ],
-//         email: ["", [Validators.required, Validators.email]],
-//         country: ["SA", Validators.required],
-//         mobileNumber: [
-//           "",
-//           [
-//             Validators.required,
-//             this.mobileValidator.bind(this)
-//           ],
-//         ],
-//         genderId: [1, Validators.required],
-//       },
-//     );
+  constructor(
+    private fb: FormBuilder,
+    @Inject(DOCUMENT) private document: Document,
+    private api: ApiService,
+    private translate: TranslateService,
+    private router: Router
+  ) {
+    this.signupForm = this.fb.group(
+      {
+        country: ['SA', Validators.required],
+        mobileNumber: ['', [Validators.required, this.mobileValidator.bind(this)]],
+        genderId: [1, Validators.required],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+      },
+      { validators: passwordsMatch }
+    );
 
-//     // Subscribe to country changes to update mobile validation
-//     this.signupForm.get('country')?.valueChanges.subscribe(() => {
-//       this.signupForm.get('mobileNumber')?.updateValueAndValidity();
-//     });
+    this.signupForm.get('country')?.valueChanges.subscribe(() => {
+      this.signupForm.get('mobileNumber')?.updateValueAndValidity();
+    });
 
-//     this.translate.setDefaultLang("en");
-//     this.translate.use("en"); // You can change this dynamically
-//   }
+    this.translate.setDefaultLang('en');
+    this.translate.use('en');
+  }
 
-//   ngOnInit(): void {
-//     this.initAppTranslation();
-//   }
-//   onSubmit() {
-//     if (this.signupForm.valid) {
-//       const formValue = { ...this.signupForm.value };
-      
-//       // Ensure mobile number starts with 0
-//       if (formValue.mobileNumber && !formValue.mobileNumber.startsWith('0')) {
-//         formValue.mobileNumber = '0' + formValue.mobileNumber;
-//       }
+  ngOnInit(): void {
+    this.initAppTranslation();
+  }
 
-//       const signupPayload = {
-//         userId: 0,
-//         roleId: 1,
-//         isActive: true,
-//         ...formValue,
-//       };
+  onSubmit(): void {
+    if (!this.signupForm.valid) {
+      this.signupForm.markAllAsTouched();
+      this.toaster.errorToaster(this.translate.instant('errors.required'));
+      return;
+    }
 
-//       this.api
-//         .post("Authentication/Register", signupPayload)
-//         .subscribe((res: any) => {
-//           this.toaster.successToaster("تم إنشاء الحساب بنجاح");
-//           this.router.navigate(["/auth/login"]);
-//         });
-//     } else {
-//       this.toaster.errorToaster("يرجى إكمال جميع الحقول");
-//     }
-//   }
+    const raw = { ...this.signupForm.value };
+    let mobile = raw.mobileNumber as string;
+    if (mobile && !String(mobile).startsWith('0')) {
+      mobile = '0' + mobile;
+    }
 
-//   toggleLanguage() {
-//     this.selectedLang = this.selectedLang === "en" ? "ar" : "en";
-//     this.currentLang = this.selectedLang;
-//     this.languageService.change(this.selectedLang);
+    const payload = {
+      mobileNumber: mobile,
+      genderId: Number(raw.genderId),
+      password: raw.password,
+    };
 
-//     this.document.body.dir = this.selectedLang === "ar" ? "rtl" : "ltr";
-//     document.documentElement.setAttribute("lang", this.selectedLang);
-//     document.documentElement.setAttribute(
-//       "dir",
-//       this.selectedLang === "ar" ? "rtl" : "ltr"
-//     );
-//   }
+    this.api.post('Authentication/Register', payload).subscribe({
+      next: (res: any) => {
+        if (res?.code !== 0) {
+          this.toaster.errorToaster(res?.message || this.translate.instant('shared.errors.general'));
+          return;
+        }
+        localStorage.setItem('clientMobile', mobile);
+        this.router.navigate(['/auth/login']);
+      },
+      error: (err: any) => {
+        const msg = err?.error?.message || this.translate.instant('shared.errors.general');
+        this.toaster.errorToaster(msg);
+      },
+    });
+  }
 
-//   public initAppTranslation() {
-//     this.languageService.changeAppDirection(this.selectedLang);
-//     this.languageService.changeHtmlLang(this.selectedLang);
-//     this.languageService.use(this.selectedLang);
-//   }
+  toggleLanguage(): void {
+    this.selectedLang = this.selectedLang === 'en' ? 'ar' : 'en';
+    this.languageService.change(this.selectedLang);
+    this.document.body.dir = this.selectedLang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.setAttribute('lang', this.selectedLang);
+    document.documentElement.setAttribute(
+      'dir',
+      this.selectedLang === 'ar' ? 'rtl' : 'ltr'
+    );
+  }
 
-//   onLogin(loginfrom: any) {
-//     this.api.login(loginfrom).subscribe((res: any) => {
-//       this.mobileNumber = res.mobilePhone;
-//       this.openOtpModal = res.status;
-//       if (!res.status) {
-//         localStorage.removeItem("token");
-//         this.toaster.errorToaster(res.message);
-//       }
-//     });
-//   }
+  initAppTranslation(): void {
+    this.languageService.changeAppDirection(this.selectedLang);
+    this.languageService.changeHtmlLang(this.selectedLang);
+    this.languageService.use(this.selectedLang);
+  }
 
-//   getOtpValue(e: any) {
-//     let otpObject = {
-//       mobile: this.mobileNumber,
-//       otpCode: e.otpValue,
-//     };
-//     this.api
-//       .post("Authentication/VerfiyOtp", otpObject)
-//       .subscribe((data: any) => {
-//         console.log(data.data);
-//         if (data.message == "Otp Is Not Valid") {
-//           this.toaster.errorToaster(data.message);
-//         } else {
-//           let dataUser: any = {
-//             img: data.data.imgSrc,
-//             id: data.data.userId,
-//             gender: data.data.gender,
-//           };
-//           localStorage.setItem("userData", JSON.stringify(dataUser));
-//           localStorage.setItem("userId", JSON.stringify(dataUser.id));
-//           localStorage.setItem("token", data.data.accessToken);
-//           this.router.navigate(["/home"]);
-//         }
-//       });
-//   }
+  mobileValidator(control: AbstractControl): ValidationErrors | null {
+    const country = this.signupForm?.get('country')?.value;
+    const mobileNumber = control.value;
+    if (!mobileNumber) {
+      return null;
+    }
+    if (country === 'SA') {
+      return /^5\d{8}$/.test(mobileNumber) ? null : { mobileValidator: true };
+    }
+    if (country === 'OM') {
+      return /^[792]\d{7}$/.test(mobileNumber) ? null : { mobileValidator: true };
+    }
+    return { mobileValidator: true };
+  }
 
-//   resendOtp(e: any) {
-//     this.onSubmit();
-//   }
+  getMobilePlaceholder(): string {
+    const country = this.signupForm.get('country')?.value;
+    if (country === 'SA') {
+      return '5xxxxxxxx';
+    }
+    if (country === 'OM') {
+      return '7xxxxxxx / 9xxxxxxx / 2xxxxxxx';
+    }
+    return '';
+  }
 
-//   // Custom mobile validator
-//   mobileValidator(control: FormControl) {
-//     const country = this.signupForm?.get('country')?.value;
-//     const mobileNumber = control.value;
-
-//     if (!mobileNumber) {
-//       return null; // Let required validator handle empty values
-//     }
-
-//     if (country === 'SA') {
-//       // Saudi mobile: 9 digits starting with 5
-//       const saudiPattern = /^5\d{8}$/;
-//       return saudiPattern.test(mobileNumber) ? null : { mobileValidator: true };
-//     } else if (country === 'OM') {
-//       // Omani mobile: 8 digits starting with 7, 9, or 2
-//       const omaniPattern = /^[792]\d{7}$/;
-//       return omaniPattern.test(mobileNumber) ? null : { mobileValidator: true };
-//     }
-
-//     return { mobileValidator: true };
-//   }
-
-//   // Get country code for display
-//   getCountryCode(): string {
-//     const country = this.signupForm?.get('country')?.value;
-//     return country === 'SA' ? '+966' : '+968';
-//   }
-
-//   // Get mobile placeholder based on country
-//   getMobilePlaceholder(): string {
-//     const country = this.signupForm?.get('country')?.value;
-//     if (country === 'SA') {
-//       return '5xxxxxxxx';
-//     } else if (country === 'OM') {
-//       return '7xxxxxxx / 9xxxxxxx / 2xxxxxxx';
-//     }
-//     return '';
-//   }
-
-//   // Get mobile error message based on country
-//   getMobileErrorMessage(): string {
-//     const country = this.signupForm?.get('country')?.value;
-//     if (country === 'SA') {
-//       return this.translate.instant('errors.saudiMobile');
-//     } else if (country === 'OM') {
-//       return this.translate.instant('errors.omaniMobile');
-//     }
-//     return this.translate.instant('errors.mobileNumber');
-//   }
-// }
-
+  getMobileErrorMessage(): string {
+    const country = this.signupForm?.get('country')?.value;
+    if (country === 'SA') {
+      return this.translate.instant('errors.saudiMobile');
+    }
+    if (country === 'OM') {
+      return this.translate.instant('errors.omaniMobile');
+    }
+    return this.translate.instant('errors.required');
+  }
+}

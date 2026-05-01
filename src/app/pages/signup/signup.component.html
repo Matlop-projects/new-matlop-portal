@@ -1,4 +1,4 @@
-<!-- <div class="signup-container">
+<div class="signup-container">
   <div class="content">
     <div class="form-section">
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
@@ -17,132 +17,10 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-6 mb-0">
-            <label for="firstName">{{ "signup.first_name" | translate }}</label>
-            <input
-              class="form-control"
-              pInputText
-              id="firstName"
-              formControlName="firstName"
-            />
-            <div
-              *ngIf="
-                signupForm.get('firstName')?.invalid &&
-                (signupForm.get('firstName')?.touched ||
-                  signupForm.get('firstName')?.dirty)
-              "
-            >
-              <div
-                *ngIf="signupForm.get('firstName')?.errors?.['required']"
-                class="text-danger"
-              >
-                {{ "errors.required" | translate }}
-              </div>
-              <div
-                *ngIf="signupForm.get('firstName')?.errors?.['minlength']"
-                class="text-danger"
-              >
-                {{ "errors.minLength" | translate }}(3)
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 mb-0">
-            <label for="lastName">{{ "signup.last_name" | translate }}</label>
-            <input
-              class="form-control"
-              pInputText
-              id="lastName"
-              formControlName="lastName"
-            />
-            <div
-              *ngIf="
-                signupForm.get('lastName')?.invalid &&
-                (signupForm.get('lastName')?.touched ||
-                  signupForm.get('lastName')?.dirty)
-              "
-            >
-              <div
-                *ngIf="signupForm.get('lastName')?.errors?.['required']"
-                class="text-danger"
-              >
-                {{ "errors.required" | translate }}
-              </div>
-              <div
-                *ngIf="signupForm.get('lastName')?.errors?.['minlength']"
-                class="text-danger"
-              >
-                {{ "errors.minLength" | translate }}(3)
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="d-flex flex-col gap-2">
-          <label for="userName">{{ "signup.username" | translate }}</label>
-          <input
-            class="w-100"
-            pInputText
-            id="userName"
-            formControlName="userName"
-          />
-          <div
-            *ngIf="
-              signupForm.get('userName')?.invalid &&
-              (signupForm.get('userName')?.touched ||
-                signupForm.get('userName')?.dirty)
-            "
-          >
-            <div
-              *ngIf="signupForm.get('userName')?.errors?.['required']"
-              class="text-danger"
-            >
-              {{ "errors.required" | translate }}
-            </div>
-            <div
-              *ngIf="signupForm.get('userName')?.errors?.['minlength']"
-              class="text-danger"
-            >
-              {{ "errors.minLength" | translate }}(3)
-            </div>
-          </div>
-        </div>
-
-        <div class="d-flex flex-col gap-2">
-          <label for="email">{{ "signup.email" | translate }}</label>
-          <input
-            class="w-100"
-            pInputText
-            id="email"
-            formControlName="email"
-            type="email"
-          />
-          <div
-            *ngIf="
-              signupForm.get('email')?.invalid &&
-              (signupForm.get('email')?.touched ||
-                signupForm.get('email')?.dirty)
-            "
-          >
-            <div
-              *ngIf="signupForm.get('email')?.errors?.['required']"
-              class="text-danger"
-            >
-              {{ "errors.required" | translate }}
-            </div>
-            <div
-              *ngIf="signupForm.get('email')?.errors?.['email']"
-              class="text-danger"
-            >
-              {{ "errors.email" | translate }}
-            </div>
-          </div>
-        </div>
-
-        <div class="d-flex flex-col gap-2">
+        <div class="d-flex flex-col gap-2 mt-3">
           <label for="mobileNumber">{{ "signup.mobile" | translate }}</label>
           <div class="phone-input-container">
-            <select 
+            <select
               class="country-dropdown"
               formControlName="country"
               id="country"
@@ -179,13 +57,78 @@
           </div>
         </div>
 
-        <div class="d-flex flex-row gap-3">
-          <label>{{ "signup.gender" | translate }}</label>
+        <div class="d-flex flex-col gap-2 mt-2">
+          <label for="password">{{ "signup.password" | translate }}</label>
+          <p-password
+            formControlName="password"
+            [toggleMask]="true"
+            [feedback]="true"
+            inputStyleClass="w-100"
+            styleClass="w-100"
+          ></p-password>
+          <div
+            *ngIf="
+              signupForm.get('password')?.touched ||
+              signupForm.get('password')?.dirty
+            "
+          >
+            <div
+              *ngIf="signupForm.get('password')?.errors?.['required']"
+              class="text-danger"
+            >
+              {{ "errors.required" | translate }}
+            </div>
+            <div
+              *ngIf="signupForm.get('password')?.errors?.['minlength']"
+              class="text-danger"
+            >
+              {{ "errors.minLength" | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-col gap-2 mt-2">
+          <label for="confirmPassword">{{ "signup.confirm_password" | translate }}</label>
+          <p-password
+            formControlName="confirmPassword"
+            [toggleMask]="true"
+            [feedback]="false"
+            inputStyleClass="w-100"
+            styleClass="w-100"
+          ></p-password>
+          <div
+            *ngIf="
+              signupForm.get('confirmPassword')?.touched ||
+              signupForm.get('confirmPassword')?.dirty
+            "
+          >
+            <div
+              *ngIf="signupForm.get('confirmPassword')?.errors?.['required']"
+              class="text-danger"
+            >
+              {{ "errors.required" | translate }}
+            </div>
+            <div
+              *ngIf="signupForm.get('confirmPassword')?.errors?.['minlength']"
+              class="text-danger"
+            >
+              {{ "errors.minLength" | translate }}
+            </div>
+            <div
+              *ngIf="signupForm.errors?.['passwordMismatch']"
+              class="text-danger"
+            >
+              {{ "errors.passwordMismatch" | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-row gap-3 mt-3 align-items-center flex-wrap">
+          <span class="me-2">{{ "signup.gender" | translate }}</span>
           <div>
             <input
               type="radio"
               id="male"
-              name="gender"
               [value]="1"
               formControlName="genderId"
             />
@@ -197,7 +140,6 @@
             <input
               type="radio"
               id="female"
-              name="gender"
               [value]="2"
               formControlName="genderId"
             />
@@ -207,7 +149,7 @@
           </div>
         </div>
 
-        <div class="button text-center mt-2">
+        <div class="button text-center mt-4">
           <button
             class="btn btn-login w-100"
             type="submit"
@@ -215,76 +157,18 @@
           >
             {{ "signup.submit" | translate }}
           </button>
-          <a class="forget_password signup" routerLink="/auth/login">
+          <a class="forget_password signup mt-2 d-inline-block" routerLink="/auth/login">
             <span class="black-color bold">
               {{ "have_account" | translate }}</span
             >
-            <span class="">
-              {{ "actions.login" | translate }}
-            </span>
+            <span>{{ "actions.login" | translate }}</span>
           </a>
         </div>
       </form>
     </div>
 
     <div class="details-section hide-part">
-      <div id="demo" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-          <button
-            type="button"
-            data-bs-target="#demo"
-            data-bs-slide-to="0"
-            class="active"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#demo"
-            data-bs-slide-to="1"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#demo"
-            data-bs-slide-to="2"
-          ></button>
-        </div>
-
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img [src]="carouselImages[0]" alt="img1" />
-          </div>
-          <div class="carousel-item">
-            <img [src]="carouselImages[1]" alt="img2" />
-          </div>
-          <div class="carousel-item">
-            <img [src]="carouselImages[2]" alt="img3 " />
-          </div>
-        </div>
-
-        <button
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#demo"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#demo"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon"></span>
-        </button>
-      </div>
+      <img src="assets/images/backgrounds/register-slider1.svg" alt="" />
     </div>
   </div>
 </div>
-
-<app-otp-modal
-  *ngIf="openOtpModal"
-  [mobileNumber]="mobileNumber"
-  (resendOtp)="resendOtp($event)"
-  (otpValue)="getOtpValue($event)"
->
-</app-otp-modal> -->

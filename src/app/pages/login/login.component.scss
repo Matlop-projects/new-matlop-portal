@@ -1,15 +1,22 @@
 .recaptcha-wrap {
   display: flex;
   justify-content: center;
-  min-height: 78px;
+  align-items: center;
+  min-height: 74px;
+  transform: scale(0.92);
+  transform-origin: top center;
 }
 
 ::ng-deep {
   .login-container {
     height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 16px;
 
     h2,
     p {
@@ -18,28 +25,44 @@
 
     .content {
       box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-      min-height: 600px;
-      height: 90vh;
+      max-height: min(640px, calc(100vh - 32px));
+      height: auto;
       flex-basis: 70%;
       display: flex;
       justify-content: space-between;
+      align-items: stretch;
       border-radius: 8px;
         background-color: #fff;
-        padding: 30px;
+        padding: 20px 24px;
+      overflow: hidden;
       .form-section {
         flex-basis: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 20px;
+        padding: 12px 12px 16px;
+        min-height: 0;
+        overflow: hidden;
 
         form {
           display: flex;
           flex-direction: column;
-          gap: 20px;
+          gap: 12px;
+          width: 100%;
+          max-width: 400px;
+          min-height: 0;
+
+          .text-gray-light {
+            font-size: 13px;
+            line-height: 1.35;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
 
           .details {
-            gap: 10px;
+            gap: 8px;
           }
 
           .d-flex {
@@ -54,7 +77,8 @@
 
       .details-section {
         flex-basis: 50%;
-        background: url('/assets/images/backgrounds/Frame\ 2147224800.png') no-repeat;
+        min-height: 0;
+        background: url('/assets/images/backgrounds/Frame\ 2147224800.png') no-repeat center;
         background-size: cover;
         border-radius: 24px;
       }
@@ -224,11 +248,16 @@
 }
 
 
+.button {
+  padding-bottom: 0.5rem;
+}
+
 .signup {
   text-align: center;
- position: relative;
- top: 10px;
-cursor: pointer;
+  display: block;
+  margin-top: 1rem;
+  padding-bottom: 0.25rem;
+  cursor: pointer;
 }
 
 .guest-country-options {

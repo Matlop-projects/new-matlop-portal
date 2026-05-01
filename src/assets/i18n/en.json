@@ -54,7 +54,7 @@
     "forget_password": "Forgot your password?",
     "submit": "Login",
     "guest_login": "Login as Guest",
-    "signup": "Sign Up",
+    "signup": "Create Account",
     "guest_select_country": "Select Country",
     "guest_country_saudia": "Saudi Arabia",
     "guest_country_oman": "Oman",
@@ -73,7 +73,7 @@
     "gender": "Gender",
     "male": "Male",
     "female": "Female",
-    "submit": "Sign Up",
+    "submit": "Create Account",
     "ERRORS": {
       "PASSWORD_MISMATCH": "Passwords do not match"
     }

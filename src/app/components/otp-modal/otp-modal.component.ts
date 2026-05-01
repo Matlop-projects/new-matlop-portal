@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputOtp } from 'primeng/inputotp';
@@ -17,11 +17,13 @@ import { IDialog } from '../modal/modal.interface';
   templateUrl: './otp-modal.component.html',
   styleUrls: ['./otp-modal.component.scss']
 })
-export class OtpModalComponent {
+export class OtpModalComponent implements OnInit, OnDestroy {
   toaster = inject(ToasterService);
   otp: any;
   timer: number = 60;
   @Input() mobileNumber: string = '';
+  /** When false, hides countdown and resend (e.g. first-order OTP: one code, no user resend). */
+  allowResend = input(true);
   @Output() otpValue = new EventEmitter();
   @Output() resendOtp = new EventEmitter()
 
@@ -39,7 +41,9 @@ export class OtpModalComponent {
 
   ngOnInit(): void {
     this.mobileNumber = this.addStarsIntoMobileNumber(this.mobileNumber);
-    this.startTimer();
+    if (this.allowResend()) {
+      this.startTimer();
+    }
   }
 
   addStarsIntoMobileNumber(mobileNumber: string): string {

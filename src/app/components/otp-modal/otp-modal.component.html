@@ -9,7 +9,7 @@
     <div class="otp">
       <p-inputotp (onChange)="checkOtpValue($event)" [(ngModel)]="otp" [length]="4" [integerOnly]="true" />
     </div>
-    <div class="timer">
+    <div class="timer" *ngIf="allowResend()">
       {{ getFormattedTimer() }}
       <span *ngIf="timer === 0" (click)="resend()" class="resend-link">Resend OTP</span>
     </div>

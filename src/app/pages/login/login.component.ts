@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Inject, inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
+import { CheckboxModule } from 'primeng/checkbox';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { DOCUMENT, NgIf } from '@angular/common';
@@ -8,8 +9,6 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ToasterService } from '../../services/toaster.service';
 import { LanguageService } from '../../services/language.service';
 import { Router, RouterModule } from '@angular/router';
-import { OtpModalComponent } from '../../components/otp-modal/otp-modal.component';
-import { CheckboxModule } from 'primeng/checkbox';
 import { Dialog } from 'primeng/dialog';
 import { LoginSignalUserDataService } from '../../services/login-signal-user-data.service';
 import { environment } from '../../../environments/environment';
@@ -28,7 +27,7 @@ declare global {
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [NgIf, TranslatePipe, ReactiveFormsModule, CheckboxModule, RouterModule, PasswordModule, InputTextModule, OtpModalComponent, Dialog],
+  imports: [NgIf, TranslatePipe, ReactiveFormsModule, CheckboxModule, RouterModule, PasswordModule, InputTextModule, Dialog],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -38,9 +37,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   loginForm: FormGroup;
   toaster = inject(ToasterService);
-  otpValue: string = '';
-  mobileNumber: string = '';
-  openOtpModal: boolean = false;
   languageService = inject(LanguageService);
   currentLang = 'en';
   selectedLang: string = localStorage.getItem('lang') || 'en';
@@ -54,12 +50,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   constructor(private fb: FormBuilder,@Inject(DOCUMENT) private document: Document, private api: ApiService, private translate: TranslateService, private router: Router ,private userDataSignals: LoginSignalUserDataService) {
     this.loginForm = this.fb.group({
-      country: ['SA'], // Default to Saudi Arabia
-      userName: ['',  [
-            Validators.required,
-            this.mobileValidator.bind(this)
-          ],],
-      loginMethod: [1]
+      country: ['SA'],
+      userName: ['', [Validators.required, this.mobileValidator.bind(this)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      loginMethod: [3],
     });
 
     // Listen to country changes to update validation
@@ -142,6 +136,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     if (this.loginForm.valid) {
       const formValue = { ...this.loginForm.value };
       ;
+      console.log(formValue);
       
       // Detect country based on mobile number pattern
       let detectedCountry = formValue.country; // Default to selected country
@@ -176,6 +171,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       }
 
       const payload = { ...formValue, captchaToken: this.captchaToken };
+      localStorage.setItem('clientMobile', formValue.userName);
       this.onLogin(payload);
     } else {
       this.toaster.errorToaster('Please Complete All Feilds');
@@ -201,51 +197,38 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   onLogin(loginfrom: any) {
-    this.openOtpModal = false;
-    this.api.login(loginfrom).subscribe((res: any) => {
-      this.mobileNumber = res.mobilePhone;
-      this.openOtpModal = res.status;
-      if (!res.status) {
-        localStorage.removeItem('token');
-        this.toaster.errorToaster(res.message)
-      }
-    })
-  }
-
-  getOtpValue(e: any) {
-    let otpObject = {
-      "mobile": this.mobileNumber,
-      "otpCode": e.otpValue
-    }
-    this.api.post('Authentication/VerfiyOtp', otpObject).subscribe((data: any) => {
-      console.log(data.data);
-      if (data.message == 'Otp Is Not Valid') {
-        this.toaster.errorToaster(data.message)
-      } else {
-        let dataUser: any = {
-          img: environment.baseImageUrl+data.data.mobileImgSrc,
-          id: data.data.userId,
-          gender: data.data.gender,
-          token: data.data.token,
-          userType:data.data.userTypeId
+    this.api.clientLogin(loginfrom).subscribe({
+      next: (data: any) => {
+        if (data?.code !== 0) {
+          this.toaster.errorToaster(data?.message || 'Login failed');
+          return;
         }
-        this.userDataSignals.setUser(dataUser);
-
-        localStorage.setItem('userData', JSON.stringify(dataUser));
-        localStorage.setItem('userId', JSON.stringify(dataUser.id))
-        localStorage.setItem('token', data.data.accessToken);
-        localStorage.setItem('img',dataUser.img);
-        localStorage.setItem('userType',dataUser.userType)
-        // Set countryId based on detected phone number (SA=1, OM=2)
-        localStorage.setItem('countryId', this.userDataSignals.getCountryId().toString());
-        this.router.navigate(['/home']);
-      }
-    })
+        this.applyTokenSuccess(data);
+      },
+      error: (err: any) => {
+        const msg = err?.error?.message || 'Login failed';
+        this.toaster.errorToaster(msg);
+      },
+    });
   }
 
-  resendOtp(e: any) {
-    this.resetRecaptcha();
-    this.onSubmit();
+  private applyTokenSuccess(data: any): void {
+    const d = data.data;
+    const dataUser: any = {
+      img: environment.baseImageUrl + d.mobileImgSrc,
+      id: d.userId,
+      gender: d.genderId,
+      token: d.accessToken,
+      userType: d.userTypeId,
+    };
+    this.userDataSignals.setUser(dataUser);
+    localStorage.setItem('userData', JSON.stringify(dataUser));
+    localStorage.setItem('userId', JSON.stringify(dataUser.id));
+    localStorage.setItem('token', d.accessToken);
+    localStorage.setItem('img', dataUser.img);
+    localStorage.setItem('userType', String(dataUser.userType));
+    localStorage.setItem('countryId', this.userDataSignals.getCountryId().toString());
+    this.router.navigate(['/home']);
   }
 
   showGuestCountryDialog = false;

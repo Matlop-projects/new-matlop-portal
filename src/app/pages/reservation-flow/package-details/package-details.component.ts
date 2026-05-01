@@ -21,6 +21,7 @@ import { InputTextModule } from "primeng/inputtext";
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { PrimeNG } from "primeng/config";
 import { LoginSignalUserDataService } from "../../../services/login-signal-user-data.service";
+import { OtpModalComponent } from "../../../components/otp-modal/otp-modal.component";
 const primengTranslations = {
   ar: {
     dayNames: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
@@ -69,7 +70,8 @@ const primengTranslations = {
     FormsModule,
     AddLocationComponent,
     BackgroundImageWithTextComponent,
-    InputNumberModule
+    InputNumberModule,
+    OtpModalComponent
   ],
   templateUrl: "./package-details.component.html",
   styleUrl: "./package-details.component.scss",
@@ -134,6 +136,9 @@ export class PackageDetailsComponent {
   isDateInvalid: boolean = false;
 
   errorMessage: any;
+
+  /** Shown when backend requests SMS code for first order (portal clients). */
+  openFirstOrderOtpModal = false;
 
   uploadedFiles: any[] = [];
   discountType: any;
@@ -568,48 +573,60 @@ export class PackageDetailsComponent {
       );
     } else {
       console.log(this.orderObject);
-      
-      // Disable button
       this.isSubmitting = true;
-      
-      this.ApiService.post("Order/Create", this.orderObject).subscribe({
-        next: (res: any) => {
-          // console.log(res);
-          // this.toaster.successToaster("تم اضافة الطلب بنجاح");
-          const orderId = res.data.orderId;
-          if (this.paymentSelect.paymentId == 2) {
-            const countryId = this.userDataService.getCountryId();
-            const paymentUrl = countryId === 2
-              ? `https://payment.matlop.com/Thawani/Pay?orderid=${orderId}`
-              : `https://payment.matlop.com/Moyasar/Pay?orderid=${orderId}`;
-            window.location.href = paymentUrl;
-          } else {
-            console.log(this.orderObject.orderTotal);
-            // window.location.href = `${window.location.origin}/thank-you?status=paid&id=${orderId}&amount=${this.orderObject.orderTotal}&message=success`;
-            window.location.href = `${window.location.origin}/#${this.router.serializeUrl(
-              this.router.createUrlTree([
-                '/thank-you'
-              ], {
-                queryParams: {
-                  status: 'paid',
-                  id: orderId,
-                  amount: res.data.orderTotal,
-                  message: 'success'
-                }
-              })
-            )}`;
-          }
-        },
-        error: (error) => {
-          // Re-enable button on error
-          this.isSubmitting = false;
-          console.error('Order creation failed:', error);
-          this.toaster.errorToaster(
-            this.languageService.translate("PACKAGE_DETAILS.ORDER_ERROR") || "An error occurred while creating the order"
-          );
-        }
-      });
+      this.postOrderCreate();
     }
+  }
+
+  getFirstOrderOtpMobile(): string {
+    return localStorage.getItem('clientMobile') || '';
+  }
+
+  onFirstOrderOtpSubmit(e: { otpValue: string }): void {
+    (this.orderObject as any).firstOrderOtpCode = e.otpValue;
+    this.openFirstOrderOtpModal = false;
+    this.isSubmitting = true;
+    this.postOrderCreate();
+  }
+
+  private postOrderCreate(): void {
+    this.ApiService.post("Order/Create", this.orderObject).subscribe({
+      next: (res: any) => {
+        delete (this.orderObject as any).firstOrderOtpCode;
+        const orderId = res.data.orderId;
+        if (this.paymentSelect.paymentId == 2) {
+          const countryId = this.userDataService.getCountryId();
+          const paymentUrl = countryId === 2
+            ? `https://payment.matlop.com/Thawani/Pay?orderid=${orderId}`
+            : `https://payment.matlop.com/Moyasar/Pay?orderid=${orderId}`;
+          window.location.href = paymentUrl;
+        } else {
+          window.location.href = `${window.location.origin}/#${this.router.serializeUrl(
+            this.router.createUrlTree([
+              '/thank-you'
+            ], {
+              queryParams: {
+                status: 'paid',
+                id: orderId,
+                amount: res.data.orderTotal,
+                message: 'success'
+              }
+            })
+          )}`;
+        }
+      },
+      error: (error) => {
+        this.isSubmitting = false;
+        if (error?.error?.data?.firstOrderOtpRequired === true) {
+          this.openFirstOrderOtpModal = true;
+          return;
+        }
+        console.error('Order creation failed:', error);
+        this.toaster.errorToaster(
+          this.languageService.translate("PACKAGE_DETAILS.ORDER_ERROR") || "An error occurred while creating the order"
+        );
+      }
+    });
   }
 
 

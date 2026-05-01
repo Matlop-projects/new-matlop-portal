@@ -16,6 +16,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { ToasterService } from '../../services/toaster.service';
 import { AddLocationComponent } from '../../components/add-location/add-location.component';
+import { OtpModalComponent } from '../../components/otp-modal/otp-modal.component';
 import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
@@ -32,7 +33,8 @@ import { TooltipModule } from 'primeng/tooltip';
     InputTextModule,
     SelectModule,
     AddLocationComponent,
-    TooltipModule
+    TooltipModule,
+    OtpModalComponent
   ],
   templateUrl: './emergency-order-page.component.html',
   styleUrl: './emergency-order-page.component.scss'
@@ -56,6 +58,9 @@ export class EmergencyOrderPageComponent {
 
   showAddLocationDialog: boolean = false
 
+  lastOrderPayload: any | null = null;
+  pendingFirstOrderOtp: string | null = null;
+  openFirstOrderOtpModal = false;
 
   form = new FormGroup({
     clientId: new FormControl(localStorage.getItem('userId')),
@@ -144,18 +149,37 @@ export class EmergencyOrderPageComponent {
         specialOrderDate: new Date().toISOString()
       });
       const payload = this.form.value;
+      this.lastOrderPayload = payload;
+      this.pendingFirstOrderOtp = null;
       this.createEmergencyOrder(payload);
     } else {
       this.form.markAllAsTouched();
     }
   }
 
-  createEmergencyOrder(payload: any) {
-    // Disable button
-    this.isSubmitting = true;
+  getFirstOrderOtpMobile(): string {
+    return localStorage.getItem('clientMobile') || '';
+  }
 
-    this.api.post('SpecialOrder/Create', payload).subscribe({
+  onFirstOrderOtpSubmit(e: { otpValue: string }): void {
+    this.pendingFirstOrderOtp = e.otpValue;
+    this.openFirstOrderOtpModal = false;
+    if (this.lastOrderPayload) {
+      this.createEmergencyOrder(this.lastOrderPayload);
+    }
+  }
+
+  createEmergencyOrder(payload: any) {
+    this.isSubmitting = true;
+    const body = { ...payload };
+    if (this.pendingFirstOrderOtp) {
+      body.firstOrderOtpCode = this.pendingFirstOrderOtp;
+    }
+
+    this.api.post('SpecialOrder/Create', body).subscribe({
       next: (res) => {
+        this.pendingFirstOrderOtp = null;
+        this.lastOrderPayload = null;
         this.toaster.successToaster(
           this.languageService.translate('EMERGENCY_ORDER.SUCCESS') || 'تم انشاء الطلب بنجاح'
         );
@@ -164,8 +188,11 @@ export class EmergencyOrderPageComponent {
         }, 1000);
       },
       error: (err) => {
-        // Re-enable button on error
         this.isSubmitting = false;
+        if (err?.error?.data?.firstOrderOtpRequired === true) {
+          this.openFirstOrderOtpModal = true;
+          return;
+        }
         console.error('Emergency order creation failed:', err);
         this.toaster.errorToaster(
           this.languageService.translate('EMERGENCY_ORDER.ERROR') || 'حدث خطأ أثناء إنشاء الطلب'

@@ -16,6 +16,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { ToasterService } from '../../services/toaster.service';
 import { AddLocationComponent } from '../../components/add-location/add-location.component';
+import { OtpModalComponent } from '../../components/otp-modal/otp-modal.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { DatePickerModule } from 'primeng/datepicker';
 import { PrimeNG } from 'primeng/config';
@@ -64,7 +65,8 @@ const primengTranslations = {
     SelectModule,
     AddLocationComponent,
     TooltipModule,
-    DatePickerModule
+    DatePickerModule,
+    OtpModalComponent
   ],
   templateUrl: './special-order-page.component.html',
   styleUrl: './special-order-page.component.scss'
@@ -87,6 +89,11 @@ export class SpecialOrderPageComponent {
   isSubmitting: boolean = false; // To prevent multiple clicks
 
   showAddLocationDialog: boolean = false
+  /** Last submitted payload for retry after first-order OTP. */
+  lastOrderPayload: any | null = null;
+  pendingFirstOrderOtp: string | null = null;
+  openFirstOrderOtpModal = false;
+
   minDate: Date = (() => {
     const date = new Date();
     date.setDate(date.getDate());
@@ -195,18 +202,37 @@ displayDatepickerConfig(lang:string) {
         specialOrderDate: newDate
       });
       const payload = this.form.value;
+      this.lastOrderPayload = payload;
+      this.pendingFirstOrderOtp = null;
       this.createEmergencyOrder(payload);
     } else {
       this.form.markAllAsTouched();
     }
   }
 
-  createEmergencyOrder(payload: any) {
-    // Disable button
-    this.isSubmitting = true;
+  getFirstOrderOtpMobile(): string {
+    return localStorage.getItem('clientMobile') || '';
+  }
 
-    this.api.post('SpecialOrder/Create', payload).subscribe({
+  onFirstOrderOtpSubmit(e: { otpValue: string }): void {
+    this.pendingFirstOrderOtp = e.otpValue;
+    this.openFirstOrderOtpModal = false;
+    if (this.lastOrderPayload) {
+      this.createEmergencyOrder(this.lastOrderPayload);
+    }
+  }
+
+  createEmergencyOrder(payload: any) {
+    this.isSubmitting = true;
+    const body = { ...payload };
+    if (this.pendingFirstOrderOtp) {
+      body.firstOrderOtpCode = this.pendingFirstOrderOtp;
+    }
+
+    this.api.post('SpecialOrder/Create', body).subscribe({
       next: (res) => {
+        this.pendingFirstOrderOtp = null;
+        this.lastOrderPayload = null;
         this.toaster.successToaster(
           this.languageService.translate('SPECIAL_ORDER.SUCCESS') || 'تم انشاء الطلب بنجاح'
         );
@@ -215,8 +241,11 @@ displayDatepickerConfig(lang:string) {
         }, 1000);
       },
       error: (error) => {
-        // Re-enable button on error
         this.isSubmitting = false;
+        if (error?.error?.data?.firstOrderOtpRequired === true) {
+          this.openFirstOrderOtpModal = true;
+          return;
+        }
         console.error('Special order creation failed:', error);
         this.toaster.errorToaster(
           this.languageService.translate('SPECIAL_ORDER.ERROR') || 'حدث خطأ أثناء إنشاء الطلب'
