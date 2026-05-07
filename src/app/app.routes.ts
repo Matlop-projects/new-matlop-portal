@@ -20,7 +20,7 @@ import { TermsConditionsComponent } from "./pages/terms-conditions/terms-conditi
 import { ProfileComponent } from "./pages/profile/profile.component";
 import { ThankYouComponent } from "./pages/thank-you/thank-you.component";
 import { FaqsSectionComponent } from "./components/hame-page-sections/faqs-section/faqs-section.component";
-import { ForgetPasswordComponentimplements } from "./pages/forget-password/forget-password.component";
+import { ForgetPasswordComponent } from "./pages/forget-password/forget-password.component";
 import { SpecialOrderListComponent } from "./pages/special-order-page/special-order-list/special-order-list.component";
 import { EmergencyOrderListComponent } from "./pages/emergency-order-page/emergency-order-list/emergency-order-list.component";
 import { AddressesComponent } from "./shared/addresses/addresses.component";
@@ -44,7 +44,7 @@ export const routes: Routes = [
       },
       { path: "login", component: LoginComponent },
       { path: "signup", component: SignupComponent },
-      { path: "forget_password", component: ForgetPasswordComponentimplements },
+      { path: "forget_password", component: ForgetPasswordComponent },
       // { path: 'reset_password', component: ResetPasswordComponent },
     ],
   },

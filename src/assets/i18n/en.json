@@ -102,15 +102,19 @@
     "DOWNLOAD_APP": "Download the app now"
   },
   "forget_pass": {
-    "title": "Forget Password",
-    "mobile": " Mobile Number",
+    "title": "Reset your password",
+    "subtitle": "Enter your mobile number and new password on this page. No SMS code is required.",
+    "success": "Your password was updated. You can sign in now.",
+    "generic_error": "Something went wrong. Please try again.",
+    "mobile": "Mobile number",
     "mobile_required": "Mobile number is required",
     "add_new_pass": "Add New Password",
     "enter_new_pass": "Enter new password",
     "new_pass_required": " New password is required",
     "confirm_pass": "Confirm password",
     "confirm_required": "Confirm password is required",
-    "not_matched": "Passwords do not match"
+    "not_matched": "Passwords do not match",
+    "submit_button": "Save new password"
   },
   "otp": {
     "enter_degits": "Please enter the verification code sent to"
